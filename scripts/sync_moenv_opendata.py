@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Incremental MOENV Open Data (MNEWS_P_01) sync + dual-track AI enricher pipeline."""
+"""Incremental MOENV Open Data (MNEWS_P_01) sync + URL resolver + candidate radar + Gemini enricher."""
 
 from __future__ import annotations
 
@@ -11,6 +11,7 @@ import sys
 import time
 import unicodedata
 from datetime import datetime, timedelta, timezone
+from html import unescape
 from pathlib import Path
 from typing import Any, Callable
 from urllib.error import HTTPError, URLError
@@ -26,11 +27,37 @@ import moenv_news_indexer as indexer  # noqa: E402
 
 TAIPEI_TZ = timezone(timedelta(hours=8))
 OPENDATA_ENDPOINT = "https://data.moenv.gov.tw/api/v2/mnews_p_01"
-FALLBACK_NEWS_URL = "https://enews.moenv.gov.tw/News/List?key=11&Lang=zh-tw"
+NEW_ARTICLE_URL_TEMPLATE = "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/{news_id}"
+SINGLE_ARTICLE_URL_RE = re.compile(
+    r"^https?://enews\.moenv\.gov\.tw/(?:moenv-news/zh-tw/News/\d+|Page/3B3C62C78849F32F/[^/?#]+)",
+    re.I,
+)
+NUMERIC_ARTICLE_URL_RE = re.compile(r"/moenv-news/zh-tw/News/(\d+)", re.I)
+LIST_OR_HOME_URL_RE = re.compile(r"(?:/News/List|/Page/B514A5023133ED27)", re.I)
+HTML_H1_RE = re.compile(r"<h1\b[^>]*>(.*?)</h1>", re.I | re.S)
+HTML_TITLE_RE = re.compile(r"<title\b[^>]*>(.*?)</title>", re.I | re.S)
+OG_TITLE_RE = re.compile(r'<meta\b[^>]*property=["\']og:title["\'][^>]*content=["\'](.*?)["\']', re.I | re.S)
+
 DEFAULT_LIMIT = 1000
 DEFAULT_TIMEOUT = 30
 DEFAULT_RETRIES = 3
 DEFAULT_OVERLAP_DAYS = 14
+DEFAULT_PROBE_RANGE = 40
+
+HIGH_SIGNAL_TERMS: tuple[str, ...] = (
+    "修正",
+    "預告",
+    "草案",
+    "費率",
+    "徵收",
+    "施行",
+    "辦法",
+    "準則",
+    "列管",
+    "裁罰",
+    "COP",
+    "淨零",
+)
 
 
 def load_local_env_files(vault: Path) -> None:
@@ -67,7 +94,6 @@ def parse_news_date(raw_value: Any) -> tuple[str, str]:
     text = str(raw_value or "").strip()
     if not text:
         return "", ""
-    # Handle YYYY-MM-DD, YYYY/MM/DD, YYYY-MM-DD HH:MM:SS, YYYYMMDD...
     match = re.match(r"^(\d{4})[-/](\d{1,2})[-/](\d{1,2})", text)
     if match:
         iso = f"{int(match.group(1)):04d}-{int(match.group(2)):02d}-{int(match.group(3)):02d}"
@@ -88,6 +114,14 @@ def clean_optional_url(raw_value: Any) -> str:
     if not text or text in {"-", "null", "None", "N/A"}:
         return ""
     return text
+
+
+def is_official_single_article_url(url: str) -> bool:
+    """Return True only when url points to a single official MOENV news article (never list/home)."""
+    cleaned = (url or "").strip()
+    if not cleaned or LIST_OR_HOME_URL_RE.search(cleaned):
+        return False
+    return bool(SINGLE_ARTICLE_URL_RE.match(cleaned))
 
 
 def is_deleted_record(record: dict[str, Any]) -> bool:
@@ -149,6 +183,16 @@ def extract_records(payload: Any) -> list[dict[str, Any]]:
     return []
 
 
+def compact_title(title: str) -> str:
+    normalized = unicodedata.normalize("NFKC", title or "").lower()
+    return re.sub(r"[\s\W_]+", "", normalized)
+
+
+def compact_title_key(date: str, title: str) -> tuple[str, str]:
+    """Whitespace- and punctuation-insensitive (date, title) fingerprint for cross-source dedup."""
+    return (date.strip(), compact_title(title))
+
+
 def parse_opendata_record(record: dict[str, Any]) -> tuple[indexer.NewsItem, str] | None:
     """Convert one MNEWS_P_01 record into (NewsItem, raw_content) or None if skipped."""
     if is_deleted_record(record):
@@ -163,7 +207,14 @@ def parse_opendata_record(record: dict[str, Any]) -> tuple[indexer.NewsItem, str
         return None
 
     unit = indexer.clean_text(str(record.get("newssource") or "")) or "未標示"
-    source_url = clean_optional_url(record.get("relativeurl")) or FALLBACK_NEWS_URL
+    raw_source_url = clean_optional_url(record.get("relativeurl"))
+    if is_official_single_article_url(raw_source_url):
+        source_url = raw_source_url
+        source_url_status = ""
+    else:
+        source_url = ""
+        source_url_status = "pending_official_link"
+
     attach_url = clean_optional_url(record.get("attachurl"))
     raw_content = str(record.get("newscontent") or "")
 
@@ -184,8 +235,244 @@ def parse_opendata_record(record: dict[str, Any]) -> tuple[indexer.NewsItem, str
         attach_url=attach_url,
         ai_tags=[],
         ai_policy_keywords=[],
+        source_url_status=source_url_status,
     )
     return item, raw_content
+
+
+def extract_html_page_title(html: str) -> str:
+    """Extract the article headline from MOENV detail HTML (<meta og:title>, <h1>, or <title>)."""
+    for pattern in (OG_TITLE_RE, HTML_H1_RE, HTML_TITLE_RE):
+        for match in pattern.findall(html or ""):
+            cleaned = indexer.clean_text(unescape(re.sub(r"<[^>]+>", " ", match)))
+            # Strip trailing site suffix like " - 環境部新聞專區"
+            cleaned = re.sub(r"\s*[-|｜–—]\s*(?:環境部新聞專區|環境部).*$", "", cleaned).strip()
+            if cleaned and cleaned not in {"環境部新聞專區", "新聞專區", "Just a moment..."}:
+                return cleaned
+    return ""
+
+
+def _max_known_numeric_article_id(items: list[indexer.NewsItem]) -> int:
+    max_id = 0
+    for item in items:
+        m = NUMERIC_ARTICLE_URL_RE.search(item.source_url or "")
+        if m:
+            max_id = max(max_id, int(m.group(1)))
+        elif item.news_id.isdigit() and len(item.news_id) <= 7:
+            max_id = max(max_id, int(item.news_id))
+    return max_id
+
+
+def _fetch_html_quiet(url: str, timeout: int = 12) -> str:
+    req = Request(url, headers=indexer.BROWSER_HEADERS)
+    with urlopen(req, timeout=timeout) as resp:
+        return resp.read().decode("utf-8", errors="replace")
+
+
+def _titles_match(target_compact: str, candidate_compact: str) -> bool:
+    if not target_compact or not candidate_compact:
+        return False
+    if target_compact == candidate_compact:
+        return True
+    shorter, longer = (
+        (target_compact, candidate_compact)
+        if len(target_compact) <= len(candidate_compact)
+        else (candidate_compact, target_compact)
+    )
+    return len(shorter) >= 12 and shorter in longer
+
+
+def resolve_official_article_urls(
+    items_to_resolve: list[indexer.NewsItem],
+    all_items: list[indexer.NewsItem],
+    timeout: int = 12,
+    probe_range: int = DEFAULT_PROBE_RANGE,
+    delay: float = 0.15,
+    list_fetcher: Callable[[int], list[indexer.NewsItem]] | None = None,
+    detail_fetcher: Callable[[str], str] | None = None,
+    sleep_fn: Callable[[float], None] = time.sleep,
+) -> set[str]:
+    """
+    Resolve official single-article URLs for items missing one.
+    1) Check official list pages 1-2 (by date + compact title, or compact title alone).
+    2) Probe sequential numeric IDs after max known official ID (up to +probe_range).
+    3) Strict zero-homepage rule: unresolved items get source_url='' and
+       source_url_status='pending_official_link'.
+    Returns set of news_ids whose source_url or source_url_status changed.
+    """
+    changed_ids: set[str] = set()
+    unresolved: list[indexer.NewsItem] = []
+
+    for item in items_to_resolve:
+        if is_official_single_article_url(item.source_url):
+            if item.source_url_status:
+                item.source_url_status = ""
+                changed_ids.add(item.news_id)
+            continue
+        # Strip any legacy list/home URL immediately
+        if item.source_url:
+            item.source_url = ""
+            changed_ids.add(item.news_id)
+        if item.source_url_status != "pending_official_link":
+            item.source_url_status = "pending_official_link"
+            changed_ids.add(item.news_id)
+        unresolved.append(item)
+
+    if not unresolved:
+        return changed_ids
+
+    # Strategy 1: Official list pages 1-2
+    list_candidates: list[indexer.NewsItem] = []
+    for page in (1, 2):
+        try:
+            if list_fetcher is not None:
+                page_items = list_fetcher(page)
+            else:
+                html = indexer.fetch_new_list_page(page, retries=2, timeout=timeout)
+                page_items = indexer.parse_list_page(html)
+            list_candidates.extend(page_items)
+        except Exception as exc:  # noqa: BLE001
+            print(f"[WARN] URL resolver list page {page} skipped: {exc}", file=sys.stderr)
+            break
+
+    still_unresolved: list[indexer.NewsItem] = []
+    for item in unresolved:
+        target_c = compact_title(item.title)
+        matched_url = ""
+        for cand in list_candidates:
+            if not is_official_single_article_url(cand.source_url):
+                continue
+            cand_c = compact_title(cand.title)
+            if _titles_match(target_c, cand_c):
+                matched_url = cand.source_url
+                break
+        if matched_url:
+            item.source_url = matched_url
+            item.source_url_status = ""
+            changed_ids.add(item.news_id)
+        else:
+            still_unresolved.append(item)
+
+    # Strategy 2: Sequential numeric ID probe from max known official ID
+    if still_unresolved and probe_range > 0:
+        max_id = _max_known_numeric_article_id([*all_items, *list_candidates])
+        if max_id > 0:
+            fetcher = detail_fetcher or (lambda u: _fetch_html_quiet(u, timeout=timeout))
+            remaining = list(still_unresolved)
+            consecutive_misses = 0
+            for offset in range(1, probe_range + 1):
+                if not remaining:
+                    break
+                cand_id = max_id + offset
+                cand_url = NEW_ARTICLE_URL_TEMPLATE.format(news_id=cand_id)
+                try:
+                    html = fetcher(cand_url)
+                    page_title = extract_html_page_title(html)
+                except Exception:  # noqa: BLE001
+                    consecutive_misses += 1
+                    if consecutive_misses >= 10:
+                        break
+                    if delay > 0:
+                        sleep_fn(delay)
+                    continue
+
+                if not page_title:
+                    consecutive_misses += 1
+                    if consecutive_misses >= 10:
+                        break
+                else:
+                    consecutive_misses = 0
+                    cand_c = compact_title(page_title)
+                    matched_item = None
+                    for item in remaining:
+                        if _titles_match(compact_title(item.title), cand_c):
+                            matched_item = item
+                            break
+                    if matched_item is not None:
+                        matched_item.source_url = cand_url
+                        matched_item.source_url_status = ""
+                        changed_ids.add(matched_item.news_id)
+                        remaining.remove(matched_item)
+
+                if delay > 0:
+                    sleep_fn(delay)
+
+    return changed_ids
+
+
+def write_candidate_radar(vault: Path, items: list[indexer.NewsItem], generated_at: str) -> Path:
+    """Generate 04_皓哥說/00_待把脈候選雷達.md from high-signal news in the last 14 days."""
+    radar_path = vault / "04_皓哥說" / "00_待把脈候選雷達.md"
+    radar_path.parent.mkdir(parents=True, exist_ok=True)
+
+    dates = sorted(item.date for item in items if item.date)
+    if not dates:
+        anchor_dt = datetime.now(TAIPEI_TZ).replace(tzinfo=None)
+    else:
+        anchor_dt = datetime.strptime(dates[-1], "%Y-%m-%d")
+    window_start = (anchor_dt - timedelta(days=13)).strftime("%Y-%m-%d")
+    window_end = anchor_dt.strftime("%Y-%m-%d")
+
+    matches_by_id = indexer.build_keyword_matches(items)
+    scored: list[tuple[int, str, list[str], indexer.NewsItem, list[str]]] = []
+
+    for item in items:
+        if not item.date or item.date < window_start:
+            continue
+        hit_terms: list[str] = []
+        score = 0
+        title_text = item.title or ""
+        summary_text = item.summary or ""
+        for term in HIGH_SIGNAL_TERMS:
+            in_title = term.lower() in title_text.lower()
+            in_summary = term.lower() in summary_text.lower()
+            if in_title or in_summary:
+                hit_terms.append(term)
+                score += (2 if in_title else 0) + (1 if in_summary else 0)
+        if score > 0:
+            topics = [m.profile.title for m in matches_by_id.get(item.news_id, [])]
+            scored.append((score, item.date, hit_terms, item, topics))
+
+    scored.sort(key=lambda row: (-row[0], row[1]), reverse=False)
+    scored.sort(key=lambda row: (row[0], row[1]), reverse=True)
+
+    lines = [
+        "---",
+        'title: "待把脈候選雷達（近 14 天高政策訊號新聞）"',
+        f"date: {window_end}",
+        "status: draft",
+        'summary: "系統自動從近 14 天環境部新聞篩選具高政策訊號之候選題目，供《皓哥說》把脈挑題使用。"',
+        "---",
+        "",
+        "# 待把脈候選雷達（近 14 天高政策訊號）",
+        "",
+        f"- 掃描區間：`{window_start}` ～ `{window_end}`",
+        f"- 更新時間：`{generated_at}`",
+        f"- 候選篇數：**{len(scored)}** 篇（訊號詞：{'、'.join(HIGH_SIGNAL_TERMS)}）",
+        "",
+    ]
+
+    if not scored:
+        lines.append("（近 14 天內暫無命中高政策訊號詞的新聞。）")
+    else:
+        lines.extend(
+            [
+                "| 訊號分 | 日期 | 新聞標題 | 發布單位 | 議題 | 命中訊號 | 原文連結 |",
+                "| ---: | --- | --- | --- | --- | --- | --- |",
+            ]
+        )
+        for score, date_str, hit_terms, item, topics in scored[:40]:
+            safe_title = item.title.replace("|", "｜")
+            topic_str = "、".join(topics[:3]) if topics else "—"
+            signal_str = "、".join(hit_terms[:5])
+            link_str = f"[原文]({item.source_url})" if item.source_url else "同步中"
+            lines.append(
+                f"| {score} | {date_str} | {safe_title} | {item.unit or '未標示'} | {topic_str} | {signal_str} | {link_str} |"
+            )
+
+    lines.append("")
+    radar_path.write_text("\n".join(lines), encoding="utf-8", newline="\n")
+    return radar_path
 
 
 def fetch_incremental_records(
@@ -230,13 +517,6 @@ def compute_cutoff_date(existing_items: list[indexer.NewsItem], overlap_days: in
     return (latest - timedelta(days=overlap_days)).strftime("%Y-%m-%d")
 
 
-def compact_title_key(date: str, title: str) -> tuple[str, str]:
-    """Whitespace- and punctuation-insensitive (date, title) fingerprint for cross-source dedup."""
-    normalized = unicodedata.normalize("NFKC", title or "").lower()
-    compact = re.sub(r"[\s\W_]+", "", normalized)
-    return (date.strip(), compact)
-
-
 def sync_opendata(
     vault: Path,
     moenv_api_key: str,
@@ -249,10 +529,13 @@ def sync_opendata(
     summary_chars: int = 500,
     dry_run: bool = False,
     force_rebuild: bool = False,
+    resolve_urls: bool = True,
     fetch_fn: Callable[[str, int, int], Any] | None = None,
     gemini_client: Any | None = None,
+    list_fetcher: Callable[[int], list[indexer.NewsItem]] | None = None,
+    detail_fetcher: Callable[[str], str] | None = None,
 ) -> dict[str, Any]:
-    """Run incremental Open Data sync + dual-track enrichment + vault index rebuild."""
+    """Run incremental Open Data sync + URL resolver + dual-track enricher + candidate radar."""
     existing_items = indexer.load_existing_items(vault)
     existing_ids = {item.news_id for item in existing_items}
     existing_identities = {indexer.item_identity_key(item) for item in existing_items}
@@ -323,12 +606,36 @@ def sync_opendata(
 
         new_items.append(item)
 
-    generated_at = datetime.now(TAIPEI_TZ).isoformat(timespec="seconds")
-    total_after = len(existing_items) + len(new_items)
+    merged_items = [*existing_items, *new_items]
 
-    if not dry_run and (new_items or force_rebuild):
-        merged_items = [*existing_items, *new_items]
-        new_ids = {item.news_id for item in new_items}
+    # Collect items needing official single-article URL resolution:
+    # - all new items
+    # - any existing item with list/home URL or pending_official_link within 14d (or any list URL globally)
+    url_changed_ids: set[str] = set()
+    if resolve_urls:
+        pending_existing = [
+            item
+            for item in existing_items
+            if (
+                LIST_OR_HOME_URL_RE.search(item.source_url or "")
+                or (
+                    (not item.source_url or item.source_url_status == "pending_official_link")
+                    and (not cutoff_date or item.date >= cutoff_date)
+                )
+            )
+        ]
+        url_changed_ids = resolve_official_article_urls(
+            items_to_resolve=[*new_items, *pending_existing],
+            all_items=merged_items,
+            list_fetcher=list_fetcher,
+            detail_fetcher=detail_fetcher,
+        )
+
+    generated_at = datetime.now(TAIPEI_TZ).isoformat(timespec="seconds")
+    total_after = len(merged_items)
+    notes_to_write = {item.news_id for item in new_items} | url_changed_ids
+
+    if not dry_run and (new_items or url_changed_ids or force_rebuild):
         indexer.write_outputs(
             vault=vault,
             items=merged_items,
@@ -336,10 +643,22 @@ def sync_opendata(
             total_from_site=None,
             mode="opendata_incremental",
             new_count=len(new_items),
-            note_ids_to_write=new_ids if not force_rebuild else None,
+            note_ids_to_write=notes_to_write if not force_rebuild else None,
         )
 
-    latest_date = max((item.date for item in [*existing_items, *new_items] if item.date), default="")
+    if not dry_run:
+        write_candidate_radar(vault, merged_items, generated_at)
+
+    resolved_now = sum(
+        1
+        for item in merged_items
+        if item.news_id in url_changed_ids and is_official_single_article_url(item.source_url)
+    )
+    pending_count = sum(
+        1 for item in merged_items if item.source_url_status == "pending_official_link" or not item.source_url
+    )
+
+    latest_date = max((item.date for item in merged_items if item.date), default="")
     return {
         "generated_at": generated_at,
         "existing_count": len(existing_items),
@@ -348,6 +667,8 @@ def sync_opendata(
         "total_count": total_after,
         "latest_date": latest_date,
         "new_ids": [item.news_id for item in new_items],
+        "url_resolved_count": resolved_now,
+        "url_pending_count": pending_count,
         "gemini_used_count": gemini_used_count,
         "gemini_fallback_count": gemini_fallback_count,
         "dry_run": dry_run,
@@ -356,7 +677,7 @@ def sync_opendata(
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Incremental MOENV Open Data (MNEWS_P_01) sync + dual-track Gemini enricher."
+        description="Incremental MOENV Open Data (MNEWS_P_01) sync + URL resolver + candidate radar."
     )
     parser.add_argument("--vault", type=Path, default=Path.cwd(), help="Path to Obsidian vault root.")
     parser.add_argument("--limit", type=int, default=DEFAULT_LIMIT, help="Records per API page (default: 1000).")
@@ -367,6 +688,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--summary-chars", type=int, default=500, help="Max summary characters.")
     parser.add_argument("--dry-run", action="store_true", help="Fetch and enrich without writing files.")
     parser.add_argument("--force-rebuild", action="store_true", help="Rebuild indexes even if 0 new items.")
+    parser.add_argument("--no-resolve-urls", action="store_true", help="Skip official single-article URL resolution.")
     parser.add_argument("--no-dotenv", action="store_true", help="Do not load local .env/key.env files.")
     return parser.parse_args(argv)
 
@@ -395,6 +717,7 @@ def main(argv: list[str] | None = None) -> int:
         summary_chars=args.summary_chars,
         dry_run=args.dry_run,
         force_rebuild=args.force_rebuild,
+        resolve_urls=not args.no_resolve_urls,
     )
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0

@@ -1,0 +1,14 @@
+{
+  "slug": "resource-circulation",
+  "title": "資源循環與減塑",
+  "topic_slug": "resource_circulation",
+  "description": "追蹤資源循環雙法、一次用產品減塑、循環杯、網購包裝減量與袋袋箱傳等源頭減量制度演進。",
+  "include_terms": ["循環雙法", "資源循環促進法", "一次用", "循環杯", "袋袋箱傳", "網購包裝"],
+  "stage_rules": [
+    {"stage": "預告", "terms": ["預告", "草案"]},
+    {"stage": "研商", "terms": ["說明會", "對話", "公聽", "研商"]},
+    {"stage": "修正發布", "terms": ["公告", "發布", "修正", "推動"]},
+    {"stage": "施行", "terms": ["施行", "上路", "生效", "實施"]}
+  ],
+  "max_nodes": 18
+}

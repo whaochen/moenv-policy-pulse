@@ -1,0 +1,14 @@
+{
+  "slug": "international-cop",
+  "title": "國際氣候會議 COP 參與",
+  "topic_slug": "international_cooperation",
+  "description": "追蹤台灣參與 UNFCCC 氣候變遷大會（COP28～COP31）、NDC 目標提出、巴黎協定第六條碳權合作與國際論壇脈絡。",
+  "include_terms": ["COP28", "COP29", "COP30", "COP31", "巴黎協定", "NDC3.0"],
+  "stage_rules": [
+    {"stage": "預告", "terms": ["預告", "草案", "暖身", "PreCOP"]},
+    {"stage": "研商", "terms": ["論壇", "研討會", "對談", "交流"]},
+    {"stage": "修正發布", "terms": ["公布", "發布", "核定", "啟動", "簽署"]},
+    {"stage": "施行", "terms": ["試行", "實作", "落實", "接軌"]}
+  ],
+  "max_nodes": 18
+}

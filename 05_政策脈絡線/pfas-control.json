@@ -1,0 +1,14 @@
+{
+  "slug": "pfas-control",
+  "title": "PFAS 化學物質列管",
+  "topic_slug": "chemical_management",
+  "description": "追蹤全氟及多氟烷基物質（PFAS）、PFOA、PFOS 國際公約接軌、飲用水標準與毒性化學物質列管演進。",
+  "include_terms": ["PFAS", "全氟", "多氟烷基", "PFOA", "PFOS", "PFHxS"],
+  "stage_rules": [
+    {"stage": "預告", "terms": ["預告", "草案", "蒐集"]},
+    {"stage": "研商", "terms": ["對話", "研商", "說明會", "公聽"]},
+    {"stage": "修正發布", "terms": ["列管", "公告", "修正", "發布", "標準"]},
+    {"stage": "施行", "terms": ["施行", "上路", "管制", "生效", "檢驗"]}
+  ],
+  "max_nodes": 18
+}

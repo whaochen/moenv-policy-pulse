@@ -1,0 +1,14 @@
+{
+  "slug": "water-pollution-fee",
+  "title": "水污染防治費收費辦法演進",
+  "topic_slug": "water_quality",
+  "description": "追蹤事業及污水下水道系統水污染防治費開徵、費率調整、減免機制與歷次收費辦法修正脈絡。",
+  "include_terms": ["水污染防治費", "水污費", "水污染防治費收費辦法"],
+  "stage_rules": [
+    {"stage": "預告", "terms": ["預告", "草案"]},
+    {"stage": "研商", "terms": ["公聽", "研商", "說明會", "座談"]},
+    {"stage": "修正發布", "terms": ["修正", "公告", "發布", "核定"]},
+    {"stage": "施行", "terms": ["施行", "上路", "開徵", "生效", "實施"]}
+  ],
+  "max_nodes": 18
+}

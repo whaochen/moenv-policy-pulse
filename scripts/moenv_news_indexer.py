@@ -285,6 +285,7 @@ class NewsItem:
     attach_url: str = ""
     ai_tags: list[str] = field(default_factory=list)
     ai_policy_keywords: list[str] = field(default_factory=list)
+    source_url_status: str = ""
 
 
 @dataclass
@@ -1064,7 +1065,11 @@ def render_note(item: NewsItem, keyword_matches: list[KeywordMatch] | None = Non
         f"- 發布日期：{item.date or item.roc_date}（民國 {item.roc_date}）",
         f"- 類別：{item.category or '未分類'}",
         f"- 發布單位：{item.unit or '未標示'}",
-        f"- 原始連結：[{SOURCE_NAME}]({item.source_url})",
+        (
+            f"- 原始連結：[{SOURCE_NAME}]({item.source_url})"
+            if item.source_url
+            else "- 原始連結：官網單篇連結同步中（來源：環境部 MNEWS_P_01）"
+        ),
     ]
     if item.attach_url:
         lines.append(f"- 附件：{item.attach_url}")
