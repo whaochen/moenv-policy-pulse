@@ -16,7 +16,7 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repository
@@ -36,13 +36,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Sync MOENV Open Data (MNEWS_P_01) incrementally
+      - name: Sync MOENV Open Data (MNEWS_P_01) & resolve official single-article URLs
         env:
           MOENV_API_KEY: ${{ secrets.MOENV_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scripts/sync_moenv_opendata.py --no-dotenv
 
-      - name: Export static JSON shards for web frontend
+      - name: Build Route 3 hybrid news relations (TF-IDF + optional Neural Embeddings)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/build_news_relations.py
+
+      - name: Export static JSON shards, policy graph, timelines & academic downloads
         run: python scripts/export_web_data.py
 
       - name: Verify exported web data integrity
@@ -63,6 +68,7 @@ jobs:
             "00_公開入口/" \
             "01_政策議題/" \
             "02_環境部新聞_可公開/" \
+            "04_皓哥說/00_待把脈候選雷達.md" \
             "索引/" \
             "資料/" \
             "環境部新聞索引.md" \

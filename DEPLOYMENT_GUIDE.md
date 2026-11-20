@@ -74,3 +74,23 @@
    - 撰寫期間維持 `status: draft`（網站完全不會顯示或生成頁面）。
    - 定稿後改為 `status: published`，在 `related_news` 填入新聞編號（如 `"14518"`）。
    - 於 Obsidian 按下 **Ctrl+P** → 執行 **Obsidian Git: Commit all changes** 與 **Push**，約 1～2 分鐘後 Cloudflare Pages 即自動上線新文章！
+
+---
+
+## 步驟六（V2 選配）：掛載品牌 Logo 與個人形象照（1 分鐘）
+
+本站已內建自動偵測與無破圖降級機制，您無須修改任何程式碼：
+
+1. 將您的品牌 Logo 放入 `web/public/images/logo.png`（支援 `.svg` / `.png` / `.webp`，建議正方形透明背景）。
+2. 將您的個人形象照放入 `web/public/images/hao-portrait.png`（支援 `.jpg` / `.png` / `.webp`，將自動顯示於首頁開場、《皓哥說》作者卡與 `/about` 頁面）。
+3. 提交並推送至 GitHub `main` 分支（或於 Obsidian 執行 `Git: Commit all changes` + `Git: Push`），約 1 分鐘後即自動呈現於線上網站。
+
+---
+
+## 步驟七（V2 選配）：於 Cloudflare Dashboard 啟用免費 Web Analytics（免 Cookie）
+
+為維持專業智庫誌版面乾淨，前台刻意不放訪客計數器；建議改於後台開啟免費、無追蹤 Cookie 的 **Cloudflare Web Analytics**：
+
+1. 登入 [Cloudflare Dashboard](https://dash.cloudflare.com/) → 進入 **Workers 和 Pages** → 點選 **`moenv-policy-pulse`**。
+2. 切換至上方 **指標（Metrics）** 或左側 **Analytics & Logs → Web Analytics**。
+3. 點擊 **啟用 Web Analytics（Enable Web Analytics）**，選擇 `moenv-policy-pulse.pages.dev` 即可一鍵自動注入輕量統計，無需改動程式碼，且永久免費。
