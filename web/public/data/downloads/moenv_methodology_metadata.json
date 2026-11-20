@@ -1,0 +1,351 @@
+{
+  "project": "環策皓脈（Taiwan Environment Observatory）",
+  "license": "資料來源：中華民國環境部（環境部新聞專區及環境資料開放平臺 MNEWS_P_01），依政府資料開放授權條款（OGDL 1.0）引用；原創分類口徑、分析與視覺化歸屬環策皓脈。",
+  "updated_at": "2026-11-20T14:47:25+08:00",
+  "coverage": {
+    "date_start": "2001-01-01",
+    "date_end": "2026-11-20",
+    "total_news": 11496
+  },
+  "dataset_version": "aa670c259e1b9bcb",
+  "dataset_sha256": "aa670c259e1b9bcb840860999bb25218cd97e667ce55178ae5717733d5b32c92",
+  "deduplication": "以 news_id 為主鍵，並搭配正規化日期＋去標點去空白標題指紋（NFKC compact identity key）雙重去重，避免跨來源（官網與開放資料）重複收錄。",
+  "multi_label_rule": "採「一文多標籤」口徑：單篇新聞若同時命中多項議題之同義詞表，將於對應議題各自計數 1 次，因此各議題加總高於全站新聞總篇數屬正常現象。",
+  "relation_engine": {
+    "name": "路線 3：雙層混合語意網絡（TF-IDF ＋ 類神經網路語意向量）",
+    "layer_1": "scikit-learn TfidfVectorizer ＋ jieba 中文斷詞（掛載 20 大議題同義詞與環境法規專有名詞詞典），計算餘弦相似度 S_tfidf。",
+    "layer_2": "選配 Gemini Embedding API（gemini-embedding-001）增量快取語意向量計算 S_embed；若未設 API Key 或遭遇限流，自動降級為 100% TF-IDF 權重。",
+    "blend_formula": "w_ij = alpha * S_tfidf(i, j) + (1 - alpha) * S_embed(i, j) + topic_bonus (0.05)",
+    "active_meta": {
+      "generated_at": "2026-11-20T14:52:59+08:00",
+      "algorithm": "Route 3 Hybrid (TF-IDF + jieba domain dict + optional Gemini Neural Embeddings)",
+      "mode": "tfidf_only",
+      "alpha": 1.0,
+      "top_k": 5,
+      "min_score": 0.16,
+      "topic_bonus": 0.05,
+      "domain_dict_terms": 174,
+      "vocab_size": 26567,
+      "total_items": 11496,
+      "total_edges": 56175,
+      "elapsed_seconds": 10.63,
+      "embedding_meta": {
+        "mode": "tfidf_only",
+        "model": "gemini-embedding-001",
+        "cached_vectors": 0,
+        "newly_embedded": 0,
+        "fallback_reason": "GEMINI_API_KEY not set"
+      }
+    }
+  },
+  "topic_profiles": [
+    {
+      "slug": "carbon_fee",
+      "title": "碳費徵收",
+      "group": "氣候與碳定價",
+      "description": "碳費申報、費率、徵收、收費制度與企業因應。",
+      "aliases": [
+        "碳費",
+        "碳費率",
+        "碳費徵收",
+        "碳費申報"
+      ],
+      "total_count": 92
+    },
+    {
+      "slug": "voluntary_reduction",
+      "title": "自主減量計畫",
+      "group": "氣候與碳定價",
+      "description": "自主減量、指定削減率、減量計畫與優惠費率。",
+      "aliases": [
+        "自主減量",
+        "自主減量計畫",
+        "減量計畫",
+        "指定削減率",
+        "優惠費率"
+      ],
+      "total_count": 43
+    },
+    {
+      "slug": "carbon_pricing_ets",
+      "title": "碳定價與ETS",
+      "group": "氣候與碳定價",
+      "description": "碳定價、排放交易、碳市場、碳權與國際接軌。",
+      "aliases": [
+        "碳定價",
+        "排放交易",
+        "ETS",
+        "碳交易",
+        "碳市場",
+        "碳權"
+      ],
+      "total_count": 102
+    },
+    {
+      "slug": "ghg_inventory",
+      "title": "溫室氣體盤查登錄",
+      "group": "氣候與碳定價",
+      "description": "溫室氣體盤查、登錄、排放清冊與範疇三係數。",
+      "aliases": [
+        "溫室氣體",
+        "盤查",
+        "登錄",
+        "排放清冊",
+        "範疇三",
+        "GHG"
+      ],
+      "total_count": 436
+    },
+    {
+      "slug": "net_zero_transition",
+      "title": "淨零轉型",
+      "group": "氣候與碳定價",
+      "description": "2050 淨零、減碳路徑、綠色轉型與企業競爭力。",
+      "aliases": [
+        "淨零",
+        "2050",
+        "淨零排放",
+        "淨零轉型",
+        "減碳",
+        "低碳"
+      ],
+      "total_count": 940
+    },
+    {
+      "slug": "climate_adaptation",
+      "title": "氣候變遷與調適",
+      "group": "氣候與碳定價",
+      "description": "氣候變遷、高溫、熱浪、韌性城市與調適政策。",
+      "aliases": [
+        "氣候變遷",
+        "氣候調適",
+        "調適",
+        "高溫",
+        "熱浪",
+        "韌性",
+        "國土綠蔭"
+      ],
+      "total_count": 740
+    },
+    {
+      "slug": "resource_circulation",
+      "title": "資源循環",
+      "group": "資源循環與廢棄物",
+      "description": "資源循環、資源回收、再利用與循環經濟政策。",
+      "aliases": [
+        "資源循環",
+        "資源回收",
+        "再利用",
+        "循環經濟",
+        "循環標誌",
+        "廢棄物再利用"
+      ],
+      "total_count": 1585
+    },
+    {
+      "slug": "plastic_reduction",
+      "title": "減塑與一次用產品",
+      "group": "資源循環與廢棄物",
+      "description": "減塑、一次用產品、塑膠袋、免洗餐具與循環容器。",
+      "aliases": [
+        "減塑",
+        "一次用",
+        "塑膠袋",
+        "免洗餐具",
+        "循環杯",
+        "袋袋箱傳",
+        "包裝減量"
+      ],
+      "total_count": 289
+    },
+    {
+      "slug": "waste_crime",
+      "title": "廢棄物與環保犯罪",
+      "group": "資源循環與廢棄物",
+      "description": "廢棄物清理、非法棄置、掩埋、清運與環保犯罪查緝。",
+      "aliases": [
+        "廢棄物",
+        "非法棄置",
+        "非法掩埋",
+        "清運",
+        "環保犯罪",
+        "事業廢棄物",
+        "有害廢棄物"
+      ],
+      "total_count": 2411
+    },
+    {
+      "slug": "air_quality",
+      "title": "空氣品質",
+      "group": "污染防制",
+      "description": "空污、PM2.5、臭氧、空污費、移動污染源與空氣品質管理。",
+      "aliases": [
+        "空氣品質",
+        "空污",
+        "空氣污染",
+        "PM2.5",
+        "細懸浮微粒",
+        "臭氧",
+        "空污費",
+        "移動污染源"
+      ],
+      "total_count": 1571
+    },
+    {
+      "slug": "water_quality",
+      "title": "水質保護",
+      "group": "污染防制",
+      "description": "水污染防治、河川污染、飲用水、放流水與水質監測。",
+      "aliases": [
+        "水質",
+        "水污染",
+        "放流水",
+        "河川污染",
+        "飲用水",
+        "地下水",
+        "污水"
+      ],
+      "total_count": 2404
+    },
+    {
+      "slug": "soil_groundwater",
+      "title": "土壤及地下水",
+      "group": "污染防制",
+      "description": "土壤污染、地下水污染、農地污染與場址整治。",
+      "aliases": [
+        "土壤污染",
+        "地下水污染",
+        "土壤及地下水",
+        "土污",
+        "農地污染",
+        "污染場址"
+      ],
+      "total_count": 489
+    },
+    {
+      "slug": "eia",
+      "title": "環評制度",
+      "group": "治理與制度",
+      "description": "環境影響評估、開發行為、環評審查與環評監督。",
+      "aliases": [
+        "環評",
+        "環境影響評估",
+        "環評審查",
+        "開發行為",
+        "環評監督"
+      ],
+      "total_count": 411
+    },
+    {
+      "slug": "chemical_management",
+      "title": "化學物質與毒化物",
+      "group": "污染防制",
+      "description": "毒性化學物質、關注化學物質、毒化災、汞、石綿與化學品管理。",
+      "aliases": [
+        "化學物質",
+        "毒性化學物質",
+        "關注化學物質",
+        "毒化物",
+        "毒化災",
+        "汞",
+        "石綿",
+        "PFAS"
+      ],
+      "total_count": 623
+    },
+    {
+      "slug": "environmental_education",
+      "title": "環境教育與綠領人才",
+      "group": "社會溝通與人才",
+      "description": "環境教育、環教場所、綠領人才、證照與人才培育。",
+      "aliases": [
+        "環境教育",
+        "環教",
+        "綠領",
+        "人才培育",
+        "環境教育人員",
+        "證照"
+      ],
+      "total_count": 1052
+    },
+    {
+      "slug": "green_consumption",
+      "title": "綠色消費與標章",
+      "group": "社會溝通與人才",
+      "description": "環保標章、綠色採購、綠色消費、環保旅宿與永續生活。",
+      "aliases": [
+        "環保標章",
+        "綠色消費",
+        "綠色採購",
+        "環保旅宿",
+        "淨零綠生活",
+        "友善食力"
+      ],
+      "total_count": 373
+    },
+    {
+      "slug": "international_cooperation",
+      "title": "國際環境合作",
+      "group": "治理與制度",
+      "description": "國際合作、COP、UNFCCC、巴黎協定、歐盟與跨國交流。",
+      "aliases": [
+        "國際合作",
+        "國際交流",
+        "COP",
+        "UNFCCC",
+        "巴黎協定",
+        "歐盟",
+        "日本",
+        "國際研討會"
+      ],
+      "total_count": 494
+    },
+    {
+      "slug": "enforcement",
+      "title": "環境執法與稽查",
+      "group": "治理與制度",
+      "description": "稽查、督察、裁罰、罰鍰、違規與檢警環合作。",
+      "aliases": [
+        "稽查",
+        "督察",
+        "裁罰",
+        "罰鍰",
+        "違規",
+        "檢警環",
+        "移送法辦"
+      ],
+      "total_count": 1858
+    },
+    {
+      "slug": "esg_finance",
+      "title": "ESG與永續金融",
+      "group": "治理與制度",
+      "description": "ESG、永續金融、企業永續、綠色金融與投資資源。",
+      "aliases": [
+        "ESG",
+        "永續金融",
+        "企業永續",
+        "綠色金融",
+        "金融資源",
+        "永續長"
+      ],
+      "total_count": 47
+    },
+    {
+      "slug": "bioenergy",
+      "title": "生質能與再生能源",
+      "group": "資源循環與廢棄物",
+      "description": "沼氣、生質能、綠能、廚餘能源化與廢棄物發電。",
+      "aliases": [
+        "沼氣",
+        "生質能",
+        "綠能",
+        "再生能源",
+        "發電",
+        "廚餘",
+        "能源化"
+      ],
+      "total_count": 404
+    }
+  ]
+}

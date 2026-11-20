@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-11-20T14:52:59+08:00",
+  "algorithm": "Route 3 Hybrid (TF-IDF + jieba domain dict + optional Gemini Neural Embeddings)",
+  "mode": "tfidf_only",
+  "alpha": 1.0,
+  "top_k": 5,
+  "min_score": 0.16,
+  "topic_bonus": 0.05,
+  "domain_dict_terms": 174,
+  "vocab_size": 26567,
+  "total_items": 11496,
+  "total_edges": 56175,
+  "elapsed_seconds": 10.63,
+  "embedding_meta": {
+    "mode": "tfidf_only",
+    "model": "gemini-embedding-001",
+    "cached_vectors": 0,
+    "newly_embedded": 0,
+    "fallback_reason": "GEMINI_API_KEY not set"
+  }
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Quick integrity check for exported web/public/data/ artifacts."""
+"""Quick integrity check for exported web/public/data/ artifacts (V2)."""
 
 from __future__ import annotations
 
@@ -14,10 +14,15 @@ REQUIRED_FILES = (
     "topics.json",
     "search_index.json",
     "research.json",
+    "policy_graph.json",
+    "timelines.json",
+    "downloads/moenv_topic_yearly_matrix.csv",
+    "downloads/moenv_unit_yearly_stats.csv",
+    "downloads/moenv_methodology_metadata.json",
 )
 MAX_FILE_BYTES = 25 * 1024 * 1024  # Cloudflare Pages 25 MiB limit
 MAX_SEARCH_INDEX_BYTES = 3 * 1024 * 1024  # 3 MiB target
-MAX_TOTAL_FILES = 50
+MAX_TOTAL_FILES = 90
 
 
 def verify_web_data(data_dir: Path) -> dict[str, object]:
@@ -62,6 +67,11 @@ def verify_web_data(data_dir: Path) -> dict[str, object]:
     if shard_sum != total_news:
         raise AssertionError(f"Shard sum ({shard_sum}) != manifest total_news ({total_news})")
 
+    rel_dir = data_dir / "relations"
+    rel_shards = sorted(rel_dir.glob("*.json"))
+    if len(rel_shards) != len(shard_files):
+        raise AssertionError(f"Relation shard count ({len(rel_shards)}) != news shard count ({len(shard_files)})")
+
     search_path = data_dir / "search_index.json"
     search_size = search_path.stat().st_size
     if search_size >= MAX_SEARCH_INDEX_BYTES:
@@ -75,12 +85,18 @@ def verify_web_data(data_dir: Path) -> dict[str, object]:
     if len(topics) != 20:
         raise AssertionError(f"topics.json count ({len(topics)}) != 20")
 
+    timelines = json.loads((data_dir / "timelines.json").read_text(encoding="utf-8"))
+    if len(timelines) < 6:
+        raise AssertionError(f"Expected >= 6 timelines, got {len(timelines)}")
+
     return {
         "status": "ok",
         "total_files": len(all_files),
         "shard_count": len(shard_files),
+        "relation_shard_count": len(rel_shards),
         "total_news": total_news,
-        "shard_sum": shard_sum,
+        "total_relation_edges": int(manifest.get("total_relation_edges", 0)),
+        "timelines": len(timelines),
         "search_index_mib": round(search_size / (1024 * 1024), 3),
         "max_file_mib": round(max(f.stat().st_size for f in all_files) / (1024 * 1024), 3),
     }
