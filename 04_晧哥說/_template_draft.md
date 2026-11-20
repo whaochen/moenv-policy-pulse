@@ -9,6 +9,7 @@ topics:
 related_news:
   - "14518"            # 填入新聞 news_id 或 newsno，網站自動串連新聞卡片
 timeline_slug: ""      # 選填：對應 05_政策脈絡線/ 的 slug（如 carbon-fee、water-pollution-fee）
+cover: ""              # 選填：自訂封面圖路徑（如 "/images/hao-talks/ev-subsidy.png"），留空則自動依議題生成專屬雜誌封面
 ---
 
 ## 一、看門道（一句話破題）

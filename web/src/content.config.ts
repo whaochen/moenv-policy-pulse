@@ -14,6 +14,7 @@ const haoTalks = defineCollection({
     topics: z.array(z.string()).default([]),
     related_news: z.array(z.union([z.string(), z.number()])).default([]),
     timeline_slug: z.string().optional().default(''),
+    cover: z.string().optional().default(''),
   }),
 });
 

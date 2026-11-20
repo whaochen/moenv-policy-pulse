@@ -2,6 +2,7 @@
 import { render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CitationBox from '../../components/CitationBox.astro';
+import HaoTalkCover from '../../components/HaoTalkCover.astro';
 import { getPublishedHaoTalks, lookupNewsByIds, findPublicImage, formatIsoDate } from '../../lib/data';
 
 export async function getStaticPaths() {
@@ -29,7 +30,18 @@ const pubYear = formatIsoDate(post.data.date).slice(0, 4);
       ← 返回《晧哥說》專欄列表
     </a>
 
-    <header class="mt-4 border-b border-gray-200 pb-6">
+    <div class="group mt-4 overflow-hidden rounded-3xl border border-emerald-deep/15 shadow-sm">
+      <HaoTalkCover
+        title={post.data.title}
+        date={post.data.date}
+        topics={post.data.topics}
+        cover={post.data.cover}
+        aspect="21/9"
+        variant="article"
+      />
+    </div>
+
+    <header class="mt-6 border-b border-gray-200 pb-6">
       <div class="flex flex-wrap items-center gap-2 text-xs text-gray-500">
         <span class="rounded-full bg-amber-soft px-2.5 py-0.5 font-semibold text-amber-accent">
           晧哥說

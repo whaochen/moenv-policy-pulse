@@ -1,12 +1,30 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HaoTalkCover from '../../components/HaoTalkCover.astro';
 import { getPublishedHaoTalks, findPublicImage, formatIsoDate } from '../../lib/data';
 
 const posts = await getPublishedHaoTalks();
 const badgeSrc = findPublicImage('hao-talks-badge');
+const featuredPost = posts[0] ?? null;
+
+// 統計所有文章中的政策議題出現頻率，依頻率高低排序
+const topicFreqMap = new Map<string, number>();
+for (const post of posts) {
+  for (const t of post.data.topics) {
+    const clean = t.trim();
+    if (!clean) continue;
+    topicFreqMap.set(clean, (topicFreqMap.get(clean) ?? 0) + 1);
+  }
+}
+const sortedTopics = Array.from(topicFreqMap.entries())
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'zh-Hant'))
+  .map(([topic, count]) => ({ topic, count }));
+
+const PAGE_SIZE = 9;
 ---
 
 <BaseLayout title="《晧哥說》專欄" description="《晧哥說》環境政策專欄：聚焦碳費、淨零轉型、資源循環與環境治理的現場觀點。">
+  <!-- 專欄頂部品牌標頭 -->
   <div class="mb-8 flex flex-col gap-4 rounded-3xl border border-emerald-900/10 bg-white p-6 shadow-xs sm:flex-row sm:items-center sm:justify-between sm:p-7">
     <div>
       <span class="inline-flex rounded-full bg-amber-soft px-3 py-1 text-xs font-semibold text-amber-accent">
@@ -27,40 +45,238 @@ const badgeSrc = findPublicImage('hao-talks-badge');
   </div>
 
   {posts.length > 0 ? (
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {posts.map((post) => (
-        <a
-          href={`/hao-talks/${post.id}`}
-          class="group flex flex-col justify-between rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-deep/40 hover:shadow-md"
-        >
-          <div>
-            <div class="flex items-center justify-between text-xs text-gray-500">
-              <span class="font-mono">{formatIsoDate(post.data.date)}</span>
-              {post.data.related_news.length > 0 && (
-                <span class="text-emerald-deep">
-                  串連 {post.data.related_news.length} 篇新聞
-                </span>
-              )}
+    <>
+      <!-- 1. 最新一期頭條大卡（Featured Hero Card，未套用篩選且在第 1 頁時顯示） -->
+      {featuredPost && (
+        <section id="featured-hero-section" class="mb-10">
+          <a
+            href={`/hao-talks/${featuredPost.id}`}
+            class="group grid grid-cols-1 overflow-hidden rounded-3xl border border-emerald-deep/20 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-emerald-deep/45 hover:shadow-lg lg:grid-cols-12"
+          >
+            <div class="relative flex items-stretch overflow-hidden bg-[#0F4C3A] lg:col-span-6">
+              <HaoTalkCover
+                title={featuredPost.data.title}
+                date={featuredPost.data.date}
+                topics={featuredPost.data.topics}
+                cover={featuredPost.data.cover}
+                aspect="16/9"
+                variant="featured"
+              />
             </div>
-            <h2 class="mt-3 font-serif text-xl font-bold leading-snug text-gray-900 group-hover:text-emerald-deep">
-              {post.data.title}
-            </h2>
-            <p class="mt-2.5 text-sm leading-relaxed text-gray-600">
-              {post.data.summary}
-            </p>
+
+            <div class="flex flex-col justify-between p-6 sm:p-8 lg:col-span-6">
+              <div>
+                <div class="flex flex-wrap items-center gap-2.5 text-xs text-gray-500">
+                  <span class="inline-flex items-center gap-1 rounded-full bg-amber-soft px-3 py-1 font-semibold text-amber-accent shadow-2xs">
+                    <span>✦</span>
+                    <span>最新把脈</span>
+                  </span>
+                  <span class="font-mono text-gray-500">{formatIsoDate(featuredPost.data.date)}</span>
+                  {featuredPost.data.related_news.length > 0 && (
+                    <span class="rounded-full bg-emerald-soft/70 px-2.5 py-0.5 font-medium text-emerald-deep">
+                      串連 {featuredPost.data.related_news.length} 篇官方新聞
+                    </span>
+                  )}
+                </div>
+
+                <h2 class="mt-4 font-serif text-2xl font-bold leading-snug text-gray-900 transition-colors group-hover:text-emerald-deep sm:text-3xl">
+                  {featuredPost.data.title}
+                </h2>
+
+                <p class="mt-3.5 text-sm leading-relaxed text-gray-600 sm:text-base">
+                  {featuredPost.data.summary}
+                </p>
+              </div>
+
+              <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-gray-100 pt-4">
+                <div class="flex flex-wrap gap-1.5">
+                  {featuredPost.data.topics.map((topic) => (
+                    <span class="rounded-full bg-emerald-soft px-2.5 py-0.5 text-xs font-medium text-emerald-deep">
+                      {topic}
+                    </span>
+                  ))}
+                </div>
+                <span class="inline-flex items-center gap-1 text-sm font-semibold text-emerald-deep transition-transform group-hover:translate-x-1">
+                  <span>閱讀全文</span>
+                  <span aria-hidden="true">→</span>
+                </span>
+              </div>
+            </div>
+          </a>
+        </section>
+      )}
+
+      <!-- 2. 議題快速篩選列 ＋ 即時搜尋框 -->
+      <section
+        id="talks-filter-bar"
+        class="mb-7 scroll-mt-24 rounded-2xl border border-emerald-900/10 bg-white p-4 shadow-2xs sm:p-5"
+      >
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <!-- 關鍵字搜尋框 -->
+          <div class="relative flex-1 max-w-md">
+            <svg
+              class="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
+            </svg>
+            <input
+              id="talks-search-input"
+              type="search"
+              placeholder="搜尋專欄標題、摘要或議題關鍵字（如：水污費、AI、碳費）..."
+              class="w-full rounded-xl border border-gray-200 bg-ivory/70 py-2 pr-4 pl-10 text-sm text-gray-800 placeholder-gray-400 transition focus:border-emerald-deep focus:bg-white focus:outline-none"
+            />
           </div>
-          {post.data.topics.length > 0 && (
-            <div class="mt-5 flex flex-wrap gap-1.5 border-t border-gray-100 pt-3">
-              {post.data.topics.map((topic) => (
-                <span class="rounded bg-emerald-soft px-2 py-0.5 text-xs font-medium text-emerald-deep">
-                  {topic}
-                </span>
-              ))}
-            </div>
+
+          <!-- 篇數統計與重置按鈕 -->
+          <div class="flex items-center justify-between gap-3 text-xs text-gray-500 lg:justify-end">
+            <span id="talks-result-count" class="font-medium text-gray-600">
+              共收錄 <strong class="text-emerald-deep">{posts.length}</strong> 篇專欄評論
+            </span>
+            <button
+              id="talks-reset-btn"
+              type="button"
+              class="hidden rounded-lg border border-gray-200 px-2.5 py-1 text-xs font-medium text-gray-600 transition hover:border-emerald-deep/40 hover:text-emerald-deep"
+            >
+              清除篩選
+            </button>
+          </div>
+        </div>
+
+        <!-- 議題膠囊篩選列（預設顯示前 12 個主要高頻政策議題，可一鍵展開全部） -->
+        <div class="mt-3.5 flex flex-wrap items-center gap-1.5 border-t border-gray-100 pt-3.5" role="tablist" aria-label="議題快速篩選">
+          <button
+            type="button"
+            data-topic="ALL"
+            class="topic-pill active-pill inline-flex items-center gap-1.5 rounded-full border border-emerald-deep bg-emerald-deep px-3 py-1 text-xs font-semibold text-white transition"
+          >
+            <span>全部</span>
+            <span class="rounded-full bg-white/20 px-1.5 py-0.2 font-mono text-[11px]">{posts.length}</span>
+          </button>
+          {sortedTopics.map(({ topic, count }, idx) => (
+            <button
+              type="button"
+              data-topic={topic}
+              data-extra-topic={idx >= 12 ? 'true' : undefined}
+              class:list={[
+                'topic-pill inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-ivory/80 px-3 py-1 text-xs font-medium text-gray-700 transition hover:border-emerald-deep/40 hover:bg-emerald-soft/40 hover:text-emerald-deep',
+                idx >= 12 && 'hidden',
+              ]}
+            >
+              <span>{topic}</span>
+              <span class="font-mono text-[11px] opacity-65">{count}</span>
+            </button>
+          ))}
+          {sortedTopics.length > 12 && (
+            <button
+              id="toggle-more-topics-btn"
+              type="button"
+              class="inline-flex items-center gap-1 rounded-full border border-dashed border-emerald-deep/35 bg-white px-2.5 py-1 text-xs font-medium text-emerald-deep transition hover:border-emerald-deep hover:bg-emerald-soft/30"
+            >
+              <span>+ 更多議題（{sortedTopics.length - 12}）</span>
+            </button>
           )}
-        </a>
-      ))}
-    </div>
+        </div>
+      </section>
+
+      <!-- 3. 3×3 雜誌卡片網格（每頁 9 篇） -->
+      <section aria-label="晧哥說專欄文章列表">
+        <div id="talks-grid" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post, idx) => {
+            const iso = formatIsoDate(post.data.date);
+            const searchBlob = `${post.data.title} ${post.data.summary} ${post.data.topics.join(' ')} ${iso}`.toLowerCase();
+            // 預設檢視第 1 頁：idx === 0 已在上方頭條大卡呈現，下方網格預設顯示 idx 1..9 共 9 篇
+            const initiallyHidden = idx === 0 || idx > PAGE_SIZE;
+            return (
+              <a
+                href={`/hao-talks/${post.id}`}
+                data-index={idx}
+                data-topics={JSON.stringify(post.data.topics)}
+                data-search={searchBlob}
+                class:list={[
+                  'talk-card group flex flex-col justify-between overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-emerald-deep/40 hover:shadow-md',
+                  initiallyHidden && 'hidden',
+                ]}
+              >
+                <div>
+                  <HaoTalkCover
+                    title={post.data.title}
+                    date={post.data.date}
+                    topics={post.data.topics}
+                    cover={post.data.cover}
+                    aspect="16/9"
+                    variant="card"
+                  />
+                  <div class="p-5 sm:p-6">
+                    <div class="flex items-center justify-between text-xs text-gray-500">
+                      <span class="font-mono">{iso}</span>
+                      {post.data.related_news.length > 0 && (
+                        <span class="font-medium text-emerald-deep">
+                          串連 {post.data.related_news.length} 篇新聞
+                        </span>
+                      )}
+                    </div>
+                    <h2 class="mt-2.5 font-serif text-lg font-bold leading-snug text-gray-900 transition-colors group-hover:text-emerald-deep sm:text-xl">
+                      {post.data.title}
+                    </h2>
+                    <p class="mt-2.5 line-clamp-3 text-sm leading-relaxed text-gray-600">
+                      {post.data.summary}
+                    </p>
+                  </div>
+                </div>
+
+                {post.data.topics.length > 0 && (
+                  <div class="flex flex-wrap gap-1.5 border-t border-gray-100 px-5 pt-3 pb-4 sm:px-6">
+                    {post.data.topics.map((topic) => (
+                      <span class="rounded bg-emerald-soft px-2 py-0.5 text-xs font-medium text-emerald-deep">
+                        {topic}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </a>
+            );
+          })}
+        </div>
+
+        <!-- 無符合搜尋結果提示 -->
+        <div
+          id="talks-empty-state"
+          class="hidden rounded-2xl border border-dashed border-gray-300 bg-white p-12 text-center"
+        >
+          <p class="font-serif text-lg font-bold text-gray-700">找不到符合篩選條件的《晧哥說》專欄文章</p>
+          <p class="mt-1.5 text-xs text-gray-500">請嘗試更換議題標籤，或清除搜尋關鍵字後重新檢視。</p>
+        </div>
+
+        <!-- 分頁控制列 -->
+        <nav
+          id="talks-pagination"
+          aria-label="專欄文章分頁"
+          class="mt-10 flex flex-wrap items-center justify-center gap-2"
+        >
+          <button
+            id="page-prev-btn"
+            type="button"
+            class="inline-flex items-center gap-1 rounded-xl border border-gray-200 bg-white px-3.5 py-2 text-xs font-semibold text-gray-700 shadow-2xs transition hover:border-emerald-deep/40 hover:text-emerald-deep disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            <span>←</span>
+            <span>上一頁</span>
+          </button>
+          <div id="page-numbers" class="flex flex-wrap items-center gap-1.5"></div>
+          <button
+            id="page-next-btn"
+            type="button"
+            class="inline-flex items-center gap-1 rounded-xl border border-gray-200 bg-white px-3.5 py-2 text-xs font-semibold text-gray-700 shadow-2xs transition hover:border-emerald-deep/40 hover:text-emerald-deep disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            <span>下一頁</span>
+            <span>→</span>
+          </button>
+        </nav>
+      </section>
+    </>
   ) : (
     <div class="rounded-2xl border border-dashed border-emerald-deep/30 bg-white p-12 text-center shadow-sm">
       <div class="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full bg-amber-soft font-serif text-xl font-bold text-amber-accent">
@@ -72,4 +288,186 @@ const badgeSrc = findPublicImage('hao-talks-badge');
       </p>
     </div>
   )}
+
+  <script>
+    const PAGE_SIZE = 9;
+    const featuredSection = document.getElementById('featured-hero-section');
+    const filterBar = document.getElementById('talks-filter-bar');
+    const searchInput = document.getElementById('talks-search-input') as HTMLInputElement | null;
+    const resultCountEl = document.getElementById('talks-result-count');
+    const resetBtn = document.getElementById('talks-reset-btn');
+    const emptyStateEl = document.getElementById('talks-empty-state');
+    const paginationEl = document.getElementById('talks-pagination');
+    const prevBtn = document.getElementById('page-prev-btn') as HTMLButtonElement | null;
+    const nextBtn = document.getElementById('page-next-btn') as HTMLButtonElement | null;
+    const pageNumbersEl = document.getElementById('page-numbers');
+    const topicButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('.topic-pill'));
+    const extraTopicButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('.topic-pill[data-extra-topic="true"]'));
+    const toggleMoreTopicsBtn = document.getElementById('toggle-more-topics-btn');
+    const allCards = Array.from(document.querySelectorAll<HTMLElement>('.talk-card'));
+
+    let activeTopic = 'ALL';
+    let searchQuery = '';
+    let currentPage = 1;
+    let showAllTopics = false;
+
+    function updateTopicPillStyles() {
+      topicButtons.forEach((btn) => {
+        const isSelected = (btn.dataset.topic || 'ALL') === activeTopic;
+        const isExtra = btn.dataset.extraTopic === 'true';
+        const shouldHide = isExtra && !showAllTopics && !isSelected;
+        const baseClass = isSelected
+          ? 'topic-pill active-pill inline-flex items-center gap-1.5 rounded-full border border-emerald-deep bg-emerald-deep px-3 py-1 text-xs font-semibold text-white transition'
+          : 'topic-pill inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-ivory/80 px-3 py-1 text-xs font-medium text-gray-700 transition hover:border-emerald-deep/40 hover:bg-emerald-soft/40 hover:text-emerald-deep';
+        btn.className = shouldHide ? `${baseClass} hidden` : baseClass;
+      });
+    }
+
+    if (toggleMoreTopicsBtn) {
+      toggleMoreTopicsBtn.addEventListener('click', () => {
+        showAllTopics = !showAllTopics;
+        toggleMoreTopicsBtn.textContent = showAllTopics
+          ? '收合次要議題'
+          : `+ 更多議題（${extraTopicButtons.length}）`;
+        updateTopicPillStyles();
+      });
+    }
+
+    function renderList(shouldScroll = false) {
+      const q = searchQuery.trim().toLowerCase();
+      const isUnfiltered = activeTopic === 'ALL' && q === '';
+
+      // 篩選符合議題與關鍵字的文章卡片
+      const matchedCards = allCards.filter((card) => {
+        const idx = Number(card.dataset.index || '0');
+        if (activeTopic !== 'ALL') {
+          try {
+            const topics: string[] = JSON.parse(card.dataset.topics || '[]');
+            if (!topics.includes(activeTopic)) return false;
+          } catch {
+            return false;
+          }
+        }
+        if (q) {
+          const blob = card.dataset.search || '';
+          if (!blob.includes(q)) return false;
+        }
+        return true;
+      });
+
+      // 未套用篩選時，第 1 篇獨立作為頂部頭條大卡，下方 3×3 分頁網格從第 2 篇（index >= 1）排起
+      const gridPool = isUnfiltered ? matchedCards.slice(1) : matchedCards;
+      const totalPages = Math.max(1, Math.ceil(gridPool.length / PAGE_SIZE));
+      if (currentPage > totalPages) currentPage = totalPages;
+
+      // 頂部頭條大卡：僅在未套用篩選且在第 1 頁時顯示
+      if (featuredSection) {
+        featuredSection.classList.toggle('hidden', !(isUnfiltered && currentPage === 1));
+      }
+
+      // 更新統計文字與清除按鈕
+      if (resultCountEl) {
+        if (isUnfiltered) {
+          resultCountEl.innerHTML = `共收錄 <strong class="text-emerald-deep">${allCards.length}</strong> 篇專欄評論`;
+        } else {
+          resultCountEl.innerHTML = `共找到 <strong class="text-emerald-deep">${matchedCards.length}</strong> 篇`;
+        }
+      }
+      if (resetBtn) {
+        resetBtn.classList.toggle('hidden', isUnfiltered);
+      }
+
+      // 顯示當前頁的 9 張卡片
+      const start = (currentPage - 1) * PAGE_SIZE;
+      const visibleSet = new Set(gridPool.slice(start, start + PAGE_SIZE));
+      allCards.forEach((card) => {
+        card.classList.toggle('hidden', !visibleSet.has(card));
+      });
+
+      // 空狀態與分頁控制列
+      if (emptyStateEl) {
+        emptyStateEl.classList.toggle('hidden', matchedCards.length > 0);
+      }
+      if (paginationEl) {
+        paginationEl.classList.toggle('hidden', gridPool.length <= PAGE_SIZE);
+      }
+
+      if (prevBtn) prevBtn.disabled = currentPage <= 1;
+      if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
+
+      if (pageNumbersEl) {
+        pageNumbersEl.innerHTML = '';
+        for (let p = 1; p <= totalPages; p++) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = String(p);
+          btn.setAttribute('aria-label', `第 ${p} 頁`);
+          if (p === currentPage) {
+            btn.className =
+              'inline-flex h-8 w-8 items-center justify-center rounded-xl border border-emerald-deep bg-emerald-deep font-mono text-xs font-bold text-white shadow-2xs';
+          } else {
+            btn.className =
+              'inline-flex h-8 w-8 items-center justify-center rounded-xl border border-gray-200 bg-white font-mono text-xs font-medium text-gray-700 transition hover:border-emerald-deep/40 hover:text-emerald-deep';
+          }
+          btn.addEventListener('click', () => {
+            if (currentPage !== p) {
+              currentPage = p;
+              renderList(true);
+            }
+          });
+          pageNumbersEl.appendChild(btn);
+        }
+      }
+
+      if (shouldScroll && filterBar) {
+        filterBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    topicButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activeTopic = btn.dataset.topic || 'ALL';
+        currentPage = 1;
+        updateTopicPillStyles();
+        renderList(false);
+      });
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        searchQuery = searchInput.value;
+        currentPage = 1;
+        renderList(false);
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        activeTopic = 'ALL';
+        searchQuery = '';
+        currentPage = 1;
+        if (searchInput) searchInput.value = '';
+        updateTopicPillStyles();
+        renderList(false);
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage -= 1;
+          renderList(true);
+        }
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        currentPage += 1;
+        renderList(true);
+      });
+    }
+
+    renderList(false);
+  </script>
 </BaseLayout>

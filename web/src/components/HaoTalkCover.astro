@@ -1,0 +1,430 @@
+---
+import { formatIsoDate } from '../lib/data';
+
+interface Props {
+  title: string;
+  date: Date | string;
+  topics?: string[];
+  cover?: string;
+  aspect?: '16/9' | '21/9';
+  variant?: 'card' | 'featured' | 'article';
+}
+
+const {
+  title,
+  date,
+  topics = [],
+  cover = '',
+  aspect = '16/9',
+  variant = 'card',
+} = Astro.props;
+
+const hasCustomCover = Boolean(cover && cover.trim().length > 0);
+const isoDate = formatIsoDate(date);
+const yearMonth = isoDate.slice(0, 7).replace('-', '.');
+
+type ThemeKey = 'climate' | 'air' | 'water' | 'circular' | 'enforcement' | 'global';
+
+interface ThemeConfig {
+  key: ThemeKey;
+  label: string;
+  gradStart: string;
+  gradEnd: string;
+  accent: string;
+  accentSoft: string;
+  glowColor: string;
+}
+
+const THEMES: Record<ThemeKey, ThemeConfig> = {
+  climate: {
+    key: 'climate',
+    label: '氣候與淨零',
+    gradStart: '#0F4C3A',
+    gradEnd: '#14532D',
+    accent: '#34D399',
+    accentSoft: '#A7F3D0',
+    glowColor: '#10B981',
+  },
+  air: {
+    key: 'air',
+    label: '空氣品質',
+    gradStart: '#115E59',
+    gradEnd: '#0F766E',
+    accent: '#5EEAD4',
+    accentSoft: '#CCFBF1',
+    glowColor: '#2DD4BF',
+  },
+  water: {
+    key: 'water',
+    label: '水土治理',
+    gradStart: '#155E75',
+    gradEnd: '#0E7490',
+    accent: '#67E8F9',
+    accentSoft: '#CFFAFE',
+    glowColor: '#22D3EE',
+  },
+  circular: {
+    key: 'circular',
+    label: '資源循環',
+    gradStart: '#78350F',
+    gradEnd: '#92400E',
+    accent: '#FBBF24',
+    accentSoft: '#86EFAC',
+    glowColor: '#F59E0B',
+  },
+  enforcement: {
+    key: 'enforcement',
+    label: '環境把關',
+    gradStart: '#1E3A3A',
+    gradEnd: '#334155',
+    accent: '#94A3B8',
+    accentSoft: '#FCD34D',
+    glowColor: '#64748B',
+  },
+  global: {
+    key: 'global',
+    label: '永續與國際',
+    gradStart: '#064E3B',
+    gradEnd: '#115E59',
+    accent: '#F59E0B',
+    accentSoft: '#FDE68A',
+    glowColor: '#D97706',
+  },
+};
+
+function detectTheme(topicList: string[], articleTitle: string): ThemeConfig {
+  const primary = topicList[0] ?? '';
+  const combined = `${primary} ${topicList.join(' ')} ${articleTitle}`;
+
+  function matches(text: string): ThemeKey | null {
+    if (/(淨零|碳費|自主減量|碳定價|盤查|碳匯|氣候|減碳|調適|溫室氣體)/.test(text)) return 'climate';
+    if (/(空氣品質|空污|電動車|揚塵|移動污染|降溫|遮蔭)/.test(text)) return 'air';
+    if (/(水質|河川|地下水|土壤|水污)/.test(text)) return 'water';
+    if (/(資源循環|廢棄物|減塑|生質能|焚化|沼氣|循環|袋)/.test(text)) return 'circular';
+    if (/(執法|稽查|環評|化學物質|PFAS|風險|防制|犯罪)/.test(text)) return 'enforcement';
+    if (/(國際|COP|ESG|綠領|綠色消費|環境教育|教育|社區|校園|原住民族|健康|採購)/.test(text)) return 'global';
+    return null;
+  }
+
+  const fromPrimary = matches(primary);
+  if (fromPrimary) return THEMES[fromPrimary];
+  const fromAll = matches(combined);
+  if (fromAll) return THEMES[fromAll];
+  return THEMES.global;
+}
+
+function hashString(input: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < input.length; i++) {
+    h ^= input.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return Math.abs(h >>> 0);
+}
+
+const theme = detectTheme(topics, title);
+const primaryTopicLabel = topics[0] || theme.label;
+const hash = hashString(`${title}-${isoDate}-${primaryTopicLabel}`);
+const uid = `htc-${hash.toString(36)}-${aspect === '21/9' ? 'w' : 'c'}`;
+
+// 由標題雜湊微調幾何構圖角度與焦點位置，讓同議題不同文章各自擁有獨特視覺變化
+const angle = ((hash % 28) - 14);
+const offsetX = ((hash >> 4) % 80) - 40;
+const offsetY = ((hash >> 8) % 50) - 25;
+const glowCx = 460 + (((hash >> 3) % 140) - 70);
+const glowCy = 150 + (((hash >> 6) % 100) - 50);
+
+const aspectClass = aspect === '21/9' ? 'aspect-[21/9]' : 'aspect-[16/9]';
+const badgeSizeClass =
+  variant === 'article'
+    ? 'px-3.5 py-1 text-xs'
+    : variant === 'featured'
+      ? 'px-3 py-1 text-xs'
+      : 'px-2.5 py-0.5 text-[11px]';
+const watermarkSizeClass =
+  variant === 'article'
+    ? 'text-[11px] sm:text-xs'
+    : 'text-[10px] sm:text-[11px]';
+---
+
+<div class:list={['relative w-full overflow-hidden bg-[#0F4C3A] select-none', aspectClass]}>
+  {hasCustomCover ? (
+    <>
+      <img
+        src={cover}
+        alt={title}
+        loading="lazy"
+        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-black/25" />
+    </>
+  ) : (
+    <svg
+      viewBox="0 0 640 360"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+      class="h-full w-full transition-transform duration-500 group-hover:scale-105"
+    >
+      <defs>
+        <linearGradient id={`${uid}-bg`} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color={theme.gradStart} />
+          <stop offset="100%" stop-color={theme.gradEnd} />
+        </linearGradient>
+        <radialGradient id={`${uid}-glow`} cx="50%" cy="50%" r="55%">
+          <stop offset="0%" stop-color={theme.glowColor} stop-opacity="0.38" />
+          <stop offset="65%" stop-color={theme.glowColor} stop-opacity="0.08" />
+          <stop offset="100%" stop-color={theme.gradEnd} stop-opacity="0" />
+        </radialGradient>
+        <linearGradient id={`${uid}-line`} x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color={theme.accent} stop-opacity="0.12" />
+          <stop offset="50%" stop-color={theme.accent} stop-opacity="0.65" />
+          <stop offset="100%" stop-color={theme.accentSoft} stop-opacity="0.2" />
+        </linearGradient>
+      </defs>
+
+      <!-- 底層主題漸層與光暈 -->
+      <rect width="640" height="360" fill={`url(#${uid}-bg)`} />
+      <circle cx={glowCx} cy={glowCy} r="240" fill={`url(#${uid}-glow)`} />
+
+      {theme.key === 'circular' && (
+        <circle cx={140 - offsetX} cy={270 + offsetY} r="175" fill="#14532D" fill-opacity="0.36" />
+      )}
+
+      <!-- 極淡雜誌細格底紋 -->
+      <g stroke="#FFFFFF" stroke-opacity="0.045" stroke-width="1">
+        <line x1="0" y1="90" x2="640" y2="90" />
+        <line x1="0" y1="180" x2="640" y2="180" />
+        <line x1="0" y1="270" x2="640" y2="270" />
+        <line x1="160" y1="0" x2="160" y2="360" />
+        <line x1="320" y1="0" x2="320" y2="360" />
+        <line x1="480" y1="0" x2="480" y2="360" />
+      </g>
+
+      <!-- 6 大主題專屬向量幾何構圖（帶標題雜湊微調） -->
+      <g transform={`translate(${offsetX}, ${offsetY}) rotate(${angle} 320 180)`}>
+        {theme.key === 'climate' && (
+          <g fill="none">
+            <!-- 抽象葉脈輪廓 -->
+            <path
+              d="M 110 290 C 180 140, 340 90, 540 85 C 470 210, 330 285, 110 290 Z"
+              stroke={theme.accent}
+              stroke-opacity="0.26"
+              stroke-width="2"
+              fill={theme.accent}
+              fill-opacity="0.05"
+            />
+            <path
+              d="M 110 290 Q 310 190 540 85"
+              stroke={`url(#${uid}-line)`}
+              stroke-width="2.5"
+            />
+            <path d="M 235 233 L 210 175" stroke={theme.accent} stroke-opacity="0.25" stroke-width="1.5" />
+            <path d="M 325 190 L 295 130" stroke={theme.accent} stroke-opacity="0.25" stroke-width="1.5" />
+            <path d="M 415 147 L 390 102" stroke={theme.accent} stroke-opacity="0.25" stroke-width="1.5" />
+            <path d="M 275 215 L 335 240" stroke={theme.accent} stroke-opacity="0.22" stroke-width="1.5" />
+            <path d="M 370 168 L 430 192" stroke={theme.accent} stroke-opacity="0.22" stroke-width="1.5" />
+            <!-- 上升減碳與轉型趨勢曲線 -->
+            <path
+              d="M 70 265 C 175 260, 235 205, 325 188 C 415 170, 470 112, 575 72"
+              stroke={theme.accentSoft}
+              stroke-opacity="0.7"
+              stroke-width="2.2"
+              stroke-dasharray="5 5"
+            />
+            <circle cx="325" cy="188" r="5" fill={theme.accentSoft} fill-opacity="0.85" />
+            <circle cx="465" cy="118" r="6" fill={theme.accent} fill-opacity="0.9" />
+            <circle cx="465" cy="118" r="14" stroke={theme.accent} stroke-opacity="0.35" stroke-width="1.5" />
+          </g>
+        )}
+
+        {theme.key === 'air' && (
+          <g fill="none">
+            <!-- 流動氣流波紋與潔淨風軌 -->
+            <path
+              d="M -20 140 C 130 75, 270 215, 430 135 C 530 85, 600 110, 680 95"
+              stroke={`url(#${uid}-line)`}
+              stroke-width="3"
+            />
+            <path
+              d="M -20 185 C 145 120, 290 250, 450 170 C 545 120, 610 150, 680 135"
+              stroke={theme.accent}
+              stroke-opacity="0.38"
+              stroke-width="2"
+            />
+            <path
+              d="M -10 230 C 160 170, 310 285, 470 205 C 560 160, 615 190, 680 175"
+              stroke={theme.accentSoft}
+              stroke-opacity="0.24"
+              stroke-width="1.5"
+            />
+            <path
+              d="M 60 100 C 190 55, 340 155, 510 85"
+              stroke={theme.accentSoft}
+              stroke-opacity="0.32"
+              stroke-width="1.5"
+              stroke-dasharray="8 6"
+            />
+            <circle cx="430" cy="135" r="5" fill={theme.accentSoft} fill-opacity="0.85" />
+            <circle cx="245" cy="150" r="3.5" fill={theme.accent} fill-opacity="0.65" />
+            <circle cx="515" cy="148" r="3" fill={theme.accentSoft} fill-opacity="0.55" />
+          </g>
+        )}
+
+        {theme.key === 'water' && (
+          <g fill="none">
+            <!-- 同心水波漣漪與流體曲線 -->
+            <g transform="translate(430, 175)">
+              <circle r="32" stroke={theme.accentSoft} stroke-opacity="0.65" stroke-width="2" />
+              <circle r="68" stroke={theme.accent} stroke-opacity="0.45" stroke-width="1.8" />
+              <circle r="108" stroke={theme.accent} stroke-opacity="0.28" stroke-width="1.5" stroke-dasharray="10 6" />
+              <circle r="152" stroke={theme.accent} stroke-opacity="0.16" stroke-width="1.2" />
+              <circle r="6" fill={theme.accentSoft} fill-opacity="0.9" />
+            </g>
+            <path
+              d="M -20 245 C 120 200, 230 285, 370 235 C 485 195, 565 230, 670 205"
+              stroke={`url(#${uid}-line)`}
+              stroke-width="2.5"
+            />
+            <path
+              d="M -20 278 C 135 235, 250 310, 395 265 C 500 230, 575 260, 670 240"
+              stroke={theme.accentSoft}
+              stroke-opacity="0.28"
+              stroke-width="1.5"
+            />
+          </g>
+        )}
+
+        {theme.key === 'circular' && (
+          <g fill="none">
+            <!-- 循環軌跡幾何環與深綠點綴 -->
+            <g transform="translate(410, 175)">
+              <circle
+                r="112"
+                stroke={theme.accent}
+                stroke-opacity="0.45"
+                stroke-width="2.5"
+                stroke-dasharray="145 32"
+              />
+              <circle
+                r="82"
+                stroke={theme.accentSoft}
+                stroke-opacity="0.5"
+                stroke-width="2"
+                stroke-dasharray="95 28"
+              />
+              <circle r="48" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="1.5" />
+              <polygon points="0,-118 10,-106 -10,-106" fill={theme.accent} fill-opacity="0.8" />
+              <polygon points="0,118 -10,106 10,106" fill={theme.accentSoft} fill-opacity="0.8" />
+            </g>
+            <circle cx="215" cy="195" r="72" stroke={theme.accentSoft} stroke-opacity="0.22" stroke-width="1.8" />
+            <path
+              d="M 120 265 C 220 190, 330 220, 490 120"
+              stroke={`url(#${uid}-line)`}
+              stroke-width="2"
+            />
+          </g>
+        )}
+
+        {theme.key === 'enforcement' && (
+          <g fill="none">
+            <!-- 結構網格與把關刻度線 -->
+            <g transform="translate(430, 175)">
+              <polygon
+                points="0,-110 95,-55 95,55 0,110 -95,55 -95,-55"
+                stroke={theme.accent}
+                stroke-opacity="0.42"
+                stroke-width="2"
+                fill={theme.accent}
+                fill-opacity="0.05"
+              />
+              <polygon
+                points="0,-70 61,-35 61,35 0,70 -61,35 -61,-35"
+                stroke={theme.accentSoft}
+                stroke-opacity="0.55"
+                stroke-width="1.6"
+              />
+              <line x1="-130" y1="0" x2="130" y2="0" stroke={theme.accent} stroke-opacity="0.3" stroke-width="1.2" />
+              <line x1="0" y1="-130" x2="0" y2="130" stroke={theme.accent} stroke-opacity="0.3" stroke-width="1.2" />
+              <circle r="6" fill={theme.accentSoft} fill-opacity="0.9" />
+            </g>
+            <!-- 左側把關刻度標尺 -->
+            <g stroke={theme.accentSoft} stroke-opacity="0.4" stroke-width="1.8">
+              <line x1="115" y1="110" x2="145" y2="110" />
+              <line x1="115" y1="135" x2="133" y2="135" />
+              <line x1="115" y1="160" x2="155" y2="160" />
+              <line x1="115" y1="185" x2="133" y2="185" />
+              <line x1="115" y1="210" x2="145" y2="210" />
+              <line x1="115" y1="235" x2="133" y2="235" />
+            </g>
+          </g>
+        )}
+
+        {theme.key === 'global' && (
+          <g fill="none">
+            <!-- 地球經緯弧線與星點 -->
+            <g transform="translate(425, 180)">
+              <circle r="115" stroke={theme.accentSoft} stroke-opacity="0.35" stroke-width="1.8" />
+              <ellipse rx="115" ry="48" stroke={theme.accent} stroke-opacity="0.45" stroke-width="1.6" transform="rotate(-18)" />
+              <ellipse rx="55" ry="115" stroke={theme.accent} stroke-opacity="0.32" stroke-width="1.4" transform="rotate(-18)" />
+              <ellipse rx="155" ry="42" stroke={theme.accentSoft} stroke-opacity="0.4" stroke-width="1.4" stroke-dasharray="6 6" transform="rotate(-24)" />
+            </g>
+            <!-- 星點網路 -->
+            <circle cx="155" cy="125" r="3" fill={theme.accentSoft} fill-opacity="0.85" />
+            <circle cx="235" cy="95" r="4" fill={theme.accent} fill-opacity="0.9" />
+            <circle cx="285" cy="155" r="3" fill={theme.accentSoft} fill-opacity="0.75" />
+            <circle cx="195" cy="215" r="3.5" fill={theme.accentSoft} fill-opacity="0.7" />
+            <path
+              d="M 155 125 L 235 95 L 285 155 L 195 215 Z"
+              stroke={theme.accentSoft}
+              stroke-opacity="0.22"
+              stroke-width="1.2"
+            />
+          </g>
+        )}
+      </g>
+
+      <!-- 底部柔和暗角保護右下角壓紋可讀性 -->
+      <rect
+        x="0"
+        y="240"
+        width="640"
+        height="120"
+        fill="url(#htc-bottom-fade)"
+        opacity="0.35"
+      />
+      <defs>
+        <linearGradient id="htc-bottom-fade" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#000000" stop-opacity="0" />
+          <stop offset="100%" stop-color="#000000" stop-opacity="0.65" />
+        </linearGradient>
+      </defs>
+    </svg>
+  )}
+
+  <!-- 左上角：半透明玻璃膠囊標示主議題名稱 -->
+  <div class="pointer-events-none absolute top-3.5 left-3.5 z-10 flex items-center gap-1.5">
+    <span
+      class:list={[
+        'inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-black/25 font-medium tracking-wide text-white backdrop-blur-md shadow-xs',
+        badgeSizeClass,
+      ]}
+    >
+      <span class="h-1.5 w-1.5 rounded-full" style={`background-color: ${theme.accent};`} />
+      <span>{primaryTopicLabel}</span>
+    </span>
+  </div>
+
+  <!-- 右下角：晧哥說 · HAO INSIGHT 細字壓紋與發布年份月份 -->
+  <div
+    class:list={[
+      'pointer-events-none absolute right-3.5 bottom-3 z-10 flex items-center gap-1.5 font-mono tracking-[0.12em] text-white/80 drop-shadow-xs',
+      watermarkSizeClass,
+    ]}
+  >
+    <span class="font-serif font-semibold tracking-wider text-white/90">晧哥說</span>
+    <span class="opacity-60">·</span>
+    <span class="uppercase">HAO INSIGHT</span>
+    <span class="opacity-60">·</span>
+    <span>{yearMonth}</span>
+  </div>
+</div>
