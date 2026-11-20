@@ -1,0 +1,14 @@
+{
+  "schema_version": "2.0",
+  "research_id": "fixture-topic",
+  "topic": {"slug": "fixture_topic", "name_zh": "Fixture", "description": "Synthetic test only"},
+  "scope": {"date_from": "2024-01-01", "date_to": "2026-09-12", "source": "MOENV news", "article_count": 3, "query_version": "test-1", "filters": ["profile:fixture_topic"], "missing_years": []},
+  "statistics": {"total_articles": 3, "first_article_date": "2024-05-01", "latest_article_date": "2026-01-01", "peak_year": {"year": 2024, "count": 1, "period_status": "observed"}},
+  "trend_series": [{"series_id": "article_count_yearly", "label": "年度新聞數", "unit": "則", "frequency": "year", "metric_type": "count", "points": [{"period": "2024", "value": 1, "period_status": "observed"}, {"period": "2025", "value": 1, "period_status": "observed"}, {"period": "2026", "value": 1, "period_status": "partial"}]}],
+  "key_metrics": [{"metric_id": "metric-test", "label": "Synthetic target", "value": 50, "display_value": "50%", "unit": "%", "metric_type": "target", "time_reference": "2030", "importance_score": 4, "confidence": "high", "source_ids": ["moenv-news:00123"]}],
+  "key_events": [{"event_id": "event-test", "date": "2024-05-01", "date_precision": "day", "title": "Synthetic event", "event_type": "policy_launch", "significance": "Fixture only", "importance_score": 4, "confidence": "high", "source_ids": ["moenv-news:00123"]}],
+  "trend_insights": [{"insight_id": "insight-test", "title": "Synthetic insight", "period": {"from": "2024", "to": "2026"}, "insight_type": "other", "statement": "Test only", "evidence_refs": ["event-test", "metric-test"], "source_ids": ["moenv-news:00123"], "confidence": "medium"}],
+  "sources": [{"source_id": "moenv-news:00123", "source_type": "moenv_news", "external_id": "00123", "title": "Synthetic news", "published_at": "2024-05-01", "publisher": "Fixture publisher", "url": "https://example.invalid/00123"}],
+  "quality": {"status": "passed", "warnings": []},
+  "meta": {"generated_at": "2026-09-12T12:35:00+08:00", "dataset_generated_at": "2026-09-12T12:35:00+08:00", "research_updated_at": "2026-09-12", "source_markdown": "fixture.md", "pipeline_version": "2.0.0", "dataset_version": "fixture-1"}
+}

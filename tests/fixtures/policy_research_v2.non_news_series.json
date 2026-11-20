@@ -1,0 +1,12 @@
+{
+  "series_id": "emissions_monthly",
+  "label": "Synthetic monthly emissions",
+  "unit": "MtCO2e",
+  "frequency": "month",
+  "metric_type": "emissions",
+  "source_ids": ["moenv-news:00123"],
+  "points": [
+    {"period": "2025-01", "value": 1.25, "period_status": "observed"},
+    {"period": "2025-02", "value": 1.5, "period_status": "observed"}
+  ]
+}

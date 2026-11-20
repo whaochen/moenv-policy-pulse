@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:moenv:policy-research:2.0",
+  "title": "Policy Research V2 (data-layer pilot)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "research_id", "topic", "scope", "statistics", "trend_series", "key_metrics", "key_events", "trend_insights", "sources", "quality", "meta"],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "research_id": {"type": "string", "pattern": "^(?!report-[0-9]+$)[a-z][a-z0-9_-]*$"},
+    "topic": {"$ref": "#/$defs/topic"},
+    "scope": {"$ref": "#/$defs/scope"},
+    "research_summary": {"$ref": "#/$defs/summary"},
+    "statistics": {"$ref": "#/$defs/statistics"},
+    "trend_series": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/series"}},
+    "key_metrics": {"type": "array", "items": {"$ref": "#/$defs/metric"}},
+    "key_events": {"type": "array", "items": {"$ref": "#/$defs/event"}},
+    "trend_insights": {"type": "array", "items": {"$ref": "#/$defs/insight"}},
+    "trend_signals": {"type": "array", "items": {"$ref": "#/$defs/signal"}},
+    "sources": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/source"}},
+    "quality": {"$ref": "#/$defs/quality"},
+    "meta": {"$ref": "#/$defs/meta"},
+    "topic_composition": {"type": "array", "items": {"$ref": "#/$defs/composition"}},
+    "recommended_visualizations": {"type": "array", "items": {"$ref": "#/$defs/visualization"}}
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "date": {"type": "string", "format": "date"},
+    "datetime": {"type": "string", "format": "date-time"},
+    "year": {"type": "string", "pattern": "^[0-9]{4}$"},
+    "count": {"type": "integer", "minimum": 0},
+    "confidence": {"enum": ["high", "medium", "low"]},
+    "refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/text"}},
+    "topic": {
+      "type": "object", "additionalProperties": false,
+      "required": ["slug", "name_zh", "description"],
+      "properties": {"slug": {"$ref": "#/$defs/text"}, "name_zh": {"$ref": "#/$defs/text"}, "name_en": {"$ref": "#/$defs/text"}, "description": {"$ref": "#/$defs/text"}}
+    },
+    "scope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["date_from", "date_to", "source", "article_count", "query_version", "filters"],
+      "properties": {
+        "date_from": {"$ref": "#/$defs/date"}, "date_to": {"$ref": "#/$defs/date"},
+        "source": {"$ref": "#/$defs/text"}, "article_count": {"$ref": "#/$defs/count"},
+        "query_version": {"$ref": "#/$defs/text"}, "filters": {"$ref": "#/$defs/refs"},
+        "missing_years": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/year"}}
+      }
+    },
+    "summary": {
+      "type": "object", "additionalProperties": false, "required": ["headline", "summary", "source_ids"],
+      "properties": {"headline": {"$ref": "#/$defs/text"}, "summary": {"$ref": "#/$defs/text"}, "source_ids": {"$ref": "#/$defs/refs"},
+        "phases": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["label", "from", "to", "description", "evidence_refs", "source_ids"], "properties": {"label": {"$ref": "#/$defs/text"}, "from": {"$ref": "#/$defs/year"}, "to": {"$ref": "#/$defs/year"}, "description": {"$ref": "#/$defs/text"}, "evidence_refs": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/text"}}, "source_ids": {"$ref": "#/$defs/refs"}}}}
+      }
+    },
+    "statistics": {
+      "type": "object", "additionalProperties": false, "required": ["total_articles", "first_article_date", "latest_article_date", "peak_year"],
+      "properties": {"total_articles": {"$ref": "#/$defs/count"}, "first_article_date": {"$ref": "#/$defs/date"}, "latest_article_date": {"$ref": "#/$defs/date"},
+        "peak_year": {"type": "object", "additionalProperties": false, "required": ["year", "count", "period_status"], "properties": {"year": {"type": "integer", "minimum": 1}, "count": {"$ref": "#/$defs/count"}, "period_status": {"enum": ["observed", "partial", "zero"]}}}}
+    },
+    "point": {
+      "type": "object", "additionalProperties": false, "required": ["period", "value", "period_status"],
+      "properties": {"period": {"$ref": "#/$defs/text"}, "value": {"type": ["number", "null"]}, "period_status": {"enum": ["observed", "partial", "unknown", "zero"]}},
+      "allOf": [{"if": {"properties": {"period_status": {"const": "unknown"}}}, "then": {"properties": {"value": {"type": "null"}}}, "else": {"properties": {"value": {"type": "number"}}}}, {"if": {"properties": {"period_status": {"const": "zero"}}}, "then": {"properties": {"value": {"const": 0}}}}]
+    },
+    "series": {
+      "type": "object", "additionalProperties": false, "required": ["series_id", "label", "unit", "frequency", "metric_type", "points"],
+      "properties": {"series_id": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"}, "label": {"$ref": "#/$defs/text"}, "unit": {"$ref": "#/$defs/text"}, "frequency": {"enum": ["year", "quarter", "month"]}, "metric_type": {"enum": ["count", "percentage", "amount", "emissions", "reduction", "capacity", "other"]}, "source_ids": {"$ref": "#/$defs/refs"}, "points": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/point"}}},
+      "allOf": [{"if": {"properties": {"metric_type": {"const": "count"}}}, "then": {"properties": {"points": {"items": {"properties": {"value": {"type": ["integer", "null"], "minimum": 0}}}}}}}]
+    },
+    "metric": {
+      "type": "object", "additionalProperties": false,
+      "required": ["metric_id", "label", "value", "display_value", "unit", "metric_type", "time_reference", "importance_score", "confidence", "source_ids"],
+      "properties": {
+        "metric_id": {"$ref": "#/$defs/text"}, "label": {"$ref": "#/$defs/text"}, "value": {"type": "number"}, "display_value": {"$ref": "#/$defs/text"}, "unit": {"$ref": "#/$defs/text"}, "metric_type": {"$ref": "#/$defs/text"}, "time_reference": {"$ref": "#/$defs/text"}, "importance_score": {"type": "integer", "minimum": 1, "maximum": 5}, "confidence": {"$ref": "#/$defs/confidence"}, "source_ids": {"$ref": "#/$defs/refs"},
+        "subject": {"$ref": "#/$defs/text"}, "geography": {"$ref": "#/$defs/text"}, "status": {"enum": ["target", "result", "threshold", "announced"]}, "evidence": {"$ref": "#/$defs/text"}, "notes": {"type": ["string", "null"]}
+      }
+    },
+    "event": {
+      "type": "object", "additionalProperties": false,
+      "required": ["event_id", "date", "date_precision", "title", "event_type", "significance", "importance_score", "confidence", "source_ids"],
+      "properties": {"event_id": {"$ref": "#/$defs/text"}, "date": {"$ref": "#/$defs/text"}, "date_precision": {"enum": ["day", "month", "year"]}, "title": {"$ref": "#/$defs/text"}, "event_type": {"$ref": "#/$defs/text"}, "date_type": {"enum": ["announcement", "approval", "promulgation", "effective", "publication", "other"]}, "significance": {"$ref": "#/$defs/text"}, "importance_score": {"type": "integer", "minimum": 1, "maximum": 5}, "confidence": {"$ref": "#/$defs/confidence"}, "source_ids": {"$ref": "#/$defs/refs"}, "evidence": {"$ref": "#/$defs/text"}},
+      "allOf": [
+        {"if": {"properties": {"date_precision": {"const": "day"}}}, "then": {"properties": {"date": {"type": "string", "format": "date", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"}}}},
+        {"if": {"properties": {"date_precision": {"const": "month"}}}, "then": {"properties": {"date": {"type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"}}}},
+        {"if": {"properties": {"date_precision": {"const": "year"}}}, "then": {"properties": {"date": {"$ref": "#/$defs/year"}}}}
+      ]
+    },
+    "insight": {
+      "type": "object", "additionalProperties": false, "required": ["insight_id", "title", "period", "insight_type", "statement", "evidence_refs", "source_ids", "confidence"],
+      "properties": {"insight_id": {"$ref": "#/$defs/text"}, "title": {"$ref": "#/$defs/text"}, "period": {"type": "object", "additionalProperties": false, "required": ["from", "to"], "properties": {"from": {"$ref": "#/$defs/year"}, "to": {"$ref": "#/$defs/year"}}}, "insight_type": {"$ref": "#/$defs/text"}, "statement": {"$ref": "#/$defs/text"}, "evidence_refs": {"$ref": "#/$defs/refs"}, "source_ids": {"$ref": "#/$defs/refs"}, "confidence": {"$ref": "#/$defs/confidence"}}
+    },
+    "signal": {
+      "type": "object", "additionalProperties": false, "required": ["signal_id", "type", "period", "series_id", "value", "baseline", "strength", "method", "description"],
+      "properties": {"signal_id": {"$ref": "#/$defs/text"}, "type": {"enum": ["peak", "rapid_growth", "rapid_decline", "sustained_growth", "sustained_decline"]}, "period": {"$ref": "#/$defs/year"}, "series_id": {"const": "article_count_yearly"}, "value": {"$ref": "#/$defs/count"}, "baseline": {"type": "number", "minimum": 0}, "strength": {"$ref": "#/$defs/confidence"}, "method": {"$ref": "#/$defs/text"}, "description": {"$ref": "#/$defs/text"}}
+    },
+    "source": {
+      "type": "object", "additionalProperties": false, "required": ["source_id", "source_type", "title", "url"],
+      "properties": {"source_id": {"$ref": "#/$defs/text"}, "source_type": {"enum": ["moenv_news", "government", "regulation", "official_statistics", "international_organization", "academic", "other"]}, "title": {"$ref": "#/$defs/text"}, "url": {"type": "string", "format": "uri", "pattern": "^https?://"}, "external_id": {"$ref": "#/$defs/text"}, "published_at": {"$ref": "#/$defs/date"}, "publisher": {"$ref": "#/$defs/text"}, "accessed_at": {"$ref": "#/$defs/date"}, "notes": {"type": "string"}}
+    },
+    "quality": {
+      "type": "object", "additionalProperties": false, "required": ["status", "warnings"],
+      "properties": {"status": {"enum": ["passed", "passed_with_warnings", "needs_review", "failed"]}, "warnings": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/text"}}}
+    },
+    "meta": {
+      "type": "object", "additionalProperties": false, "required": ["generated_at", "dataset_generated_at", "research_updated_at", "source_markdown", "pipeline_version", "dataset_version"],
+      "properties": {"generated_at": {"$ref": "#/$defs/datetime"}, "dataset_generated_at": {"$ref": "#/$defs/datetime"}, "research_updated_at": {"$ref": "#/$defs/date"}, "narrative_coverage_end": {"$ref": "#/$defs/date"}, "source_markdown": {"$ref": "#/$defs/text"}, "pipeline_version": {"$ref": "#/$defs/text"}, "dataset_version": {"$ref": "#/$defs/text"}, "input_sha256": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}, "notes": {"type": "string"}}
+    },
+    "composition": {"type": "object", "additionalProperties": false, "required": ["period", "segments"], "properties": {"period": {"$ref": "#/$defs/year"}, "segments": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["topic", "count", "share"], "properties": {"topic": {"$ref": "#/$defs/text"}, "count": {"$ref": "#/$defs/count"}, "share": {"type": "number", "minimum": 0, "maximum": 1}}}}}},
+    "visualization": {"type": "object", "additionalProperties": false, "required": ["viz_id", "type", "data_ref", "priority", "reason"], "properties": {"viz_id": {"$ref": "#/$defs/text"}, "type": {"$ref": "#/$defs/text"}, "data_ref": {"$ref": "#/$defs/text"}, "title": {"$ref": "#/$defs/text"}, "priority": {"type": "integer", "minimum": 1}, "reason": {"$ref": "#/$defs/text"}}}
+  }
+}

@@ -1,0 +1,40 @@
+# Environment variables & secrets (NEVER commit real keys)
+.env
+.env.*
+*.env
+!.env.example
+!local-mail.env.example
+
+# Private workspaces & local backups
+_local/
+_local_backups/
+99_內部工作區_不公開/
+
+# Python virtual environments & caches
+.venv*/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Obsidian local UI state; keep vault notes/settings portable
+.smart-env/
+.obsidian/workspace*.json
+.obsidian/cache/
+.obsidian/plugins/*/data.json
+
+# Frontend (Astro / Node)
+web/node_modules/
+web/dist/
+web/.astro/
+
+# OS & temporary files
+logs/
+.DS_Store
+Thumbs.db
+desktop.ini
+_test-output/
+_test-summary/
+_cloud_exports/
+tmp*/
+tests/tmp*/
+tests/_tmp/

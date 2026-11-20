@@ -1,0 +1,10 @@
+{
+  "news_index": {
+    "00123": {"news_id": "00123", "date": "2024-05-01", "title": "Synthetic news", "unit": "Fixture publisher", "source_url": "https://example.invalid/00123"},
+    "00124": {"news_id": "00124", "date": "2025-01-01", "title": "Synthetic news 2", "unit": "Fixture publisher", "source_url": "https://example.invalid/00124"},
+    "00125": {"news_id": "00125", "date": "2026-01-01", "title": "Synthetic news 3", "unit": "Fixture publisher", "source_url": "https://example.invalid/00125"}
+  },
+  "profiles": {"fixture_topic": {"slug": "fixture_topic", "title": "Fixture", "description": "Synthetic test only", "total": 3, "year_counts": {"2024": 1, "2025": 1, "2026": 1}}},
+  "membership": {"fixture_topic": ["00123", "00124", "00125"]},
+  "manifest": {"generated_at": "2026-09-12T12:35:00+08:00", "indexed_count": 3, "keyword_profiles": 1, "site_total": 3}
+}

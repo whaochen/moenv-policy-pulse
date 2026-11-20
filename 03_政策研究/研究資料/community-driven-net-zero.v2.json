@@ -1,0 +1,581 @@
+{
+  "schema_version": "2.0",
+  "research_id": "community-driven-net-zero",
+  "topic": {
+    "slug": "net_zero_transition",
+    "name_zh": "淨零轉型",
+    "description": "2050 淨零、減碳路徑、綠色轉型與企業競爭力。"
+  },
+  "scope": {
+    "date_from": "2001-01-01",
+    "date_to": "2026-09-29",
+    "source": "MOENV news canonical local snapshot",
+    "article_count": 913,
+    "query_version": "canonical-profile-v2",
+    "filters": [
+      "profile:net_zero_transition"
+    ],
+    "missing_years": [
+      "2001",
+      "2002",
+      "2003",
+      "2004",
+      "2005",
+      "2006"
+    ]
+  },
+  "statistics": {
+    "total_articles": 913,
+    "first_article_date": "2007-11-11",
+    "latest_article_date": "2026-09-26",
+    "peak_year": {
+      "year": 2026,
+      "count": 135,
+      "period_status": "partial"
+    }
+  },
+  "trend_series": [
+    {
+      "series_id": "article_count_yearly",
+      "label": "年度新聞數",
+      "unit": "則",
+      "frequency": "year",
+      "metric_type": "count",
+      "points": [
+        {
+          "period": "2007",
+          "value": 1,
+          "period_status": "observed"
+        },
+        {
+          "period": "2008",
+          "value": 35,
+          "period_status": "observed"
+        },
+        {
+          "period": "2009",
+          "value": 48,
+          "period_status": "observed"
+        },
+        {
+          "period": "2010",
+          "value": 50,
+          "period_status": "observed"
+        },
+        {
+          "period": "2011",
+          "value": 52,
+          "period_status": "observed"
+        },
+        {
+          "period": "2012",
+          "value": 51,
+          "period_status": "observed"
+        },
+        {
+          "period": "2013",
+          "value": 36,
+          "period_status": "observed"
+        },
+        {
+          "period": "2014",
+          "value": 29,
+          "period_status": "observed"
+        },
+        {
+          "period": "2015",
+          "value": 29,
+          "period_status": "observed"
+        },
+        {
+          "period": "2016",
+          "value": 17,
+          "period_status": "observed"
+        },
+        {
+          "period": "2017",
+          "value": 12,
+          "period_status": "observed"
+        },
+        {
+          "period": "2018",
+          "value": 8,
+          "period_status": "observed"
+        },
+        {
+          "period": "2019",
+          "value": 16,
+          "period_status": "observed"
+        },
+        {
+          "period": "2020",
+          "value": 15,
+          "period_status": "observed"
+        },
+        {
+          "period": "2021",
+          "value": 29,
+          "period_status": "observed"
+        },
+        {
+          "period": "2022",
+          "value": 54,
+          "period_status": "observed"
+        },
+        {
+          "period": "2023",
+          "value": 71,
+          "period_status": "observed"
+        },
+        {
+          "period": "2024",
+          "value": 92,
+          "period_status": "observed"
+        },
+        {
+          "period": "2025",
+          "value": 133,
+          "period_status": "observed"
+        },
+        {
+          "period": "2026",
+          "value": 135,
+          "period_status": "partial"
+        }
+      ]
+    }
+  ],
+  "trend_signals": [
+    {
+      "signal_id": "signal-sustained_growth-2009",
+      "type": "sustained_growth",
+      "period": "2009",
+      "series_id": "article_count_yearly",
+      "value": 48,
+      "baseline": 1,
+      "strength": "medium",
+      "method": "three_consecutive_years_each_delta_ge5",
+      "description": "三個連續完整年度，每次增加至少五則；屬新聞關注度訊號。"
+    },
+    {
+      "signal_id": "signal-sustained_decline-2014",
+      "type": "sustained_decline",
+      "period": "2014",
+      "series_id": "article_count_yearly",
+      "value": 29,
+      "baseline": 51,
+      "strength": "medium",
+      "method": "three_consecutive_years_each_delta_le_minus5",
+      "description": "三個連續完整年度，每次減少至少五則；屬新聞關注度訊號。"
+    },
+    {
+      "signal_id": "signal-sustained_decline-2017",
+      "type": "sustained_decline",
+      "period": "2017",
+      "series_id": "article_count_yearly",
+      "value": 12,
+      "baseline": 29,
+      "strength": "medium",
+      "method": "three_consecutive_years_each_delta_le_minus5",
+      "description": "三個連續完整年度，每次減少至少五則；屬新聞關注度訊號。"
+    },
+    {
+      "signal_id": "signal-rapid_growth-2019",
+      "type": "rapid_growth",
+      "period": "2019",
+      "series_id": "article_count_yearly",
+      "value": 16,
+      "baseline": 8,
+      "strength": "medium",
+      "method": "yoy_base_ge5_abs_delta_ge5_ratio_ge0.5",
+      "description": "完整相鄰年度新聞量變動達門檻；不代表政策成效或因果。"
+    },
+    {
+      "signal_id": "signal-rapid_growth-2021",
+      "type": "rapid_growth",
+      "period": "2021",
+      "series_id": "article_count_yearly",
+      "value": 29,
+      "baseline": 15,
+      "strength": "medium",
+      "method": "yoy_base_ge5_abs_delta_ge5_ratio_ge0.5",
+      "description": "完整相鄰年度新聞量變動達門檻；不代表政策成效或因果。"
+    },
+    {
+      "signal_id": "signal-rapid_growth-2022",
+      "type": "rapid_growth",
+      "period": "2022",
+      "series_id": "article_count_yearly",
+      "value": 54,
+      "baseline": 29,
+      "strength": "medium",
+      "method": "yoy_base_ge5_abs_delta_ge5_ratio_ge0.5",
+      "description": "完整相鄰年度新聞量變動達門檻；不代表政策成效或因果。"
+    },
+    {
+      "signal_id": "signal-sustained_growth-2022",
+      "type": "sustained_growth",
+      "period": "2022",
+      "series_id": "article_count_yearly",
+      "value": 54,
+      "baseline": 15,
+      "strength": "medium",
+      "method": "three_consecutive_years_each_delta_ge5",
+      "description": "三個連續完整年度，每次增加至少五則；屬新聞關注度訊號。"
+    },
+    {
+      "signal_id": "signal-sustained_growth-2023",
+      "type": "sustained_growth",
+      "period": "2023",
+      "series_id": "article_count_yearly",
+      "value": 71,
+      "baseline": 29,
+      "strength": "medium",
+      "method": "three_consecutive_years_each_delta_ge5",
+      "description": "三個連續完整年度，每次增加至少五則；屬新聞關注度訊號。"
+    },
+    {
+      "signal_id": "signal-sustained_growth-2024",
+      "type": "sustained_growth",
+      "period": "2024",
+      "series_id": "article_count_yearly",
+      "value": 92,
+      "baseline": 54,
+      "strength": "medium",
+      "method": "three_consecutive_years_each_delta_ge5",
+      "description": "三個連續完整年度，每次增加至少五則；屬新聞關注度訊號。"
+    },
+    {
+      "signal_id": "signal-sustained_growth-2025",
+      "type": "sustained_growth",
+      "period": "2025",
+      "series_id": "article_count_yearly",
+      "value": 133,
+      "baseline": 71,
+      "strength": "medium",
+      "method": "three_consecutive_years_each_delta_ge5",
+      "description": "三個連續完整年度，每次增加至少五則；屬新聞關注度訊號。"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "moenv-news:14176",
+      "source_type": "moenv_news",
+      "external_id": "14176",
+      "title": "中央地方攜手邁向2030減碳新目標 環境部邀22縣市政府齊聚交流三期減量執行方案",
+      "url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14176",
+      "published_at": "2026-09-23",
+      "publisher": "環境部氣候變遷署",
+      "accessed_at": "2026-09-30"
+    },
+    {
+      "source_id": "moenv-news:14119",
+      "source_type": "moenv_news",
+      "external_id": "14119",
+      "title": "讓永續成為日常！環境部攜手五社區共同體驗減碳綠生活",
+      "url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14119",
+      "published_at": "2026-09-16",
+      "publisher": "環境部環境保護司",
+      "accessed_at": "2026-09-30"
+    },
+    {
+      "source_id": "moenv-news:13808",
+      "source_type": "moenv_news",
+      "external_id": "13808",
+      "title": "115年度「淨零行動：社區驅動與技術協力創新試辦計畫」徵件起跑",
+      "url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/13808",
+      "published_at": "2026-07-30",
+      "publisher": "環境部氣候變遷署",
+      "accessed_at": "2026-09-30"
+    },
+    {
+      "source_id": "moenv-news:13590",
+      "source_type": "moenv_news",
+      "external_id": "13590",
+      "title": "環境部舉辦「打造淨零家園生態系」成果交流會 在地15標竿團隊共同建立指引　落實社區驅動淨零轉型",
+      "url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/13590",
+      "published_at": "2026-06-22",
+      "publisher": "環境部氣候變遷署",
+      "accessed_at": "2026-09-30"
+    },
+    {
+      "source_id": "moenv-news:1723",
+      "source_type": "moenv_news",
+      "external_id": "1723",
+      "title": "環境部與社區大學合辦青年工作坊 高中生走讀東螺溪體驗淨零行動",
+      "url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/1723",
+      "published_at": "2026-05-29",
+      "publisher": "環境部氣候變遷署",
+      "accessed_at": "2026-09-30"
+    },
+    {
+      "source_id": "moenv-news:1739",
+      "source_type": "moenv_news",
+      "external_id": "1739",
+      "title": "綠能公益邁向淨零新典範：環境部培力社區「綠領人才」跨界點亮社福屋頂",
+      "url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/1739",
+      "published_at": "2026-05-18",
+      "publisher": "環境部氣候變遷署",
+      "accessed_at": "2026-09-30"
+    },
+    {
+      "source_id": "moenv-news:2188",
+      "source_type": "moenv_news",
+      "external_id": "2188",
+      "title": "低碳永續家園推廣綠能屋頂 氣候署啟動社區參與培訓課程",
+      "url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/2188",
+      "published_at": "2025-09-10",
+      "publisher": "環境部氣候變遷署",
+      "accessed_at": "2026-09-30"
+    },
+    {
+      "source_id": "moenv-news:2627",
+      "source_type": "moenv_news",
+      "external_id": "2627",
+      "title": "村里競賽結果揭曉 低碳村里展現減碳永續力",
+      "url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/2627",
+      "published_at": "2024-12-24",
+      "publisher": "環境部氣候變遷署",
+      "accessed_at": "2026-09-30"
+    },
+    {
+      "source_id": "moenv-news:2999",
+      "source_type": "moenv_news",
+      "external_id": "2999",
+      "title": "2050淨零轉型論壇　各方齊力共商中央地方氣候治理策略",
+      "url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/2999",
+      "published_at": "2024-03-20",
+      "publisher": "環境部氣候變遷署",
+      "accessed_at": "2026-09-30"
+    },
+    {
+      "source_id": "moenv-news:3250",
+      "source_type": "moenv_news",
+      "external_id": "3250",
+      "title": "環署與公民電廠合作淨零 推廣低碳家園綠能屋頂",
+      "url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/3250",
+      "published_at": "2023-08-15",
+      "publisher": "行政院環境保護署氣候變遷署籌備處",
+      "accessed_at": "2026-09-30"
+    }
+  ],
+  "quality": {
+    "status": "needs_review",
+    "warnings": [
+      "Artifact topic and canonical yearly series use the net_zero_transition profile; the narrative studies the narrower community-driven subtopic. The 913 article profile total is not a community-project count.",
+      "The 52 community-related titles are a separately reproducible title-text filter, not a complete community policy corpus or an artifact profile series.",
+      "The official 2026 pilot announcement lists 2026-09-15 as the selection-results announcement date, but the reviewed page did not include a selection list; selected projects and implementation outcomes remain unverified.",
+      "2026 is a partial news-count year through the 2026-09-29 snapshot date; news counts are not emissions results.",
+      "MOENV news source publisher values identify the publishing unit only and do not establish legal competence."
+    ]
+  },
+  "meta": {
+    "generated_at": "2026-09-29T18:16:26.273001+00:00",
+    "dataset_generated_at": "2026-09-29T21:42:44+08:00",
+    "research_updated_at": "2026-09-30",
+    "narrative_coverage_end": "2026-09-29",
+    "source_markdown": "03_政策研究/研究報告/2026-09-30_社區驅動.md",
+    "pipeline_version": "2.0.1",
+    "dataset_version": "sha256:fbdb6eeb43b4a8b872829f3c94cf560c3365c509abcccd4f6162828ecc9d39f5",
+    "input_sha256": {
+      "news_index": "82a2b2f6b8f7cf6f15af7ab1a274b1d512a6494403cc9d528d438fe159a3b822",
+      "membership": "52e463ee6a255d20b4f4ae3f5410457d7a56560a38984eed5bfc121c5db902d2",
+      "profiles": "0844a361a8361a7606ce2c01a51832a142f3948cae709076c226d1568bc55dec",
+      "manifest": "358cc04b8ed6ce6124dc7996b8c3b041b316e36d8f65bef9c259137dd9795ace",
+      "source_markdown": "db56d77878b4d8276bb11369772a4d6079e88359103724a68aa77fd213317192"
+    },
+    "notes": "This is a community-driven subtopic study under canonical topic net_zero_transition. The artifact's annual news series represents the complete keyword profile for canonical validation, while the Markdown separately reports a title filter for community-related items. Human acceptance is pending under the research V2 pilot workflow."
+  },
+  "key_metrics": [
+    {
+      "metric_id": "metric-pilot-community-target",
+      "label": "社區驅動試辦預計徵求數",
+      "value": 20,
+      "display_value": "20 個試辦社區（預計）",
+      "unit": "社區",
+      "metric_type": "program_target_count",
+      "time_reference": "2026 年度試辦計畫",
+      "importance_score": 5,
+      "confidence": "high",
+      "source_ids": [
+        "moenv-news:13808"
+      ],
+      "subject": "環境部淨零行動：社區驅動與技術協力創新試辦計畫",
+      "geography": "臺灣",
+      "status": "target",
+      "evidence": "環境部徵件公告載明預計徵求全國 20 個試辦社區。",
+      "notes": "計畫目標數，不是遴選結果或已完成執行數。"
+    },
+    {
+      "metric_id": "metric-pilot-planning-grant-cap",
+      "label": "每案規劃費最高核定額",
+      "value": 150000,
+      "display_value": "每案最高新臺幣 15 萬元",
+      "unit": "新臺幣／案",
+      "metric_type": "grant_cap",
+      "time_reference": "2026 年度試辦計畫",
+      "importance_score": 4,
+      "confidence": "high",
+      "source_ids": [
+        "moenv-news:13808"
+      ],
+      "subject": "社區提案規劃費",
+      "geography": "臺灣",
+      "status": "threshold",
+      "evidence": "環境部公告每案規劃費最高核定新臺幣 15 萬元。",
+      "notes": "上限不是平均補助額，也非社區建置與長期營運的總經費。"
+    },
+    {
+      "metric_id": "metric-guideline-teams",
+      "label": "參與社區驅動指引初稿交流的在地團隊",
+      "value": 15,
+      "display_value": "15 個在地標竿團隊",
+      "unit": "團隊",
+      "metric_type": "participating_teams",
+      "time_reference": "2026-06-22 成果交流會",
+      "importance_score": 4,
+      "confidence": "high",
+      "source_ids": [
+        "moenv-news:13590"
+      ],
+      "subject": "社區驅動與中介組織發展指引初稿交流",
+      "geography": "臺灣",
+      "status": "announced",
+      "evidence": "官方新聞報導由社區大學全國促進會與全臺 15 個在地標竿團隊分享指引初稿及實務經驗。",
+      "notes": "參與交流的團隊數，不是 2026 試辦計畫入選數。"
+    }
+  ],
+  "key_events": [
+    {
+      "event_id": "event-community-energy-cooperative",
+      "date": "2023-08-15",
+      "date_precision": "day",
+      "date_type": "publication",
+      "title": "公民電廠合作推廣低碳家園綠能屋頂",
+      "event_type": "community_energy_case_reported",
+      "significance": "提供社區參與能源轉型與公共屋頂合作的早期案例，可用來比較後續社區能源自主及收益治理設計。",
+      "importance_score": 3,
+      "confidence": "high",
+      "source_ids": [
+        "moenv-news:3250"
+      ],
+      "evidence": "環境部新聞介紹機關屋頂與綠電合作社合作設置太陽光電並分享經驗；新聞發布日作為報導事件日期，不當作整體計畫起始日。"
+    },
+    {
+      "event_id": "event-low-carbon-village-results",
+      "date": "2024-12-24",
+      "date_precision": "day",
+      "date_type": "publication",
+      "title": "低碳永續家園村里多元競賽成果公布",
+      "event_type": "community_program_results_reported",
+      "significance": "顯示村里行動已具案例表揚與經驗擴散機制；尚不能由競賽得獎推論全國減量成果。",
+      "importance_score": 3,
+      "confidence": "high",
+      "source_ids": [
+        "moenv-news:2627"
+      ],
+      "evidence": "官方新聞報導第 4 屆低碳永續家園村里多元競賽結果。"
+    },
+    {
+      "event_id": "event-community-intermediary-guideline-draft",
+      "date": "2026-06-22",
+      "date_precision": "day",
+      "date_type": "publication",
+      "title": "15 個在地團隊交流社區驅動與中介組織發展指引初稿",
+      "event_type": "intermediary_guidance_development",
+      "significance": "政策發展開始把中介組織定位為政府政策與地方需求的橋梁，為社區治理能力制度化提供具體切入點。",
+      "importance_score": 5,
+      "confidence": "high",
+      "source_ids": [
+        "moenv-news:13590"
+      ],
+      "evidence": "環境部新聞載明 15 個在地團隊分享編撰中的指引初稿；來源稱為初稿，不視為已發布定稿。"
+    },
+    {
+      "event_id": "event-community-driven-pilot-announced",
+      "date": "2026-07-30",
+      "date_precision": "day",
+      "date_type": "announcement",
+      "title": "環境部公告社區驅動與技術協力創新試辦計畫徵件",
+      "event_type": "pilot_call_announced",
+      "significance": "從既有評等、活動和案例擴散進一步走向社區規劃補助、跨域協力與五類工具模組試辦。",
+      "importance_score": 5,
+      "confidence": "high",
+      "source_ids": [
+        "moenv-news:13808"
+      ],
+      "evidence": "官方新聞及氣候變遷署公告載明 2026 年 7 月 30 日徵件起跑；這是公告日，不是遴選日或成果日。"
+    },
+    {
+      "event_id": "event-community-five-village-activity",
+      "date": "2026-09-16",
+      "date_precision": "day",
+      "date_type": "publication",
+      "title": "環境部與五個社區共同推廣減碳綠生活",
+      "event_type": "community_lifestyle_engagement_reported",
+      "significance": "反映生活型態與社區推廣工作持續進行，與技術及能源類社區專案互補；活動本身不等於可量化的排放減量。",
+      "importance_score": 3,
+      "confidence": "high",
+      "source_ids": [
+        "moenv-news:14119"
+      ],
+      "evidence": "官方新聞標題與內文報導五社區共同體驗減碳綠生活。"
+    }
+  ],
+  "trend_insights": [
+    {
+      "insight_id": "insight-community-policy-institutionalization",
+      "title": "社區淨零政策由宣導與評等走向能力建構試辦",
+      "period": {
+        "from": "2021",
+        "to": "2026"
+      },
+      "insight_type": "policy_institutionalization",
+      "statement": "地方低碳家園與村里競賽提供行動展示和經驗擴散；2025 至 2026 年的社區人才培力、中介組織指引初稿、技術協力徵件及跨縣市方案交流，顯示政策設計逐步納入社區執行能力與地方治理連結。證據支持制度設計正在擴展的判讀，但不證明參與品質、減碳量或補助後持續性已改善。",
+      "evidence_refs": [
+        "event-low-carbon-village-results",
+        "event-community-intermediary-guideline-draft",
+        "event-community-driven-pilot-announced",
+        "metric-pilot-community-target",
+        "metric-guideline-teams"
+      ],
+      "source_ids": [
+        "moenv-news:2627",
+        "moenv-news:13590",
+        "moenv-news:13808"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "insight_id": "insight-community-five-year-implementation",
+      "title": "試辦成效需以社區決策、可查證減量與後續運作評估",
+      "period": {
+        "from": "2026",
+        "to": "2026"
+      },
+      "insight_type": "evaluation_requirement",
+      "statement": "20 個社區與每案 15 萬元是徵件設計，15 個團隊是指引初稿交流參與者，均不應誤作減碳成果或同一批試辦入選者。由於公告頁未列出入選名單，且試辦期至 2027 年 2 月，當前可評估政策設計與執行準備；成效結論須待社區計畫、基準線、實際排放資料和補助後追蹤。",
+      "evidence_refs": [
+        "event-community-driven-pilot-announced",
+        "metric-pilot-community-target",
+        "metric-pilot-planning-grant-cap",
+        "metric-guideline-teams"
+      ],
+      "source_ids": [
+        "moenv-news:13808",
+        "moenv-news:13590"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "research_summary": {
+    "headline": "社區驅動淨零：從參與倡議走向地方治理能力",
+    "summary": "本研究把社區驅動視為淨零轉型的治理延伸，檢視臺灣由低碳家園與村里行動，走向中介組織培力及 2026 年社區驅動試辦的制度發展。試辦公告預計遴選 20 個社區、每案最高提供新臺幣 15 萬元規劃費，提出五類推動方向；這些是方案設計與目標，並非已驗證的社區數或減量成果。評估重點應包括社區決策權、中介組織持續能力、可查證減碳量、利益分配及補助結束後的運作。主題詞庫共 913 則，標題篩選出 52 則社區相關新聞；後者不是完整專案母體。",
+    "source_ids": [
+      "moenv-news:14176",
+      "moenv-news:13808",
+      "moenv-news:13590",
+      "moenv-news:14119"
+    ]
+  }
+}

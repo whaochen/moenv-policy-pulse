@@ -1,0 +1,40 @@
+{
+  "research_id": "net-zero-transition",
+  "topic_slug": "net_zero_transition",
+  "date_from": "2001-01-01",
+  "source_markdown": "03_政策研究/研究報告/2026-07-10_淨零轉型.md",
+  "accessed_at": "2026-09-12",
+  "source_news_ids": ["3234", "2078", "1868"],
+  "research_summary": {
+    "headline": "淨零轉型：從組織與目標走向部門執行",
+    "summary": "本 Pilot 聚焦臺灣淨零治理在 2023 至 2026 年的制度進展：氣候變遷署揭牌、行政院核定 NDC3.0，以及核定六大部門第三期溫室氣體減量行動方案。政策以相較 2005 年的 2030 年 28±2% 與 2035 年 38±2% 淨排放減量目標，連結 2026 至 2030 年部門措施及 20 項減碳旗艦行動計畫。這些證據支持專責組織、量化目標與執行安排逐步串接的判讀，但不代表減量成果已達成；未來研究仍須對照排放、預算與年度成果資料，檢驗承諾與執行之間的差距。",
+    "source_ids": ["moenv-news:3234", "moenv-news:2078", "moenv-news:1868"]
+  },
+  "warnings": [
+    "2001-2006 缺少本議題年度統計鍵，視為 unknown，不補零；不能據此推定當時沒有相關政策。",
+    "2026 為截至資料快照日期的 partial 年度，不與完整年度直接判斷全年增減。",
+    "原 Markdown 保留 2026-07-08 研究範圍及 876 則歷史快照；V2 採 2026-09-12 canonical 快照。差額亦含歷史資料修訂，不代表單純新增新聞數。",
+    "本 Pilot 僅結構化原稿部分高信心證據，並非完整抽取法規、機關、國際比較與所有研究論點。",
+    "本議題詞庫包含低碳與減碳；新聞量是詞庫命中的溝通頻率，不是減碳績效或狹義淨零政策數量。"
+  ],
+  "notes": "研究範圍由 2001 年起列示；年度數列與來源欄位由 canonical 輸入產生。原稿僅更正 NDC3.0 核定日期，未全面更新敘事。發布單位只作來源出處，不推定法定主管機關。政策事實依所列官方新聞核對，並非截至 2026-09-13 的全議題更新。",
+  "key_metrics": [
+    {
+      "metric_id": "metric-2030-reduction-target", "label": "2030 年淨排放減量目標", "value": 28, "display_value": "28% ± 2 個百分點", "unit": "%", "metric_type": "emission_reduction_target", "time_reference": "2030", "importance_score": 5, "confidence": "high", "source_ids": ["moenv-news:1868"], "subject": "全國溫室氣體淨排放量，相較 2005 年基準", "geography": "臺灣", "status": "target", "evidence": "官方新聞說明 2030 年相較基準年 2005 年減量目標為 28±2%。", "notes": "value 僅為目標中央值，範圍 26%-30%；不是實際達成率。"
+    },
+    {
+      "metric_id": "metric-2035-reduction-target", "label": "2035 年淨排放減量目標", "value": 38, "display_value": "38% ± 2 個百分點", "unit": "%", "metric_type": "emission_reduction_target", "time_reference": "2035", "importance_score": 5, "confidence": "high", "source_ids": ["moenv-news:2078"], "subject": "全國溫室氣體淨排放量，相較 2005 年基準", "geography": "臺灣", "status": "target", "evidence": "NDC3.0 核定新聞載明 2035 年相較 2005 年淨排放減少 38±2%。", "notes": "value 僅為目標中央值，範圍 36%-40%；不是實際達成率。"
+    },
+    {
+      "metric_id": "metric-flagship-action-count", "label": "減碳旗艦行動計畫數", "value": 20, "display_value": "20 項", "unit": "項", "metric_type": "policy_program_count", "time_reference": "2026-2030", "importance_score": 4, "confidence": "high", "source_ids": ["moenv-news:1868"], "subject": "第三期部門減量行動方案配合的減碳旗艦行動計畫", "geography": "臺灣", "status": "announced", "evidence": "第三期部門方案新聞列述 20 項減碳旗艦行動計畫。", "notes": "此為政策安排數量，不是已完成計畫數或排放減量成果；是原稿部門執行論點的來源補充。"
+    }
+  ],
+  "key_events": [
+    {"event_id": "event-climate-agency-opening", "date": "2023-08-22", "date_precision": "day", "date_type": "other", "title": "氣候變遷署正式揭牌", "event_type": "institution_established", "significance": "原稿組織制度化論點的具體事件，提供專責氣候治理組織成立的時間錨點。", "importance_score": 4, "confidence": "high", "source_ids": ["moenv-news:3234"], "evidence": "官方新聞載明 8 月 22 日正式揭牌；這裡記錄揭牌事件，不將其當成組織法生效日。"},
+    {"event_id": "event-ndc3-approval", "date": "2025-11-03", "date_precision": "day", "date_type": "approval", "title": "行政院核定 NDC3.0", "event_type": "target_approved", "significance": "將 2035 年減量承諾具體化，對應原稿目標加嚴的研究論點。", "importance_score": 5, "confidence": "high", "source_ids": ["moenv-news:2078"], "evidence": "11 月 6 日發布的官方新聞指出行政院於 11 月 3 日核定；核定日與發布日分開記錄。"},
+    {"event_id": "event-third-sector-plans-approval", "date": "2026-02-26", "date_precision": "day", "date_type": "approval", "title": "行政院核定六大部門第三期溫室氣體減量行動方案", "event_type": "implementation_plan_approved", "significance": "部門方案承接 2026-2030 年目標與執行工作，構成後續研究執行成果的制度起點。", "importance_score": 5, "confidence": "high", "source_ids": ["moenv-news:1868"], "evidence": "3 月 12 日發布的官方新聞指出行政院於 2 月 26 日核定；不以新聞發布日替代核定日。"}
+  ],
+  "trend_insights": [
+    {"insight_id": "insight-institution-target-implementation", "title": "從專責組織到目標與部門執行的制度串接", "period": {"from": "2023", "to": "2026"}, "insight_type": "policy_transition", "statement": "從氣候變遷署成立、NDC3.0 核定到六大部門第三期行動方案，可以觀察到專責組織、量化目標與部門措施逐步串接。這組事件支持原稿對制度化與執行架構的判讀，但僅顯示治理安排的形成；不能由方案數或新聞量推定減碳成效。未來研究應對照年度成果報告、預算與排放資料，檢驗制度承諾與執行結果之間的差距。", "evidence_refs": ["event-climate-agency-opening", "event-ndc3-approval", "event-third-sector-plans-approval", "metric-2030-reduction-target", "metric-2035-reduction-target"], "source_ids": ["moenv-news:3234", "moenv-news:2078", "moenv-news:1868"], "confidence": "medium"}
+  ]
+}
