@@ -74,12 +74,12 @@ function isActive(href: string): boolean {
           )}
         </a>
 
-        <nav class="hidden lg:flex items-center gap-1" aria-label="主導覽列">
+        <nav class="hidden lg:flex items-center gap-0.5" aria-label="主導覽列">
           {navItems.map((item) => (
             <a
               href={item.href}
               class:list={[
-                'rounded-full px-3.5 py-2 text-sm transition',
+                'whitespace-nowrap rounded-full px-3 py-2 text-sm transition',
                 isActive(item.href)
                   ? 'bg-emerald-900/10 text-emerald-950 font-semibold'
                   : 'text-[#0F4C3A] font-medium hover:bg-emerald-900/5 hover:text-emerald-950',
@@ -88,6 +88,17 @@ function isActive(href: string): boolean {
               {item.label}
             </a>
           ))}
+          <a
+            href="https://hao-element-matrix.pages.dev/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="ml-2 inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-[#0F4C3A]/25 bg-transparent px-3 py-1.5 text-xs font-medium text-[#0F4C3A] transition hover:border-[#0F4C3A]/55 hover:bg-emerald-900/5"
+            title="前往主站：晧脈元素庫"
+          >
+            <span class="font-mono text-[11px] font-bold text-[#B45309]">[O]</span>
+            <span>晧脈元素庫</span>
+            <span aria-hidden="true" class="text-[11px] opacity-75">↗</span>
+          </a>
         </nav>
 
         <button
@@ -118,6 +129,18 @@ function isActive(href: string): boolean {
               {item.label}
             </a>
           ))}
+          <div class="mt-2 border-t border-emerald-950/10 pt-2.5">
+            <a
+              href="https://hao-element-matrix.pages.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 rounded-full border border-[#0F4C3A]/25 bg-transparent px-3.5 py-1.5 text-xs font-medium text-[#0F4C3A] transition hover:border-[#0F4C3A]/55 hover:bg-emerald-900/5"
+            >
+              <span class="font-mono text-[11px] font-bold text-[#B45309]">[O]</span>
+              <span>晧脈元素庫</span>
+              <span aria-hidden="true" class="text-[11px] opacity-75">↗</span>
+            </a>
+          </div>
         </div>
       </div>
     </header>
@@ -129,12 +152,25 @@ function isActive(href: string): boolean {
     <footer class="mt-20 border-t border-emerald-950/10 bg-white">
       <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-10">
         <div class="flex flex-col gap-3 text-xs leading-relaxed text-gray-600 lg:flex-row lg:items-center lg:justify-between">
-          <div class="max-w-4xl">
-            資料來源：中華民國環境部（環境部新聞專區及環境資料開放平臺
-            <code class="rounded bg-ivory px-1.5 py-0.5 text-[11px] text-emerald-deep">MNEWS_P_01</code>），依政府資料開放授權條款引用｜本站為獨立政策觀察與研究平台，非環境部官方網站｜《晧哥說》與脈絡分析 © 環策晧脈。
-            <a href="/about" class="ml-1.5 font-semibold text-emerald-deep underline underline-offset-2 hover:text-emerald-dark">
-              完整資料宣告與免責聲明 →
-            </a>
+          <div class="max-w-4xl space-y-1.5">
+            <div>
+              所屬矩陣：
+              <a
+                href="https://hao-element-matrix.pages.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-semibold text-emerald-deep underline underline-offset-2 hover:text-emerald-dark"
+              >
+                晧脈元素庫 · 元素 O（氧）↗
+              </a>
+            </div>
+            <div>
+              資料來源：中華民國環境部（環境部新聞專區及環境資料開放平臺
+              <code class="rounded bg-ivory px-1.5 py-0.5 text-[11px] text-emerald-deep">MNEWS_P_01</code>），依政府資料開放授權條款引用｜本站為獨立政策觀察與研究平台，非環境部官方網站｜《晧哥說》與脈絡分析 © 環策晧脈。
+              <a href="/about" class="ml-1.5 font-semibold text-emerald-deep underline underline-offset-2 hover:text-emerald-dark">
+                完整資料宣告與免責聲明 →
+              </a>
+            </div>
           </div>
           <div class="shrink-0 text-[11px] text-gray-500">
             累計收錄 <strong class="text-gray-700">{manifest.total_news.toLocaleString()}</strong> 篇 · 最近更新：{formatTaipeiTimestamp(manifest.updated_at)}
