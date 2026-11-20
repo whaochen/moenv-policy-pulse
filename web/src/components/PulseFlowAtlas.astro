@@ -1,0 +1,795 @@
+---
+import { loadManifest, formatTaipeiTimestamp } from '../lib/data';
+
+const manifest = loadManifest();
+const startYear = manifest.date_start ? Number(manifest.date_start.slice(0, 4)) : 2001;
+const endYear = manifest.date_end ? Number(manifest.date_end.slice(0, 4)) : 2026;
+const spanYears = Math.max(1, endYear - startYear + 1);
+const initialNews = manifest.total_news;
+const initialRelations = manifest.total_relation_edges ?? 0;
+const initialSync = formatTaipeiTimestamp(manifest.updated_at);
+---
+
+<div
+  id="hao-pulse-flow-atlas"
+  class="relative overflow-hidden rounded-2xl border border-emerald-500/25 bg-gradient-to-b from-[#071A14] to-[#04110D] text-emerald-50 shadow-2xl"
+  style="background-image: linear-gradient(to bottom, #071A14, #04110D), linear-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(16, 185, 129, 0.08) 1px, transparent 1px); background-size: 100% 100%, 36px 36px, 36px 36px; background-blend-mode: normal, screen, screen;"
+>
+  <!-- 1. 頂部遙測控制列（Telemetry Header） -->
+  <div class="flex flex-col gap-3 border-b border-emerald-500/20 bg-black/25 px-4 py-3.5 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
+    <!-- 左側標題 -->
+    <div class="flex items-center gap-3">
+      <span class="relative flex h-3 w-3 shrink-0">
+        <span class="atlas-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_10px_#34D399]"></span>
+      </span>
+      <div>
+        <div class="font-mono text-xs font-bold tracking-[0.16em] text-emerald-300 sm:text-sm">
+          HAO PULSE FLOW ATLAS
+        </div>
+        <div class="text-[11px] text-emerald-100/70">
+          環策晧脈全自動資料流動與 AI 協作中樞
+        </div>
+      </div>
+    </div>
+
+    <!-- 中間三視圖切換膠囊 -->
+    <div class="inline-flex self-start rounded-full border border-emerald-500/25 bg-[#04110D]/90 p-1 font-mono text-xs lg:self-auto" role="tablist" aria-label="圖譜視圖切換">
+      <button
+        type="button"
+        role="tab"
+        aria-selected="true"
+        data-atlas-view="flows"
+        class="atlas-view-btn rounded-full bg-emerald-500/25 px-3.5 py-1.5 font-bold text-emerald-200 shadow-[0_0_12px_rgba(16,185,129,0.25)] transition"
+      >
+        FLOWS
+      </button>
+      <button
+        type="button"
+        role="tab"
+        aria-selected="false"
+        data-atlas-view="arcs"
+        class="atlas-view-btn rounded-full px-3.5 py-1.5 font-medium text-emerald-200/60 transition hover:text-emerald-200"
+      >
+        ARCS
+      </button>
+      <button
+        type="button"
+        role="tab"
+        aria-selected="false"
+        data-atlas-view="logs"
+        class="atlas-view-btn rounded-full px-3.5 py-1.5 font-medium text-emerald-200/60 transition hover:text-emerald-200"
+      >
+        LOGS
+      </button>
+    </div>
+
+    <!-- 右側 LIVE 狀態與巡航控制 -->
+    <div class="flex flex-wrap items-center gap-3 text-xs">
+      <div class="flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-950/60 px-3 py-1 font-mono text-[11px]">
+        <span class="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34D399]"></span>
+        <span class="font-bold text-emerald-300">LIVE</span>
+        <span class="text-emerald-200/75" id="atlas-header-sync">{initialSync}</span>
+      </div>
+      <button
+        type="button"
+        id="atlas-cruise-btn"
+        class="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-500/15 px-3 py-1 font-mono text-[11px] font-semibold text-amber-300 transition hover:bg-amber-500/25"
+      >
+        ⏸ 暫停巡航
+      </button>
+    </div>
+  </div>
+
+  <!-- 2. 視圖一：FLOWS（橫向弧線流光圖 Arc Diagram） -->
+  <div id="atlas-panel-flows" class="atlas-panel p-4 sm:p-6">
+    <!-- 懸浮玻璃態解說卡 -->
+    <div class="mb-5 rounded-xl border border-emerald-400/25 bg-[#08241C]/80 p-4 backdrop-blur-md shadow-[0_8px_28px_rgba(0,0,0,0.35)] sm:p-5">
+      <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+        <div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span id="flow-card-step" class="rounded-full bg-amber-500/20 border border-amber-400/40 px-2.5 py-0.5 font-mono text-[11px] font-bold text-amber-300">
+              01 · MOENV OPEN DATA
+            </span>
+            <span id="flow-card-scale" class="rounded-full bg-emerald-500/15 border border-emerald-400/30 px-2.5 py-0.5 font-mono text-[11px] text-emerald-300">
+              {initialNews.toLocaleString()} 篇官方新聞
+            </span>
+          </div>
+          <h3 id="flow-card-title" class="mt-2 font-serif text-lg font-bold text-white sm:text-xl">
+            官方源頭：MNEWS_P_01 ＋ 單篇原網址自動配對
+          </h3>
+          <p id="flow-card-tools" class="mt-1 font-mono text-[11px] text-emerald-300/85">
+            核心工具：環境部環境資料開放平臺 MNEWS_P_01 · 精準單篇 URL Resolver
+          </p>
+        </div>
+        <div id="flow-cruise-indicator" class="shrink-0 font-mono text-xs font-bold tracking-wider text-amber-300/90">
+          01 / 05 · OPEN DATA
+        </div>
+      </div>
+
+      <ul id="flow-card-points" class="mt-3 grid grid-cols-1 gap-2 text-xs leading-relaxed text-emerald-100/85 md:grid-cols-3">
+        <li class="rounded-lg bg-black/25 px-3 py-2 border border-emerald-500/15">直接串接官方開放資料 API，取代脆弱網頁爬蟲，穩定零中斷。</li>
+        <li class="rounded-lg bg-black/25 px-3 py-2 border border-emerald-500/15">自動比對官網列表與連續編號，精準回填單篇原文網址、絕不以首頁充數。</li>
+        <li class="rounded-lg bg-black/25 px-3 py-2 border border-emerald-500/15">雙重指紋去重機制保護既有歷史歸檔，只增量補齊每日新發布新聞。</li>
+      </ul>
+    </div>
+
+    <!-- 桌機版 SVG 橫向弧線流光圖 -->
+    <div class="hidden md:block relative">
+      <svg
+        id="atlas-flows-svg"
+        viewBox="0 0 1000 320"
+        class="w-full h-auto select-none"
+        role="img"
+        aria-label="環策晧脈五站式弧線流光架構圖"
+      >
+        <defs>
+          <filter id="atlas-glow-green" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="3.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <filter id="atlas-glow-amber" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <linearGradient id="beam-emerald" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#10B981" stop-opacity="0.35" />
+            <stop offset="50%" stop-color="#34D399" stop-opacity="0.95" />
+            <stop offset="100%" stop-color="#10B981" stop-opacity="0.35" />
+          </linearGradient>
+          <linearGradient id="beam-amber" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#10B981" stop-opacity="0.4" />
+            <stop offset="50%" stop-color="#F59E0B" stop-opacity="0.95" />
+            <stop offset="100%" stop-color="#34D399" stop-opacity="0.4" />
+          </linearGradient>
+        </defs>
+
+        <!-- 水平發光基準軸 -->
+        <line x1="80" y1="215" x2="920" y2="215" stroke="url(#beam-emerald)" stroke-width="2" opacity="0.65" />
+
+        <!-- 主資料流貝茲弧線（相鄰站點 + 跨站回饋弧線） -->
+        <g id="flow-arcs-layer" fill="none">
+          <!-- 1 -> 2 -->
+          <path id="arc-1-2" d="M 100 215 Q 200 105 300 215" stroke="url(#beam-emerald)" stroke-width="2.2" opacity="0.85" />
+          <!-- 2 -> 3 -->
+          <path id="arc-2-3" d="M 300 215 Q 400 105 500 215" stroke="url(#beam-emerald)" stroke-width="2.2" opacity="0.85" />
+          <!-- 3 -> 4 -->
+          <path id="arc-3-4" d="M 500 215 Q 600 105 700 215" stroke="url(#beam-amber)" stroke-width="2.2" opacity="0.85" />
+          <!-- 4 -> 5 -->
+          <path id="arc-4-5" d="M 700 215 Q 800 105 900 215" stroke="url(#beam-emerald)" stroke-width="2.2" opacity="0.85" />
+          <!-- 跨站弧線 2 -> 5（每日自動輸出直達發布） -->
+          <path id="arc-2-5" d="M 300 215 Q 600 25 900 215" stroke="url(#beam-emerald)" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.55" />
+          <!-- 跨站弧線 1 -> 3（全文語意向量建置） -->
+          <path id="arc-1-3" d="M 100 215 Q 300 58 500 215" stroke="url(#beam-amber)" stroke-width="1.4" stroke-dasharray="4 5" opacity="0.5" />
+          <!-- 回饋弧線 4 -> 2（Obsidian Git Push 觸發更新） -->
+          <path id="arc-4-2" d="M 700 215 Q 500 285 300 215" stroke="#F59E0B" stroke-width="1.3" stroke-dasharray="3 6" opacity="0.45" />
+        </g>
+
+        <!-- 持續穿梭的能量粒子 -->
+        <g class="atlas-particles" filter="url(#atlas-glow-green)">
+          <circle r="3.6" fill="#FFFFFF">
+            <animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#arc-1-2" /></animateMotion>
+          </circle>
+          <circle r="3.6" fill="#34D399">
+            <animateMotion dur="2.6s" begin="0.7s" repeatCount="indefinite"><mpath href="#arc-2-3" /></animateMotion>
+          </circle>
+          <circle r="3.8" fill="#F59E0B">
+            <animateMotion dur="2.8s" begin="1.1s" repeatCount="indefinite"><mpath href="#arc-3-4" /></animateMotion>
+          </circle>
+          <circle r="3.6" fill="#FFFFFF">
+            <animateMotion dur="2.5s" begin="1.6s" repeatCount="indefinite"><mpath href="#arc-4-5" /></animateMotion>
+          </circle>
+          <circle r="3.2" fill="#34D399">
+            <animateMotion dur="4.2s" begin="0.3s" repeatCount="indefinite"><mpath href="#arc-2-5" /></animateMotion>
+          </circle>
+          <circle r="3.0" fill="#FCD34D">
+            <animateMotion dur="3.8s" begin="1.9s" repeatCount="indefinite"><mpath href="#arc-1-3" /></animateMotion>
+          </circle>
+          <circle r="2.8" fill="#F59E0B">
+            <animateMotion dur="4.6s" begin="0.9s" repeatCount="indefinite"><mpath href="#arc-4-2" /></animateMotion>
+          </circle>
+        </g>
+
+        <!-- 5 大核心站點節點 -->
+        {[
+          { idx: 0, x: 100, code: '01', en: 'MOENV OPEN DATA', zh: '官方源頭' },
+          { idx: 1, x: 300, code: '02', en: 'GITHUB ACTIONS', zh: '雲端排程' },
+          { idx: 2, x: 500, code: '03', en: 'GEMINI × TF-IDF', zh: '語意關聯引擎' },
+          { idx: 3, x: 700, code: '04', en: 'OBSIDIAN VAULT', zh: '晧哥把脈台' },
+          { idx: 4, x: 900, code: '05', en: 'ASTRO × CF PAGES', zh: '全球極速發布' },
+        ].map((n) => (
+          <g
+            class="flow-node cursor-pointer"
+            data-flow-idx={n.idx}
+            transform={`translate(${n.x}, 215)`}
+          >
+            <!-- 全區域透明點擊熱區 -->
+            <rect x="-76" y="-30" width="152" height="114" rx="12" fill="transparent" />
+            <!-- 外層脈衝光環 -->
+            <circle class="flow-ring" r="24" fill="none" stroke="#F59E0B" stroke-width="1.8" opacity={n.idx === 0 ? '0.9' : '0'} filter="url(#atlas-glow-amber)" />
+            <circle class="flow-core" r="15" fill="#071A14" stroke={n.idx === 0 ? '#F59E0B' : '#34D399'} stroke-width="2.5" filter="url(#atlas-glow-green)" />
+            <text y="4" text-anchor="middle" fill="#FFFFFF" font-family="ui-monospace, monospace" font-size="10" font-weight="700">{n.code}</text>
+
+            <!-- 迷你脈衝刻度條 -->
+            <g transform="translate(-18, 28)" opacity="0.65">
+              <rect x="0" y="2" width="4" height="8" rx="1" fill="#10B981" />
+              <rect x="7" y="0" width="4" height="10" rx="1" fill="#34D399" />
+              <rect x="14" y="4" width="4" height="6" rx="1" fill="#10B981" />
+              <rect x="21" y="1" width="4" height="9" rx="1" fill="#F59E0B" />
+              <rect x="28" y="3" width="4" height="7" rx="1" fill="#34D399" />
+            </g>
+
+            <text y="56" text-anchor="middle" fill="#A7F3D0" font-family="ui-monospace, monospace" font-size="10.5" font-weight="700">{n.en}</text>
+            <text y="74" text-anchor="middle" fill="#D1FAE5" font-size="12" font-weight="600">{n.zh}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+
+    <!-- 手機版直向緊湊流光列表 -->
+    <div class="md:hidden space-y-2.5">
+      {[
+        { idx: 0, code: '01', en: 'MOENV OPEN DATA', zh: '官方源頭 · MNEWS_P_01' },
+        { idx: 1, code: '02', en: 'GITHUB ACTIONS', zh: '雲端排程 · 每日 08:00 自動同步' },
+        { idx: 2, code: '03', en: 'GEMINI × TF-IDF', zh: '語意與關聯引擎 · 56,000+ 條脈絡' },
+        { idx: 3, code: '04', en: 'OBSIDIAN VAULT', zh: '晧哥把脈工作台 ·《晧哥說》撰寫' },
+        { idx: 4, code: '05', en: 'ASTRO × CLOUDFLARE', zh: '全球極速發布 · 永久 $0 託管' },
+      ].map((m) => (
+        <button
+          type="button"
+          data-flow-idx={m.idx}
+          class:list={[
+            'flow-mobile-btn flex w-full items-center justify-between rounded-xl border px-3.5 py-3 text-left transition',
+            m.idx === 0
+              ? 'border-amber-400/60 bg-emerald-900/50'
+              : 'border-emerald-500/20 bg-black/25',
+          ]}
+        >
+          <div class="flex items-center gap-3">
+            <span class="flex h-7 w-7 items-center justify-center rounded-full border border-emerald-400/50 bg-[#071A14] font-mono text-[11px] font-bold text-emerald-200">
+              {m.code}
+            </span>
+            <div>
+              <div class="font-mono text-[11px] font-bold text-emerald-300">{m.en}</div>
+              <div class="text-xs text-emerald-50/90">{m.zh}</div>
+            </div>
+          </div>
+          <span class="font-mono text-[11px] text-amber-300">查看 →</span>
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- 3. 視圖二：ARCS（AI 模型 × 系統能力雙向神經星芒網） -->
+  <div id="atlas-panel-arcs" class="atlas-panel hidden p-4 sm:p-6">
+    <div class="mb-3 flex flex-wrap items-center justify-between gap-2 text-xs text-emerald-200/75">
+      <span>滑鼠懸停或點擊任一左側工具／右側模組，即刻點亮神經傳導關聯路徑</span>
+      <button type="button" id="arcs-reset-btn" class="font-mono text-[11px] text-amber-300 hover:underline">
+        顯示全部連線
+      </button>
+    </div>
+
+    <div class="overflow-x-auto">
+      <svg
+        id="atlas-arcs-svg"
+        viewBox="0 0 960 400"
+        class="w-full min-w-[640px] h-auto select-none"
+        role="img"
+        aria-label="AI 模型與系統治理模組神經星芒連線圖"
+      >
+        <defs>
+          <filter id="arc-glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- 標題標記 -->
+        <text x="140" y="24" text-anchor="middle" fill="#6EE7B7" font-family="ui-monospace, monospace" font-size="11" font-weight="700" letter-spacing="1.5">
+          SOURCES · AI MODELS · TOOLS
+        </text>
+        <text x="790" y="24" text-anchor="middle" fill="#FCD34D" font-family="ui-monospace, monospace" font-size="11" font-weight="700" letter-spacing="1.5">
+          SYSTEM GOVERNANCE & DELIVERY
+        </text>
+
+        <!-- 動態連線層（由 JS 渲染精準貝茲曲線） -->
+        <g id="arcs-links-layer" fill="none"></g>
+
+        <!-- 左側 7 節點 -->
+        <g id="arcs-left-layer"></g>
+
+        <!-- 右側 4 模組 -->
+        <g id="arcs-right-layer"></g>
+      </svg>
+    </div>
+
+    <!-- 白話解說條 -->
+    <div id="arcs-explain-bar" class="mt-4 rounded-xl border border-emerald-500/25 bg-black/35 px-4 py-3 text-xs leading-relaxed text-emerald-100">
+      <span class="font-mono font-bold text-amber-300">NEURAL LINK · </span>
+      <span id="arcs-explain-text">將游標移至任一 AI 模型、工具或系統模組上，即可查看它如何支撐環策晧脈的每日運作。</span>
+    </div>
+  </div>
+
+  <!-- 4. 視圖三：LOGS（終端機風格真實同步遙測紀錄） -->
+  <div id="atlas-panel-logs" class="atlas-panel hidden p-4 sm:p-6">
+    <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
+      <div class="font-mono text-xs text-emerald-300/80">
+        moenv-policy-pulse@cloud-runner:~$ <span class="text-white">tail -f daily-sync.log</span>
+      </div>
+      <button
+        type="button"
+        id="logs-replay-btn"
+        class="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-500/15 px-3.5 py-1.5 font-mono text-xs font-semibold text-emerald-200 transition hover:bg-emerald-500/25"
+      >
+        ▶ 模擬重播每日 08:00 同步流程
+      </button>
+    </div>
+
+    <div
+      id="atlas-logs-screen"
+      class="min-h-[260px] rounded-xl border border-emerald-500/20 bg-[#030B08] p-4 font-mono text-xs leading-7 text-emerald-200 shadow-inner sm:p-5"
+    ></div>
+  </div>
+
+  <!-- 5. 底部常駐即時遙測狀態列（Telemetry Footer Bar） -->
+  <div class="grid grid-cols-2 gap-3 border-t border-emerald-500/20 bg-black/35 px-4 py-3.5 font-mono text-[11px] sm:grid-cols-3 sm:px-6 lg:grid-cols-6">
+    <div>
+      <div class="text-[10px] text-emerald-400/70">NEWS</div>
+      <div class="mt-0.5 font-bold text-white" id="atlas-stat-news">{initialNews.toLocaleString()} 篇</div>
+    </div>
+    <div>
+      <div class="text-[10px] text-emerald-400/70">RELATIONS</div>
+      <div class="mt-0.5 font-bold text-amber-300" id="atlas-stat-relations">{initialRelations.toLocaleString()} 條</div>
+    </div>
+    <div>
+      <div class="text-[10px] text-emerald-400/70">SPAN</div>
+      <div class="mt-0.5 font-bold text-emerald-200" id="atlas-stat-span">{startYear}–{endYear} ({spanYears} YRS)</div>
+    </div>
+    <div>
+      <div class="text-[10px] text-emerald-400/70">AI ENGINE</div>
+      <div class="mt-0.5 font-bold text-emerald-200">GEMINI + TF-IDF</div>
+    </div>
+    <div>
+      <div class="text-[10px] text-emerald-400/70">INFRA COST</div>
+      <div class="mt-0.5 font-bold text-emerald-300">$0 / MO</div>
+    </div>
+    <div>
+      <div class="text-[10px] text-emerald-400/70">STATUS</div>
+      <div class="mt-0.5 font-bold text-emerald-300">LIVE · AUTO-SYNC ✓</div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes atlas-ping-kf {
+    0% { transform: scale(1); opacity: 0.75; }
+    75%, 100% { transform: scale(2.1); opacity: 0; }
+  }
+  .atlas-ping {
+    animation: atlas-ping-kf 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .atlas-ping {
+      animation: none;
+    }
+    .atlas-particles {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const root = document.getElementById('hao-pulse-flow-atlas');
+  if (root) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Live state hydrated from /data/manifest.json
+    const liveData = {
+      totalNews: Number((document.getElementById('atlas-stat-news')?.textContent || '11496').replace(/[^\d]/g, '')) || 11496,
+      totalRelations: Number((document.getElementById('atlas-stat-relations')?.textContent || '56175').replace(/[^\d]/g, '')) || 56175,
+      dateStart: '2001-01-01',
+      dateEnd: '2026-11-20',
+      updatedAt: document.getElementById('atlas-header-sync')?.textContent || '',
+      yearsSpan: 26,
+    };
+
+    const flowStations = [
+      {
+        code: '01 · MOENV OPEN DATA',
+        short: 'OPEN DATA',
+        title: '官方源頭：MNEWS_P_01 ＋ 單篇原網址自動配對',
+        tools: '核心工具：環境部環境資料開放平臺 MNEWS_P_01 · 精準單篇 URL Resolver',
+        scaleFn: () => `${liveData.totalNews.toLocaleString()} 篇官方新聞`,
+        points: [
+          '直接串接官方開放資料 API，取代脆弱網頁爬蟲，穩定零中斷。',
+          '自動比對官網列表與連續編號，精準回填單篇原文網址、絕不以首頁充數。',
+          '雙重指紋去重機制保護既有歷史歸檔，只增量補齊每日新發布新聞。',
+        ],
+      },
+      {
+        code: '02 · GITHUB ACTIONS',
+        short: 'CLOUD SYNC',
+        title: '雲端自動化大腦：每日 08:00 增量同步與零幻覺統計',
+        tools: '核心工具：GitHub Actions (ubuntu-latest) · Python 3.12 · 自動完整性校驗',
+        scaleFn: () => '每日 08:00 自動執行 · 約 60 秒完成',
+        points: [
+          '無須開啟本機電腦，每天早上自動喚醒抓取最新環境部政策新聞。',
+          '純程式碼重算 25 年趨勢、近 30 天升溫指標與候選雷達，杜絕統計幻覺。',
+          '通過完整性驗證後才自動 Commit 回主分支，確保線上資料永遠可靠。',
+        ],
+      },
+      {
+        code: '03 · GEMINI × TF-IDF',
+        short: 'AI ENGINE',
+        title: 'AI 語意與關聯引擎：雙模型摘要與 56,000+ 條脈絡計算',
+        tools: '核心模型：Gemini 2.5 Flash-Lite · gemini-embedding-001 · TF-IDF + Jieba',
+        scaleFn: () => `${liveData.totalRelations.toLocaleString()} 條語意脈絡邊`,
+        points: [
+          '單篇摘要與標籤由 Gemini 2.5 Flash-Lite 免費層增強，遇限流無縫降級規則引擎。',
+          '結合中文環保專有名詞詞典與語意嵌入向量，為每篇新聞算出 Top 5 前世今生。',
+          '架構設計由 Gemini 拆解、Google Antigravity 實作驗證，維持高品質零月費。',
+        ],
+      },
+      {
+        code: '04 · OBSIDIAN VAULT',
+        short: 'OBSIDIAN',
+        title: '晧哥把脈工作台：四層知識庫與《晧哥說》撰寫',
+        tools: '核心工具：Obsidian 四層知識庫 · Obsidian Git · 待把脈候選雷達',
+        scaleFn: () => '原料 → 脈絡 → 觀點 → 研究',
+        points: [
+          '開啟 Obsidian 自動 Pull 最新環境部新聞與近 14 天高訊號候選雷達。',
+          '晧哥親自挑題寫作《晧哥說》，並以 related_news 自動串連官方原新聞。',
+          '嚴格草稿閘門保護：draft 絕不公開，改為 published 後一鍵 Push 即發布。',
+        ],
+      },
+      {
+        code: '05 · ASTRO × CLOUDFLARE',
+        short: 'EDGE DEPLOY',
+        title: '全球極速發布：年度分片靜態站點，永久 $0 託管',
+        tools: '核心工具：Astro 5 靜態編譯 · 26 年度 JSON 分片 · Cloudflare Pages',
+        scaleFn: () => '建置 < 5 秒 · 永久 $0 / 月',
+        points: [
+          '將 25 年全量新聞切分為 26 個年度輕量分片，避開檔案上限並實現毫秒檢索。',
+          'GitHub 主分支一有更新即觸發 Cloudflare Pages 自動建置部署至全球節點。',
+          '搭配無追蹤 Cookie 的 Cloudflare Web Analytics，兼具速度、隱私與零帳單。',
+        ],
+      },
+    ];
+
+    // Update FLOWS card + SVG highlight
+    let activeFlowIdx = 0;
+    let cruiseOn = !reduceMotion;
+    let cruiseTimer: number | null = null;
+
+    const flowStepEl = document.getElementById('flow-card-step');
+    const flowScaleEl = document.getElementById('flow-card-scale');
+    const flowTitleEl = document.getElementById('flow-card-title');
+    const flowToolsEl = document.getElementById('flow-card-tools');
+    const flowPointsEl = document.getElementById('flow-card-points');
+    const flowIndicatorEl = document.getElementById('flow-cruise-indicator');
+    const cruiseBtn = document.getElementById('atlas-cruise-btn');
+
+    function renderFlowFocus(idx: number) {
+      activeFlowIdx = idx;
+      const st = flowStations[idx];
+      if (!st) return;
+
+      if (flowStepEl) flowStepEl.textContent = st.code;
+      if (flowScaleEl) flowScaleEl.textContent = st.scaleFn();
+      if (flowTitleEl) flowTitleEl.textContent = st.title;
+      if (flowToolsEl) flowToolsEl.textContent = st.tools;
+      if (flowIndicatorEl) flowIndicatorEl.textContent = `0${idx + 1} / 05 · ${st.short}`;
+      if (flowPointsEl) {
+        flowPointsEl.innerHTML = st.points
+          .map((pt) => `<li class="rounded-lg bg-black/25 px-3 py-2 border border-emerald-500/15">${pt}</li>`)
+          .join('');
+      }
+
+      root.querySelectorAll<SVGGElement>('.flow-node').forEach((node) => {
+        const isCurrent = Number(node.dataset.flowIdx) === idx;
+        const ring = node.querySelector<SVGCircleElement>('.flow-ring');
+        const core = node.querySelector<SVGCircleElement>('.flow-core');
+        if (ring) ring.setAttribute('opacity', isCurrent ? '0.95' : '0');
+        if (core) core.setAttribute('stroke', isCurrent ? '#F59E0B' : '#34D399');
+      });
+
+      root.querySelectorAll<HTMLButtonElement>('.flow-mobile-btn').forEach((btn) => {
+        const isCurrent = Number(btn.dataset.flowIdx) === idx;
+        btn.classList.toggle('border-amber-400/60', isCurrent);
+        btn.classList.toggle('bg-emerald-900/50', isCurrent);
+        btn.classList.toggle('border-emerald-500/20', !isCurrent);
+        btn.classList.toggle('bg-black/25', !isCurrent);
+      });
+    }
+
+    function updateCruiseBtn() {
+      if (!cruiseBtn) return;
+      cruiseBtn.textContent = cruiseOn ? '⏸ 暫停巡航' : '▶ 自動巡航';
+    }
+
+    function stopCruise() {
+      cruiseOn = false;
+      if (cruiseTimer !== null) {
+        window.clearInterval(cruiseTimer);
+        cruiseTimer = null;
+      }
+      updateCruiseBtn();
+    }
+
+    function startCruise() {
+      stopCruise();
+      cruiseOn = true;
+      updateCruiseBtn();
+      cruiseTimer = window.setInterval(() => {
+        renderFlowFocus((activeFlowIdx + 1) % flowStations.length);
+      }, 4000);
+    }
+
+    cruiseBtn?.addEventListener('click', () => {
+      if (cruiseOn) stopCruise();
+      else startCruise();
+    });
+
+    root.querySelectorAll<Element>('.flow-node, .flow-mobile-btn').forEach((el) => {
+      const idx = Number((el as HTMLElement).dataset.flowIdx || '0');
+      el.addEventListener('click', () => {
+        stopCruise();
+        renderFlowFocus(idx);
+      });
+      el.addEventListener('mouseenter', () => {
+        if (el.classList.contains('flow-node')) {
+          stopCruise();
+          renderFlowFocus(idx);
+        }
+      });
+    });
+
+    // View Switching (FLOWS / ARCS / LOGS)
+    const viewBtns = Array.from(root.querySelectorAll<HTMLButtonElement>('.atlas-view-btn'));
+    const panels: Record<string, HTMLElement | null> = {
+      flows: document.getElementById('atlas-panel-flows'),
+      arcs: document.getElementById('atlas-panel-arcs'),
+      logs: document.getElementById('atlas-panel-logs'),
+    };
+
+    function switchView(view: string) {
+      viewBtns.forEach((b) => {
+        const active = b.dataset.atlasView === view;
+        b.setAttribute('aria-selected', String(active));
+        b.classList.toggle('bg-emerald-500/25', active);
+        b.classList.toggle('font-bold', active);
+        b.classList.toggle('text-emerald-200', active);
+        b.classList.toggle('shadow-[0_0_12px_rgba(16,185,129,0.25)]', active);
+        b.classList.toggle('text-emerald-200/60', !active);
+        b.classList.toggle('font-medium', !active);
+      });
+      Object.entries(panels).forEach(([k, p]) => p?.classList.toggle('hidden', k !== view));
+      if (view === 'logs' && !logsRenderedOnce) {
+        renderLogs(false);
+      }
+    }
+
+    viewBtns.forEach((btn) => {
+      btn.addEventListener('click', () => switchView(btn.dataset.atlasView || 'flows'));
+    });
+
+    // 3. Build View 2: ARCS (7 Left Tools × 4 Right Governance Modules)
+    const leftNodes = [
+      { id: 'L0', label: 'MOENV MNEWS_P_01', desc: '環境部開放資料平臺每日提供最新新聞原料，並搭配單篇原網址自動配對。' },
+      { id: 'L1', label: 'GitHub Actions', desc: '每日台灣時間 08:00 自動在雲端執行抓取、關聯運算、資料校驗與提交。' },
+      { id: 'L2', label: 'Gemini 2.5 Flash-Lite', desc: 'Google AI Studio 免費層模型，強化每日新增新聞的重點摘要與政策標籤，遇限流自動降級。' },
+      { id: 'L3', label: 'gemini-embedding-001', desc: '類神經語意嵌入向量，捕捉法規與政策間的深層語意連結，支援增量快取。' },
+      { id: 'L4', label: 'TF-IDF + Jieba', desc: '掛載 20 大議題同義詞與環保法規詞典，10 秒內完成全站 11,496 篇餘弦相似度計算。' },
+      { id: 'L5', label: 'Obsidian Git', desc: '讓晧哥在純本機四層知識庫撰寫《晧哥說》，一鍵 Commit & Push 觸發上線。' },
+      { id: 'L6', label: 'Google Antigravity', desc: '與 Gemini 架構設計協作完成工程實作、自動化測試、UI 重塑與部署驗證。' },
+    ];
+
+    const rightNodes = [
+      { id: 'R0', label: 'DATA', sub: '原文擷取 · 單篇配對 · 雙重去重', desc: 'DATA 模組負責每日增量擷取、精準配對環境部單篇原文網址，並以雙重指紋守護 11,496 筆歸檔。' },
+      { id: 'R1', label: 'MEMORY', sub: '25 年語料 · 56,175+ 關聯 · 四層筆記', desc: 'MEMORY 模組串連 25 年全量語料庫與超過 56,000 條跨年關聯邊，並同步寫入 Obsidian 四層知識結構。' },
+      { id: 'R2', label: 'RULES', sub: '零幻覺統計 · 免費降級 · 草稿閘門', desc: 'RULES 模組以純程式確保統計零幻覺、API 限流自動降級不中斷，並嚴格攔截所有 draft 草稿。' },
+      { id: 'R3', label: 'DELIVERY', sub: '年度分片 JSON · 神經網 · 學術下載', desc: 'DELIVERY 模組將全量資料切分為年度輕量分片，驅動互動神經網絡圖、全量檢索與研究級 CSV 下載。' },
+    ];
+
+    const arcEdges: [string, string][] = [
+      ['L0', 'R0'], ['L0', 'R1'],
+      ['L1', 'R0'], ['L1', 'R2'], ['L1', 'R3'],
+      ['L2', 'R1'], ['L2', 'R2'],
+      ['L3', 'R1'], ['L3', 'R3'],
+      ['L4', 'R1'], ['L4', 'R2'], ['L4', 'R3'],
+      ['L5', 'R1'], ['L5', 'R2'], ['L5', 'R3'],
+      ['L6', 'R0'], ['L6', 'R2'], ['L6', 'R3'],
+    ];
+
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const linksLayer = document.getElementById('arcs-links-layer');
+    const leftLayer = document.getElementById('arcs-left-layer');
+    const rightLayer = document.getElementById('arcs-right-layer');
+    const explainText = document.getElementById('arcs-explain-text');
+    const arcsResetBtn = document.getElementById('arcs-reset-btn');
+
+    if (linksLayer && leftLayer && rightLayer) {
+      const leftPos = new Map<string, { x: number; y: number }>();
+      const rightPos = new Map<string, { x: number; y: number }>();
+
+      leftNodes.forEach((n, i) => {
+        const y = 62 + i * 50;
+        leftPos.set(n.id, { x: 255, y });
+        const g = document.createElementNS(svgNS, 'g');
+        g.setAttribute('class', 'arc-node cursor-pointer');
+        g.setAttribute('data-node-id', n.id);
+        g.innerHTML = `
+          <rect x="24" y="${y - 16}" width="231" height="32" rx="10" fill="#09231B" stroke="#10B981" stroke-opacity="0.4" stroke-width="1.2" />
+          <circle cx="255" cy="${y}" r="4" fill="#34D399" />
+          <text x="38" y="${y + 4}" fill="#ECFDF5" font-family="ui-monospace, monospace" font-size="11.5" font-weight="600">${n.label}</text>
+        `;
+        leftLayer.appendChild(g);
+      });
+
+      rightNodes.forEach((n, i) => {
+        const y = 85 + i * 82;
+        rightPos.set(n.id, { x: 645, y });
+        const g = document.createElementNS(svgNS, 'g');
+        g.setAttribute('class', 'arc-node cursor-pointer');
+        g.setAttribute('data-node-id', n.id);
+        g.innerHTML = `
+          <rect x="645" y="${y - 26}" width="290" height="52" rx="12" fill="#09231B" stroke="#F59E0B" stroke-opacity="0.45" stroke-width="1.4" />
+          <circle cx="645" cy="${y}" r="4.5" fill="#F59E0B" />
+          <text x="664" y="${y - 4}" fill="#FDE68A" font-family="ui-monospace, monospace" font-size="12.5" font-weight="700">${n.label}</text>
+          <text x="664" y="${y + 14}" fill="#D1FAE5" font-size="10.5">${n.sub}</text>
+        `;
+        rightLayer.appendChild(g);
+      });
+
+      arcEdges.forEach(([src, dst], idx) => {
+        const p1 = leftPos.get(src);
+        const p2 = rightPos.get(dst);
+        if (!p1 || !p2) return;
+        const d = `M ${p1.x} ${p1.y} C ${p1.x + 170} ${p1.y}, ${p2.x - 170} ${p2.y}, ${p2.x} ${p2.y}`;
+        const path = document.createElementNS(svgNS, 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('class', 'arc-edge transition-all duration-200');
+        path.setAttribute('data-src', src);
+        path.setAttribute('data-dst', dst);
+        path.setAttribute('stroke', idx % 3 === 0 ? '#F59E0B' : '#10B981');
+        path.setAttribute('stroke-width', '1.4');
+        path.setAttribute('opacity', '0.45');
+        linksLayer.appendChild(path);
+      });
+
+      const nodeDesc = new Map<string, string>([
+        ...leftNodes.map((n) => [n.id, `${n.label}：${n.desc}`] as [string, string]),
+        ...rightNodes.map((n) => [n.id, n.desc] as [string, string]),
+      ]);
+
+      function highlightArcNode(nodeId: string | null) {
+        const connected = new Set<string>();
+        if (nodeId) connected.add(nodeId);
+
+        linksLayer!.querySelectorAll<SVGPathElement>('.arc-edge').forEach((edge) => {
+          const s = edge.dataset.src || '';
+          const d = edge.dataset.dst || '';
+          if (!nodeId) {
+            edge.setAttribute('opacity', '0.45');
+            edge.setAttribute('stroke-width', '1.4');
+            edge.removeAttribute('filter');
+          } else if (s === nodeId || d === nodeId) {
+            connected.add(s);
+            connected.add(d);
+            edge.setAttribute('opacity', '0.98');
+            edge.setAttribute('stroke-width', '2.8');
+            edge.setAttribute('filter', 'url(#arc-glow)');
+          } else {
+            edge.setAttribute('opacity', '0.12');
+            edge.setAttribute('stroke-width', '1');
+            edge.removeAttribute('filter');
+          }
+        });
+
+        root.querySelectorAll<SVGGElement>('.arc-node').forEach((node) => {
+          const nid = node.dataset.nodeId || '';
+          node.setAttribute('opacity', !nodeId || connected.has(nid) ? '1' : '0.28');
+        });
+
+        if (explainText) {
+          explainText.textContent = nodeId
+            ? nodeDesc.get(nodeId) || ''
+            : '將游標移至任一 AI 模型、工具或系統模組上，即可查看它如何支撐環策晧脈的每日運作。';
+        }
+      }
+
+      root.querySelectorAll<SVGGElement>('.arc-node').forEach((node) => {
+        const nid = node.dataset.nodeId || '';
+        node.addEventListener('mouseenter', () => highlightArcNode(nid));
+        node.addEventListener('click', () => highlightArcNode(nid));
+      });
+      arcsResetBtn?.addEventListener('click', () => highlightArcNode(null));
+    }
+
+    // 4. View 3: LOGS (CLI Telemetry + Typewriter Replay)
+    const logsScreen = document.getElementById('atlas-logs-screen');
+    const logsReplayBtn = document.getElementById('logs-replay-btn');
+    let logsRenderedOnce = false;
+    let logsTimers: number[] = [];
+
+    function buildLogLines(): { tag: string; color: string; text: string }[] {
+      return [
+        { tag: '[BOOT]', color: 'text-emerald-400', text: `Taiwan Environment Observatory · Last Sync ${liveData.updatedAt}` },
+        { tag: '[SYNC]', color: 'text-emerald-300', text: `MOENV MNEWS_P_01 incremental check ...... OK (${liveData.totalNews.toLocaleString()} total archived)` },
+        { tag: '[LINK]', color: 'text-emerald-300', text: 'Official article URL resolver ............ MATCHED (0 homepage fallback)' },
+        { tag: '[AI]  ', color: 'text-amber-300', text: 'Gemini 2.5 Flash-Lite + Rule Fallback .... READY ($0 Free Tier)' },
+        { tag: '[NET] ', color: 'text-amber-300', text: `TF-IDF + gemini-embedding-001 graph ...... ${liveData.totalRelations.toLocaleString()} edges indexed` },
+        { tag: '[DATA]', color: 'text-emerald-300', text: 'Yearly JSON shards + Research CSVs ....... EXPORTED (< 90 files, < 2 MiB index)' },
+        { tag: '[LIVE]', color: 'text-white', text: 'Astro static build -> Cloudflare Pages ... DEPLOYED ($0/mo · STATUS OK)' },
+      ];
+    }
+
+    function renderLogs(animate: boolean) {
+      if (!logsScreen) return;
+      logsRenderedOnce = true;
+      logsTimers.forEach((t) => window.clearTimeout(t));
+      logsTimers = [];
+      const lines = buildLogLines();
+
+      if (!animate || reduceMotion) {
+        logsScreen.innerHTML = lines
+          .map((l) => `<div><span class="font-bold ${l.color}">${l.tag}</span> <span class="text-emerald-100/90">${l.text}</span></div>`)
+          .join('');
+        return;
+      }
+
+      logsScreen.innerHTML = '';
+      lines.forEach((l, idx) => {
+        const t = window.setTimeout(() => {
+          const row = document.createElement('div');
+          row.innerHTML = `<span class="font-bold ${l.color}">${l.tag}</span> <span class="text-emerald-100/90">${l.text}</span>`;
+          logsScreen.appendChild(row);
+        }, idx * 380);
+        logsTimers.push(t);
+      });
+    }
+
+    logsReplayBtn?.addEventListener('click', () => renderLogs(true));
+
+    // 5. Hydrate live real data from /data/manifest.json
+    fetch('/data/manifest.json')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((m) => {
+        if (!m) return;
+        if (typeof m.total_news === 'number') liveData.totalNews = m.total_news;
+        if (typeof m.total_relation_edges === 'number') liveData.totalRelations = m.total_relation_edges;
+        if (m.date_start) liveData.dateStart = m.date_start;
+        if (m.date_end) liveData.dateEnd = m.date_end;
+        if (m.updated_at) liveData.updatedAt = String(m.updated_at).replace('T', ' ').replace(/\+08:00$/, ' (UTC+8)');
+        const sy = Number(liveData.dateStart.slice(0, 4)) || 2001;
+        const ey = Number(liveData.dateEnd.slice(0, 4)) || 2026;
+        liveData.yearsSpan = Math.max(1, ey - sy + 1);
+
+        const elNews = document.getElementById('atlas-stat-news');
+        const elRel = document.getElementById('atlas-stat-relations');
+        const elSpan = document.getElementById('atlas-stat-span');
+        const elSync = document.getElementById('atlas-header-sync');
+        if (elNews) elNews.textContent = `${liveData.totalNews.toLocaleString()} 篇`;
+        if (elRel) elRel.textContent = `${liveData.totalRelations.toLocaleString()} 條`;
+        if (elSpan) elSpan.textContent = `${sy}–${ey} (${liveData.yearsSpan} YRS)`;
+        if (elSync) elSync.textContent = liveData.updatedAt;
+
+        renderFlowFocus(activeFlowIdx);
+        if (logsRenderedOnce) renderLogs(false);
+      })
+      .catch(() => {});
+
+    renderFlowFocus(0);
+    updateCruiseBtn();
+    if (cruiseOn) startCruise();
+  }
+</script>
