@@ -282,6 +282,9 @@ class NewsItem:
     site_topics: list[str] = field(default_factory=list)
     note_path: str = ""
     body: str = ""
+    attach_url: str = ""
+    ai_tags: list[str] = field(default_factory=list)
+    ai_policy_keywords: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -636,11 +639,14 @@ def item_from_mapping(data: dict[str, object]) -> NewsItem:
             value = ""
         values[name] = value
 
-    site_topics = values.get("site_topics")
-    if isinstance(site_topics, str):
-        values["site_topics"] = [topic for topic in site_topics.split(";") if topic]
-    elif not isinstance(site_topics, list):
-        values["site_topics"] = []
+    for list_field in ("site_topics", "ai_tags", "ai_policy_keywords"):
+        raw_list = values.get(list_field)
+        if isinstance(raw_list, str):
+            values[list_field] = [entry.strip() for entry in raw_list.split(";") if entry.strip()]
+        elif isinstance(raw_list, list):
+            values[list_field] = [str(entry).strip() for entry in raw_list if str(entry).strip()]
+        else:
+            values[list_field] = []
 
     views = values.get("views")
     if isinstance(views, str):
@@ -767,6 +773,7 @@ def count_alias(text: str, alias: str) -> int:
 def keyword_matches_for_item(item: NewsItem) -> list[KeywordMatch]:
     text = item_search_text(item)
     matches: list[KeywordMatch] = []
+    ai_titles = {title.strip() for title in item.ai_policy_keywords if title and title.strip()}
     for profile in KEYWORD_PROFILES:
         aliases: list[str] = []
         score = 0
@@ -777,6 +784,8 @@ def keyword_matches_for_item(item: NewsItem) -> list[KeywordMatch]:
                 score += count
         if aliases:
             matches.append(KeywordMatch(profile=profile, aliases=aliases, score=score))
+        elif profile.title in ai_titles:
+            matches.append(KeywordMatch(profile=profile, aliases=["[AI]"], score=1))
     return matches
 
 
@@ -1042,6 +1051,9 @@ def render_note(item: NewsItem, keyword_matches: list[KeywordMatch] | None = Non
         frontmatter.extend(f"  - {yaml_scalar(match.profile.title)}" for match in keyword_matches)
     else:
         frontmatter.append("policy_keywords: []")
+    if item.ai_tags:
+        frontmatter.append("ai_tags:")
+        frontmatter.extend(f"  - {yaml_scalar(tag)}" for tag in item.ai_tags)
     frontmatter.append("---")
 
     lines = [
@@ -1054,6 +1066,8 @@ def render_note(item: NewsItem, keyword_matches: list[KeywordMatch] | None = Non
         f"- 發布單位：{item.unit or '未標示'}",
         f"- 原始連結：[{SOURCE_NAME}]({item.source_url})",
     ]
+    if item.attach_url:
+        lines.append(f"- 附件：{item.attach_url}")
     if item.views is not None:
         lines.append(f"- 點擊數：{item.views}")
     if item.image_url:
