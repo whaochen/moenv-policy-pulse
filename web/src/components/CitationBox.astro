@@ -1,0 +1,101 @@
+---
+interface Props {
+  title: string;
+  year?: string;
+}
+
+const { title, year = String(new Date().getFullYear()) } = Astro.props;
+const uid = `cite-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<section
+  class="citation-box mt-8 rounded-2xl border border-emerald-deep/15 bg-white p-5 shadow-xs"
+  data-cite-title={title}
+  data-cite-year={year}
+  id={uid}
+>
+  <div class="flex flex-wrap items-center justify-between gap-2">
+    <div>
+      <span class="text-[11px] font-bold uppercase tracking-wider text-amber-accent">Academic Citation</span>
+      <h3 class="font-serif text-base font-bold text-emerald-deep">標準學術引用格式（一鍵複製）</h3>
+    </div>
+    <div class="inline-flex rounded-lg border border-gray-200 bg-ivory p-0.5 text-xs">
+      <button type="button" data-fmt="zh" class="cite-tab rounded-md bg-emerald-deep px-2.5 py-1 font-semibold text-white">
+        中文學術格式
+      </button>
+      <button type="button" data-fmt="apa" class="cite-tab rounded-md px-2.5 py-1 font-medium text-gray-600 hover:text-emerald-deep">
+        APA 7th
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-3 rounded-xl border border-gray-200 bg-ivory p-3.5 font-mono text-xs leading-relaxed text-gray-800 break-all cite-preview">
+    環策皓脈（{year}）。〈{title}〉。環策皓脈。
+  </div>
+
+  <div class="mt-3 flex flex-wrap items-center justify-between gap-2">
+    <p class="text-[11px] text-gray-500">
+      學術引用提醒：引用本站政策脈絡分析時，請同步並列原始中華民國環境部官方新聞來源與公告日期。
+    </p>
+    <button
+      type="button"
+      class="cite-copy-btn inline-flex items-center rounded-lg bg-emerald-deep px-3.5 py-1.5 text-xs font-semibold text-white transition hover:bg-emerald-dark"
+    >
+      複製引用格式
+    </button>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.citation-box').forEach((box) => {
+    if (box.dataset.bound === '1') return;
+    box.dataset.bound = '1';
+
+    const title = box.dataset.citeTitle || document.title;
+    const year = box.dataset.citeYear || String(new Date().getFullYear());
+    const previewEl = box.querySelector<HTMLElement>('.cite-preview');
+    const copyBtn = box.querySelector<HTMLButtonElement>('.cite-copy-btn');
+    const tabs = Array.from(box.querySelectorAll<HTMLButtonElement>('.cite-tab'));
+    let mode: 'zh' | 'apa' = 'zh';
+
+    function formatCitation(): string {
+      const url = window.location.href;
+      if (mode === 'apa') {
+        return `環策皓脈 (${year}). ${title}. 環策皓脈 Taiwan Environment Observatory. ${url}`;
+      }
+      return `環策皓脈（${year}）。〈${title}〉。環策皓脈。${url}`;
+    }
+
+    function update() {
+      if (previewEl) previewEl.textContent = formatCitation();
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        mode = (tab.dataset.fmt as 'zh' | 'apa') || 'zh';
+        tabs.forEach((t) => {
+          t.classList.remove('bg-emerald-deep', 'text-white', 'font-semibold');
+          t.classList.add('text-gray-600', 'font-medium');
+        });
+        tab.classList.add('bg-emerald-deep', 'text-white', 'font-semibold');
+        tab.classList.remove('text-gray-600', 'font-medium');
+        update();
+      });
+    });
+
+    copyBtn?.addEventListener('click', async () => {
+      const text = formatCitation();
+      try {
+        await navigator.clipboard.writeText(text);
+        copyBtn.textContent = '已複製 ✓';
+        window.setTimeout(() => {
+          copyBtn.textContent = '複製引用格式';
+        }, 1800);
+      } catch {
+        copyBtn.textContent = '請手動選取複製';
+      }
+    });
+
+    update();
+  });
+</script>

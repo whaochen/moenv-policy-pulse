@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CitationBox from '../../components/CitationBox.astro';
 import {
   loadTopics,
   loadResearch,
@@ -151,6 +152,8 @@ const counts = years.map((y) => topic.yearly_counts[y] ?? 0);
       </button>
     </div>
   </section>
+
+  <CitationBox title={`政策議題專頁：${topic.title}（2001–2026 環境部新聞趨勢與檔案）`} year="2026" />
 
   <!-- 側邊閱讀抽屜 -->
   <div id="topic-drawer-backdrop" class="fixed inset-0 z-50 hidden bg-black/40 backdrop-blur-[1px]"></div>
