@@ -1,0 +1,77 @@
+name: Daily MOENV News Sync
+
+on:
+  schedule:
+    # Daily at 00:00 UTC (08:00 Asia/Taipei)
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: moenv-daily-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: 'requirements.txt'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Sync MOENV Open Data (MNEWS_P_01) incrementally
+        env:
+          MOENV_API_KEY: ${{ secrets.MOENV_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/sync_moenv_opendata.py --no-dotenv
+
+      - name: Export static JSON shards for web frontend
+        run: python scripts/export_web_data.py
+
+      - name: Verify exported web data integrity
+        run: python scripts/verify_web_data.py
+
+      - name: Commit and push data updates
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No data changes detected; skipping commit."
+            exit 0
+          fi
+
+          SYNC_DATE=$(TZ='Asia/Taipei' date +%F)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add \
+            "00_公開入口/" \
+            "01_政策議題/" \
+            "02_環境部新聞_可公開/" \
+            "索引/" \
+            "資料/" \
+            "環境部新聞索引.md" \
+            "web/public/data/"
+
+          if git diff --cached --quiet; then
+            echo "No staged changes after path filter; skipping commit."
+            exit 0
+          fi
+
+          git commit -m "chore(data): auto-sync MOENV news ${SYNC_DATE}"
+          git push origin main
