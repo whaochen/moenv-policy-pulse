@@ -124,14 +124,14 @@ def _export_research(vault: Path) -> dict[str, Any]:
                 }
             )
 
-    datasets: list[dict[str, Any]] = []
+    raw_datasets: list[dict[str, Any]] = []
     if data_dir.is_dir():
         for path in sorted(data_dir.glob("*.v2.json")):
             try:
                 payload = json.loads(path.read_text(encoding="utf-8"))
             except (OSError, json.JSONDecodeError):
                 continue
-            datasets.append(
+            raw_datasets.append(
                 {
                     "filename": path.name,
                     "research_id": payload.get("research_id", path.stem),
@@ -143,6 +143,26 @@ def _export_research(vault: Path) -> dict[str, Any]:
                     "milestones": payload.get("milestones", []),
                 }
             )
+
+    # Deduplicate datasets sharing the same Chinese topic: keep latest coverage date & highest article count
+    dedup_by_topic: dict[str, dict[str, Any]] = {}
+    for ds in raw_datasets:
+        topic_key = str((ds.get("topic") or {}).get("name_zh") or ds.get("research_id") or "").strip()
+        prev = dedup_by_topic.get(topic_key)
+        if prev is None:
+            dedup_by_topic[topic_key] = ds
+            continue
+        cur_score = (
+            str((ds.get("scope") or {}).get("date_to") or ""),
+            int((ds.get("statistics") or {}).get("total_articles") or (ds.get("scope") or {}).get("article_count") or 0),
+        )
+        prev_score = (
+            str((prev.get("scope") or {}).get("date_to") or ""),
+            int((prev.get("statistics") or {}).get("total_articles") or (prev.get("scope") or {}).get("article_count") or 0),
+        )
+        if cur_score > prev_score:
+            dedup_by_topic[topic_key] = ds
+    datasets = list(dedup_by_topic.values())
 
     return {
         "generated_at": datetime.now(TAIPEI_TZ).isoformat(timespec="seconds"),
@@ -175,6 +195,26 @@ def _load_relations(vault: Path) -> tuple[dict[str, list[dict[str, Any]]], dict[
     return relations, meta
 
 
+CANONICAL_STAGE_RULES: tuple[tuple[str, tuple[str, ...]], ...] = (
+    ("草案預告", ("預告", "草案")),
+    ("研商溝通", ("研商", "公聽", "說明會", "論壇", "座談", "對話", "對談", "研討會", "審議會")),
+    ("修正發布", ("修正", "發布", "訂定", "公告", "核定", "公布", "拍板", "列管", "簽署")),
+    ("施行與查核", ("施行", "上路", "開徵", "稽查", "生效", "實施", "試行", "申報", "裁罰")),
+)
+
+
+def _classify_timeline_stage(title: str, summary: str) -> str:
+    t_low = (title or "").lower()
+    h_low = f"{title} {summary}".lower()
+    for stage, terms in CANONICAL_STAGE_RULES:
+        if any(term.lower() in t_low for term in terms):
+            return stage
+    for stage, terms in CANONICAL_STAGE_RULES:
+        if any(term.lower() in h_low for term in terms):
+            return stage
+    return ""
+
+
 def _export_timelines(vault: Path, items: list[indexer.NewsItem]) -> list[dict[str, Any]]:
     timeline_dir = vault / "05_政策脈絡線"
     if not timeline_dir.is_dir():
@@ -188,55 +228,92 @@ def _export_timelines(vault: Path, items: list[indexer.NewsItem]) -> list[dict[s
             continue
 
         include_terms = [str(t).lower() for t in cfg.get("include_terms", []) if str(t).strip()]
-        stage_rules = cfg.get("stage_rules", [])
-        max_nodes = int(cfg.get("max_nodes", 18))
+        max_nodes = max(12, int(cfg.get("max_nodes", 22)))
 
         matched: list[dict[str, Any]] = []
         for item in items:
             hay = f"{item.title} {item.summary}".lower()
             if not any(term in hay for term in include_terms):
                 continue
-            stage = "政策進展"
-            title_lower = item.title.lower()
-            for rule in stage_rules:
-                terms = [str(t).lower() for t in rule.get("terms", [])]
-                if any(t in title_lower for t in terms):
-                    stage = str(rule.get("stage", "政策進展"))
-                    break
-            else:
-                for rule in stage_rules:
-                    terms = [str(t).lower() for t in rule.get("terms", [])]
-                    if any(t in hay for t in terms):
-                        stage = str(rule.get("stage", "政策進展"))
-                        break
-
+            stage = _classify_timeline_stage(item.title, item.summary)
+            if not stage:
+                continue
+            in_title_bonus = 1 if any(term in (item.title or "").lower() for term in include_terms) else 0
             matched.append(
                 {
                     "news_id": item.news_id,
                     "date": item.date,
+                    "year": item.date[:4] if item.date else "",
                     "title": item.title,
                     "unit": item.unit or "未標示",
                     "stage": stage,
                     "summary": item.summary[:180],
                     "source_url": item.source_url,
                     "source_url_status": item.source_url_status,
+                    "_priority": in_title_bonus,
                 }
             )
 
-        # Keep chronological diversity: prioritize stage-tagged nodes + most recent milestones
-        matched_sorted_desc = sorted(matched, key=lambda r: (r["date"], r["news_id"]), reverse=True)
-        priority_nodes = [m for m in matched_sorted_desc if m["stage"] != "政策進展"]
-        selected = priority_nodes[:max_nodes]
-        if len(selected) < max_nodes:
-            seen_ids = {m["news_id"] for m in selected}
-            for m in matched_sorted_desc:
-                if m["news_id"] not in seen_ids:
-                    selected.append(m)
-                    seen_ids.add(m["news_id"])
-                if len(selected) >= max_nodes:
+        # Sample across the FULL real chronological span (not just latest 18)
+        by_year: dict[str, list[dict[str, Any]]] = defaultdict(list)
+        for m in matched:
+            if m["year"].isdigit():
+                by_year[m["year"]].append(m)
+
+        selected: list[dict[str, Any]] = []
+        seen_ids: set[str] = set()
+        sorted_yrs = sorted(by_year.keys())
+
+        # Pick 1-2 representative milestones per year across the entire span
+        per_year_cap = 2 if len(sorted_yrs) <= 10 else 1
+        for yr in sorted_yrs:
+            yr_items = sorted(
+                by_year[yr],
+                key=lambda r: (r["_priority"], 1 if r["stage"] in {"修正發布", "施行與查核", "草案預告"} else 0, r["date"]),
+                reverse=True,
+            )
+            picked = 0
+            picked_stages: set[str] = set()
+            for cand in yr_items:
+                if cand["news_id"] in seen_ids:
+                    continue
+                if picked > 0 and cand["stage"] in picked_stages and len(yr_items) > picked + 1:
+                    continue
+                selected.append(cand)
+                seen_ids.add(cand["news_id"])
+                picked_stages.add(cand["stage"])
+                picked += 1
+                if picked >= per_year_cap:
                     break
 
+        # Ensure the latest 3 milestone articles are always included
+        for cand in sorted(matched, key=lambda r: (r["date"], r["news_id"]), reverse=True)[:3]:
+            if cand["news_id"] not in seen_ids:
+                selected.append(cand)
+                seen_ids.add(cand["news_id"])
+
+        # Cap gently if extremely long, preserving earliest + latest + evenly spaced middle
         selected.sort(key=lambda r: (r["date"], r["news_id"]))
+        if len(selected) > max_nodes:
+            keep = [selected[0]]
+            middle = selected[1:-3]
+            step = max(1, len(middle) / max(1, max_nodes - 4))
+            for i in range(max_nodes - 4):
+                idx = min(len(middle) - 1, int(round(i * step)))
+                if middle[idx] not in keep:
+                    keep.append(middle[idx])
+            keep.extend(selected[-3:])
+            selected = sorted(keep, key=lambda r: (r["date"], r["news_id"]))
+
+        stage_counts = {stage: 0 for stage, _ in CANONICAL_STAGE_RULES}
+        clean_nodes = []
+        for node in selected:
+            stage_counts[node["stage"]] = stage_counts.get(node["stage"], 0) + 1
+            clean_nodes.append({k: v for k, v in node.items() if not k.startswith("_")})
+
+        year_start = clean_nodes[0]["date"][:4] if clean_nodes else ""
+        year_end = clean_nodes[-1]["date"][:4] if clean_nodes else ""
+
         timelines.append(
             {
                 "slug": cfg.get("slug", cfg_path.stem),
@@ -244,7 +321,10 @@ def _export_timelines(vault: Path, items: list[indexer.NewsItem]) -> list[dict[s
                 "topic_slug": cfg.get("topic_slug", ""),
                 "description": cfg.get("description", ""),
                 "total_matched": len(matched),
-                "nodes": selected,
+                "year_start": year_start,
+                "year_end": year_end,
+                "stage_counts": stage_counts,
+                "nodes": clean_nodes,
             }
         )
 

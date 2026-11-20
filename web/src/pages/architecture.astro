@@ -1,0 +1,294 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CitationBox from '../components/CitationBox.astro';
+import { loadManifest } from '../lib/data';
+
+const manifest = loadManifest();
+
+const stations = [
+  {
+    step: '01',
+    title: '官方源頭',
+    subtitle: '環境部開放資料 MNEWS_P_01',
+    badge: '資料起點',
+    summary: '直接串接中華民國環境部環境資料開放平臺 MNEWS_P_01，並透過精準單篇原網址自動配對器對應官網原文，絕不以列表首頁充數。',
+    details: [
+      '資料涵蓋 2001 至最新年份共 ' + manifest.total_news.toLocaleString() + ' 篇環境政策新聞。',
+      '以新聞編號與去標點標題指紋雙重去重，確保零重複、不覆寫歷史歸檔。',
+      '自動解析單篇官方網址，確保每篇政策追蹤皆可直達原始公告。',
+    ],
+  },
+  {
+    step: '02',
+    title: '雲端自動化大腦',
+    subtitle: 'GitHub Actions 每日排程',
+    badge: '零人工維運',
+    summary: '每天台灣時間早上 08:00 自動於雲端喚醒執行增量抓取、統計重算與完整性驗證，睡覺時也自動更新。',
+    details: [
+      '僅針對每日新增差額篇數進行處理，全程約 1 分鐘完成。',
+      '自動產生「待把脈候選雷達」，主動提醒近 14 天最具法規訊號的焦點新聞。',
+      '驗證資料無缺漏後才自動提交回主分支，杜絕壞資料上線。',
+    ],
+  },
+  {
+    step: '03',
+    title: 'AI 語意與關聯引擎',
+    subtitle: 'Gemini 雙模型 × TF-IDF 混合架構',
+    badge: '公開模型明細',
+    summary: '結合結構化 AI 摘要、類神經語意向量與中文環保專有名詞規則引擎，計算超過 56,000 條新聞「前世今生」脈絡邊。',
+    details: [
+      '單篇摘要與標籤補齊：Gemini 2.5 Flash-Lite（Google AI Studio 免費層，搭配 20 大關鍵字規則引擎自動備援，遇限流零中斷）。',
+      '56,000+ 條新聞關聯脈絡：Gemini Embedding（gemini-embedding-001）類神經語意向量 ＋ TF-IDF 中文環保專有名詞向量混合運算。',
+      '架構設計與開發協作：Gemini（總架構師與規格拆解）× Google Antigravity（程式實作與自動化測試驗證）。',
+    ],
+  },
+  {
+    step: '04',
+    title: '晧哥把脈工作台',
+    subtitle: 'Obsidian 四層知識庫 × Obsidian Git',
+    badge: '人類觀點核心',
+    summary: '所有新聞與候選雷達自動同步回本機 Obsidian 知識庫，由晧哥親自挑題、寫作《晧哥說》，一鍵推送即發布。',
+    details: [
+      '四層知識演化結構：新聞原料 → 政策脈絡線 → 晧哥說觀點 → 深度專題研究。',
+      '嚴格草稿閘門機制：草稿維持 status: draft 絕不外流，定稿改為 published 後一鍵 Push 即自動上線。',
+      '自動串連 related_news 新聞編號，文章底部即時呈現官方原新聞卡片。',
+    ],
+  },
+  {
+    step: '05',
+    title: '全球極速發布',
+    subtitle: 'Astro 靜態分片 × Cloudflare Pages',
+    badge: '永久 $0 託管',
+    summary: '將 25 年全量新聞切分為 26 個輕量年度 JSON 分片，搭配 Astro 靜態編譯與 Cloudflare 全球邊緣節點秒速載入。',
+    details: [
+      '全站靜態建置僅約 4 秒、產出約 140 個檔案，遠低於免費額度上限。',
+      '全量檢索索引壓縮至 2 MiB 以內，在瀏覽器端即可毫秒級篩選 11,496+ 篇新聞。',
+      '不依賴付費伺服器與資料庫，達成永久 $0 營運成本與極高穩定度。',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="建站幕後與系統架構"
+  description="公開環策晧脈（HAO POLICY INTELLIGENCE）從 1.0 到 2.0 的演進歷程、五站式全自動資料流動架構、使用的 AI 模型與人機分工宣言。"
+>
+  <!-- 第一幕｜為什麼要打造環策晧脈？ -->
+  <section class="rounded-3xl border border-emerald-950/[0.07] bg-gradient-to-br from-white via-white to-emerald-soft/60 p-7 shadow-[0_8px_30px_rgb(15,76,58,0.05)] sm:p-10">
+    <span class="inline-flex rounded-full bg-emerald-soft px-3.5 py-1 text-xs font-semibold text-emerald-deep">
+      Behind the Scenes · 建站幕後與系統架構
+    </span>
+    <h1 class="mt-3 font-serif text-3xl font-bold leading-tight text-emerald-deep sm:text-4xl">
+      環策晧脈是怎麼做出來的？
+    </h1>
+    <p class="mt-4 max-w-3xl text-base leading-relaxed text-gray-600">
+      過去 25 年，中華民國環境部（與前身環保署）累積發布了超過 <strong>{manifest.total_news.toLocaleString()}</strong> 篇新聞與法規公告。這些資料非常珍貴，卻分散在龐大的網頁海裡，很難一眼看出「這項法規從哪裡來、改了幾次、接下來會怎麼走」。
+    </p>
+    <p class="mt-3 max-w-3xl text-base leading-relaxed text-gray-600">
+      因此我們嘗試用「<strong class="text-emerald-deep">人機協作</strong>」的方式打造環策晧脈——把枯燥的資料整理、分類統計與脈絡串連交給全自動管線與 AI，把思考、把脈與把關留給人，讓這座網站成為透明、可檢驗、永久零伺服器負擔的台灣環境政策觀測站。
+    </p>
+  </section>
+
+  <!-- 第二幕｜系統演進雙世代對照（1.0 → 2.0） -->
+  <section class="reveal-section py-14 lg:py-20">
+    <div class="mb-6">
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-accent">Evolution · 1.0 → 2.0</span>
+      <h2 class="mt-1 font-serif text-2xl font-bold text-emerald-deep sm:text-3xl">
+        系統演進雙世代對照
+      </h2>
+      <p class="mt-1 text-sm text-gray-600">從手動爬蟲的探索期，走向雲端全自動運作的智庫世代</p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <!-- 1.0 探索期 -->
+      <div class="rounded-3xl border border-gray-200 bg-white/80 p-6 shadow-xs sm:p-8">
+        <div class="flex items-center justify-between">
+          <span class="rounded-full bg-gray-100 px-3 py-1 text-xs font-bold text-gray-600">1.0 探索期</span>
+          <span class="text-xs text-gray-400">手動整理世代</span>
+        </div>
+        <h3 class="mt-3 font-serif text-xl font-bold text-gray-800">驗證理念的初代工作流</h3>
+        <div class="mt-4 flex flex-wrap gap-1.5 text-xs">
+          <span class="rounded-full bg-gray-100 px-3 py-1 font-medium text-gray-700">Obsidian 知識庫雛形</span>
+          <span class="rounded-full bg-gray-100 px-3 py-1 font-medium text-gray-700">ChatGPT / Codex 爬蟲</span>
+          <span class="rounded-full bg-gray-100 px-3 py-1 font-medium text-gray-700">Google Drive 雙向同步</span>
+          <span class="rounded-full bg-gray-100 px-3 py-1 font-medium text-gray-700">chatgpt.site 初代發布</span>
+        </div>
+        <ul class="mt-5 space-y-2 text-sm leading-relaxed text-gray-600 list-disc pl-5">
+          <li>成功驗證將環境部歷年新聞轉為結構化知識庫與《晧哥說》評論的價值。</li>
+          <li>但網頁爬蟲容易受官網改版與反爬蟲驗證影響，需仰賴本機人工補抓與維護。</li>
+          <li>上萬筆 Markdown 檔在雲端硬碟雙向同步容易產生鎖定與版本衝突。</li>
+        </ul>
+      </div>
+
+      <!-- 2.0 全自動智庫世代 -->
+      <div class="rounded-3xl border border-emerald-deep/20 bg-gradient-to-br from-[#EDF5F1] via-white to-[#FAF8F3] p-6 shadow-[0_8px_30px_rgb(15,76,58,0.08)] sm:p-8">
+        <div class="flex items-center justify-between">
+          <span class="rounded-full bg-emerald-deep px-3 py-1 text-xs font-bold text-white">2.0 全自動智庫世代</span>
+          <span class="text-xs font-semibold text-amber-accent">現在的環策晧脈 · 永久 $0</span>
+        </div>
+        <h3 class="mt-3 font-serif text-xl font-bold text-emerald-deep">全自動每日更新與語意脈絡平台</h3>
+        <div class="mt-4 flex flex-wrap gap-1.5 text-xs">
+          <span class="rounded-full bg-emerald-soft px-3 py-1 font-semibold text-emerald-deep">環境部開放資料 MNEWS_P_01</span>
+          <span class="rounded-full bg-emerald-soft px-3 py-1 font-semibold text-emerald-deep">GitHub Actions 每日排程</span>
+          <span class="rounded-full bg-amber-soft px-3 py-1 font-semibold text-amber-accent">Gemini 語意與架構設計</span>
+          <span class="rounded-full bg-amber-soft px-3 py-1 font-semibold text-amber-accent">Google Antigravity 工程開發</span>
+          <span class="rounded-full bg-emerald-soft px-3 py-1 font-semibold text-emerald-deep">Obsidian Git 寫作把脈</span>
+          <span class="rounded-full bg-emerald-soft px-3 py-1 font-semibold text-emerald-deep">Astro + Cloudflare Pages</span>
+        </div>
+        <ul class="mt-5 space-y-2 text-sm leading-relaxed text-gray-700 list-disc pl-5">
+          <li>改以官方 Open Data API 每日自動增量同步，並精準配對單篇官網原文。</li>
+          <li>建置 56,000+ 條新聞關聯邊與雙層互動關聯圖，讓每一則新聞都能看見前世今生。</li>
+          <li>全套雲端排程、靜態託管與 AI 免費層自動降級機制，達成永久零伺服器月費。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第三幕｜互動式「五站式全自動資料流動與 AI 協作架構圖」 -->
+  <section class="reveal-section mb-16 rounded-3xl border border-emerald-950/[0.07] bg-white p-6 shadow-[0_8px_30px_rgb(15,76,58,0.05)] sm:p-8 lg:p-10">
+    <div class="mb-7">
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-accent">Interactive Architecture</span>
+      <h2 class="mt-1 font-serif text-2xl font-bold text-emerald-deep sm:text-3xl">
+        全自動資料流動與 AI 協作架構圖
+      </h2>
+      <p class="mt-1.5 text-sm text-gray-600">
+        每天早上資料如何從環境部自動流到你的螢幕前？點擊下方任一站點，展開查看該階段的運作細節與使用的 AI 模型。
+      </p>
+    </div>
+
+    <!-- 五站式流動卡片列 -->
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-5" id="arch-stations">
+      {stations.map((st, idx) => (
+        <div class="relative flex items-stretch">
+          <button
+            type="button"
+            data-station-idx={idx}
+            class:list={[
+              'arch-station-btn flex w-full flex-col justify-between rounded-2xl border p-4 text-left transition-all duration-300',
+              idx === 2
+                ? 'border-emerald-deep bg-emerald-soft/70 shadow-sm ring-2 ring-emerald-deep/15'
+                : 'border-gray-200 bg-ivory/70 hover:border-emerald-deep/40 hover:bg-white',
+            ]}
+          >
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-xs font-bold text-amber-accent">STEP {st.step}</span>
+                <span class="rounded-full bg-white px-2 py-0.5 text-[10px] font-semibold text-emerald-deep border border-emerald-deep/10">
+                  {st.badge}
+                </span>
+              </div>
+              <h3 class="mt-2 font-serif text-base font-bold text-emerald-deep">{st.title}</h3>
+              <div class="mt-0.5 text-[11px] font-medium text-gray-500">{st.subtitle}</div>
+            </div>
+            <div class="mt-3 text-[11px] font-semibold text-emerald-deep">點擊查看細節 ▾</div>
+          </button>
+
+          {idx < stations.length - 1 && (
+            <div class="hidden lg:flex items-center justify-center px-0.5 text-amber-accent" aria-hidden="true">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none">
+                <path d="M4 12 H20 M14 6 L20 12 L14 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pulse-flow-path" />
+              </svg>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <!-- 展開解說面板 -->
+    <div id="arch-detail-panel" class="mt-6 rounded-2xl border border-emerald-deep/15 bg-ivory/90 p-6">
+      <div class="flex flex-wrap items-center gap-2">
+        <span id="arch-detail-step" class="rounded-full bg-emerald-deep px-3 py-0.5 font-mono text-xs font-bold text-white">STEP 03</span>
+        <h3 id="arch-detail-title" class="font-serif text-xl font-bold text-emerald-deep">AI 語意與關聯引擎</h3>
+        <span id="arch-detail-sub" class="text-xs text-gray-500">Gemini 雙模型 × TF-IDF 混合架構</span>
+      </div>
+      <p id="arch-detail-summary" class="mt-2.5 text-sm leading-relaxed text-gray-700">
+        {stations[2].summary}
+      </p>
+      <ul id="arch-detail-list" class="mt-3.5 space-y-2 text-xs leading-relaxed text-gray-700 list-disc pl-5">
+        {stations[2].details.map((d) => (
+          <li>{d}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 第四幕｜AI 與人類的分工宣言 -->
+  <section class="reveal-section mb-12">
+    <div class="mb-6">
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-accent">Human × AI Philosophy</span>
+      <h2 class="mt-1 font-serif text-2xl font-bold text-emerald-deep sm:text-3xl">
+        AI 與人類的分工宣言
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div class="rounded-3xl border border-emerald-950/[0.07] bg-white p-6 shadow-[0_8px_30px_rgb(15,76,58,0.05)] sm:p-8">
+        <div class="inline-flex rounded-full bg-emerald-soft px-3 py-1 text-xs font-bold text-emerald-deep">
+          AI 與自動化擅長的事
+        </div>
+        <h3 class="mt-3 font-serif text-xl font-bold text-gray-900">把繁重、重複、需要全量記憶的工作做到極致</h3>
+        <ul class="mt-4 space-y-2.5 text-sm leading-relaxed text-gray-600 list-disc pl-5">
+          <li>每天早上 08:00 不喊累地讀完環境部最新公告，完成清洗與去重。</li>
+          <li>幾秒鐘內算完 25 年、20 大議題的歷年聲量變化與近 30 天升溫指標。</li>
+          <li>從 11,496 篇新聞裡自動串連超過 56,000 條語意脈絡，讓任何一篇新公告都能馬上看見前世今生。</li>
+        </ul>
+      </div>
+
+      <div class="rounded-3xl border border-amber-accent/20 bg-gradient-to-br from-[#FFFDF7] to-white p-6 shadow-[0_8px_30px_rgb(180,83,9,0.06)] sm:p-8">
+        <div class="inline-flex rounded-full bg-amber-soft px-3 py-1 text-xs font-bold text-amber-accent">
+          晧哥堅持自己做的事
+        </div>
+        <h3 class="mt-3 font-serif text-xl font-bold text-emerald-deep">把現場經驗、脈絡判斷與公共溫度留在文章裡</h3>
+        <ul class="mt-4 space-y-2.5 text-sm leading-relaxed text-gray-700 list-disc pl-5">
+          <li>從候選雷達裡親自挑出真正影響台灣環境、企業合規與民眾日常的關鍵題目。</li>
+          <li>用實務現場經驗為政策「把脈、把關」，點出公告背後容易被忽略的盲點與配套缺口。</li>
+          <li>親手寫下每一篇有觀點、有溫度的《晧哥說》，不替政策打分數，只陪你多看一層。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CitationBox title="建站幕後：環策晧脈（HAO POLICY INTELLIGENCE）人機協作與全自動觀測架構" year="2026" />
+
+  <script
+    id="arch-stations-payload"
+    type="application/json"
+    set:html={JSON.stringify(stations)}
+  />
+
+  <script>
+    const payloadEl = document.getElementById('arch-stations-payload');
+    const btns = Array.from(document.querySelectorAll<HTMLButtonElement>('.arch-station-btn'));
+    const stepEl = document.getElementById('arch-detail-step');
+    const titleEl = document.getElementById('arch-detail-title');
+    const subEl = document.getElementById('arch-detail-sub');
+    const summaryEl = document.getElementById('arch-detail-summary');
+    const listEl = document.getElementById('arch-detail-list');
+
+    if (payloadEl && btns.length) {
+      const stations = JSON.parse(payloadEl.textContent || '[]');
+      btns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const idx = Number(btn.dataset.stationIdx || '0');
+          const st = stations[idx];
+          if (!st) return;
+
+          btns.forEach((b) => {
+            b.classList.remove('border-emerald-deep', 'bg-emerald-soft/70', 'shadow-sm', 'ring-2', 'ring-emerald-deep/15');
+            b.classList.add('border-gray-200', 'bg-ivory/70');
+          });
+          btn.classList.add('border-emerald-deep', 'bg-emerald-soft/70', 'shadow-sm', 'ring-2', 'ring-emerald-deep/15');
+          btn.classList.remove('border-gray-200', 'bg-ivory/70');
+
+          if (stepEl) stepEl.textContent = `STEP ${st.step}`;
+          if (titleEl) titleEl.textContent = st.title;
+          if (subEl) subEl.textContent = st.subtitle;
+          if (summaryEl) summaryEl.textContent = st.summary;
+          if (listEl) {
+            listEl.innerHTML = (st.details || []).map((d: string) => `<li>${d}</li>`).join('');
+          }
+        });
+      });
+    }
+  </script>
+</BaseLayout>

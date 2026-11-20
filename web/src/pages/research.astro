@@ -5,287 +5,404 @@ import CitationBox from '../components/CitationBox.astro';
 import {
   loadResearch,
   loadTimelines,
+  loadTrends,
   loadMethodology,
   formatTaipeiTimestamp,
 } from '../lib/data';
 
 const research = loadResearch();
 const timelines = loadTimelines();
+const trends = loadTrends();
 const methodology = loadMethodology();
 
 const renderedReports = research.reports.map((rep) => ({
   ...rep,
   html: marked.parse(rep.body_markdown) as string,
 }));
+
+// Auto-compute Findings Card 1: 2019 top topic vs latest year top 2 topics + Sparkline data
+const matrixYears = trends.topic_yearly_matrix.years;
+const matrixTopics = trends.topic_yearly_matrix.topics;
+const idx2019 = matrixYears.indexOf('2019');
+const idxLatest = matrixYears.length - 1;
+const latestYear = matrixYears[idxLatest] ?? '2026';
+
+const top2019 =
+  idx2019 >= 0
+    ? [...matrixTopics].sort((a, b) => (b.counts[idx2019] || 0) - (a.counts[idx2019] || 0))[0]
+    : matrixTopics[0];
+const topLatest = [...matrixTopics]
+  .sort((a, b) => (b.counts[idxLatest] || 0) - (a.counts[idxLatest] || 0))
+  .slice(0, 2);
+
+const sparkYears = matrixYears.slice(-10);
+const sparkStartIdx = Math.max(0, matrixYears.length - 10);
+const airTopic = matrixTopics.find((t) => t.slug === 'air_quality') ?? matrixTopics[0];
+const netZeroTopic = matrixTopics.find((t) => t.slug === 'net_zero_transition') ?? matrixTopics[1];
+const circularTopic = matrixTopics.find((t) => t.slug === 'resource_circulation') ?? matrixTopics[2];
+
+// Auto-compute Findings Card 2: Top 5 publishing units + share %
+const totalAllNews = methodology.coverage.total_news || 1;
+const top5Units = trends.unit_ranking.all_time.slice(0, 5).map((u) => ({
+  unit: u.unit.replace(/^環境部/, ''),
+  fullUnit: u.unit,
+  count: u.count,
+  pct: Math.round((u.count / totalAllNews) * 1000) / 10,
+}));
+const maxUnitCount = top5Units[0]?.count || 1;
+
+// Deduplicated primary feature dataset (Net Zero Transition 20-year curve)
+const featureDataset = research.datasets[0] ?? null;
+const featurePoints = featureDataset?.trend_series?.[0]?.points ?? [];
+const featureTotal = featureDataset?.statistics?.total_articles ?? featureDataset?.scope?.article_count ?? 0;
+const featurePeakYear = featureDataset?.statistics?.peak_year?.year ?? 2025;
+const featurePeakCount = featureDataset?.statistics?.peak_year?.count ?? 0;
+
+const stageMeta: Record<string, { badge: string; dot: string; color: string; emoji: string }> = {
+  草案預告: { badge: 'bg-amber-50 text-amber-800 border-amber-200', dot: 'bg-amber-500', color: '#D97706', emoji: '🟡' },
+  研商溝通: { badge: 'bg-blue-50 text-blue-800 border-blue-200', dot: 'bg-blue-600', color: '#2563EB', emoji: '🔵' },
+  修正發布: { badge: 'bg-emerald-50 text-emerald-800 border-emerald-200', dot: 'bg-emerald-700', color: '#0F4C3A', emoji: '🟢' },
+  施行與查核: { badge: 'bg-rose-50 text-rose-800 border-rose-200', dot: 'bg-rose-600', color: '#E11D48', emoji: '🔴' },
+};
 ---
 
 <BaseLayout
-  title="學術研究專區"
-  description="環策晧脈學術研究專區：政策演進法規時間軸、研究級 CSV/JSON 開放下載、標準學術引用格式、分類口徑與路線 3 關聯演算法公開。"
+  title="研究觀察與資料下載"
+  description="環策晧脈研究觀察專區：25 年台灣環境政策觀察成果、可互動法規演進時間軸、深度專題分析與開放資料下載。"
 >
-  <div class="mb-8">
-    <span class="inline-flex rounded-full bg-emerald-soft px-3 py-1 text-xs font-semibold text-emerald-deep">
-      Academic Research Hub · 開放研究基礎設施
+  <div class="mb-10">
+    <span class="inline-flex rounded-full bg-emerald-soft px-3.5 py-1 text-xs font-semibold text-emerald-deep">
+      研究觀察與開放資料 · 2001–{latestYear}
     </span>
-    <h1 class="mt-2 font-serif text-3xl font-bold text-emerald-deep">學術研究專區</h1>
-    <p class="mt-1.5 text-sm text-gray-600">
-      提供台灣環境政策 25 年法規演進時間軸、UTF-8 統計資料開放下載、標準學術引用格式、透明分類口徑與 {research.report_count} 篇深度研究報告。
+    <h1 class="mt-3 font-serif text-3xl font-bold text-emerald-deep sm:text-4xl">
+      我們整理出了什麼？
+    </h1>
+    <p class="mt-2.5 max-w-3xl text-sm leading-relaxed text-gray-600 sm:text-base">
+      每一份下載檔背後，都是環策晧脈從 {methodology.coverage.total_news.toLocaleString()} 篇官方新聞中清洗、分類並長期追蹤的成果。你可以先看下面的核心發現，若要寫報告或做論文分析，再一鍵帶走完整表格（Excel 直接開啟不亂碼）。
     </p>
-    <div class="mt-4 flex flex-wrap gap-2 text-xs font-semibold">
-      <a href="#timelines" class="rounded-full border border-emerald-deep/20 bg-white px-3 py-1.5 text-emerald-deep hover:bg-emerald-soft">① 法規演進時間軸</a>
-      <a href="#downloads" class="rounded-full border border-emerald-deep/20 bg-white px-3 py-1.5 text-emerald-deep hover:bg-emerald-soft">② 研究資料開放下載</a>
-      <a href="#citation" class="rounded-full border border-emerald-deep/20 bg-white px-3 py-1.5 text-emerald-deep hover:bg-emerald-soft">③ 標準學術引用</a>
-      <a href="#methodology" class="rounded-full border border-emerald-deep/20 bg-white px-3 py-1.5 text-emerald-deep hover:bg-emerald-soft">④ 分類口徑與演算法</a>
-      <a href="#reports" class="rounded-full border border-emerald-deep/20 bg-white px-3 py-1.5 text-emerald-deep hover:bg-emerald-soft">深度研究報告 ({research.report_count})</a>
+    <div class="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
+      <a href="#findings" class="rounded-full border border-emerald-deep/20 bg-white px-3.5 py-1.5 text-emerald-deep transition hover:bg-emerald-soft">政策觀察成果與下載</a>
+      <a href="#timelines" class="rounded-full border border-emerald-deep/20 bg-white px-3.5 py-1.5 text-emerald-deep transition hover:bg-emerald-soft">法規演進時間軸</a>
+      <a href="#feature-story" class="rounded-full border border-emerald-deep/20 bg-white px-3.5 py-1.5 text-emerald-deep transition hover:bg-emerald-soft">深度專題故事</a>
+      <a href="#reports" class="rounded-full border border-emerald-deep/20 bg-white px-3.5 py-1.5 text-emerald-deep transition hover:bg-emerald-soft">專題研究報告 ({renderedReports.length})</a>
+      <a href="/architecture" class="rounded-full border border-amber-accent/30 bg-amber-soft/50 px-3.5 py-1.5 text-amber-accent transition hover:bg-amber-soft">建站幕後與架構 →</a>
     </div>
   </div>
 
-  <!-- ① 政策演進「法規時間軸」模組 -->
-  <section id="timelines" class="mb-10 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-    <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-      <div>
-        <span class="text-xs font-bold uppercase tracking-wider text-amber-accent">Pillar 01 · Policy Evolution Timelines</span>
-        <h2 class="mt-0.5 font-serif text-2xl font-bold text-emerald-deep">政策演進「法規時間軸」</h2>
-        <p class="mt-1 text-xs text-gray-500">
-          自動從 {methodology.coverage.total_news.toLocaleString()} 篇歷史新聞彙整「預告 → 研商 → 修正發布 → 施行」關鍵節點，每筆直達環境部單篇原文。
-        </p>
-      </div>
+  <!-- 一、先秀研究成果與互動預覽，再引導下載 -->
+  <section id="findings" class="mb-14">
+    <div class="mb-6">
+      <h2 class="font-serif text-2xl font-bold text-emerald-deep">
+        25 年政策觀察成果與資料下載
+      </h2>
+      <p class="mt-1 text-xs text-gray-500">先看關鍵發現，再依研究需求帶走完整資料表</p>
     </div>
 
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <!-- 成果卡 1：25 年台灣環境政策重心大挪移 -->
+      <div class="editorial-card flex flex-col justify-between rounded-3xl p-6">
+        <div>
+          <span class="rounded-full bg-emerald-soft px-2.5 py-0.5 text-[11px] font-semibold text-emerald-deep">
+            關鍵發現 01
+          </span>
+          <h3 class="mt-2.5 font-serif text-xl font-bold text-gray-900">
+            25 年台灣環境政策重心大挪移
+          </h3>
+          <p class="mt-2 text-xs leading-relaxed text-gray-600">
+            2019 年官方聲量最高為「<strong class="text-emerald-deep">{top2019?.title}</strong>」；到了 {latestYear} 年，已由「<strong class="text-emerald-deep">{topLatest[0]?.title}</strong>」與「<strong class="text-emerald-deep">{topLatest[1]?.title}</strong>」躍居政策主軸。
+          </p>
+          <div id="findings-sparkline" class="mt-4 h-[150px] w-full rounded-xl bg-ivory/70"></div>
+        </div>
+        <div class="mt-5 border-t border-gray-100 pt-4">
+          <a
+            href="/data/downloads/moenv_topic_yearly_matrix.csv"
+            download="moenv_topic_yearly_matrix.csv"
+            class="inline-flex w-full items-center justify-center rounded-xl bg-emerald-deep px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-emerald-dark"
+          >
+            下載完整 2001–{latestYear} 議題歷年統計表（Excel / CSV）↓
+          </a>
+        </div>
+      </div>
+
+      <!-- 成果卡 2：環境部各司署發聲版圖排行 -->
+      <div class="editorial-card flex flex-col justify-between rounded-3xl p-6">
+        <div>
+          <span class="rounded-full bg-amber-soft px-2.5 py-0.5 text-[11px] font-semibold text-amber-accent">
+            關鍵發現 02
+          </span>
+          <h3 class="mt-2.5 font-serif text-xl font-bold text-gray-900">
+            環境部各司署「發聲版圖」排行
+          </h3>
+          <p class="mt-2 text-xs leading-relaxed text-gray-600">
+            從 25 年累計發布量來看，前五大主力單位合計貢獻近半數官方政策公告：
+          </p>
+
+          <div class="mt-4 space-y-2.5">
+            {top5Units.map((u, idx) => (
+              <div>
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-medium text-gray-800 truncate pr-2">
+                    {idx + 1}. {u.unit}
+                  </span>
+                  <span class="shrink-0 font-mono text-[11px] text-gray-600">
+                    {u.count.toLocaleString()} 篇（{u.pct}%）
+                  </span>
+                </div>
+                <div class="mt-1 h-2 w-full overflow-hidden rounded-full bg-ivory">
+                  <div
+                    class="h-full rounded-full bg-gradient-to-r from-emerald-deep to-teal-600"
+                    style={`width: ${Math.max(12, Math.round((u.count / maxUnitCount) * 100))}%`}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="mt-5 border-t border-gray-100 pt-4">
+          <a
+            href="/data/downloads/moenv_unit_yearly_stats.csv"
+            download="moenv_unit_yearly_stats.csv"
+            class="inline-flex w-full items-center justify-center rounded-xl bg-emerald-deep px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-emerald-dark"
+          >
+            下載各司署歷年發布量完整清冊（Excel / CSV）↓
+          </a>
+        </div>
+      </div>
+
+      <!-- 成果卡 3：分類怎麼來的？透明研究手冊 -->
+      <div class="editorial-card flex flex-col justify-between rounded-3xl p-6">
+        <div>
+          <span class="rounded-full bg-emerald-soft px-2.5 py-0.5 text-[11px] font-semibold text-emerald-deep">
+            關鍵發現 03
+          </span>
+          <h3 class="mt-2.5 font-serif text-xl font-bold text-gray-900">
+            分類怎麼來的？透明研究手冊
+          </h3>
+          <p class="mt-2 text-xs leading-relaxed text-gray-600">
+            本站採「一文多標籤」公開規則：每則新聞若同時涵蓋多個政策領域（例如碳費與淨零），將於對應議題各自計入，並排除跨來源重複新聞，絕非黑箱統計。
+          </p>
+
+          <details class="mt-4 rounded-xl border border-emerald-deep/15 bg-ivory/80 p-3.5 text-xs">
+            <summary class="cursor-pointer font-semibold text-emerald-deep">
+              預覽 20 大政策議題分類字典 ▾
+            </summary>
+            <div class="mt-3 max-h-44 space-y-2 overflow-y-auto pr-1">
+              {methodology.topic_profiles.map((p) => (
+                <div class="rounded-lg bg-white p-2 border border-gray-100">
+                  <div class="flex items-center justify-between font-semibold text-emerald-deep">
+                    <span>{p.title}</span>
+                    <span class="font-mono text-[10px] text-gray-500">{p.total_count.toLocaleString()} 篇</span>
+                  </div>
+                  <div class="mt-0.5 text-[11px] text-gray-600">{p.aliases.join('、')}</div>
+                </div>
+              ))}
+            </div>
+          </details>
+        </div>
+
+        <div class="mt-5 border-t border-gray-100 pt-4 space-y-2.5">
+          <a
+            href="/data/downloads/moenv_methodology_metadata.json"
+            download="moenv_methodology_metadata.json"
+            class="inline-flex w-full items-center justify-center rounded-xl border border-emerald-deep/25 bg-ivory px-4 py-2.5 text-xs font-semibold text-emerald-deep transition hover:bg-emerald-soft"
+          >
+            下載完整研究方法與分類規則檔（JSON）↓
+          </a>
+          <details class="text-[11px] text-gray-500">
+            <summary class="cursor-pointer hover:text-emerald-deep">學術引用校驗資訊 ▾</summary>
+            <div class="mt-1.5 rounded-lg bg-ivory p-2.5 leading-relaxed">
+              <div>資料涵蓋：{methodology.coverage.date_start} ～ {methodology.coverage.date_end}（{methodology.coverage.total_news.toLocaleString()} 篇）</div>
+              <div>最近更新：{formatTaipeiTimestamp(methodology.updated_at)}</div>
+              <div>資料集校驗碼：<code class="font-mono text-[10px]">{methodology.dataset_version}</code></div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 二、政策演進「法規時間軸」圖像化升級 -->
+  <section id="timelines" class="mb-14 rounded-3xl border border-emerald-950/[0.07] bg-white p-6 shadow-[0_8px_30px_rgb(15,76,58,0.05)] sm:p-8 lg:p-10">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-accent">Policy Evolution Timelines</span>
+      <h2 class="mt-1 font-serif text-2xl font-bold text-emerald-deep sm:text-3xl">
+        政策演進「法規時間軸」
+      </h2>
+      <p class="mt-1.5 text-xs leading-relaxed text-gray-600 sm:text-sm">
+        依各議題真實演進年份跨度呈現關鍵節點，透過四階段色點時間尺一眼掌握法規從預告、研商、修正到施行的完整歷程；點擊上方色點即可快速聚焦對應事件。
+      </p>
+    </div>
+
+    <!-- 真實年份跨度議題切換按鈕 -->
     <div class="mt-5 flex flex-wrap gap-2" id="timeline-tabs">
       {timelines.map((tl, idx) => (
         <button
           type="button"
           data-tl-slug={tl.slug}
           class:list={[
-            'tl-tab-btn rounded-xl border px-3.5 py-2 text-xs font-semibold transition',
+            'tl-tab-btn rounded-full border px-4 py-2 text-xs font-semibold transition',
             idx === 0
-              ? 'border-emerald-deep bg-emerald-deep text-white'
+              ? 'border-emerald-deep bg-emerald-deep text-white shadow-xs'
               : 'border-gray-200 bg-ivory text-gray-700 hover:border-emerald-deep/40 hover:text-emerald-deep',
           ]}
         >
-          {tl.title}（{tl.nodes.length}）
+          {tl.title}（{tl.year_start}–{tl.year_end}）
         </button>
       ))}
     </div>
 
+    <!-- 每個時間軸面板 -->
     <div class="mt-6">
       {timelines.map((tl, idx) => (
         <div
           data-tl-panel={tl.slug}
           class:list={['tl-panel', idx === 0 ? '' : 'hidden']}
         >
-          <div class="mb-4 rounded-xl bg-ivory p-4 text-xs text-gray-600">
-            <strong class="text-emerald-deep">{tl.title}</strong>：{tl.description}
-            <span class="ml-2 text-gray-400">（全庫累計命中 {tl.total_matched} 篇，精選 {tl.nodes.length} 個關鍵演進節點）</span>
+          <div class="rounded-2xl bg-ivory/90 p-4 sm:p-5">
+            <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+              <p class="text-xs leading-relaxed text-gray-700 max-w-2xl">
+                <strong class="text-emerald-deep">{tl.title}</strong>：{tl.description}
+                <span class="ml-1 text-gray-500">（涵蓋 {tl.year_start}–{tl.year_end}，全庫累計 {tl.total_matched} 篇相關新聞）</span>
+              </p>
+
+              <!-- 四階段分佈膠囊統計 -->
+              <div class="flex flex-wrap gap-1.5 shrink-0">
+                {(['草案預告', '研商溝通', '修正發布', '施行與查核'] as const).map((st) => {
+                  const count = tl.stage_counts?.[st] ?? 0;
+                  const meta = stageMeta[st];
+                  return (
+                    <span class={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-[11px] font-semibold ${meta.badge}`}>
+                      <span>{meta.emoji}</span>
+                      <span>{st} {count}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+
+            <!-- 圖像化水平時間尺（ECharts 散點時間尺） -->
+            <div
+              id={`tl-ruler-${tl.slug}`}
+              class="tl-ruler-chart mt-4 h-[155px] w-full rounded-xl bg-white/95 border border-emerald-950/[0.05]"
+            ></div>
           </div>
 
-          <ol class="relative border-l-2 border-emerald-deep/20 pl-6 space-y-5">
-            {tl.nodes.map((node) => (
-              <li class="relative">
-                <span class="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full border-2 border-white bg-amber-accent ring-2 ring-emerald-deep/25"></span>
-                <div class="flex flex-wrap items-center gap-2 text-xs">
-                  <span class="font-mono font-bold text-emerald-deep">{node.date}</span>
-                  <span class="rounded-full bg-emerald-soft px-2.5 py-0.5 text-[11px] font-semibold text-emerald-deep">
-                    {node.stage}
-                  </span>
-                  <span class="text-gray-500">{node.unit}</span>
-                </div>
-                <div class="mt-1 flex flex-wrap items-center gap-2">
-                  <button
-                    type="button"
-                    data-news-id={node.news_id}
-                    data-news-date={node.date}
-                    class="tl-open-drawer text-left font-serif text-base font-bold text-gray-900 hover:text-emerald-deep hover:underline"
-                  >
-                    {node.title}
-                  </button>
-                  {node.source_url && (
-                    <a
-                      href={node.source_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="rounded border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-emerald-deep hover:bg-emerald-soft"
+          <!-- 下方圖文時間軸卡片 -->
+          <ol class="mt-6 relative border-l-2 border-emerald-deep/20 pl-6 space-y-4">
+            {tl.nodes.map((node, nIdx) => {
+              const meta = stageMeta[node.stage] ?? stageMeta['修正發布'];
+              return (
+                <li
+                  id={`tl-node-${tl.slug}-${nIdx}`}
+                  class="tl-event-card relative rounded-2xl border border-gray-100 bg-ivory/50 p-4 transition-all duration-300"
+                >
+                  <span class={`absolute -left-[31px] top-5 h-3 w-3 rounded-full border-2 border-white ring-2 ring-emerald-deep/20 ${meta.dot}`}></span>
+                  <div class="flex flex-wrap items-center gap-2 text-xs">
+                    <span class="font-mono font-bold text-emerald-deep">{node.date}</span>
+                    <span class={`rounded-full border px-2.5 py-0.5 text-[11px] font-semibold ${meta.badge}`}>
+                      {meta.emoji} {node.stage}
+                    </span>
+                    <span class="text-gray-500">{node.unit}</span>
+                  </div>
+                  <div class="mt-1.5 flex flex-wrap items-center gap-2">
+                    <button
+                      type="button"
+                      data-news-id={node.news_id}
+                      data-news-date={node.date}
+                      class="tl-open-drawer text-left font-serif text-base font-bold text-gray-900 hover:text-emerald-deep hover:underline"
                     >
-                      官網原文 ↗
-                    </a>
+                      {node.title}
+                    </button>
+                    {node.source_url && (
+                      <a
+                        href={node.source_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="rounded-full border border-emerald-deep/20 bg-white px-2.5 py-0.5 text-[11px] font-semibold text-emerald-deep hover:bg-emerald-soft"
+                      >
+                        環境部原文 ↗
+                      </a>
+                    )}
+                  </div>
+                  {node.summary && (
+                    <p class="mt-1.5 text-xs leading-relaxed text-gray-600">{node.summary}</p>
                   )}
-                </div>
-                {node.summary && (
-                  <p class="mt-1 text-xs leading-relaxed text-gray-600">{node.summary}</p>
-                )}
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ol>
         </div>
       ))}
     </div>
   </section>
 
-  <!-- ② 研究級統計資料開放下載區 -->
-  <section id="downloads" class="mb-10 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-    <span class="text-xs font-bold uppercase tracking-wider text-amber-accent">Pillar 02 · Open Research Datasets</span>
-    <h2 class="mt-0.5 font-serif text-2xl font-bold text-emerald-deep">研究級統計資料開放下載</h2>
-    <p class="mt-1 text-xs text-gray-600">
-      資料涵蓋期間：<strong>{methodology.coverage.date_start} ～ {methodology.coverage.date_end}</strong>（共 {methodology.coverage.total_news.toLocaleString()} 篇）｜
-      最後更新：{formatTaipeiTimestamp(methodology.updated_at)}｜
-      版本指紋（SHA-256）：<code class="rounded bg-ivory px-1.5 py-0.5 font-mono text-[11px] text-emerald-deep">{methodology.dataset_version}</code>
-    </p>
-
-    <div class="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
-      <a
-        href="/data/downloads/moenv_topic_yearly_matrix.csv"
-        download="moenv_topic_yearly_matrix.csv"
-        class="group flex flex-col justify-between rounded-2xl border border-gray-200 bg-ivory/70 p-5 transition hover:border-emerald-deep/40 hover:bg-white hover:shadow-sm"
-      >
+  <!-- 三、深度專題故事卡（單張寬幅雜誌版面，移除重複雙圖與工程代號） -->
+  {featureDataset && (
+    <section id="feature-story" class="mb-14 rounded-3xl border border-emerald-950/[0.07] bg-white p-6 shadow-[0_8px_30px_rgb(15,76,58,0.05)] sm:p-8 lg:p-10">
+      <div class="flex flex-wrap items-center justify-between gap-2">
         <div>
-          <span class="rounded bg-emerald-soft px-2 py-0.5 font-mono text-[11px] font-semibold text-emerald-deep">CSV (UTF-8 BOM)</span>
-          <h3 class="mt-2 font-serif text-base font-bold text-gray-900 group-hover:text-emerald-deep">
-            歷年 20 大政策議題聲量矩陣
-          </h3>
-          <p class="mt-1 text-xs leading-relaxed text-gray-600">
-            2001～2026 各年度總新聞數與 20 大議題逐年筆數，Excel 開啟零亂碼。
-          </p>
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-accent">Featured Deep Dive</span>
+          <h2 class="mt-1 font-serif text-2xl font-bold text-emerald-deep sm:text-3xl">
+            專題觀察：台灣「{featureDataset.topic?.name_zh || '淨零轉型'}」政策 20 年升溫曲線
+          </h2>
         </div>
-        <div class="mt-4 text-xs font-semibold text-emerald-deep">下載 moenv_topic_yearly_matrix.csv ↓</div>
-      </a>
+        <span class="rounded-full bg-emerald-soft px-3 py-1 text-xs font-semibold text-emerald-deep">
+          累計追蹤 {featureTotal.toLocaleString()} 篇官方新聞
+        </span>
+      </div>
 
-      <a
-        href="/data/downloads/moenv_unit_yearly_stats.csv"
-        download="moenv_unit_yearly_stats.csv"
-        class="group flex flex-col justify-between rounded-2xl border border-gray-200 bg-ivory/70 p-5 transition hover:border-emerald-deep/40 hover:bg-white hover:shadow-sm"
-      >
-        <div>
-          <span class="rounded bg-emerald-soft px-2 py-0.5 font-mono text-[11px] font-semibold text-emerald-deep">CSV (UTF-8 BOM)</span>
-          <h3 class="mt-2 font-serif text-base font-bold text-gray-900 group-hover:text-emerald-deep">
-            環境部各司署歷年發布量統計
-          </h3>
-          <p class="mt-1 text-xs leading-relaxed text-gray-600">
-            前 40 大發布司署／單位自 2001 年起逐年發布量與歷年累計統計表。
-          </p>
+      <div class="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
+        <div class="lg:col-span-8">
+          <div id="feature-netzero-chart" class="h-[340px] w-full rounded-2xl bg-ivory/60 p-2"></div>
         </div>
-        <div class="mt-4 text-xs font-semibold text-emerald-deep">下載 moenv_unit_yearly_stats.csv ↓</div>
-      </a>
 
-      <a
-        href="/data/downloads/moenv_methodology_metadata.json"
-        download="moenv_methodology_metadata.json"
-        class="group flex flex-col justify-between rounded-2xl border border-gray-200 bg-ivory/70 p-5 transition hover:border-emerald-deep/40 hover:bg-white hover:shadow-sm"
-      >
-        <div>
-          <span class="rounded bg-amber-soft px-2 py-0.5 font-mono text-[11px] font-semibold text-amber-accent">JSON Metadata</span>
-          <h3 class="mt-2 font-serif text-base font-bold text-gray-900 group-hover:text-emerald-deep">
-            研究口徑、同義詞表與 SHA-256 指紋
-          </h3>
-          <p class="mt-1 text-xs leading-relaxed text-gray-600">
-            完整紀錄 20 大議題同義詞規則、去重演算法與路線 3 關聯引擎參數，支援論文可重現性。
-          </p>
-        </div>
-        <div class="mt-4 text-xs font-semibold text-emerald-deep">下載 moenv_methodology_metadata.json ↓</div>
-      </a>
-    </div>
-  </section>
+        <div class="lg:col-span-4 space-y-4">
+          <div class="text-xs font-bold uppercase tracking-wider text-emerald-deep">三點關鍵解讀</div>
 
-  <!-- ③ 一鍵複製標準學術引用格式 -->
-  <div id="citation" class="mb-10">
-    <CitationBox title="台灣環境部歷年政策新聞資料庫與 20 大議題長期趨勢統計（2001–2026）" year="2026" />
-  </div>
-
-  <!-- ④ 分類口徑與路線 3 關聯演算法公開（Methodology） -->
-  <section id="methodology" class="mb-10 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-    <span class="text-xs font-bold uppercase tracking-wider text-amber-accent">Pillar 04 · Transparent Methodology</span>
-    <h2 class="mt-0.5 font-serif text-2xl font-bold text-emerald-deep">分類口徑與路線 3 關聯演算法公開</h2>
-
-    <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 text-xs leading-relaxed text-gray-700">
-      <div class="rounded-xl bg-ivory p-4">
-        <div class="font-bold text-emerald-deep">去重與一文多標籤口徑</div>
-        <p class="mt-1.5">{methodology.deduplication}</p>
-        <p class="mt-2">{methodology.multi_label_rule}</p>
-      </div>
-      <div class="rounded-xl bg-ivory p-4">
-        <div class="font-bold text-emerald-deep">{methodology.relation_engine.name}</div>
-        <p class="mt-1.5"><strong>第一層：</strong>{methodology.relation_engine.layer_1}</p>
-        <p class="mt-1.5"><strong>第二層：</strong>{methodology.relation_engine.layer_2}</p>
-        <p class="mt-1.5 font-mono text-[11px] text-emerald-deep">{methodology.relation_engine.blend_formula}</p>
-      </div>
-    </div>
-
-    <details class="mt-5 rounded-xl border border-gray-200 bg-ivory/50 p-4">
-      <summary class="cursor-pointer text-xs font-bold text-emerald-deep">
-        展開檢視全部 20 大政策議題同義詞規則表（{methodology.topic_profiles.length} 項）▾
-      </summary>
-      <div class="mt-3 overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200 text-xs">
-          <thead>
-            <tr class="bg-white text-left font-semibold text-gray-600">
-              <th class="px-3 py-2">議題</th>
-              <th class="px-3 py-2">群組</th>
-              <th class="px-3 py-2">同義詞規則</th>
-              <th class="px-3 py-2 text-right">累計命中</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-100 bg-white">
-            {methodology.topic_profiles.map((p) => (
-              <tr>
-                <td class="px-3 py-2 font-semibold text-emerald-deep">{p.title}</td>
-                <td class="px-3 py-2 text-gray-500">{p.group}</td>
-                <td class="px-3 py-2 text-gray-700">{p.aliases.join('、')}</td>
-                <td class="px-3 py-2 text-right font-mono">{p.total_count.toLocaleString()}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </details>
-  </section>
-
-  <!-- 結構化 v2 資料集互動圖表 -->
-  {research.datasets.length > 0 && (
-    <section class="mb-10">
-      <h2 class="mb-4 font-serif text-2xl font-bold text-emerald-deep">
-        結構化政策研究統計圖表（v2 資料集）
-      </h2>
-      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {research.datasets.map((ds, idx) => (
-          <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <span class="rounded-full bg-emerald-soft px-2.5 py-0.5 text-xs font-semibold text-emerald-deep">
-                {ds.research_id}
-              </span>
-              <span class="text-xs text-gray-500">
-                涵蓋：{ds.scope?.date_from} ～ {ds.scope?.date_to}
-              </span>
-            </div>
-            <h3 class="mt-2 font-serif text-xl font-bold text-gray-900">
-              {ds.topic?.name_zh || ds.research_id}
-            </h3>
+          <div class="rounded-2xl bg-ivory p-4">
+            <div class="text-xs font-bold text-amber-accent">01 · 2008 初期萌芽與低碳宣導</div>
             <p class="mt-1 text-xs leading-relaxed text-gray-600">
-              {ds.topic?.description}
+              早期聲量集中在節能減碳與低碳社區推廣，反映政策尚處於社會溝通與意識培養階段。
             </p>
-            <div class="mt-3 flex flex-wrap gap-4 text-xs text-gray-600">
-              <span>總新聞數：<strong class="text-emerald-deep">{ds.statistics?.total_articles ?? ds.scope?.article_count ?? 0}</strong> 篇</span>
-              {ds.statistics?.peak_year && (
-                <span>高峰年份：<strong class="text-amber-accent">{ds.statistics.peak_year.year}</strong>（{ds.statistics.peak_year.count} 篇）</span>
-              )}
-            </div>
-            <div id={`research-chart-${idx}`} class="mt-4 h-[280px] w-full"></div>
           </div>
-        ))}
+
+          <div class="rounded-2xl bg-ivory p-4">
+            <div class="text-xs font-bold text-emerald-deep">02 · 2022 國家淨零路徑發布後翻倍爆發</div>
+            <p class="mt-1 text-xs leading-relaxed text-gray-600">
+              隨著 2050 淨零路徑公布與《氣候變遷因應法》三讀，部會公告量自 2022 年起明顯躍升，進入制度建構期。
+            </p>
+          </div>
+
+          <div class="rounded-2xl bg-ivory p-4">
+            <div class="text-xs font-bold text-emerald-deep">03 · {featurePeakYear} 年創下 {featurePeakCount} 篇歷史高峰</div>
+            <p class="mt-1 text-xs leading-relaxed text-gray-600">
+              碳費子法、自主減量、NDC 3.0 與跨部會行動方案全面上路，淨零已從宣示正式轉為產業合規主戰場。
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   )}
 
-  <!-- 深度政策研究報告列表 -->
+  <!-- 標準學術引用元件 -->
+  <div id="citation" class="mb-14">
+    <CitationBox title="台灣環境部歷年政策新聞資料庫與 20 大議題長期趨勢觀察（2001–2026）" year="2026" />
+  </div>
+
+  <!-- 深度政策研究報告列表（17 篇） -->
   <section id="reports">
-    <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      <h2 class="font-serif text-2xl font-bold text-emerald-deep">
-        深度研究報告（{renderedReports.length} 篇）
-      </h2>
+    <div class="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <h2 class="font-serif text-2xl font-bold text-emerald-deep">
+          專題研究報告（{renderedReports.length} 篇）
+        </h2>
+        <p class="mt-0.5 text-xs text-gray-500">涵蓋碳定價、淨零轉型、水質、空污、PFAS 與資源循環等深度整理</p>
+      </div>
       <input
         id="research-filter"
         type="search"
         placeholder="篩選研究主題或關鍵字..."
-        class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-emerald-deep focus:outline-none sm:w-64"
+        class="w-full rounded-full border border-gray-300 bg-white px-4 py-2 text-sm focus:border-emerald-deep focus:outline-none sm:w-64"
       />
     </div>
 
@@ -294,13 +411,13 @@ const renderedReports = research.reports.map((rep) => ({
         <details
           id={rep.slug}
           data-search={`${rep.topic} ${rep.issue_type} ${rep.aliases.join(' ')} ${rep.summary}`.toLowerCase()}
-          class="research-card group rounded-2xl border border-gray-200 bg-white shadow-sm open:border-emerald-deep/40"
+          class="research-card group rounded-2xl border border-emerald-950/[0.07] bg-white shadow-[0_6px_24px_rgb(15,76,58,0.04)] open:border-emerald-deep/35"
         >
           <summary class="cursor-pointer list-none p-5 sm:p-6">
             <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <div class="flex flex-wrap items-center gap-2">
                 <span class="rounded-full bg-emerald-soft px-2.5 py-0.5 text-xs font-semibold text-emerald-deep">
-                  {rep.issue_type || '政策研究'}
+                  {rep.issue_type || '政策專題'}
                 </span>
                 <h3 class="font-serif text-lg font-bold text-gray-900 group-hover:text-emerald-deep">
                   {rep.topic}
@@ -314,7 +431,7 @@ const renderedReports = research.reports.map((rep) => ({
             <div class="mt-3 flex items-center justify-between text-xs">
               <div class="flex flex-wrap gap-1.5">
                 {rep.aliases.slice(0, 6).map((a) => (
-                  <span class="rounded bg-ivory px-2 py-0.5 text-gray-600">{a}</span>
+                  <span class="rounded-full bg-ivory px-2.5 py-0.5 text-gray-600">{a}</span>
                 ))}
               </div>
               <span class="font-semibold text-emerald-deep shrink-0 ml-2">展開全文 ▾</span>
@@ -330,31 +447,196 @@ const renderedReports = research.reports.map((rep) => ({
   </section>
 
   <script
-    id="research-datasets-payload"
+    id="research-v22-payload"
     type="application/json"
-    set:html={JSON.stringify(research.datasets)}
+    set:html={JSON.stringify({
+      spark: {
+        years: sparkYears,
+        air: (airTopic?.counts || []).slice(sparkStartIdx),
+        netZero: (netZeroTopic?.counts || []).slice(sparkStartIdx),
+        circular: (circularTopic?.counts || []).slice(sparkStartIdx),
+      },
+      timelines: timelines.map((tl) => ({
+        slug: tl.slug,
+        nodes: tl.nodes.map((n, idx) => ({ idx, date: n.date, title: n.title, stage: n.stage })),
+      })),
+      featurePoints,
+    })}
   />
 
   <script>
     import * as echarts from 'echarts';
 
-    // Timeline tab switching
-    const tabBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.tl-tab-btn'));
-    const panels = Array.from(document.querySelectorAll<HTMLElement>('.tl-panel'));
-    tabBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const slug = btn.dataset.tlSlug;
-        tabBtns.forEach((b) => {
-          b.classList.remove('border-emerald-deep', 'bg-emerald-deep', 'text-white');
-          b.classList.add('border-gray-200', 'bg-ivory', 'text-gray-700');
-        });
-        btn.classList.add('border-emerald-deep', 'bg-emerald-deep', 'text-white');
-        btn.classList.remove('border-gray-200', 'bg-ivory', 'text-gray-700');
-        panels.forEach((p) => p.classList.toggle('hidden', p.dataset.tlPanel !== slug));
-      });
-    });
+    const payloadEl = document.getElementById('research-v22-payload');
+    const stageColorMap: Record<string, string> = {
+      草案預告: '#D97706',
+      研商溝通: '#2563EB',
+      修正發布: '#0F4C3A',
+      施行與查核: '#E11D48',
+    };
+    const stageYIndex: Record<string, number> = {
+      草案預告: 3,
+      研商溝通: 2,
+      修正發布: 1,
+      施行與查核: 0,
+    };
 
-    // Open NewsDetailDrawer from timeline nodes
+    const allCharts: echarts.ECharts[] = [];
+    const rulerCharts = new Map<string, echarts.ECharts>();
+
+    if (payloadEl) {
+      const data = JSON.parse(payloadEl.textContent || '{}');
+
+      // 1. Findings Card 1 Sparkline
+      const sparkEl = document.getElementById('findings-sparkline');
+      if (sparkEl && data.spark) {
+        const sparkChart = echarts.init(sparkEl);
+        sparkChart.setOption({
+          tooltip: { trigger: 'axis' },
+          legend: { top: 4, textStyle: { fontSize: 10 }, itemWidth: 10, itemHeight: 6 },
+          grid: { left: 28, right: 12, top: 30, bottom: 22 },
+          xAxis: { type: 'category', data: data.spark.years, axisLabel: { fontSize: 10, color: '#6B7280' } },
+          yAxis: { type: 'value', splitLine: { lineStyle: { color: '#E5E7EB', type: 'dashed' } }, axisLabel: { fontSize: 10, color: '#9CA3AF' } },
+          series: [
+            { name: '空氣品質', type: 'line', smooth: true, symbol: 'none', data: data.spark.air, lineStyle: { width: 2, color: '#2563EB' } },
+            { name: '資源循環', type: 'line', smooth: true, symbol: 'none', data: data.spark.circular, lineStyle: { width: 2, color: '#0D9488' } },
+            { name: '淨零轉型', type: 'line', smooth: true, symbol: 'none', data: data.spark.netZero, lineStyle: { width: 2.5, color: '#0F4C3A' } },
+          ],
+        });
+        allCharts.push(sparkChart);
+      }
+
+      // 2. Timeline Visual Ruler Charts (init on demand when tab becomes visible)
+      function initRuler(slug: string) {
+        if (rulerCharts.has(slug)) {
+          rulerCharts.get(slug)?.resize();
+          return;
+        }
+        const tl = (data.timelines || []).find((t: any) => t.slug === slug);
+        const el = document.getElementById(`tl-ruler-${slug}`);
+        if (!tl || !el) return;
+
+        const chart = echarts.init(el);
+        const pts = (tl.nodes || []).map((n: any) => ({
+          value: [n.date, stageYIndex[n.stage] ?? 1],
+          idx: n.idx,
+          date: n.date,
+          title: n.title,
+          stage: n.stage,
+          itemStyle: { color: stageColorMap[n.stage] || '#0F4C3A' },
+        }));
+
+        chart.setOption({
+          tooltip: {
+            trigger: 'item',
+            formatter: (p: any) => {
+              const d = p.data;
+              return `<strong>${d.date}｜${d.stage}</strong><br/>${d.title}<br/><span style="color:#0F4C3A;">點擊聚焦下方事件卡片 ↓</span>`;
+            },
+          },
+          grid: { left: 78, right: 24, top: 18, bottom: 26 },
+          xAxis: { type: 'time', axisLabel: { fontSize: 10, color: '#6B7280' }, splitLine: { show: true, lineStyle: { color: '#F3F4F6' } } },
+          yAxis: {
+            type: 'category',
+            data: ['施行與查核', '修正發布', '研商溝通', '草案預告'],
+            axisLine: { show: false },
+            axisTick: { show: false },
+            axisLabel: { fontSize: 10, color: '#4B5563' },
+            splitLine: { show: true, lineStyle: { color: '#F3F4F6', type: 'dashed' } },
+          },
+          series: [
+            {
+              type: 'scatter',
+              symbolSize: 13,
+              data: pts,
+              emphasis: { scale: 1.4 },
+            },
+          ],
+        });
+
+        chart.on('click', (p: any) => {
+          const card = document.getElementById(`tl-node-${slug}-${p.data.idx}`);
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            card.classList.add('ring-2', 'ring-amber-accent', 'bg-white');
+            window.setTimeout(() => {
+              card.classList.remove('ring-2', 'ring-amber-accent', 'bg-white');
+            }, 2200);
+          }
+        });
+
+        rulerCharts.set(slug, chart);
+        allCharts.push(chart);
+      }
+
+      if (data.timelines?.[0]?.slug) {
+        initRuler(data.timelines[0].slug);
+      }
+
+      // Timeline tab switcher
+      const tabBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.tl-tab-btn'));
+      const panels = Array.from(document.querySelectorAll<HTMLElement>('.tl-panel'));
+      tabBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const slug = btn.dataset.tlSlug || '';
+          tabBtns.forEach((b) => {
+            b.classList.remove('border-emerald-deep', 'bg-emerald-deep', 'text-white', 'shadow-xs');
+            b.classList.add('border-gray-200', 'bg-ivory', 'text-gray-700');
+          });
+          btn.classList.add('border-emerald-deep', 'bg-emerald-deep', 'text-white', 'shadow-xs');
+          btn.classList.remove('border-gray-200', 'bg-ivory', 'text-gray-700');
+          panels.forEach((p) => p.classList.toggle('hidden', p.dataset.tlPanel !== slug));
+          window.requestAnimationFrame(() => initRuler(slug));
+        });
+      });
+
+      // 3. Featured Net Zero 20-year Story Chart with markPoint / markLine annotations
+      const featEl = document.getElementById('feature-netzero-chart');
+      if (featEl && Array.isArray(data.featurePoints) && data.featurePoints.length) {
+        const featChart = echarts.init(featEl);
+        const periods = data.featurePoints.map((p: any) => p.period);
+        const values = data.featurePoints.map((p: any) => p.value);
+        featChart.setOption({
+          tooltip: { trigger: 'axis' },
+          grid: { left: 46, right: 24, top: 36, bottom: 28 },
+          xAxis: { type: 'category', data: periods, axisLabel: { color: '#4B5563', fontSize: 11 } },
+          yAxis: { type: 'value', splitLine: { lineStyle: { color: '#E5E7EB', type: 'dashed' } } },
+          series: [
+            {
+              name: '年度相關新聞',
+              type: 'line',
+              smooth: true,
+              data: values,
+              lineStyle: { width: 3, color: '#0F4C3A' },
+              itemStyle: { color: '#0F4C3A' },
+              areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  { offset: 0, color: 'rgba(15,76,58,0.22)' },
+                  { offset: 1, color: 'rgba(15,76,58,0.01)' },
+                ]),
+              },
+              markPoint: {
+                symbolSize: 44,
+                label: { fontSize: 10, color: '#fff' },
+                itemStyle: { color: '#B45309' },
+                data: [{ type: 'max', name: '歷史高峰' }],
+              },
+              markLine: {
+                symbol: 'none',
+                label: { formatter: '2022 淨零路徑發布', fontSize: 11, color: '#B45309' },
+                lineStyle: { color: '#B45309', type: 'dashed', width: 1.5 },
+                data: periods.includes('2022') ? [{ xAxis: '2022' }] : [],
+              },
+            },
+          ],
+        });
+        allCharts.push(featChart);
+      }
+
+      window.addEventListener('resize', () => allCharts.forEach((c) => c.resize()));
+    }
+
+    // Drawer triggers from timeline
     document.querySelectorAll<HTMLButtonElement>('.tl-open-drawer').forEach((btn) => {
       btn.addEventListener('click', () => {
         window.dispatchEvent(
@@ -365,40 +647,7 @@ const renderedReports = research.reports.map((rep) => ({
       });
     });
 
-    // v2 dataset charts
-    const payloadEl = document.getElementById('research-datasets-payload');
-    if (payloadEl) {
-      const datasets = JSON.parse(payloadEl.textContent || '[]');
-      const charts: echarts.ECharts[] = [];
-      datasets.forEach((ds: any, idx: number) => {
-        const el = document.getElementById(`research-chart-${idx}`);
-        const series = (ds.trend_series || [])[0];
-        if (!el || !series) return;
-        const points = series.points || [];
-        const chart = echarts.init(el);
-        chart.setOption({
-          tooltip: { trigger: 'axis' },
-          grid: { left: 42, right: 16, top: 16, bottom: 28 },
-          xAxis: { type: 'category', data: points.map((p: any) => p.period), axisLabel: { color: '#4B5563', fontSize: 11 } },
-          yAxis: { type: 'value', splitLine: { lineStyle: { color: '#F3F4F6' } } },
-          series: [
-            {
-              name: series.label || '年度新聞數',
-              type: 'line',
-              smooth: true,
-              data: points.map((p: any) => p.value),
-              lineStyle: { width: 2.5, color: idx % 2 === 0 ? '#0F4C3A' : '#B45309' },
-              itemStyle: { color: idx % 2 === 0 ? '#0F4C3A' : '#B45309' },
-              areaStyle: { opacity: 0.14 },
-            },
-          ],
-        });
-        charts.push(chart);
-      });
-      window.addEventListener('resize', () => charts.forEach((c) => c.resize()));
-    }
-
-    // Filter reports
+    // Report filter
     const filterInput = document.getElementById('research-filter') as HTMLInputElement | null;
     const cards = Array.from(document.querySelectorAll<HTMLElement>('.research-card'));
     filterInput?.addEventListener('input', () => {

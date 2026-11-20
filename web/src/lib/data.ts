@@ -172,6 +172,9 @@ export interface TimelineItem {
   topic_slug: string;
   description: string;
   total_matched: number;
+  year_start?: string;
+  year_end?: string;
+  stage_counts?: Record<string, number>;
   nodes: TimelineNode[];
 }
 
