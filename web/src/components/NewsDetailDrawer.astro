@@ -1,0 +1,377 @@
+---
+/**
+ * Global interactive News Detail Drawer with Micro Local News Graph (前世今生小星系圖)
+ * Trigger anywhere via:
+ *   window.dispatchEvent(new CustomEvent('open-news-drawer', { detail: { id, date } }))
+ */
+---
+
+<div
+  id="global-news-backdrop"
+  class="fixed inset-0 z-50 hidden bg-black/45 backdrop-blur-[2px] transition-opacity"
+></div>
+
+<aside
+  id="global-news-drawer"
+  class="fixed right-0 top-0 z-50 hidden h-full w-full max-w-2xl overflow-y-auto bg-white shadow-2xl"
+  aria-label="環境部新聞詳情與關聯星系"
+>
+  <div class="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-white/95 px-6 py-3.5 backdrop-blur">
+    <div class="flex items-center gap-2">
+      <button
+        id="global-news-back"
+        type="button"
+        class="hidden rounded-md border border-gray-200 px-2.5 py-1 text-xs font-semibold text-gray-600 hover:bg-ivory"
+      >
+        ← 上一篇
+      </button>
+      <span class="text-xs font-semibold tracking-wide text-emerald-deep">
+        環境部新聞檔案 · 前世今生脈絡
+      </span>
+    </div>
+    <button
+      id="global-news-close"
+      type="button"
+      class="rounded-md p-1.5 text-gray-500 transition hover:bg-gray-100 hover:text-gray-800"
+      aria-label="關閉抽屜"
+    >
+      ✕
+    </button>
+  </div>
+
+  <div id="global-news-body" class="p-6"></div>
+</aside>
+
+<script>
+  import * as echarts from 'echarts';
+
+  const backdrop = document.getElementById('global-news-backdrop') as HTMLDivElement | null;
+  const drawer = document.getElementById('global-news-drawer') as HTMLElement | null;
+  const bodyEl = document.getElementById('global-news-body') as HTMLDivElement | null;
+  const closeBtn = document.getElementById('global-news-close') as HTMLButtonElement | null;
+  const backBtn = document.getElementById('global-news-back') as HTMLButtonElement | null;
+
+  const newsYearCache = new Map<string, any[]>();
+  const relYearCache = new Map<string, Record<string, any[]>>();
+  const historyStack: { id: string; date: string }[] = [];
+  let currentEntry: { id: string; date: string } | null = null;
+  let localGraphChart: echarts.ECharts | null = null;
+
+  function esc(text: string): string {
+    return String(text || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function closeDrawer() {
+    drawer?.classList.add('hidden');
+    backdrop?.classList.add('hidden');
+    if (localGraphChart) {
+      localGraphChart.dispose();
+      localGraphChart = null;
+    }
+    historyStack.length = 0;
+    currentEntry = null;
+    backBtn?.classList.add('hidden');
+  }
+
+  closeBtn?.addEventListener('click', closeDrawer);
+  backdrop?.addEventListener('click', closeDrawer);
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer && !drawer.classList.contains('hidden')) {
+      closeDrawer();
+    }
+  });
+
+  backBtn?.addEventListener('click', () => {
+    const prev = historyStack.pop();
+    if (prev) {
+      openNewsDrawer(prev.id, prev.date, false);
+    }
+  });
+
+  async function loadYearNews(year: string): Promise<any[]> {
+    let rows = newsYearCache.get(year);
+    if (!rows) {
+      const res = await fetch(`/data/news/${year}.json`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      rows = await res.json();
+      newsYearCache.set(year, rows || []);
+    }
+    return rows || [];
+  }
+
+  async function loadYearRelations(year: string): Promise<Record<string, any[]>> {
+    let map = relYearCache.get(year);
+    if (!map) {
+      try {
+        const res = await fetch(`/data/relations/${year}.json`);
+        if (res.ok) {
+          map = await res.json();
+          relYearCache.set(year, map || {});
+          return map || {};
+        }
+      } catch {
+        // graceful fallback
+      }
+      relYearCache.set(year, {});
+      return {};
+    }
+    return map;
+  }
+
+  function renderLocalGraph(centerItem: any, relations: any[]) {
+    const graphEl = document.getElementById('local-news-graph');
+    if (!graphEl) return;
+    if (localGraphChart) {
+      localGraphChart.dispose();
+      localGraphChart = null;
+    }
+    if (!relations.length) {
+      graphEl.innerHTML =
+        '<div class="flex h-full items-center justify-center text-xs text-gray-400">此篇新聞目前無高於門檻的語意關聯邊。</div>';
+      return;
+    }
+
+    const earlier = relations.filter((r) => r.direction === 'earlier');
+    const later = relations.filter((r) => r.direction !== 'earlier');
+
+    const nodes: any[] = [
+      {
+        id: String(centerItem.news_id),
+        name: centerItem.title.length > 18 ? `${centerItem.title.slice(0, 18)}…` : centerItem.title,
+        fullTitle: centerItem.title,
+        date: centerItem.date,
+        x: 0,
+        y: 0,
+        symbolSize: 36,
+        itemStyle: { color: '#0F4C3A', borderColor: '#B45309', borderWidth: 3 },
+        label: { show: true, position: 'bottom', fontSize: 11, fontWeight: 'bold', color: '#0F4C3A' },
+        isCenter: true,
+      },
+    ];
+    const links: any[] = [];
+
+    earlier.forEach((rel, idx) => {
+      const spread = earlier.length === 1 ? 0 : (idx - (earlier.length - 1) / 2) * 80;
+      const pct = Math.round((rel.score || 0) * 100);
+      nodes.push({
+        id: String(rel.news_id),
+        name: `${rel.date.slice(0, 7)}\n${rel.title.slice(0, 12)}…`,
+        fullTitle: rel.title,
+        date: rel.date,
+        scorePct: pct,
+        directionLabel: '前期脈絡（前因）',
+        x: -210,
+        y: spread,
+        symbolSize: 22 + Math.round((rel.score || 0.2) * 14),
+        itemStyle: { color: '#0D9488' },
+        label: { show: true, position: 'left', fontSize: 10, color: '#374151', distance: 6 },
+      });
+      links.push({
+        source: String(rel.news_id),
+        target: String(centerItem.news_id),
+        value: `${pct}%`,
+        lineStyle: { width: Math.max(1.5, (rel.score || 0.2) * 5), color: '#0D9488', curveness: 0.12 },
+      });
+    });
+
+    later.forEach((rel, idx) => {
+      const spread = later.length === 1 ? 0 : (idx - (later.length - 1) / 2) * 80;
+      const pct = Math.round((rel.score || 0) * 100);
+      nodes.push({
+        id: String(rel.news_id),
+        name: `${rel.date.slice(0, 7)}\n${rel.title.slice(0, 12)}…`,
+        fullTitle: rel.title,
+        date: rel.date,
+        scorePct: pct,
+        directionLabel: '後續演進（延伸）',
+        x: 210,
+        y: spread,
+        symbolSize: 22 + Math.round((rel.score || 0.2) * 14),
+        itemStyle: { color: '#B45309' },
+        label: { show: true, position: 'right', fontSize: 10, color: '#374151', distance: 6 },
+      });
+      links.push({
+        source: String(centerItem.news_id),
+        target: String(rel.news_id),
+        value: `${pct}%`,
+        lineStyle: { width: Math.max(1.5, (rel.score || 0.2) * 5), color: '#B45309', curveness: 0.12 },
+      });
+    });
+
+    localGraphChart = echarts.init(graphEl);
+    localGraphChart.setOption({
+      tooltip: {
+        trigger: 'item',
+        formatter: (params: any) => {
+          if (params.dataType === 'edge') {
+            return `語意關聯度：<strong>${params.data.value}</strong>`;
+          }
+          const d = params.data;
+          if (d.isCenter) {
+            return `<strong>本篇新聞</strong><br/>${esc(d.date)}<br/>${esc(d.fullTitle)}`;
+          }
+          return `<strong>${esc(d.directionLabel)}</strong>（${d.scorePct}% 相關）<br/>${esc(d.date)}<br/>${esc(d.fullTitle)}<br/><span style="color:#0F4C3A;">點擊節點立即跳讀 ↗</span>`;
+        },
+      },
+      series: [
+        {
+          type: 'graph',
+          layout: 'none',
+          roam: true,
+          edgeSymbol: ['none', 'arrow'],
+          edgeSymbolSize: [4, 8],
+          data: nodes,
+          links,
+          emphasis: { focus: 'adjacency' },
+        },
+      ],
+    });
+
+    localGraphChart.on('click', (params: any) => {
+      if (params.dataType === 'node' && !params.data.isCenter) {
+        openNewsDrawer(params.data.id, params.data.date, true);
+      }
+    });
+  }
+
+  async function openNewsDrawer(id: string, date: string, pushHistory = true) {
+    if (!drawer || !backdrop || !bodyEl) return;
+    if (pushHistory && currentEntry && currentEntry.id !== id) {
+      historyStack.push(currentEntry);
+    }
+    currentEntry = { id: String(id), date: String(date || '') };
+    if (backBtn) {
+      backBtn.classList.toggle('hidden', historyStack.length === 0);
+    }
+
+    drawer.classList.remove('hidden');
+    backdrop.classList.remove('hidden');
+    drawer.scrollTop = 0;
+    bodyEl.innerHTML = '<div class="py-12 text-center text-sm text-gray-500">正在載入新聞與前世今生關聯脈絡...</div>';
+
+    const year = (date || '').slice(0, 4) || 'unknown';
+    try {
+      const [rows, relMap] = await Promise.all([loadYearNews(year), loadYearRelations(year)]);
+      const item = rows.find((r: any) => String(r.news_id) === String(id));
+      if (!item) {
+        bodyEl.innerHTML = '<p class="text-sm text-red-600">找不到該篇新聞資料。</p>';
+        return;
+      }
+
+      const relations = relMap[String(item.news_id)] || [];
+      const kwHtml = (item.policy_keywords || [])
+        .map(
+          (kw: string) =>
+            `<span class="rounded-full bg-emerald-soft px-2.5 py-0.5 text-xs font-medium text-emerald-deep">${esc(kw)}</span>`
+        )
+        .join('');
+      const aiTagHtml = (item.ai_tags || [])
+        .map(
+          (tag: string) =>
+            `<span class="rounded-full bg-amber-soft px-2.5 py-0.5 text-xs font-medium text-amber-accent">#${esc(tag)}</span>`
+        )
+        .join('');
+
+      const officialLinkHtml = item.source_url
+        ? `<a href="${esc(item.source_url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-lg bg-emerald-deep px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-emerald-dark">前往環境部單篇原文 ↗</a>`
+        : `<span class="inline-flex items-center rounded-lg border border-amber-accent/30 bg-amber-soft/60 px-3 py-2 text-xs font-medium text-amber-accent">站內閱讀開放資料全文（來源：環境部 MNEWS_P_01，官網單篇連結同步中）</span>`;
+
+      const attachHtml = item.attach_url
+        ? `<a href="${esc(item.attach_url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-lg border border-gray-300 px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-gray-50">下載官方附件</a>`
+        : '';
+
+      const relCardsHtml = relations.length
+        ? relations
+            .map((rel: any) => {
+              const pct = Math.round((rel.score || 0) * 100);
+              const isEarlier = rel.direction === 'earlier';
+              const badgeCls = isEarlier
+                ? 'bg-teal-50 text-teal-800 border-teal-200'
+                : 'bg-amber-soft/70 text-amber-accent border-amber-200';
+              const dirLabel = isEarlier ? '← 前期脈絡' : '後續演進 →';
+              return `
+                <button
+                  type="button"
+                  data-jump-id="${esc(String(rel.news_id))}"
+                  data-jump-date="${esc(rel.date)}"
+                  class="rel-jump-btn block w-full rounded-xl border border-gray-200 bg-ivory/70 p-3.5 text-left transition hover:border-emerald-deep/40 hover:bg-white"
+                >
+                  <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+                    <div class="flex items-center gap-2">
+                      <span class="rounded border px-2 py-0.5 text-[11px] font-semibold ${badgeCls}">${dirLabel}</span>
+                      <span class="font-mono text-gray-500">${esc(rel.date)}</span>
+                    </div>
+                    <span class="font-mono font-semibold text-emerald-deep">${pct}% 高度相關</span>
+                  </div>
+                  <div class="mt-1.5 text-sm font-semibold text-gray-900 leading-snug">${esc(rel.title)}</div>
+                  <div class="mt-1 text-[11px] text-gray-500">${esc(rel.unit)} · 點擊立即跳讀此篇脈絡</div>
+                </button>
+              `;
+            })
+            .join('')
+        : '<p class="text-xs text-gray-500">暫無高於門檻的歷史關聯新聞。</p>';
+
+      bodyEl.innerHTML = `
+        <div class="flex flex-wrap items-center gap-2 text-xs text-gray-500">
+          <span class="font-mono font-semibold text-emerald-deep">${esc(item.date)}</span>
+          <span>（民國 ${esc(item.roc_date || '')}）</span>
+          <span>·</span>
+          <span>${esc(item.unit)}</span>
+          <span>·</span>
+          <span class="font-mono text-gray-400">ID: ${esc(String(item.news_id))}</span>
+        </div>
+
+        <h2 class="mt-2 font-serif text-xl font-bold leading-snug text-gray-900">${esc(item.title)}</h2>
+        <div class="mt-3 flex flex-wrap gap-1.5">${kwHtml}${aiTagHtml}</div>
+
+        <div class="mt-5 rounded-xl border border-gray-100 bg-ivory p-4 text-sm leading-relaxed text-gray-700 whitespace-pre-line">
+          ${esc(item.summary || '（此篇歷史新聞未收錄內文摘要，請點擊下方按鈕前往環境部原文頁面閱讀。）')}
+        </div>
+
+        <div class="mt-4 flex flex-wrap items-center gap-2">
+          ${officialLinkHtml}
+          ${attachHtml}
+        </div>
+
+        <div class="mt-7 border-t border-gray-200 pt-5">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-serif text-base font-bold text-emerald-deep">局部關聯小星系圖（前世今生）</h3>
+              <p class="text-[11px] text-gray-500">左側為前期脈絡（前因）、右側為後續演進（延伸），點擊任一節點可無縫跳讀</p>
+            </div>
+            <span class="rounded-full bg-emerald-soft px-2.5 py-0.5 text-[11px] font-semibold text-emerald-deep">
+              Top ${relations.length}
+            </span>
+          </div>
+          <div id="local-news-graph" class="mt-3 h-[240px] w-full rounded-xl border border-gray-100 bg-ivory/60"></div>
+        </div>
+
+        <div class="mt-5">
+          <h4 class="mb-2.5 text-xs font-bold uppercase tracking-wider text-gray-500">Top ${relations.length} 關聯新聞卡片</h4>
+          <div class="space-y-2.5">${relCardsHtml}</div>
+        </div>
+      `;
+
+      renderLocalGraph(item, relations);
+
+      bodyEl.querySelectorAll<HTMLButtonElement>('.rel-jump-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          openNewsDrawer(btn.dataset.jumpId || '', btn.dataset.jumpDate || '', true);
+        });
+      });
+    } catch {
+      bodyEl.innerHTML = '<p class="text-sm text-red-600">載入新聞資料失敗，請稍後再試。</p>';
+    }
+  }
+
+  window.addEventListener('open-news-drawer', (ev: Event) => {
+    const custom = ev as CustomEvent<{ id: string; date: string }>;
+    if (custom.detail?.id) {
+      openNewsDrawer(custom.detail.id, custom.detail.date || '', false);
+    }
+  });
+</script>

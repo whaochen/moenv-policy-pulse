@@ -3,298 +3,541 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import {
   loadManifest,
   loadTrends,
+  loadPolicyGraph,
+  loadTimelines,
   getPublishedHaoTalks,
+  findPublicImage,
   formatIsoDate,
   formatTaipeiTimestamp,
 } from '../lib/data';
 
 const manifest = loadManifest();
 const trends = loadTrends();
-const publishedTalks = (await getPublishedHaoTalks()).slice(0, 3);
+const policyGraph = loadPolicyGraph();
+const timelines = loadTimelines();
+const allTalks = await getPublishedHaoTalks();
+const leadTalk = allTalks[0] ?? null;
+const secondaryTalks = allTalks.slice(1, 3);
+const portraitSrc = findPublicImage('hao-portrait');
 
-const delta = manifest.last_30_days_delta;
-const deltaPct = manifest.last_30_days_pct;
-const deltaLabel =
-  delta > 0
-    ? `+${delta} 篇（+${deltaPct}%）`
-    : delta < 0
-      ? `${delta} 篇（${deltaPct}%）`
-      : '持平（0%）';
+const startYear = manifest.date_start ? Number(manifest.date_start.slice(0, 4)) : 2001;
+const endYear = manifest.date_end ? Number(manifest.date_end.slice(0, 4)) : 2026;
+const spanYears = Math.max(1, endYear - startYear + 1);
 
-const top10Momentum = [...trends.last_30_days.topics]
+const top3Heating = [...trends.last_30_days.topics]
   .sort((a, b) => b.delta - a.delta || b.current - a.current)
-  .slice(0, 10);
+  .slice(0, 3);
 
-const startYear = manifest.date_start ? manifest.date_start.slice(0, 4) : '2001';
-const endYear = manifest.date_end ? manifest.date_end.slice(0, 4) : '2026';
+// Match a timeline for Act 2 (prefer leadTalk.timeline_slug, else water-pollution-fee or first)
+const featuredTimeline =
+  (leadTalk?.data.timeline_slug && timelines.find((t) => t.slug === leadTalk.data.timeline_slug)) ||
+  timelines.find((t) => t.slug === 'water-pollution-fee') ||
+  timelines[0] ||
+  null;
+
+const top5TopicsYearly = [...trends.topic_yearly_matrix.topics]
+  .map((t) => ({ ...t, total: t.counts.reduce((a, b) => a + b, 0) }))
+  .sort((a, b) => b.total - a.total)
+  .slice(0, 5);
 ---
 
-<BaseLayout title="首頁儀表板">
-  <!-- Hero & KPI Strip -->
-  <section class="mb-8 rounded-2xl border border-emerald-900/10 bg-white p-6 shadow-sm sm:p-8">
-    <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-      <div>
-        <span class="inline-flex items-center rounded-full bg-emerald-soft px-3 py-1 text-xs font-semibold text-emerald-deep">
-          環境政策觀測站 · 每日自動同步
-        </span>
-        <h1 class="mt-3 font-serif text-3xl font-bold tracking-tight text-emerald-deep sm:text-4xl">
-          環策皓脈 Policy Pulse
+<BaseLayout title="首頁">
+  <!-- 第一幕｜品牌開場 × 皓哥把脈宣言 -->
+  <section class="relative overflow-hidden rounded-3xl border border-emerald-900/15 bg-gradient-to-br from-white via-white to-emerald-soft/60 p-6 shadow-sm sm:p-10">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
+      <div class="lg:col-span-7">
+        <div class="inline-flex items-center gap-2 rounded-full border border-emerald-deep/15 bg-emerald-soft px-3.5 py-1 text-xs font-semibold text-emerald-deep">
+          <span class="h-2 w-2 rounded-full bg-amber-accent"></span>
+          台灣環境政策觀測與研究入口 · 每日自動同步
+        </div>
+
+        <h1 class="mt-4 font-serif text-3xl font-bold leading-tight tracking-tight text-emerald-deep sm:text-4xl lg:text-[2.6rem]">
+          環境部 25 年累積超過一萬篇新聞，<br class="hidden sm:inline" />然後呢？
         </h1>
-        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-gray-600 sm:text-base">
-          追蹤中華民國環境部 25 年政策脈絡，整合全量歷史新聞檢索、20 大政策議題聲量趨勢與深度專欄評析。
+
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg">
+          <strong class="font-semibold text-emerald-deep">環策皓脈</strong>為你從公告海裡找出政策脈絡——
+          <span class="font-semibold text-amber-accent">找脈絡、把脈、把關</span>。結合雙層混合語意關聯網絡與實務評論，讓政策演進一目了然。
         </p>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a
+            href={leadTalk ? `/hao-talks/${leadTalk.id}` : '/hao-talks'}
+            class="inline-flex items-center rounded-xl bg-emerald-deep px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-dark"
+          >
+            閱讀最新《皓哥說》 →
+          </a>
+          <a
+            href="/policy-map"
+            class="inline-flex items-center rounded-xl border border-emerald-deep/25 bg-white px-5 py-3 text-sm font-semibold text-emerald-deep shadow-xs transition hover:bg-emerald-soft/70"
+          >
+            探索政策神經網絡
+          </a>
+        </div>
       </div>
-      <div class="flex flex-wrap gap-2">
-        <a
-          href="/news"
-          class="inline-flex items-center rounded-lg bg-emerald-deep px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-dark"
-        >
-          檢索全量新聞
-        </a>
-        <a
-          href="/trends"
-          class="inline-flex items-center rounded-lg border border-emerald-deep/20 bg-emerald-soft/60 px-4 py-2.5 text-sm font-semibold text-emerald-deep transition hover:bg-emerald-soft"
-        >
-          進入趨勢分析室
-        </a>
+
+      <!-- 右側：個人形象卡 + 本月政策體溫計 -->
+      <div class="lg:col-span-5 space-y-4">
+        <div class="flex items-center gap-4 rounded-2xl border border-emerald-900/10 bg-white/95 p-4 shadow-xs">
+          {portraitSrc ? (
+            <img
+              src={portraitSrc}
+              alt="環策皓脈主筆形象照"
+              class="h-16 w-16 shrink-0 rounded-2xl object-cover ring-2 ring-emerald-deep/15"
+            />
+          ) : (
+            <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-deep to-emerald-dark font-serif text-2xl font-bold text-amber-200 shadow-inner">
+              皓
+            </div>
+          )}
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="font-serif text-base font-bold text-emerald-deep">環策皓脈 · 政策把脈室</span>
+              <span class="rounded bg-amber-soft px-1.5 py-0.5 text-[10px] font-semibold text-amber-accent">獨立智庫誌</span>
+            </div>
+            <p class="mt-1 text-xs leading-relaxed text-gray-600">
+              「公告看的是今天發了什麼，把脈看的是這項制度從哪裡來、將往哪裡去。」
+            </p>
+          </div>
+        </div>
+
+        <!-- 本月政策體溫計 -->
+        <div class="rounded-2xl border border-amber-accent/20 bg-white p-4 shadow-xs">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold tracking-wide text-emerald-deep">本月政策體溫計</span>
+              <span class="text-[11px] text-gray-400">近 30 天升溫 Top 3</span>
+            </div>
+            <svg class="h-5 w-16 text-amber-accent pulse-line" viewBox="0 0 80 20" fill="none">
+              <path
+                d="M2 10 H20 L26 3 L32 17 L38 6 L44 13 L50 10 H78"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <div class="mt-3 space-y-2">
+            {top3Heating.map((item, idx) => (
+              <a
+                href={`/topics/${item.slug}`}
+                class="flex items-center justify-between rounded-lg bg-ivory px-3 py-2 text-xs transition hover:bg-emerald-soft/70"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-deep text-[10px] font-bold text-white">
+                    {idx + 1}
+                  </span>
+                  <span class="font-semibold text-gray-800">{item.title}</span>
+                </div>
+                <div class="flex items-center gap-2 font-mono">
+                  <span class="text-gray-600">{item.current} 篇</span>
+                  <span class="rounded-full bg-amber-soft px-2 py-0.5 text-[11px] font-semibold text-amber-accent">
+                    {item.delta >= 0 ? `+${item.delta}` : item.delta}
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      <div class="rounded-xl border border-gray-100 bg-ivory p-4">
-        <div class="text-xs font-medium text-gray-500">累計收錄新聞數</div>
-        <div class="mt-1 font-serif text-3xl font-bold text-emerald-deep">
-          {manifest.total_news.toLocaleString()}
+    <!-- 底部 KPI Count-up 數字條 -->
+    <div class="mt-8 grid grid-cols-2 gap-3 border-t border-emerald-900/10 pt-6 lg:grid-cols-4">
+      <div class="rounded-xl bg-ivory/90 p-4">
+        <div class="text-xs font-medium text-gray-500">累計收錄新聞</div>
+        <div class="mt-1 font-serif text-2xl font-bold text-emerald-deep sm:text-3xl">
+          <span class="count-up" data-target={manifest.total_news}>{manifest.total_news.toLocaleString()}</span>
+          <span class="ml-0.5 text-sm font-normal text-gray-500">篇</span>
         </div>
-        <div class="mt-1 text-xs text-gray-500">涵蓋 {manifest.topic_count} 大政策議題</div>
+        <div class="mt-0.5 text-[11px] text-gray-500">{manifest.date_start} ～ {manifest.date_end}</div>
       </div>
 
-      <div class="rounded-xl border border-gray-100 bg-ivory p-4">
-        <div class="text-xs font-medium text-gray-500">收錄時間跨度</div>
-        <div class="mt-1 font-serif text-3xl font-bold text-emerald-deep">
-          {startYear}～{endYear}
+      <div class="rounded-xl bg-ivory/90 p-4">
+        <div class="text-xs font-medium text-gray-500">橫跨政策年數</div>
+        <div class="mt-1 font-serif text-2xl font-bold text-emerald-deep sm:text-3xl">
+          <span class="count-up" data-target={spanYears}>{spanYears}</span>
+          <span class="ml-0.5 text-sm font-normal text-gray-500">年</span>
         </div>
-        <div class="mt-1 text-xs text-gray-500">
-          {manifest.date_start} 至 {manifest.date_end}
-        </div>
+        <div class="mt-0.5 text-[11px] text-gray-500">{startYear}～{endYear} 完整歸檔</div>
       </div>
 
-      <div class="rounded-xl border border-gray-100 bg-ivory p-4">
-        <div class="text-xs font-medium text-gray-500">近 30 天新聞量</div>
-        <div class="mt-1 flex items-baseline gap-2">
-          <span class="font-serif text-3xl font-bold text-emerald-deep">
-            {manifest.last_30_days_count}
+      <div class="rounded-xl bg-ivory/90 p-4">
+        <div class="text-xs font-medium text-gray-500">已建立新聞關聯邊</div>
+        <div class="mt-1 font-serif text-2xl font-bold text-amber-accent sm:text-3xl">
+          <span class="count-up" data-target={manifest.total_relation_edges ?? 0}>
+            {(manifest.total_relation_edges ?? 0).toLocaleString()}
           </span>
-          <span
-            class:list={[
-              'rounded-full px-2 py-0.5 text-xs font-semibold',
-              delta >= 0 ? 'bg-amber-soft text-amber-accent' : 'bg-gray-200 text-gray-700',
-            ]}
-          >
-            {deltaLabel}
-          </span>
+          <span class="ml-0.5 text-sm font-normal text-gray-500">條</span>
         </div>
-        <div class="mt-1 text-xs text-gray-500">
-          較前 30 天（{manifest.prev_30_days_count} 篇）
-        </div>
+        <div class="mt-0.5 text-[11px] text-gray-500">路線 3 雙層混合語意網絡</div>
       </div>
 
-      <div class="rounded-xl border border-gray-100 bg-ivory p-4">
-        <div class="text-xs font-medium text-gray-500">最後自動同步時間</div>
-        <div class="mt-2 text-sm font-semibold text-gray-800">
+      <div class="rounded-xl bg-ivory/90 p-4">
+        <div class="text-xs font-medium text-gray-500">最近自動同步</div>
+        <div class="mt-2 text-xs font-semibold text-gray-800 sm:text-sm">
           {formatTaipeiTimestamp(manifest.updated_at)}
         </div>
-        <div class="mt-1.5 text-xs text-emerald-deep/80">Open Data MNEWS_P_01 管線</div>
+        <div class="mt-1 text-[11px] text-emerald-deep">GitHub Actions 每日 08:00</div>
       </div>
     </div>
   </section>
 
-  <!-- 《皓哥說》最新專欄區 -->
-  <section class="mb-10">
-    <div class="mb-4 flex items-center justify-between">
+  <!-- 第二幕｜主編焦點：《皓哥說》＋ 政策前世今生連動 -->
+  <section class="reveal-section mt-12">
+    <div class="mb-5 flex items-end justify-between">
       <div>
-        <h2 class="font-serif text-2xl font-bold text-emerald-deep">《皓哥說》最新專欄</h2>
-        <p class="text-xs text-gray-500">政策現場觀察、制度解讀與法規追蹤</p>
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-accent">Act II · Editor's Focus</span>
+        <h2 class="mt-1 font-serif text-2xl font-bold text-emerald-deep">主編焦點：《皓哥說》與政策前世今生</h2>
       </div>
       <a href="/hao-talks" class="text-sm font-semibold text-emerald-deep hover:underline">
-        查看全部專欄 →
+        全部 {allTalks.length} 篇專欄 →
       </a>
     </div>
 
-    {publishedTalks.length > 0 ? (
-      <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
-        {publishedTalks.map((post) => (
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
+      <!-- 左側 7 欄：雜誌頭條大卡 + 2 篇次焦點 -->
+      <div class="lg:col-span-7 space-y-5">
+        {leadTalk ? (
           <a
-            href={`/hao-talks/${post.id}`}
-            class="group flex flex-col justify-between rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-deep/40 hover:shadow-md"
+            href={`/hao-talks/${leadTalk.id}`}
+            class="group block rounded-2xl border border-emerald-900/15 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-deep/40 hover:shadow-md sm:p-7"
           >
-            <div>
-              <div class="flex items-center justify-between text-xs text-gray-500">
-                <span>{formatIsoDate(post.data.date)}</span>
-                <span class="rounded-full bg-amber-soft px-2 py-0.5 font-medium text-amber-accent">
-                  皓哥說
-                </span>
+            <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+              <div class="flex items-center gap-2">
+                <span class="rounded-full bg-amber-soft px-2.5 py-0.5 font-semibold text-amber-accent">最新把脈</span>
+                <span class="font-mono text-gray-500">{formatIsoDate(leadTalk.data.date)}</span>
               </div>
-              <h3 class="mt-2.5 font-serif text-lg font-bold text-gray-900 group-hover:text-emerald-deep">
-                {post.data.title}
-              </h3>
-              <p class="mt-2 line-clamp-3 text-sm leading-relaxed text-gray-600">
-                {post.data.summary}
-              </p>
+              <span class="text-emerald-deep font-semibold group-hover:underline">閱讀全文 →</span>
             </div>
-            {post.data.topics.length > 0 && (
-              <div class="mt-4 flex flex-wrap gap-1.5">
-                {post.data.topics.slice(0, 3).map((topic) => (
-                  <span class="rounded bg-emerald-soft px-2 py-0.5 text-xs font-medium text-emerald-deep">
-                    {topic}
-                  </span>
-                ))}
-              </div>
-            )}
+            <h3 class="mt-3 font-serif text-2xl font-bold leading-snug text-gray-900 group-hover:text-emerald-deep">
+              {leadTalk.data.title}
+            </h3>
+            <p class="mt-3 text-sm leading-relaxed text-gray-600">
+              {leadTalk.data.summary}
+            </p>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              {leadTalk.data.topics.slice(0, 4).map((t) => (
+                <span class="rounded-full bg-emerald-soft px-2.5 py-0.5 text-xs font-medium text-emerald-deep">
+                  {t}
+                </span>
+              ))}
+            </div>
           </a>
-        ))}
+        ) : (
+          <div class="rounded-2xl border border-dashed border-emerald-deep/25 bg-white p-8 text-center">
+            <h3 class="font-serif text-lg font-bold text-emerald-deep">專欄籌備中</h3>
+          </div>
+        )}
+
+        {secondaryTalks.length > 0 && (
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {secondaryTalks.map((post) => (
+              <a
+                href={`/hao-talks/${post.id}`}
+                class="group flex flex-col justify-between rounded-xl border border-gray-200 bg-white p-4 shadow-xs transition hover:border-emerald-deep/40 hover:shadow-sm"
+              >
+                <div>
+                  <div class="font-mono text-[11px] text-gray-500">{formatIsoDate(post.data.date)}</div>
+                  <h4 class="mt-1.5 font-serif text-base font-bold text-gray-900 group-hover:text-emerald-deep">
+                    {post.data.title}
+                  </h4>
+                  <p class="mt-1.5 line-clamp-2 text-xs leading-relaxed text-gray-600">{post.data.summary}</p>
+                </div>
+                <div class="mt-3 text-xs font-semibold text-emerald-deep">閱讀把脈 →</div>
+              </a>
+            ))}
+          </div>
+        )}
       </div>
-    ) : (
-      <div class="rounded-xl border border-dashed border-emerald-deep/25 bg-white/80 p-8 text-center">
-        <div class="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-amber-soft font-serif font-bold text-amber-accent">
-          皓
+
+      <!-- 右側 5 欄：政策演進時間軸精選 -->
+      <div class="lg:col-span-5 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-amber-accent">政策演進時間軸</span>
+            <h3 class="mt-0.5 font-serif text-lg font-bold text-emerald-deep">
+              {featuredTimeline ? featuredTimeline.title : '重大法規演進'}
+            </h3>
+          </div>
+          <a href="/research#timelines" class="shrink-0 text-xs font-semibold text-emerald-deep hover:underline">
+            看全部 {timelines.length} 條 →
+          </a>
         </div>
-        <h3 class="mt-3 font-serif text-lg font-bold text-emerald-deep">專欄籌備中</h3>
-        <p class="mt-1 text-sm text-gray-600">
-          最新政策深度評析正在撰寫校訂，正式發布後將自動呈現於此。
-        </p>
+
+        {featuredTimeline && (
+          <ol class="mt-4 relative border-l-2 border-emerald-deep/20 pl-5 space-y-4">
+            {featuredTimeline.nodes.slice(-5).reverse().map((node) => (
+              <li class="relative">
+                <span class="absolute -left-[25px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-amber-accent ring-2 ring-emerald-deep/20"></span>
+                <div class="flex items-center gap-2 text-[11px]">
+                  <span class="font-mono font-semibold text-emerald-deep">{node.date}</span>
+                  <span class="rounded bg-emerald-soft px-1.5 py-0.5 font-semibold text-emerald-deep">{node.stage}</span>
+                </div>
+                <button
+                  type="button"
+                  data-news-id={node.news_id}
+                  data-news-date={node.date}
+                  class="open-drawer-trigger mt-1 text-left text-xs font-semibold leading-snug text-gray-900 hover:text-emerald-deep hover:underline"
+                >
+                  {node.title}
+                </button>
+              </li>
+            ))}
+          </ol>
+        )}
       </div>
-    )}
+    </div>
   </section>
 
-  <!-- 近 30 天政策議題動能圖 & 最新新聞快訊 -->
-  <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
-    <section class="lg:col-span-5 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-      <div class="flex items-start justify-between gap-2">
-        <div>
-          <h2 class="font-serif text-xl font-bold text-emerald-deep">近 30 天政策議題動能</h2>
-          <p class="mt-1 text-xs text-gray-500">
-            升溫最快前 10 大議題（{trends.last_30_days.window_start} ～ {trends.last_30_days.window_end}）
-          </p>
+  <!-- 第三幕｜巨觀動態「政策脈絡神經網絡圖」 -->
+  <section class="reveal-section mt-12 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+    <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-accent">Act III · Macro Policy Neural Map</span>
+        <h2 class="mt-1 font-serif text-2xl font-bold text-emerald-deep">巨觀政策脈絡神經網絡圖</h2>
+        <p class="mt-1 text-xs text-gray-500">
+          五大板塊 × 20 大政策議題 × 核心法規群聚；懸停點亮關聯路徑、點擊節點直接進入專頁或切換 25 年重心演變。
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <div class="inline-flex rounded-lg border border-gray-200 bg-ivory p-0.5 text-xs">
+          <button type="button" id="act3-btn-graph" class="rounded-md bg-emerald-deep px-3 py-1.5 font-semibold text-white">神經網絡圖</button>
+          <button type="button" id="act3-btn-trend" class="rounded-md px-3 py-1.5 font-medium text-gray-600 hover:text-emerald-deep">25 年重心演變</button>
         </div>
-        <a href="/trends" class="text-xs font-semibold text-emerald-deep hover:underline shrink-0">
-          完整分析 →
+        <a
+          href="/policy-map"
+          class="inline-flex items-center rounded-lg border border-emerald-deep/25 px-3 py-1.5 text-xs font-semibold text-emerald-deep hover:bg-emerald-soft/60"
+        >
+          全螢幕互動版 ↗
         </a>
       </div>
-      <div id="home-momentum-chart" class="mt-4 h-[420px] w-full"></div>
-    </section>
+    </div>
 
-    <section class="lg:col-span-7 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-      <div class="mb-4 flex items-center justify-between">
-        <div>
-          <h2 class="font-serif text-xl font-bold text-emerald-deep">最新環境部新聞快訊</h2>
-          <p class="mt-0.5 text-xs text-gray-500">最新收錄 10 篇官方新聞</p>
-        </div>
-        <a href="/news" class="text-xs font-semibold text-emerald-deep hover:underline">
-          檢索全部 {manifest.total_news.toLocaleString()} 篇 →
-        </a>
+    <div id="home-macro-graph" class="mt-5 h-[440px] w-full rounded-2xl border border-gray-100 bg-ivory/50"></div>
+    <div id="home-macro-trend" class="mt-5 hidden h-[440px] w-full rounded-2xl border border-gray-100 bg-ivory/50"></div>
+  </section>
+
+  <!-- 第四幕｜最新新聞快訊 ＋ 單篇微觀關聯小星系圖 -->
+  <section class="reveal-section mt-12 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+    <div class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-accent">Act IV · Latest Signals & Local Galaxy</span>
+        <h2 class="mt-1 font-serif text-2xl font-bold text-emerald-deep">最新環境部新聞快訊</h2>
+        <p class="mt-0.5 text-xs text-gray-500">
+          點擊任一新聞立即展開閱讀抽屜，檢視全文摘要、精準單篇原文連結與「前世今生」微觀關聯小星系圖。
+        </p>
       </div>
+      <a href="/news" class="text-sm font-semibold text-emerald-deep hover:underline">
+        檢索全量 {manifest.total_news.toLocaleString()} 篇 →
+      </a>
+    </div>
 
-      <div class="divide-y divide-gray-100">
-        {manifest.latest_news.map((item) => (
-          <article class="py-3.5 first:pt-0 last:pb-0">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      {manifest.latest_news.map((item) => (
+        <button
+          type="button"
+          data-news-id={item.news_id}
+          data-news-date={item.date}
+          class="open-drawer-trigger group flex flex-col justify-between rounded-2xl border border-gray-100 bg-ivory/70 p-4 text-left transition hover:border-emerald-deep/40 hover:bg-white hover:shadow-sm"
+        >
+          <div>
             <div class="flex flex-wrap items-center gap-2 text-xs text-gray-500">
-              <span class="font-mono font-medium text-emerald-deep">{item.date}</span>
-              <span class="text-gray-300">|</span>
+              <span class="font-mono font-semibold text-emerald-deep">{item.date}</span>
+              <span>·</span>
               <span>{item.unit}</span>
-              {item.policy_keywords.slice(0, 3).map((kw) => (
-                <span class="rounded bg-emerald-soft px-2 py-0.5 text-[11px] font-medium text-emerald-deep">
+              {item.policy_keywords.slice(0, 2).map((kw) => (
+                <span class="rounded-full bg-emerald-soft px-2 py-0.5 text-[11px] font-medium text-emerald-deep">
                   {kw}
                 </span>
               ))}
             </div>
-            <h3 class="mt-1.5 text-sm font-bold leading-snug text-gray-900">
-              <a
-                href={item.source_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="hover:text-emerald-deep hover:underline"
-              >
-                {item.title}
-              </a>
+            <h3 class="mt-2 font-serif text-base font-bold leading-snug text-gray-900 group-hover:text-emerald-deep">
+              {item.title}
             </h3>
             {item.summary && (
-              <p class="mt-1 line-clamp-2 text-xs leading-relaxed text-gray-600">
-                {item.summary}
-              </p>
+              <p class="mt-1.5 line-clamp-2 text-xs leading-relaxed text-gray-600">{item.summary}</p>
             )}
-          </article>
-        ))}
-      </div>
-    </section>
-  </div>
+          </div>
+          <div class="mt-3 flex items-center justify-between text-[11px] font-semibold text-emerald-deep">
+            <span>展開摘要與前世今生小星系 →</span>
+            {item.source_url ? (
+              <span class="text-gray-400">含單篇官網原文</span>
+            ) : (
+              <span class="text-amber-accent">官網連結同步中</span>
+            )}
+          </div>
+        </button>
+      ))}
+    </div>
+  </section>
 
   <script
-    id="home-momentum-data"
+    id="home-v2-payload"
     type="application/json"
-    set:html={JSON.stringify(top10Momentum)}
+    set:html={JSON.stringify({
+      graph: policyGraph,
+      years: trends.topic_yearly_matrix.years,
+      top5TopicsYearly,
+    })}
   />
 
   <script>
     import * as echarts from 'echarts';
 
-    const el = document.getElementById('home-momentum-chart');
-    const dataEl = document.getElementById('home-momentum-data');
-    if (el && dataEl) {
-      const rows = JSON.parse(dataEl.textContent || '[]');
-      const ordered = [...rows].reverse();
-      const chart = echarts.init(el);
-      chart.setOption({
+    // 1. KPI Count-up animation (respects prefers-reduced-motion)
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll<HTMLElement>('.count-up').forEach((el) => {
+      const target = Number(el.dataset.target || '0');
+      if (reduceMotion || !target) {
+        el.textContent = target.toLocaleString();
+        return;
+      }
+      const duration = 900;
+      const startTime = performance.now();
+      function tick(now: number) {
+        const progress = Math.min(1, (now - startTime) / duration);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(target * eased).toLocaleString();
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+
+    // 2. Wire all drawer triggers on homepage
+    document.querySelectorAll<HTMLButtonElement>('.open-drawer-trigger').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        window.dispatchEvent(
+          new CustomEvent('open-news-drawer', {
+            detail: { id: btn.dataset.newsId || '', date: btn.dataset.newsDate || '' },
+          })
+        );
+      });
+    });
+
+    // 3. Act III Macro Neural Network Graph + 25-year Trend Toggle
+    const payloadEl = document.getElementById('home-v2-payload');
+    const graphEl = document.getElementById('home-macro-graph');
+    const trendEl = document.getElementById('home-macro-trend');
+    const btnGraph = document.getElementById('act3-btn-graph');
+    const btnTrend = document.getElementById('act3-btn-trend');
+
+    if (payloadEl && graphEl && trendEl) {
+      const { graph, years, top5TopicsYearly } = JSON.parse(payloadEl.textContent || '{}');
+      const graphChart = echarts.init(graphEl);
+      let trendChart: echarts.ECharts | null = null;
+
+      const nodes = (graph.nodes || []).map((n: any) => {
+        const isGroup = n.kind === 'group';
+        const isTopic = n.kind === 'topic';
+        const size = isGroup
+          ? 38
+          : isTopic
+            ? Math.max(16, Math.min(34, 14 + Math.sqrt(n.value || 1) * 0.48))
+            : 13;
+        return {
+          ...n,
+          symbolSize: size,
+          itemStyle: n.delta30 > 3 ? { shadowBlur: 14, shadowColor: 'rgba(180,83,9,0.55)' } : undefined,
+          label: {
+            show: isGroup || isTopic,
+            fontSize: isGroup ? 12 : 11,
+            fontWeight: isGroup ? 'bold' : 'normal',
+            color: '#1F2937',
+          },
+        };
+      });
+
+      const links = (graph.links || []).map((l: any) => ({
+        ...l,
+        lineStyle: {
+          width: l.kind === 'hierarchy' ? 2 : Math.max(1, Math.min(4, (l.weight || 1) / 80)),
+          opacity: l.kind === 'hierarchy' ? 0.55 : 0.35,
+          curveness: l.kind === 'semantic' ? 0.18 : 0,
+        },
+      }));
+
+      graphChart.setOption({
         tooltip: {
-          trigger: 'axis',
-          axisPointer: { type: 'shadow' },
-          formatter: (params: any) => {
-            const p = params[0];
-            const row = ordered[p.dataIndex];
-            const sign = row.delta >= 0 ? '+' : '';
-            return `<strong>${row.title}</strong><br/>近 30 天：${row.current} 篇<br/>前 30 天：${row.previous} 篇<br/>變化：${sign}${row.delta} 篇（${sign}${row.pct_change}%）`;
+          trigger: 'item',
+          formatter: (p: any) => {
+            if (p.dataType === 'edge') {
+              return p.data.kind === 'semantic'
+                ? `議題語意與共現強度：<strong>${p.data.weight}</strong>（共現 ${p.data.cooccurrence || 0} 篇）`
+                : '從屬脈絡連線';
+            }
+            const d = p.data;
+            return `<strong>${d.name}</strong><br/>累計篇數：${(d.value || 0).toLocaleString()} 篇<br/>近 30 天：${d.last30 || 0} 篇${d.url ? '<br/><span style="color:#0F4C3A;">點擊前往專頁 →</span>' : ''}`;
           },
         },
-        grid: { left: 120, right: 24, top: 12, bottom: 28 },
-        xAxis: {
-          type: 'value',
-          splitLine: { lineStyle: { color: '#F3F4F6' } },
-          axisLabel: { color: '#6B7280', fontSize: 11 },
-        },
-        yAxis: {
-          type: 'category',
-          data: ordered.map((r: any) => r.title),
-          axisLine: { show: false },
-          axisTick: { show: false },
-          axisLabel: { color: '#1F2937', fontSize: 12 },
-        },
+        legend: { bottom: 6, data: (graph.categories || []).map((c: any) => c.name), textStyle: { fontSize: 11 } },
         series: [
           {
-            name: '近 30 天篇數',
-            type: 'bar',
-            barWidth: 18,
-            data: ordered.map((r: any) => ({
-              value: r.current,
-              itemStyle: {
-                color: r.delta > 0 ? '#0F4C3A' : '#6B9B8A',
-                borderRadius: [0, 6, 6, 0],
-              },
-            })),
-            label: {
-              show: true,
-              position: 'right',
-              fontSize: 11,
-              color: '#374151',
-              formatter: (p: any) => {
-                const row = ordered[p.dataIndex];
-                const sign = row.delta > 0 ? '+' : '';
-                return `${row.current} (${sign}${row.delta})`;
-              },
-            },
+            type: 'graph',
+            layout: 'force',
+            roam: true,
+            draggable: true,
+            categories: graph.categories || [],
+            data: nodes,
+            links,
+            force: { repulsion: 260, edgeLength: [55, 130], gravity: 0.12 },
+            emphasis: { focus: 'adjacency', lineStyle: { width: 3.5, opacity: 0.9 } },
           },
         ],
       });
-      window.addEventListener('resize', () => chart.resize());
+
+      graphChart.on('click', (p: any) => {
+        if (p.dataType === 'node' && p.data?.url) {
+          window.location.href = p.data.url;
+        }
+      });
+
+      btnGraph?.addEventListener('click', () => {
+        graphEl.classList.remove('hidden');
+        trendEl.classList.add('hidden');
+        btnGraph.classList.add('bg-emerald-deep', 'text-white', 'font-semibold');
+        btnGraph.classList.remove('text-gray-600', 'font-medium');
+        btnTrend?.classList.remove('bg-emerald-deep', 'text-white', 'font-semibold');
+        btnTrend?.classList.add('text-gray-600', 'font-medium');
+        graphChart.resize();
+      });
+
+      btnTrend?.addEventListener('click', () => {
+        graphEl.classList.add('hidden');
+        trendEl.classList.remove('hidden');
+        btnTrend.classList.add('bg-emerald-deep', 'text-white', 'font-semibold');
+        btnTrend.classList.remove('text-gray-600', 'font-medium');
+        btnGraph?.classList.remove('bg-emerald-deep', 'text-white', 'font-semibold');
+        btnGraph?.classList.add('text-gray-600', 'font-medium');
+
+        if (!trendChart) {
+          const colors = ['#0F4C3A', '#B45309', '#2563EB', '#0D9488', '#7C3AED'];
+          trendChart = echarts.init(trendEl);
+          trendChart.setOption({
+            tooltip: { trigger: 'axis' },
+            legend: { bottom: 6, type: 'scroll' },
+            grid: { left: 48, right: 24, top: 24, bottom: 48 },
+            xAxis: { type: 'category', data: years, boundaryGap: false },
+            yAxis: { type: 'value', splitLine: { lineStyle: { color: '#F3F4F6' } } },
+            series: (top5TopicsYearly || []).map((t: any, idx: number) => ({
+              name: t.title,
+              type: 'line',
+              smooth: true,
+              data: t.counts,
+              lineStyle: { width: 2.5, color: colors[idx % colors.length] },
+              itemStyle: { color: colors[idx % colors.length] },
+              areaStyle: { opacity: 0.08 },
+            })),
+          });
+        }
+        trendChart.resize();
+      });
+
+      window.addEventListener('resize', () => {
+        graphChart.resize();
+        trendChart?.resize();
+      });
     }
   </script>
 </BaseLayout>

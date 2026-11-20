@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadPolicyGraph, loadTopics, loadTrends } from '../lib/data';
+
+const policyGraph = loadPolicyGraph();
+const topics = loadTopics();
+const trends = loadTrends();
+---
+
+<BaseLayout
+  title="政策脈絡神經網絡圖"
+  description="互動式巨觀政策神經網絡圖：五大板塊、20 大政策議題與核心法規群聚之語意關聯視覺化。"
+>
+  <div class="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+    <div>
+      <span class="inline-flex rounded-full bg-emerald-soft px-3 py-1 text-xs font-semibold text-emerald-deep">
+        路線 3 · 雙層混合語意網絡
+      </span>
+      <h1 class="mt-2 font-serif text-3xl font-bold text-emerald-deep">政策脈絡神經網絡圖</h1>
+      <p class="mt-1 text-sm text-gray-600">
+        節點大小反映 25 年累積聲量、暖金光暈代表近 30 天升溫熱度、連線粗細整合議題共現與路線 3 語意關聯權重。
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-2 text-xs">
+      <a href="/topics" class="rounded-lg border border-gray-300 bg-white px-3.5 py-2 font-semibold text-gray-700 hover:bg-ivory">
+        20 大議題目錄
+      </a>
+      <a href="/trends" class="rounded-lg bg-emerald-deep px-3.5 py-2 font-semibold text-white hover:bg-emerald-dark">
+        趨勢分析室 →
+      </a>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
+    <section class="lg:col-span-8 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+      <div class="mb-3 flex flex-wrap items-center justify-between gap-2 px-2 text-xs text-gray-500">
+        <span>操作提示：滑鼠懸停點亮整條關聯路徑 · 滾輪縮放 · 拖曳節點 · 點擊節點檢視右側摘要</span>
+        <button id="pm-reset-btn" type="button" class="font-semibold text-emerald-deep hover:underline">
+          重設視角
+        </button>
+      </div>
+      <div id="policy-map-canvas" class="h-[620px] w-full rounded-xl border border-gray-100 bg-ivory/60"></div>
+    </section>
+
+    <aside class="lg:col-span-4 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div id="pm-inspector">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-accent">節點檢視器</span>
+        <h2 class="mt-1 font-serif text-xl font-bold text-emerald-deep">點選任一節點探索脈絡</h2>
+        <p class="mt-2 text-xs leading-relaxed text-gray-600">
+          點選左側神經網絡中的任一政策議題節點，即可在此查看該議題的 25 年總聲量、近 30 天動能與最新代表新聞，並可直接展開單篇「前世今生」小星系抽屜。
+        </p>
+
+        <div class="mt-6 border-t border-gray-100 pt-4">
+          <div class="text-xs font-semibold text-gray-500">近 30 天高溫議題快選</div>
+          <div class="mt-2.5 flex flex-wrap gap-1.5">
+            {trends.last_30_days.topics.slice(0, 8).map((t) => (
+              <button
+                type="button"
+                data-focus-slug={t.slug}
+                class="pm-quick-btn rounded-full border border-emerald-deep/20 bg-emerald-soft/60 px-2.5 py-1 text-xs font-medium text-emerald-deep hover:bg-emerald-soft"
+              >
+                {t.title} ({t.current})
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script
+    id="policy-map-payload"
+    type="application/json"
+    set:html={JSON.stringify({ graph: policyGraph, topics })}
+  />
+
+  <script>
+    import * as echarts from 'echarts';
+
+    const payloadEl = document.getElementById('policy-map-payload');
+    const canvasEl = document.getElementById('policy-map-canvas');
+    const inspectorEl = document.getElementById('pm-inspector');
+    const resetBtn = document.getElementById('pm-reset-btn');
+
+    if (payloadEl && canvasEl && inspectorEl) {
+      const { graph, topics } = JSON.parse(payloadEl.textContent || '{}');
+      const topicBySlug = new Map<string, any>((topics || []).map((t: any) => [t.slug, t]));
+
+      const chart = echarts.init(canvasEl);
+
+      function buildOption() {
+        const nodes = (graph.nodes || []).map((n: any) => {
+          const isGroup = n.kind === 'group';
+          const isTopic = n.kind === 'topic';
+          const size = isGroup
+            ? 42
+            : isTopic
+              ? Math.max(18, Math.min(36, 15 + Math.sqrt(n.value || 1) * 0.52))
+              : 14;
+          return {
+            ...n,
+            symbolSize: size,
+            itemStyle: n.delta30 > 3 ? { shadowBlur: 16, shadowColor: 'rgba(180,83,9,0.55)' } : undefined,
+            label: {
+              show: true,
+              fontSize: isGroup ? 13 : isTopic ? 11 : 10,
+              fontWeight: isGroup ? 'bold' : 'normal',
+              color: '#1F2937',
+            },
+          };
+        });
+
+        const links = (graph.links || []).map((l: any) => ({
+          ...l,
+          lineStyle: {
+            width: l.kind === 'hierarchy' ? 2.2 : Math.max(1, Math.min(4.5, (l.weight || 1) / 70)),
+            opacity: l.kind === 'hierarchy' ? 0.6 : 0.38,
+            curveness: l.kind === 'semantic' ? 0.16 : 0,
+          },
+        }));
+
+        return {
+          tooltip: {
+            trigger: 'item',
+            formatter: (p: any) => {
+              if (p.dataType === 'edge') {
+                return p.data.kind === 'semantic'
+                  ? `語意與共現關聯權重：<strong>${p.data.weight}</strong>（共現 ${p.data.cooccurrence || 0} 篇）`
+                  : '板塊從屬連線';
+              }
+              const d = p.data;
+              return `<strong>${d.name}</strong><br/>累計篇數：${(d.value || 0).toLocaleString()} 篇<br/>近 30 天：${d.last30 || 0} 篇`;
+            },
+          },
+          legend: { bottom: 8, data: (graph.categories || []).map((c: any) => c.name), textStyle: { fontSize: 12 } },
+          series: [
+            {
+              type: 'graph',
+              layout: 'force',
+              roam: true,
+              draggable: true,
+              categories: graph.categories || [],
+              data: nodes,
+              links,
+              force: { repulsion: 320, edgeLength: [60, 145], gravity: 0.1 },
+              emphasis: { focus: 'adjacency', lineStyle: { width: 4, opacity: 0.95 } },
+            },
+          ],
+        };
+      }
+
+      function showTopicInspector(slug: string) {
+        const topic = topicBySlug.get(slug);
+        if (!topic || !inspectorEl) return;
+        const latestHtml = (topic.latest_news || [])
+          .slice(0, 5)
+          .map(
+            (n: any) => `
+            <button type="button" data-id="${n.news_id}" data-date="${n.date}" class="pm-news-btn block w-full rounded-lg border border-gray-100 bg-ivory p-2.5 text-left transition hover:border-emerald-deep/40 hover:bg-white">
+              <div class="font-mono text-[11px] text-emerald-deep">${n.date} · ${n.unit}</div>
+              <div class="mt-0.5 text-xs font-semibold text-gray-900 leading-snug">${n.title}</div>
+            </button>
+          `
+          )
+          .join('');
+
+        inspectorEl.innerHTML = `
+          <span class="rounded-full bg-emerald-soft px-2.5 py-0.5 text-xs font-semibold text-emerald-deep">${topic.group}</span>
+          <h2 class="mt-2 font-serif text-2xl font-bold text-emerald-deep">${topic.title}</h2>
+          <p class="mt-1.5 text-xs leading-relaxed text-gray-600">${topic.description}</p>
+          <div class="mt-4 grid grid-cols-2 gap-2.5 text-center">
+            <div class="rounded-xl bg-ivory p-3">
+              <div class="text-[11px] text-gray-500">累計篇數</div>
+              <div class="font-serif text-xl font-bold text-emerald-deep">${topic.total_count.toLocaleString()}</div>
+            </div>
+            <div class="rounded-xl bg-ivory p-3">
+              <div class="text-[11px] text-gray-500">近 30 天</div>
+              <div class="font-serif text-xl font-bold text-amber-accent">${topic.last_30_days_count}</div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <a href="/topics/${topic.slug}" class="inline-flex w-full items-center justify-center rounded-xl bg-emerald-deep px-4 py-2.5 text-xs font-semibold text-white hover:bg-emerald-dark">
+              進入「${topic.title}」完整議題專頁 →
+            </a>
+          </div>
+          <div class="mt-5">
+            <div class="mb-2 text-xs font-bold text-gray-500">最新代表新聞（點擊展開微觀小星系）</div>
+            <div class="space-y-2">${latestHtml}</div>
+          </div>
+        `;
+
+        inspectorEl.querySelectorAll<HTMLButtonElement>('.pm-news-btn').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            window.dispatchEvent(
+              new CustomEvent('open-news-drawer', {
+                detail: { id: btn.dataset.id || '', date: btn.dataset.date || '' },
+              })
+            );
+          });
+        });
+      }
+
+      chart.setOption(buildOption());
+
+      chart.on('click', (p: any) => {
+        if (p.dataType !== 'node') return;
+        const d = p.data;
+        if (d.kind === 'topic' && d.slug) {
+          showTopicInspector(d.slug);
+        } else if (d.url) {
+          window.location.href = d.url;
+        }
+      });
+
+      document.querySelectorAll<HTMLButtonElement>('.pm-quick-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (btn.dataset.focusSlug) showTopicInspector(btn.dataset.focusSlug);
+        });
+      });
+
+      resetBtn?.addEventListener('click', () => {
+        chart.setOption(buildOption(), true);
+      });
+
+      window.addEventListener('resize', () => chart.resize());
+    }
+  </script>
+</BaseLayout>

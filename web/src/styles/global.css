@@ -2,10 +2,10 @@
 
 @theme {
   --color-emerald-deep: #0F4C3A;
-  --color-emerald-dark: #0A382A;
+  --color-emerald-dark: #0A3629;
   --color-emerald-soft: #E8F3EE;
   --color-ivory: #F8F9F7;
-  --color-amber-accent: #D97706;
+  --color-amber-accent: #B45309;
   --color-amber-soft: #FEF3C7;
   --font-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, -apple-system, sans-serif;
   --font-serif: "Noto Serif TC", Georgia, serif;
@@ -23,6 +23,42 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+  }
+}
+
+/* Subtle editorial scroll-reveal & pulse micro-interactions */
+.reveal-section {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+.reveal-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes pulse-wave {
+  0%, 100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.pulse-line {
+  animation: pulse-wave 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .pulse-line {
+    animation: none;
   }
 }
 
@@ -56,7 +92,7 @@
 }
 
 .prose-editorial p {
-  line-height: 1.85;
+  line-height: 1.88;
   margin-bottom: 1rem;
   color: #374151;
 }
@@ -82,7 +118,7 @@
 }
 
 .prose-editorial blockquote {
-  border-left: 4px solid #D97706;
+  border-left: 4px solid #B45309;
   background-color: #FFFBEB;
   padding: 0.75rem 1rem;
   margin: 1rem 0;

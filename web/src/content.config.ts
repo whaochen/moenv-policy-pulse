@@ -13,6 +13,7 @@ const haoTalks = defineCollection({
     summary: z.string().default(''),
     topics: z.array(z.string()).default([]),
     related_news: z.array(z.union([z.string(), z.number()])).default([]),
+    timeline_slug: z.string().optional().default(''),
   }),
 });
 

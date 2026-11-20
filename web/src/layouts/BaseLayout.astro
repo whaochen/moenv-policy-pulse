@@ -1,27 +1,34 @@
 ---
 import '../styles/global.css';
-import { loadManifest, formatTaipeiTimestamp } from '../lib/data';
+import NewsDetailDrawer from '../components/NewsDetailDrawer.astro';
+import { loadManifest, findPublicImage, formatTaipeiTimestamp } from '../lib/data';
 
 interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = '環策皓脈（Taiwan Environment Observatory）— 環境部 25 年全量新聞檢索、政策趨勢分析與深度評論智庫平台。' } = Astro.props;
+const {
+  title,
+  description = '環策皓脈（Taiwan Environment Observatory）— 從環境部 25 年、11,496+ 篇新聞中為台灣環境政策找脈絡、把脈、把關的智庫研究入口。',
+} = Astro.props;
 const currentPath = Astro.url.pathname;
 const manifest = loadManifest();
+const logoSrc = findPublicImage('logo');
 
 const navItems = [
-  { href: '/', label: '首頁儀表板' },
-  { href: '/trends', label: '趨勢分析室' },
-  { href: '/topics', label: '政策議題' },
-  { href: '/news', label: '全量檢索' },
+  { href: '/', label: '首頁' },
   { href: '/hao-talks', label: '皓哥說' },
-  { href: '/research', label: '政策研究' },
+  { href: '/policy-map', label: '政策神經網' },
+  { href: '/trends', label: '趨勢脈絡' },
+  { href: '/news', label: '全量新聞' },
+  { href: '/research', label: '學術研究' },
+  { href: '/about', label: '關於與宣告' },
 ];
 
 function isActive(href: string): boolean {
   if (href === '/') return currentPath === '/';
+  if (href === '/trends' && currentPath.startsWith('/topics')) return true;
   return currentPath === href || currentPath.startsWith(`${href}/`);
 }
 ---
@@ -41,26 +48,34 @@ function isActive(href: string): boolean {
     />
   </head>
   <body class="bg-ivory text-gray-800 antialiased">
-    <header class="sticky top-0 z-40 border-b border-emerald-900/10 bg-emerald-deep text-white shadow-sm">
-      <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
+    <header class="sticky top-0 z-40 border-b border-emerald-900/15 bg-emerald-deep text-white shadow-sm">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <a href="/" class="flex items-center gap-3 group">
-          <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-accent/90 font-serif text-lg font-bold text-white shadow-sm transition group-hover:bg-amber-accent">
-            脈
-          </div>
+          {logoSrc ? (
+            <img
+              src={logoSrc}
+              alt="環策皓脈 Logo"
+              class="h-9 w-9 rounded-lg object-contain bg-white/95 p-0.5 shadow-sm"
+            />
+          ) : (
+            <div class="flex h-9 w-9 items-center justify-center rounded-lg border border-amber-300/40 bg-amber-accent font-serif text-lg font-bold text-white shadow-sm transition group-hover:brightness-110">
+              脈
+            </div>
+          )}
           <div>
             <div class="font-serif text-lg font-bold tracking-wide leading-tight">環策皓脈</div>
-            <div class="text-[11px] tracking-wider text-emerald-100/80 uppercase">
+            <div class="text-[10px] tracking-[0.14em] text-emerald-100/80 uppercase">
               Taiwan Environment Observatory
             </div>
           </div>
         </a>
 
-        <nav class="hidden md:flex items-center gap-1" aria-label="主導覽列">
+        <nav class="hidden lg:flex items-center gap-0.5" aria-label="主導覽列">
           {navItems.map((item) => (
             <a
               href={item.href}
               class:list={[
-                'rounded-md px-3.5 py-2 text-sm font-medium transition',
+                'rounded-md px-3 py-2 text-sm font-medium transition',
                 isActive(item.href)
                   ? 'bg-white/15 text-white shadow-inner'
                   : 'text-emerald-100/90 hover:bg-white/10 hover:text-white',
@@ -74,7 +89,7 @@ function isActive(href: string): boolean {
         <button
           id="mobile-menu-btn"
           type="button"
-          class="md:hidden inline-flex items-center justify-center rounded-md p-2 text-emerald-100 hover:bg-white/10 hover:text-white"
+          class="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-emerald-100 hover:bg-white/10 hover:text-white"
           aria-label="開啟選單"
           aria-expanded="false"
         >
@@ -84,7 +99,7 @@ function isActive(href: string): boolean {
         </button>
       </div>
 
-      <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-emerald-dark px-4 py-2">
+      <div id="mobile-menu" class="hidden lg:hidden border-t border-white/10 bg-emerald-dark px-4 py-2">
         <div class="flex flex-col gap-1">
           {navItems.map((item) => (
             <a
@@ -106,17 +121,23 @@ function isActive(href: string): boolean {
     </main>
 
     <footer class="mt-16 border-t border-gray-200 bg-white">
-      <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-xs text-gray-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-        <div>
-          <span class="font-semibold text-emerald-deep">環策皓脈 Taiwan Environment Observatory</span>
-          <span class="mx-2 text-gray-300">|</span>
-          <span>資料來源：環境部開放資料平台（MNEWS_P_01）與歷年新聞歸檔</span>
-        </div>
-        <div>
-          累計收錄 <strong class="text-gray-700">{manifest.total_news.toLocaleString()}</strong> 篇新聞 · 最後同步：{formatTaipeiTimestamp(manifest.updated_at)}
+      <div class="mx-auto max-w-7xl px-4 py-7 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-3 text-xs leading-relaxed text-gray-600 lg:flex-row lg:items-center lg:justify-between">
+          <div class="max-w-4xl">
+            資料來源：中華民國環境部（環境部新聞專區及環境資料開放平臺
+            <code class="rounded bg-gray-100 px-1 py-0.5 text-[11px]">MNEWS_P_01</code>），依政府資料開放授權條款引用｜本站為獨立政策觀察與研究平台，非環境部官方網站｜《皓哥說》與脈絡分析 © 環策皓脈。
+            <a href="/about" class="ml-1.5 font-semibold text-emerald-deep underline underline-offset-2 hover:text-emerald-dark">
+              完整資料宣告與免責聲明 →
+            </a>
+          </div>
+          <div class="shrink-0 text-[11px] text-gray-500">
+            累計收錄 <strong class="text-gray-700">{manifest.total_news.toLocaleString()}</strong> 篇 · 最後同步：{formatTaipeiTimestamp(manifest.updated_at)}
+          </div>
         </div>
       </div>
     </footer>
+
+    <NewsDetailDrawer />
 
     <script>
       const btn = document.getElementById('mobile-menu-btn');
@@ -127,6 +148,25 @@ function isActive(href: string): boolean {
           menu.classList.toggle('hidden');
           btn.setAttribute('aria-expanded', String(!isOpen));
         });
+      }
+
+      // Subtle scroll-reveal observer
+      const revealEls = document.querySelectorAll('.reveal-section');
+      if ('IntersectionObserver' in window && revealEls.length > 0) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.08 }
+        );
+        revealEls.forEach((el) => io.observe(el));
+      } else {
+        revealEls.forEach((el) => el.classList.add('is-visible'));
       }
     </script>
   </body>
