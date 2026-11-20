@@ -155,50 +155,50 @@
     const links: any[] = [];
 
     earlier.forEach((rel, idx) => {
-      const spread = earlier.length === 1 ? 0 : (idx - (earlier.length - 1) / 2) * 80;
+      const spread = earlier.length === 1 ? 0 : (idx - (earlier.length - 1) / 2) * 92;
       const pct = Math.round((rel.score || 0) * 100);
       nodes.push({
         id: String(rel.news_id),
-        name: `${rel.date.slice(0, 7)}\n${rel.title.slice(0, 12)}…`,
+        name: `${rel.date.slice(0, 7)} ${rel.title.slice(0, 10)}…`,
         fullTitle: rel.title,
         date: rel.date,
         scorePct: pct,
         directionLabel: '前期脈絡（前因）',
-        x: -210,
+        x: -230,
         y: spread,
         symbolSize: 22 + Math.round((rel.score || 0.2) * 14),
         itemStyle: { color: '#0D9488' },
-        label: { show: true, position: 'left', fontSize: 10, color: '#374151', distance: 6 },
+        label: { show: true, position: 'top', fontSize: 10, color: '#374151', distance: 6, width: 130, overflow: 'truncate' },
       });
       links.push({
         source: String(rel.news_id),
         target: String(centerItem.news_id),
         value: `${pct}%`,
-        lineStyle: { width: Math.max(1.5, (rel.score || 0.2) * 5), color: '#0D9488', curveness: 0.12 },
+        lineStyle: { width: Math.max(1.5, (rel.score || 0.2) * 5), color: '#0D9488', curveness: 0.14 },
       });
     });
 
     later.forEach((rel, idx) => {
-      const spread = later.length === 1 ? 0 : (idx - (later.length - 1) / 2) * 80;
+      const spread = later.length === 1 ? 0 : (idx - (later.length - 1) / 2) * 92;
       const pct = Math.round((rel.score || 0) * 100);
       nodes.push({
         id: String(rel.news_id),
-        name: `${rel.date.slice(0, 7)}\n${rel.title.slice(0, 12)}…`,
+        name: `${rel.date.slice(0, 7)} ${rel.title.slice(0, 10)}…`,
         fullTitle: rel.title,
         date: rel.date,
         scorePct: pct,
         directionLabel: '後續演進（延伸）',
-        x: 210,
+        x: 230,
         y: spread,
         symbolSize: 22 + Math.round((rel.score || 0.2) * 14),
         itemStyle: { color: '#B45309' },
-        label: { show: true, position: 'right', fontSize: 10, color: '#374151', distance: 6 },
+        label: { show: true, position: 'top', fontSize: 10, color: '#374151', distance: 6, width: 130, overflow: 'truncate' },
       });
       links.push({
         source: String(centerItem.news_id),
         target: String(rel.news_id),
         value: `${pct}%`,
-        lineStyle: { width: Math.max(1.5, (rel.score || 0.2) * 5), color: '#B45309', curveness: 0.12 },
+        lineStyle: { width: Math.max(1.5, (rel.score || 0.2) * 5), color: '#B45309', curveness: 0.14 },
       });
     });
 

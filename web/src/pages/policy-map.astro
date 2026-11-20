@@ -142,8 +142,9 @@ const trends = loadTrends();
               categories: graph.categories || [],
               data: nodes,
               links,
-              force: { repulsion: 320, edgeLength: [60, 145], gravity: 0.1 },
-              emphasis: { focus: 'adjacency', lineStyle: { width: 4, opacity: 0.95 } },
+              force: { repulsion: 320, edgeLength: [60, 145], gravity: 0.1, friction: 0.2 },
+              emphasis: { focus: 'adjacency', scale: true, lineStyle: { width: 4, opacity: 0.95 } },
+              blur: { itemStyle: { opacity: 0.15 }, lineStyle: { opacity: 0.08 }, label: { opacity: 0.2 } },
             },
           ],
         };

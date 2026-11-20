@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PolicyBarRace from '../components/PolicyBarRace.astro';
 import { loadTrends } from '../lib/data';
 
 const trends = loadTrends();
@@ -14,8 +15,12 @@ const defaultSelectedSlugs = [...trends.topic_yearly_matrix.topics]
   <div class="mb-6">
     <h1 class="font-serif text-3xl font-bold text-emerald-deep">趨勢分析室</h1>
     <p class="mt-1.5 text-sm text-gray-600">
-      互動疊加對比 20 大政策議題 25 年聲量走勢、近 30 天升溫／降溫動能與各司署發布排行。
+      動態回顧 25 年政策重心交棒，並互動疊加對比 20 大政策議題聲量走勢、近 30 天升溫動能與各司署發布排行。
     </p>
+  </div>
+
+  <div class="mb-8">
+    <PolicyBarRace idPrefix="trends-race" />
   </div>
 
   <!-- 2001~2026 歷年政策聲量折線/面積圖 -->

@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title,
-  description = '環策晧脈（Taiwan Environment Observatory）— 從環境部 25 年、11,496+ 篇新聞中為台灣環境政策找脈絡、把脈、把關的智庫研究入口。',
+  description = '環策晧脈（HAO POLICY INTELLIGENCE）— 從環境部 25 年、一萬多篇官方新聞中，為台灣環境政策找脈絡、把脈、把關。',
 } = Astro.props;
 const currentPath = Astro.url.pathname;
 const manifest = loadManifest();
@@ -39,7 +39,7 @@ function isActive(href: string): boolean {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <title>{title} | 環策晧脈 Taiwan Environment Observatory</title>
+    <title>{title} | 環策晧脈 HAO Policy Intelligence</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -48,39 +48,40 @@ function isActive(href: string): boolean {
     />
   </head>
   <body class="bg-ivory text-gray-800 antialiased">
-    <header class="sticky top-0 z-40 border-b border-emerald-900/15 bg-emerald-deep text-white shadow-sm">
-      <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <a href="/" class="flex items-center gap-3 group">
+    <!-- 通透象牙白毛玻璃頂部導覽列（桌機 80px / 手機 68px） -->
+    <header class="sticky top-0 z-40 border-b border-emerald-950/10 bg-[#FAFBF9]/92 backdrop-blur-md">
+      <div class="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-[80px] lg:px-10">
+        <a href="/" class="flex items-center gap-3 group shrink-0">
           {logoSrc ? (
             <img
               src={logoSrc}
-              alt="環策晧脈 HAO Policy Intelligence"
-              class="h-10 w-auto max-w-[210px] rounded-lg bg-white/95 px-2.5 py-1 object-contain shadow-sm transition group-hover:bg-white"
+              alt="環策晧脈 HAO POLICY INTELLIGENCE"
+              class="h-[58px] sm:h-[64px] lg:h-[72px] w-auto object-contain transition-opacity group-hover:opacity-90"
             />
           ) : (
             <>
-              <div class="flex h-9 w-9 items-center justify-center rounded-lg border border-amber-300/40 bg-amber-accent font-serif text-lg font-bold text-white shadow-sm transition group-hover:brightness-110">
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-deep font-serif text-xl font-bold text-white shadow-sm">
                 脈
               </div>
               <div>
-                <div class="font-serif text-lg font-bold tracking-wide leading-tight">環策晧脈</div>
-                <div class="text-[10px] tracking-[0.14em] text-emerald-100/80 uppercase">
-                  Taiwan Environment Observatory
+                <div class="font-serif text-xl font-bold tracking-wide text-emerald-deep leading-tight">環策晧脈</div>
+                <div class="text-[10px] tracking-[0.14em] text-emerald-deep/70 uppercase">
+                  HAO Policy Intelligence
                 </div>
               </div>
             </>
           )}
         </a>
 
-        <nav class="hidden lg:flex items-center gap-0.5" aria-label="主導覽列">
+        <nav class="hidden lg:flex items-center gap-1" aria-label="主導覽列">
           {navItems.map((item) => (
             <a
               href={item.href}
               class:list={[
-                'rounded-md px-3 py-2 text-sm font-medium transition',
+                'rounded-full px-3.5 py-2 text-sm transition',
                 isActive(item.href)
-                  ? 'bg-white/15 text-white shadow-inner'
-                  : 'text-emerald-100/90 hover:bg-white/10 hover:text-white',
+                  ? 'bg-emerald-900/10 text-emerald-950 font-semibold'
+                  : 'text-[#0F4C3A] font-medium hover:bg-emerald-900/5 hover:text-emerald-950',
               ]}
             >
               {item.label}
@@ -91,7 +92,7 @@ function isActive(href: string): boolean {
         <button
           id="mobile-menu-btn"
           type="button"
-          class="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-emerald-100 hover:bg-white/10 hover:text-white"
+          class="lg:hidden inline-flex items-center justify-center rounded-lg p-2 text-emerald-deep hover:bg-emerald-900/5"
           aria-label="開啟選單"
           aria-expanded="false"
         >
@@ -101,14 +102,16 @@ function isActive(href: string): boolean {
         </button>
       </div>
 
-      <div id="mobile-menu" class="hidden lg:hidden border-t border-white/10 bg-emerald-dark px-4 py-2">
+      <div id="mobile-menu" class="hidden lg:hidden border-t border-emerald-950/10 bg-[#FAFBF9] px-4 py-3 shadow-sm">
         <div class="flex flex-col gap-1">
           {navItems.map((item) => (
             <a
               href={item.href}
               class:list={[
-                'rounded-md px-3 py-2 text-sm font-medium',
-                isActive(item.href) ? 'bg-white/15 text-white' : 'text-emerald-100 hover:bg-white/10',
+                'rounded-xl px-3.5 py-2.5 text-sm transition',
+                isActive(item.href)
+                  ? 'bg-emerald-900/10 text-emerald-950 font-semibold'
+                  : 'text-[#0F4C3A] font-medium hover:bg-emerald-900/5',
               ]}
             >
               {item.label}
@@ -118,22 +121,22 @@ function isActive(href: string): boolean {
       </div>
     </header>
 
-    <main class="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
+    <main class="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6 lg:px-10">
       <slot />
     </main>
 
-    <footer class="mt-16 border-t border-gray-200 bg-white">
-      <div class="mx-auto max-w-7xl px-4 py-7 sm:px-6 lg:px-8">
+    <footer class="mt-20 border-t border-emerald-950/10 bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-10">
         <div class="flex flex-col gap-3 text-xs leading-relaxed text-gray-600 lg:flex-row lg:items-center lg:justify-between">
           <div class="max-w-4xl">
             資料來源：中華民國環境部（環境部新聞專區及環境資料開放平臺
-            <code class="rounded bg-gray-100 px-1 py-0.5 text-[11px]">MNEWS_P_01</code>），依政府資料開放授權條款引用｜本站為獨立政策觀察與研究平台，非環境部官方網站｜《晧哥說》與脈絡分析 © 環策晧脈。
+            <code class="rounded bg-ivory px-1.5 py-0.5 text-[11px] text-emerald-deep">MNEWS_P_01</code>），依政府資料開放授權條款引用｜本站為獨立政策觀察與研究平台，非環境部官方網站｜《晧哥說》與脈絡分析 © 環策晧脈。
             <a href="/about" class="ml-1.5 font-semibold text-emerald-deep underline underline-offset-2 hover:text-emerald-dark">
               完整資料宣告與免責聲明 →
             </a>
           </div>
           <div class="shrink-0 text-[11px] text-gray-500">
-            累計收錄 <strong class="text-gray-700">{manifest.total_news.toLocaleString()}</strong> 篇 · 最後同步：{formatTaipeiTimestamp(manifest.updated_at)}
+            累計收錄 <strong class="text-gray-700">{manifest.total_news.toLocaleString()}</strong> 篇 · 最近更新：{formatTaipeiTimestamp(manifest.updated_at)}
           </div>
         </div>
       </div>
@@ -152,7 +155,6 @@ function isActive(href: string): boolean {
         });
       }
 
-      // Subtle scroll-reveal observer
       const revealEls = document.querySelectorAll('.reveal-section');
       if ('IntersectionObserver' in window && revealEls.length > 0) {
         const io = new IntersectionObserver(
