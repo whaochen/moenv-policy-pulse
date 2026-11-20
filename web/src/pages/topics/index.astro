@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { loadTopics } from '../../lib/data';
+
+const topics = loadTopics();
+
+const groupOrder = [
+  '氣候與碳定價',
+  '資源循環與廢棄物',
+  '污染防制',
+  '治理與制度',
+  '社會溝通與人才',
+];
+
+const grouped = groupOrder.map((group) => ({
+  group,
+  items: topics
+    .filter((t) => t.group === group)
+    .sort((a, b) => b.total_count - a.total_count),
+}));
+---
+
+<BaseLayout title="政策議題總覽" description="環境部 20 大核心政策議題群組總覽與歷年聲量統計。">
+  <div class="mb-8">
+    <h1 class="font-serif text-3xl font-bold text-emerald-deep">政策議題總覽</h1>
+    <p class="mt-1.5 text-sm text-gray-600">
+      依五大治理維度劃分 20 大核心環境政策議題，點擊任一議題進入 25 年專屬趨勢與歷史新聞檔案。
+    </p>
+  </div>
+
+  <div class="space-y-10">
+    {grouped.map(({ group, items }) => (
+      <section>
+        <div class="mb-4 flex items-center gap-3">
+          <h2 class="font-serif text-xl font-bold text-emerald-deep">{group}</h2>
+          <span class="rounded-full bg-emerald-soft px-2.5 py-0.5 text-xs font-semibold text-emerald-deep">
+            {items.length} 項議題
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((topic) => (
+            <a
+              href={`/topics/${topic.slug}`}
+              class="group flex flex-col justify-between rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-deep/40 hover:shadow-md"
+            >
+              <div>
+                <div class="flex items-start justify-between gap-2">
+                  <h3 class="font-serif text-lg font-bold text-gray-900 group-hover:text-emerald-deep">
+                    {topic.title}
+                  </h3>
+                  <span class="shrink-0 rounded-md bg-ivory px-2 py-1 font-mono text-xs font-semibold text-emerald-deep">
+                    {topic.total_count.toLocaleString()} 篇
+                  </span>
+                </div>
+                <p class="mt-2 text-xs leading-relaxed text-gray-600">
+                  {topic.description}
+                </p>
+              </div>
+
+              <div class="mt-4 flex items-center justify-between border-t border-gray-100 pt-3 text-xs">
+                <span class="text-gray-500">
+                  近 30 天：<strong class="text-amber-accent">{topic.last_30_days_count}</strong> 篇
+                </span>
+                <span class="font-semibold text-emerald-deep group-hover:underline">
+                  進入專頁 →
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>

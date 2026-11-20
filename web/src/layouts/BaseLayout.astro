@@ -1,0 +1,133 @@
+---
+import '../styles/global.css';
+import { loadManifest, formatTaipeiTimestamp } from '../lib/data';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = '環策皓脈（Taiwan Environment Observatory）— 環境部 25 年全量新聞檢索、政策趨勢分析與深度評論智庫平台。' } = Astro.props;
+const currentPath = Astro.url.pathname;
+const manifest = loadManifest();
+
+const navItems = [
+  { href: '/', label: '首頁儀表板' },
+  { href: '/trends', label: '趨勢分析室' },
+  { href: '/topics', label: '政策議題' },
+  { href: '/news', label: '全量檢索' },
+  { href: '/hao-talks', label: '皓哥說' },
+  { href: '/research', label: '政策研究' },
+];
+
+function isActive(href: string): boolean {
+  if (href === '/') return currentPath === '/';
+  return currentPath === href || currentPath.startsWith(`${href}/`);
+}
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title} | 環策皓脈 Taiwan Environment Observatory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-ivory text-gray-800 antialiased">
+    <header class="sticky top-0 z-40 border-b border-emerald-900/10 bg-emerald-deep text-white shadow-sm">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
+        <a href="/" class="flex items-center gap-3 group">
+          <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-accent/90 font-serif text-lg font-bold text-white shadow-sm transition group-hover:bg-amber-accent">
+            脈
+          </div>
+          <div>
+            <div class="font-serif text-lg font-bold tracking-wide leading-tight">環策皓脈</div>
+            <div class="text-[11px] tracking-wider text-emerald-100/80 uppercase">
+              Taiwan Environment Observatory
+            </div>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-1" aria-label="主導覽列">
+          {navItems.map((item) => (
+            <a
+              href={item.href}
+              class:list={[
+                'rounded-md px-3.5 py-2 text-sm font-medium transition',
+                isActive(item.href)
+                  ? 'bg-white/15 text-white shadow-inner'
+                  : 'text-emerald-100/90 hover:bg-white/10 hover:text-white',
+              ]}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <button
+          id="mobile-menu-btn"
+          type="button"
+          class="md:hidden inline-flex items-center justify-center rounded-md p-2 text-emerald-100 hover:bg-white/10 hover:text-white"
+          aria-label="開啟選單"
+          aria-expanded="false"
+        >
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+      <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-emerald-dark px-4 py-2">
+        <div class="flex flex-col gap-1">
+          {navItems.map((item) => (
+            <a
+              href={item.href}
+              class:list={[
+                'rounded-md px-3 py-2 text-sm font-medium',
+                isActive(item.href) ? 'bg-white/15 text-white' : 'text-emerald-100 hover:bg-white/10',
+              ]}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
+      <slot />
+    </main>
+
+    <footer class="mt-16 border-t border-gray-200 bg-white">
+      <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-xs text-gray-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+        <div>
+          <span class="font-semibold text-emerald-deep">環策皓脈 Taiwan Environment Observatory</span>
+          <span class="mx-2 text-gray-300">|</span>
+          <span>資料來源：環境部開放資料平台（MNEWS_P_01）與歷年新聞歸檔</span>
+        </div>
+        <div>
+          累計收錄 <strong class="text-gray-700">{manifest.total_news.toLocaleString()}</strong> 篇新聞 · 最後同步：{formatTaipeiTimestamp(manifest.updated_at)}
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      if (btn && menu) {
+        btn.addEventListener('click', () => {
+          const isOpen = !menu.classList.contains('hidden');
+          menu.classList.toggle('hidden');
+          btn.setAttribute('aria-expanded', String(!isOpen));
+        });
+      }
+    </script>
+  </body>
+</html>

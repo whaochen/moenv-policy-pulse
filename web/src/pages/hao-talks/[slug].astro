@@ -1,0 +1,93 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedHaoTalks, lookupNewsByIds, formatIsoDate } from '../../lib/data';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedHaoTalks();
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'haoTalks'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const relatedNews = lookupNewsByIds(post.data.related_news);
+---
+
+<BaseLayout title={`${post.data.title} — 皓哥說`} description={post.data.summary}>
+  <article class="mx-auto max-w-3xl">
+    <a href="/hao-talks" class="text-xs font-semibold text-emerald-deep hover:underline">
+      ← 返回《皓哥說》專欄列表
+    </a>
+
+    <header class="mt-4 border-b border-gray-200 pb-6">
+      <div class="flex flex-wrap items-center gap-2 text-xs text-gray-500">
+        <span class="rounded-full bg-amber-soft px-2.5 py-0.5 font-semibold text-amber-accent">
+          皓哥說
+        </span>
+        <span class="font-mono">{formatIsoDate(post.data.date)}</span>
+      </div>
+      <h1 class="mt-3 font-serif text-3xl font-bold leading-tight text-emerald-deep sm:text-4xl">
+        {post.data.title}
+      </h1>
+      {post.data.summary && (
+        <p class="mt-3 rounded-xl border-l-4 border-amber-accent bg-amber-soft/40 p-4 text-sm leading-relaxed text-gray-700">
+          {post.data.summary}
+        </p>
+      )}
+      {post.data.topics.length > 0 && (
+        <div class="mt-4 flex flex-wrap gap-2">
+          {post.data.topics.map((topic) => (
+            <span class="rounded-full bg-emerald-soft px-3 py-1 text-xs font-medium text-emerald-deep">
+              {topic}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="prose-editorial mt-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+      <Content />
+    </div>
+
+    {relatedNews.length > 0 && (
+      <section class="mt-10 rounded-2xl border border-emerald-deep/15 bg-white p-6 shadow-sm">
+        <h2 class="font-serif text-xl font-bold text-emerald-deep">本文串連之環境部原新聞</h2>
+        <p class="mt-0.5 text-xs text-gray-500">自動依文章 Frontmatter 的 news_id 解析對應官方紀錄</p>
+        <div class="mt-4 space-y-3">
+          {relatedNews.map((news) => (
+            <div class="rounded-xl border border-gray-100 bg-ivory p-4">
+              <div class="flex flex-wrap items-center gap-2 text-xs text-gray-500">
+                <span class="font-mono font-semibold text-emerald-deep">{news.date}</span>
+                <span>·</span>
+                <span>{news.unit}</span>
+                <span class="font-mono text-gray-400">#{news.news_id}</span>
+              </div>
+              <h3 class="mt-1 text-sm font-bold text-gray-900">
+                <a
+                  href={news.source_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-emerald-deep hover:underline"
+                >
+                  {news.title} ↗
+                </a>
+              </h3>
+              {news.summary && (
+                <p class="mt-1.5 line-clamp-3 text-xs leading-relaxed text-gray-600">
+                  {news.summary}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+</BaseLayout>

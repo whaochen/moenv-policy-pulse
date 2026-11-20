@@ -1,0 +1,348 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadManifest, loadTopics } from '../lib/data';
+
+const manifest = loadManifest();
+const topics = loadTopics();
+const yearsDesc = [...manifest.years].reverse();
+---
+
+<BaseLayout title="全量新聞檢索室" description="即時搜尋 2001～2026 環境部全部 11,495+ 篇新聞，支援關鍵字、年份、政策議題與發布單位交叉篩選。">
+  <div class="mb-6">
+    <h1 class="font-serif text-3xl font-bold text-emerald-deep">全量新聞檢索室</h1>
+    <p class="mt-1.5 text-sm text-gray-600">
+      即時篩選 {manifest.date_start.slice(0, 4)}～{manifest.date_end.slice(0, 4)} 全部
+      <strong class="text-emerald-deep">{manifest.total_news.toLocaleString()}</strong> 篇環境部新聞，點擊任一筆展開閱讀抽屜載入完整摘要與官方連結。
+    </p>
+  </div>
+
+  <!-- 篩選列 -->
+  <section class="mb-6 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+    <div class="grid grid-cols-1 gap-3 md:grid-cols-12">
+      <div class="md:col-span-5">
+        <label for="search-q" class="block text-xs font-semibold text-gray-600">關鍵字（標題、單位或新聞編號）</label>
+        <input
+          id="search-q"
+          type="search"
+          placeholder="例如：碳費、PFAS、袋袋箱傳、COP31..."
+          class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-deep focus:outline-none"
+        />
+      </div>
+
+      <div class="md:col-span-2">
+        <label for="search-year" class="block text-xs font-semibold text-gray-600">年份</label>
+        <select
+          id="search-year"
+          class="mt-1 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-emerald-deep focus:outline-none"
+        >
+          <option value="">全部年份</option>
+          {yearsDesc.map((y) => (
+            <option value={y}>{y}</option>
+          ))}
+        </select>
+      </div>
+
+      <div class="md:col-span-3">
+        <label for="search-topic" class="block text-xs font-semibold text-gray-600">政策議題</label>
+        <select
+          id="search-topic"
+          class="mt-1 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-emerald-deep focus:outline-none"
+        >
+          <option value="">全部 20 大議題</option>
+          {topics.map((t) => (
+            <option value={t.slug}>{t.title}（{t.total_count.toLocaleString()}）</option>
+          ))}
+        </select>
+      </div>
+
+      <div class="md:col-span-2">
+        <label for="search-unit" class="block text-xs font-semibold text-gray-600">發布單位</label>
+        <select
+          id="search-unit"
+          class="mt-1 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-emerald-deep focus:outline-none"
+        >
+          <option value="">全部司署</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-500">
+      <span id="search-status">正在載入全量索引（約 1.9 MiB）...</span>
+      <button
+        id="search-reset"
+        type="button"
+        class="font-semibold text-emerald-deep hover:underline"
+      >
+        重設所有條件
+      </button>
+    </div>
+  </section>
+
+  <!-- 結果清單 -->
+  <section class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+    <div id="search-results" class="divide-y divide-gray-100"></div>
+
+    <div class="mt-5 flex items-center justify-between border-t border-gray-100 pt-4 text-xs">
+      <button
+        id="search-prev"
+        type="button"
+        class="rounded-md border border-gray-300 px-3.5 py-1.5 font-medium text-gray-700 disabled:opacity-40"
+      >
+        上一頁
+      </button>
+      <span id="search-page-info" class="text-gray-600"></span>
+      <button
+        id="search-next"
+        type="button"
+        class="rounded-md border border-gray-300 px-3.5 py-1.5 font-medium text-gray-700 disabled:opacity-40"
+      >
+        下一頁
+      </button>
+    </div>
+  </section>
+
+  <!-- 側邊閱讀抽屜 -->
+  <div id="news-drawer-backdrop" class="fixed inset-0 z-50 hidden bg-black/40 backdrop-blur-[1px]"></div>
+  <aside
+    id="news-drawer"
+    class="fixed right-0 top-0 z-50 hidden h-full w-full max-w-xl overflow-y-auto bg-white p-6 shadow-2xl"
+    aria-label="新聞詳情抽屜"
+  >
+    <div class="flex items-center justify-between border-b border-gray-200 pb-3">
+      <span class="text-xs font-semibold text-emerald-deep">環境部新聞全文摘要</span>
+      <button id="news-drawer-close" type="button" class="rounded-md p-1.5 text-gray-500 hover:bg-gray-100">✕</button>
+    </div>
+    <div id="news-drawer-body" class="mt-4"></div>
+  </aside>
+
+  <script
+    id="news-topic-map"
+    type="application/json"
+    set:html={JSON.stringify(Object.fromEntries(topics.map((t) => [t.slug, t.title])))}
+  />
+
+  <script>
+    const topicMapEl = document.getElementById('news-topic-map');
+    const topicMap: Record<string, string> = JSON.parse(topicMapEl?.textContent || '{}');
+
+    const qInput = document.getElementById('search-q') as HTMLInputElement;
+    const yearSelect = document.getElementById('search-year') as HTMLSelectElement;
+    const topicSelect = document.getElementById('search-topic') as HTMLSelectElement;
+    const unitSelect = document.getElementById('search-unit') as HTMLSelectElement;
+    const resetBtn = document.getElementById('search-reset') as HTMLButtonElement;
+    const statusEl = document.getElementById('search-status') as HTMLSpanElement;
+    const resultsEl = document.getElementById('search-results') as HTMLDivElement;
+    const prevBtn = document.getElementById('search-prev') as HTMLButtonElement;
+    const nextBtn = document.getElementById('search-next') as HTMLButtonElement;
+    const pageInfoEl = document.getElementById('search-page-info') as HTMLSpanElement;
+
+    const drawer = document.getElementById('news-drawer') as HTMLElement;
+    const backdrop = document.getElementById('news-drawer-backdrop') as HTMLDivElement;
+    const drawerBody = document.getElementById('news-drawer-body') as HTMLDivElement;
+    const drawerClose = document.getElementById('news-drawer-close') as HTMLButtonElement;
+
+    interface IndexItem {
+      id: string;
+      d: string;
+      t: string;
+      u: string;
+      k: string[];
+    }
+
+    let allItems: IndexItem[] = [];
+    let filtered: IndexItem[] = [];
+    let page = 1;
+    const pageSize = 25;
+    const yearCache = new Map<string, any[]>();
+
+    function escapeHtml(text: string): string {
+      return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function closeDrawer() {
+      drawer.classList.add('hidden');
+      backdrop.classList.add('hidden');
+    }
+    drawerClose.addEventListener('click', closeDrawer);
+    backdrop.addEventListener('click', closeDrawer);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDrawer();
+    });
+
+    async function openDrawer(id: string, date: string) {
+      drawer.classList.remove('hidden');
+      backdrop.classList.remove('hidden');
+      drawerBody.innerHTML = '<p class="text-sm text-gray-500">正在載入年度分片資料...</p>';
+
+      const year = (date || '').slice(0, 4) || 'unknown';
+      try {
+        let rows = yearCache.get(year);
+        if (!rows) {
+          const res = await fetch(`/data/news/${year}.json`);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          rows = await res.json();
+          yearCache.set(year, rows || []);
+        }
+        const item = (rows || []).find((r: any) => String(r.news_id) === String(id));
+        if (!item) {
+          drawerBody.innerHTML = '<p class="text-sm text-red-600">找不到該篇新聞。</p>';
+          return;
+        }
+        const kwHtml = (item.policy_keywords || [])
+          .map((kw: string) => `<span class="rounded bg-emerald-soft px-2 py-0.5 text-xs font-medium text-emerald-deep">${escapeHtml(kw)}</span>`)
+          .join('');
+        const aiTagHtml = (item.ai_tags || [])
+          .map((tag: string) => `<span class="rounded bg-amber-soft px-2 py-0.5 text-xs font-medium text-amber-accent">#${escapeHtml(tag)}</span>`)
+          .join('');
+        const attachHtml = item.attach_url
+          ? `<a href="${escapeHtml(item.attach_url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-lg border border-gray-300 px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-gray-50">下載官方附件</a>`
+          : '';
+
+        drawerBody.innerHTML = `
+          <div class="flex flex-wrap items-center gap-2 text-xs text-gray-500">
+            <span class="font-mono font-semibold text-emerald-deep">${escapeHtml(item.date)}</span>
+            <span>（民國 ${escapeHtml(item.roc_date || '')}）</span>
+            <span>·</span>
+            <span>${escapeHtml(item.unit)}</span>
+            <span>·</span>
+            <span class="font-mono text-gray-400">ID: ${escapeHtml(String(item.news_id))}</span>
+          </div>
+          <h2 class="mt-2 font-serif text-xl font-bold leading-snug text-gray-900">${escapeHtml(item.title)}</h2>
+          <div class="mt-3 flex flex-wrap gap-1.5">${kwHtml}${aiTagHtml}</div>
+          <div class="mt-5 rounded-xl border border-gray-100 bg-ivory p-4 text-sm leading-relaxed text-gray-700 whitespace-pre-line">
+            ${escapeHtml(item.summary || '（此篇歷史新聞未收錄內文摘要，請點擊下方按鈕前往環境部原文頁面閱讀。）')}
+          </div>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <a href="${escapeHtml(item.source_url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-lg bg-emerald-deep px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-emerald-dark">前往環境部官方原文 ↗</a>
+            ${attachHtml}
+          </div>
+        `;
+      } catch {
+        drawerBody.innerHTML = '<p class="text-sm text-red-600">無法載入年度分片資料，請稍後再試。</p>';
+      }
+    }
+
+    function applyFilter() {
+      const q = qInput.value.trim().toLowerCase();
+      const year = yearSelect.value;
+      const topic = topicSelect.value;
+      const unit = unitSelect.value;
+
+      filtered = allItems.filter((item) => {
+        if (year && !item.d.startsWith(year)) return false;
+        if (topic && !(item.k && item.k.includes(topic))) return false;
+        if (unit && item.u !== unit) return false;
+        if (q) {
+          const hay = `${item.t} ${item.u} ${item.id}`.toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+      page = 1;
+      renderResults();
+    }
+
+    function renderResults() {
+      const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+      page = Math.min(page, totalPages);
+      const slice = filtered.slice((page - 1) * pageSize, page * pageSize);
+
+      statusEl.textContent = `符合條件：${filtered.length.toLocaleString()} / ${allItems.length.toLocaleString()} 篇`;
+      pageInfoEl.textContent = `第 ${page} / ${totalPages} 頁`;
+      prevBtn.disabled = page <= 1;
+      nextBtn.disabled = page >= totalPages;
+
+      if (slice.length === 0) {
+        resultsEl.innerHTML = '<div class="py-12 text-center text-sm text-gray-500">查無符合條件的新聞，請嘗試放寬關鍵字或篩選條件。</div>';
+        return;
+      }
+
+      resultsEl.innerHTML = slice
+        .map((item) => {
+          const badges = (item.k || [])
+            .slice(0, 3)
+            .map((slug) => `<span class="rounded bg-emerald-soft px-2 py-0.5 text-[11px] font-medium text-emerald-deep">${escapeHtml(topicMap[slug] || slug)}</span>`)
+            .join('');
+          return `
+            <button type="button" data-id="${escapeHtml(String(item.id))}" data-date="${escapeHtml(item.d)}" class="news-row block w-full rounded-md px-2.5 py-3 text-left transition hover:bg-ivory">
+              <div class="flex flex-wrap items-center gap-2 text-xs text-gray-500">
+                <span class="font-mono font-medium text-emerald-deep">${escapeHtml(item.d)}</span>
+                <span>·</span>
+                <span>${escapeHtml(item.u)}</span>
+                ${badges}
+              </div>
+              <div class="mt-1 text-sm font-semibold text-gray-900">${escapeHtml(item.t)}</div>
+            </button>
+          `;
+        })
+        .join('');
+
+      resultsEl.querySelectorAll<HTMLButtonElement>('.news-row').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          openDrawer(btn.dataset.id || '', btn.dataset.date || '');
+        });
+      });
+    }
+
+    let debounceTimer: number | undefined;
+    qInput.addEventListener('input', () => {
+      window.clearTimeout(debounceTimer);
+      debounceTimer = window.setTimeout(applyFilter, 120);
+    });
+    yearSelect.addEventListener('change', applyFilter);
+    topicSelect.addEventListener('change', applyFilter);
+    unitSelect.addEventListener('change', applyFilter);
+    resetBtn.addEventListener('click', () => {
+      qInput.value = '';
+      yearSelect.value = '';
+      topicSelect.value = '';
+      unitSelect.value = '';
+      applyFilter();
+    });
+    prevBtn.addEventListener('click', () => {
+      if (page > 1) {
+        page -= 1;
+        renderResults();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+    nextBtn.addEventListener('click', () => {
+      page += 1;
+      renderResults();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    fetch('/data/search_index.json')
+      .then((res) => res.json())
+      .then((data: IndexItem[]) => {
+        allItems = data;
+        const unitCounts = new Map<string, number>();
+        for (const item of data) {
+          unitCounts.set(item.u, (unitCounts.get(item.u) || 0) + 1);
+        }
+        const sortedUnits = [...unitCounts.entries()]
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 40);
+        for (const [u, count] of sortedUnits) {
+          const opt = document.createElement('option');
+          opt.value = u;
+          opt.textContent = `${u}（${count}）`;
+          unitSelect.appendChild(opt);
+        }
+
+        // Apply URL query parameters if present
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('q')) qInput.value = params.get('q') || '';
+        if (params.get('year')) yearSelect.value = params.get('year') || '';
+        if (params.get('topic')) topicSelect.value = params.get('topic') || '';
+        applyFilter();
+      })
+      .catch(() => {
+        statusEl.textContent = '載入檢索索引失敗，請重新整理頁面。';
+      });
+  </script>
+</BaseLayout>

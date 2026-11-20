@@ -1,0 +1,313 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadTrends } from '../lib/data';
+
+const trends = loadTrends();
+const defaultSelectedSlugs = [...trends.topic_yearly_matrix.topics]
+  .map((t) => ({ slug: t.slug, total: t.counts.reduce((a, b) => a + b, 0) }))
+  .sort((a, b) => b.total - a.total)
+  .slice(0, 5)
+  .map((t) => t.slug);
+---
+
+<BaseLayout title="趨勢分析室" description="2001～2026 環境部歷年政策聲量走勢、近 30 天議題動能與各司署發布量排行。">
+  <div class="mb-6">
+    <h1 class="font-serif text-3xl font-bold text-emerald-deep">趨勢分析室</h1>
+    <p class="mt-1.5 text-sm text-gray-600">
+      互動疊加對比 20 大政策議題 25 年聲量走勢、近 30 天升溫／降溫動能與各司署發布排行。
+    </p>
+  </div>
+
+  <!-- 2001~2026 歷年政策聲量折線/面積圖 -->
+  <section class="mb-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div>
+        <h2 class="font-serif text-xl font-bold text-emerald-deep">
+          2001～2026 歷年政策聲量走勢
+        </h2>
+        <p class="text-xs text-gray-500">可複選任意多個政策議題進行跨年度疊加對比</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <div class="inline-flex rounded-lg border border-gray-200 bg-ivory p-0.5 text-xs">
+          <button type="button" data-range="all" class="range-btn rounded-md bg-emerald-deep px-3 py-1.5 font-semibold text-white">全部</button>
+          <button type="button" data-range="10" class="range-btn rounded-md px-3 py-1.5 font-medium text-gray-600 hover:text-emerald-deep">近 10 年</button>
+          <button type="button" data-range="5" class="range-btn rounded-md px-3 py-1.5 font-medium text-gray-600 hover:text-emerald-deep">近 5 年</button>
+        </div>
+        <div class="inline-flex rounded-lg border border-gray-200 bg-ivory p-0.5 text-xs">
+          <button type="button" data-chart-style="line" class="style-btn rounded-md bg-emerald-deep px-3 py-1.5 font-semibold text-white">折線圖</button>
+          <button type="button" data-chart-style="area" class="style-btn rounded-md px-3 py-1.5 font-medium text-gray-600 hover:text-emerald-deep">面積圖</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 flex flex-wrap gap-2" id="topic-selector">
+      {trends.topic_yearly_matrix.topics.map((topic) => {
+        const checked = defaultSelectedSlugs.includes(topic.slug);
+        return (
+          <label
+            class:list={[
+              'topic-pill inline-flex cursor-pointer items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition select-none',
+              checked
+                ? 'border-emerald-deep bg-emerald-soft text-emerald-deep'
+                : 'border-gray-200 bg-white text-gray-600 hover:border-emerald-deep/40',
+            ]}
+          >
+            <input
+              type="checkbox"
+              value={topic.slug}
+              checked={checked}
+              class="sr-only topic-checkbox"
+            />
+            <span>{topic.title}</span>
+          </label>
+        );
+      })}
+    </div>
+
+    <div id="yearly-trend-chart" class="mt-5 h-[420px] w-full"></div>
+  </section>
+
+  <!-- 近 30 天 vs 前 30 天動能對比表 & 發布單位聲量排行 -->
+  <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+    <section class="lg:col-span-7 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div class="mb-4 flex items-baseline justify-between">
+        <div>
+          <h2 class="font-serif text-xl font-bold text-emerald-deep">近 30 天 vs 前 30 天動能對比</h2>
+          <p class="mt-0.5 text-xs text-gray-500">
+            當期：{trends.last_30_days.window_start}～{trends.last_30_days.window_end}（共 {trends.last_30_days.current_total} 篇）
+            ／ 前期：{trends.last_30_days.prev_start}～{trends.last_30_days.prev_end}（共 {trends.last_30_days.previous_total} 篇）
+          </p>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 text-sm">
+          <thead>
+            <tr class="bg-ivory text-left text-xs font-semibold text-gray-600">
+              <th class="px-3 py-2.5">政策議題</th>
+              <th class="px-3 py-2.5">群組</th>
+              <th class="px-3 py-2.5 text-right">近 30 天</th>
+              <th class="px-3 py-2.5 text-right">前 30 天</th>
+              <th class="px-3 py-2.5 text-right">增減變化</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            {trends.last_30_days.topics.map((row) => (
+              <tr class="hover:bg-ivory/70">
+                <td class="px-3 py-2 font-medium">
+                  <a href={`/topics/${row.slug}`} class="text-emerald-deep hover:underline">
+                    {row.title}
+                  </a>
+                </td>
+                <td class="px-3 py-2 text-xs text-gray-500">{row.group}</td>
+                <td class="px-3 py-2 text-right font-mono font-semibold text-gray-900">{row.current}</td>
+                <td class="px-3 py-2 text-right font-mono text-gray-500">{row.previous}</td>
+                <td class="px-3 py-2 text-right font-mono text-xs">
+                  <span
+                    class:list={[
+                      'inline-block rounded-full px-2 py-0.5 font-semibold',
+                      row.delta > 0
+                        ? 'bg-amber-soft text-amber-accent'
+                        : row.delta < 0
+                          ? 'bg-gray-100 text-gray-600'
+                          : 'text-gray-400',
+                    ]}
+                  >
+                    {row.delta > 0 ? `+${row.delta}` : row.delta} ({row.delta > 0 ? '+' : ''}{row.pct_change}%)
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="lg:col-span-5 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div class="flex items-center justify-between gap-2">
+        <div>
+          <h2 class="font-serif text-xl font-bold text-emerald-deep">發布單位聲量排行</h2>
+          <p class="mt-0.5 text-xs text-gray-500">環境部各司署發布量前 15 名</p>
+        </div>
+        <div class="inline-flex rounded-lg border border-gray-200 bg-ivory p-0.5 text-xs">
+          <button type="button" data-unit-mode="recent_1y" class="unit-btn rounded-md bg-emerald-deep px-2.5 py-1 font-semibold text-white">近一年</button>
+          <button type="button" data-unit-mode="all_time" class="unit-btn rounded-md px-2.5 py-1 font-medium text-gray-600">歷年累計</button>
+        </div>
+      </div>
+
+      <div id="unit-ranking-chart" class="mt-4 h-[520px] w-full"></div>
+    </section>
+  </div>
+
+  <script id="trends-payload" type="application/json" set:html={JSON.stringify(trends)} />
+
+  <script>
+    import * as echarts from 'echarts';
+
+    const payloadEl = document.getElementById('trends-payload');
+    const yearlyEl = document.getElementById('yearly-trend-chart');
+    const unitEl = document.getElementById('unit-ranking-chart');
+
+    if (payloadEl && yearlyEl && unitEl) {
+      const trends = JSON.parse(payloadEl.textContent || '{}');
+      const yearlyChart = echarts.init(yearlyEl);
+      const unitChart = echarts.init(unitEl);
+
+      const palette = [
+        '#0F4C3A', '#D97706', '#2563EB', '#DC2626', '#7C3AED',
+        '#059669', '#DB2777', '#0891B2', '#65A30D', '#EA580C',
+      ];
+
+      let currentRange: 'all' | '10' | '5' = 'all';
+      let currentStyle: 'line' | 'area' = 'line';
+      let unitMode: 'recent_1y' | 'all_time' = 'recent_1y';
+
+      function getSelectedSlugs(): string[] {
+        return Array.from(document.querySelectorAll<HTMLInputElement>('.topic-checkbox'))
+          .filter((cb) => cb.checked)
+          .map((cb) => cb.value);
+      }
+
+      function renderYearlyChart() {
+        const allYears: string[] = trends.topic_yearly_matrix.years || [];
+        let startIdx = 0;
+        if (currentRange === '10') startIdx = Math.max(0, allYears.length - 10);
+        if (currentRange === '5') startIdx = Math.max(0, allYears.length - 5);
+        const years = allYears.slice(startIdx);
+
+        const selected = new Set(getSelectedSlugs());
+        const topics = (trends.topic_yearly_matrix.topics || []).filter((t: any) =>
+          selected.has(t.slug)
+        );
+
+        const series = topics.map((t: any, idx: number) => ({
+          name: t.title,
+          type: 'line',
+          smooth: true,
+          symbolSize: 6,
+          data: (t.counts || []).slice(startIdx),
+          lineStyle: { width: 2.5, color: palette[idx % palette.length] },
+          itemStyle: { color: palette[idx % palette.length] },
+          areaStyle: currentStyle === 'area' ? { opacity: 0.18 } : undefined,
+        }));
+
+        yearlyChart.setOption(
+          {
+            tooltip: { trigger: 'axis' },
+            legend: { bottom: 0, type: 'scroll' },
+            grid: { left: 48, right: 20, top: 20, bottom: 52 },
+            xAxis: {
+              type: 'category',
+              data: years,
+              boundaryGap: false,
+              axisLabel: { color: '#4B5563' },
+            },
+            yAxis: {
+              type: 'value',
+              splitLine: { lineStyle: { color: '#F3F4F6' } },
+              axisLabel: { color: '#6B7280' },
+            },
+            series,
+          },
+          true
+        );
+      }
+
+      function renderUnitChart() {
+        const list = (trends.unit_ranking?.[unitMode] || []).slice(0, 15).reverse();
+        unitChart.setOption(
+          {
+            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+            grid: { left: 135, right: 32, top: 10, bottom: 24 },
+            xAxis: {
+              type: 'value',
+              splitLine: { lineStyle: { color: '#F3F4F6' } },
+              axisLabel: { color: '#6B7280', fontSize: 11 },
+            },
+            yAxis: {
+              type: 'category',
+              data: list.map((r: any) => r.unit.replace(/^環境部/, '')),
+              axisLine: { show: false },
+              axisTick: { show: false },
+              axisLabel: { color: '#1F2937', fontSize: 11 },
+            },
+            series: [
+              {
+                type: 'bar',
+                barWidth: 16,
+                data: list.map((r: any) => r.count),
+                itemStyle: {
+                  color: unitMode === 'recent_1y' ? '#0F4C3A' : '#D97706',
+                  borderRadius: [0, 5, 5, 0],
+                },
+                label: { show: true, position: 'right', fontSize: 11, color: '#374151' },
+              },
+            ],
+          },
+          true
+        );
+      }
+
+      document.querySelectorAll<HTMLInputElement>('.topic-checkbox').forEach((cb) => {
+        cb.addEventListener('change', () => {
+          const label = cb.closest('label');
+          if (label) {
+            label.classList.toggle('border-emerald-deep', cb.checked);
+            label.classList.toggle('bg-emerald-soft', cb.checked);
+            label.classList.toggle('text-emerald-deep', cb.checked);
+            label.classList.toggle('border-gray-200', !cb.checked);
+            label.classList.toggle('bg-white', !cb.checked);
+            label.classList.toggle('text-gray-600', !cb.checked);
+          }
+          renderYearlyChart();
+        });
+      });
+
+      document.querySelectorAll<HTMLButtonElement>('.range-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          currentRange = (btn.dataset.range as 'all' | '10' | '5') || 'all';
+          document.querySelectorAll('.range-btn').forEach((b) => {
+            b.classList.remove('bg-emerald-deep', 'text-white', 'font-semibold');
+            b.classList.add('text-gray-600', 'font-medium');
+          });
+          btn.classList.add('bg-emerald-deep', 'text-white', 'font-semibold');
+          btn.classList.remove('text-gray-600', 'font-medium');
+          renderYearlyChart();
+        });
+      });
+
+      document.querySelectorAll<HTMLButtonElement>('.style-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          currentStyle = (btn.dataset.chartStyle as 'line' | 'area') || 'line';
+          document.querySelectorAll('.style-btn').forEach((b) => {
+            b.classList.remove('bg-emerald-deep', 'text-white', 'font-semibold');
+            b.classList.add('text-gray-600', 'font-medium');
+          });
+          btn.classList.add('bg-emerald-deep', 'text-white', 'font-semibold');
+          btn.classList.remove('text-gray-600', 'font-medium');
+          renderYearlyChart();
+        });
+      });
+
+      document.querySelectorAll<HTMLButtonElement>('.unit-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          unitMode = (btn.dataset.unitMode as 'recent_1y' | 'all_time') || 'recent_1y';
+          document.querySelectorAll('.unit-btn').forEach((b) => {
+            b.classList.remove('bg-emerald-deep', 'text-white', 'font-semibold');
+            b.classList.add('text-gray-600', 'font-medium');
+          });
+          btn.classList.add('bg-emerald-deep', 'text-white', 'font-semibold');
+          btn.classList.remove('text-gray-600', 'font-medium');
+          renderUnitChart();
+        });
+      });
+
+      renderYearlyChart();
+      renderUnitChart();
+      window.addEventListener('resize', () => {
+        yearlyChart.resize();
+        unitChart.resize();
+      });
+    }
+  </script>
+</BaseLayout>

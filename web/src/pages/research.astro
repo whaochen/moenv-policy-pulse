@@ -1,0 +1,183 @@
+---
+import { marked } from 'marked';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadResearch } from '../lib/data';
+
+const research = loadResearch();
+
+const renderedReports = research.reports.map((rep) => ({
+  ...rep,
+  html: marked.parse(rep.body_markdown) as string,
+}));
+---
+
+<BaseLayout title="政策研究專區" description="環境部 25 年新聞歸檔深度政策研究報告與結構化 v2 統計趨勢圖表。">
+  <div class="mb-8">
+    <h1 class="font-serif text-3xl font-bold text-emerald-deep">政策研究專區</h1>
+    <p class="mt-1.5 text-sm text-gray-600">
+      彙整 {research.report_count} 篇深度環境政策研究報告與 {research.dataset_count} 組結構化統計資料集（`.v2.json`）。
+    </p>
+  </div>
+
+  <!-- 結構化 v2 資料集互動圖表 -->
+  {research.datasets.length > 0 && (
+    <section class="mb-10">
+      <h2 class="mb-4 font-serif text-2xl font-bold text-emerald-deep">
+        結構化政策研究統計圖表（v2 資料集）
+      </h2>
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {research.datasets.map((ds, idx) => (
+          <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="rounded-full bg-emerald-soft px-2.5 py-0.5 text-xs font-semibold text-emerald-deep">
+                {ds.research_id}
+              </span>
+              <span class="text-xs text-gray-500">
+                涵蓋：{ds.scope?.date_from} ～ {ds.scope?.date_to}
+              </span>
+            </div>
+            <h3 class="mt-2 font-serif text-xl font-bold text-gray-900">
+              {ds.topic?.name_zh || ds.research_id}
+            </h3>
+            <p class="mt-1 text-xs leading-relaxed text-gray-600">
+              {ds.topic?.description}
+            </p>
+            <div class="mt-3 flex flex-wrap gap-4 text-xs text-gray-600">
+              <span>總新聞數：<strong class="text-emerald-deep">{ds.statistics?.total_articles ?? ds.scope?.article_count ?? 0}</strong> 篇</span>
+              {ds.statistics?.peak_year && (
+                <span>高峰年份：<strong class="text-amber-accent">{ds.statistics.peak_year.year}</strong>（{ds.statistics.peak_year.count} 篇）</span>
+              )}
+            </div>
+            <div id={`research-chart-${idx}`} class="mt-4 h-[280px] w-full"></div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- 深度政策研究報告列表 -->
+  <section>
+    <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <h2 class="font-serif text-2xl font-bold text-emerald-deep">
+        深度研究報告（{renderedReports.length} 篇）
+      </h2>
+      <input
+        id="research-filter"
+        type="search"
+        placeholder="篩選研究主題或關鍵字..."
+        class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:border-emerald-deep focus:outline-none sm:w-64"
+      />
+    </div>
+
+    <div class="space-y-4" id="research-report-list">
+      {renderedReports.map((rep) => (
+        <details
+          id={rep.slug}
+          data-search={`${rep.topic} ${rep.issue_type} ${rep.aliases.join(' ')} ${rep.summary}`.toLowerCase()}
+          class="research-card group rounded-2xl border border-gray-200 bg-white shadow-sm open:border-emerald-deep/40"
+        >
+          <summary class="cursor-pointer list-none p-5 sm:p-6">
+            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="rounded-full bg-emerald-soft px-2.5 py-0.5 text-xs font-semibold text-emerald-deep">
+                  {rep.issue_type || '政策研究'}
+                </span>
+                <h3 class="font-serif text-lg font-bold text-gray-900 group-hover:text-emerald-deep">
+                  {rep.topic}
+                </h3>
+              </div>
+              <span class="text-xs font-mono text-gray-500">
+                涵蓋 {rep.coverage_start} ～ {rep.coverage_end || rep.updated}
+              </span>
+            </div>
+            <p class="mt-2 text-sm leading-relaxed text-gray-600">
+              {rep.summary}
+            </p>
+            <div class="mt-3 flex items-center justify-between text-xs">
+              <div class="flex flex-wrap gap-1.5">
+                {rep.aliases.slice(0, 6).map((a) => (
+                  <span class="rounded bg-ivory px-2 py-0.5 text-gray-600">{a}</span>
+                ))}
+              </div>
+              <span class="font-semibold text-emerald-deep shrink-0 ml-2">展開全文 ▾</span>
+            </div>
+          </summary>
+
+          <div class="border-t border-gray-100 px-5 py-6 sm:px-8">
+            <div class="prose-editorial" set:html={rep.html} />
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <script
+    id="research-datasets-payload"
+    type="application/json"
+    set:html={JSON.stringify(research.datasets)}
+  />
+
+  <script>
+    import * as echarts from 'echarts';
+
+    const payloadEl = document.getElementById('research-datasets-payload');
+    if (payloadEl) {
+      const datasets = JSON.parse(payloadEl.textContent || '[]');
+      const charts: echarts.ECharts[] = [];
+
+      datasets.forEach((ds: any, idx: number) => {
+        const el = document.getElementById(`research-chart-${idx}`);
+        const series = (ds.trend_series || [])[0];
+        if (!el || !series) return;
+        const points = series.points || [];
+        const chart = echarts.init(el);
+        chart.setOption({
+          tooltip: { trigger: 'axis' },
+          grid: { left: 42, right: 16, top: 16, bottom: 28 },
+          xAxis: {
+            type: 'category',
+            data: points.map((p: any) => p.period),
+            axisLabel: { color: '#4B5563', fontSize: 11 },
+          },
+          yAxis: {
+            type: 'value',
+            splitLine: { lineStyle: { color: '#F3F4F6' } },
+          },
+          series: [
+            {
+              name: series.label || '年度新聞數',
+              type: 'line',
+              smooth: true,
+              data: points.map((p: any) => p.value),
+              lineStyle: { width: 2.5, color: idx % 2 === 0 ? '#0F4C3A' : '#D97706' },
+              itemStyle: { color: idx % 2 === 0 ? '#0F4C3A' : '#D97706' },
+              areaStyle: { opacity: 0.14 },
+            },
+          ],
+        });
+        charts.push(chart);
+      });
+
+      window.addEventListener('resize', () => charts.forEach((c) => c.resize()));
+    }
+
+    const filterInput = document.getElementById('research-filter') as HTMLInputElement | null;
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.research-card'));
+    filterInput?.addEventListener('input', () => {
+      const q = (filterInput.value || '').trim().toLowerCase();
+      cards.forEach((card) => {
+        const hay = card.dataset.search || '';
+        card.classList.toggle('hidden', Boolean(q && !hay.includes(q)));
+      });
+    });
+
+    // Auto-open card if linked via #slug hash
+    if (window.location.hash) {
+      const target = document.getElementById(window.location.hash.slice(1)) as HTMLDetailsElement | null;
+      if (target && target.tagName === 'DETAILS') {
+        target.open = true;
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  </script>
+</BaseLayout>

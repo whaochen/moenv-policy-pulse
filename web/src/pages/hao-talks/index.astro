@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedHaoTalks, formatIsoDate } from '../../lib/data';
+
+const posts = await getPublishedHaoTalks();
+---
+
+<BaseLayout title="《皓哥說》專欄" description="《皓哥說》環境政策專欄：聚焦碳費、淨零轉型、資源循環與環境治理的現場觀點。">
+  <div class="mb-8">
+    <span class="inline-flex rounded-full bg-amber-soft px-3 py-1 text-xs font-semibold text-amber-accent">
+      原創專欄 · 政策評析
+    </span>
+    <h1 class="mt-2 font-serif text-3xl font-bold text-emerald-deep">《皓哥說》專欄</h1>
+    <p class="mt-1.5 text-sm text-gray-600">
+      以環境政策實務視角解讀法規脈絡、制度轉折與關鍵新聞背後的治理訊號。
+    </p>
+  </div>
+
+  {posts.length > 0 ? (
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => (
+        <a
+          href={`/hao-talks/${post.id}`}
+          class="group flex flex-col justify-between rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-deep/40 hover:shadow-md"
+        >
+          <div>
+            <div class="flex items-center justify-between text-xs text-gray-500">
+              <span class="font-mono">{formatIsoDate(post.data.date)}</span>
+              {post.data.related_news.length > 0 && (
+                <span class="text-emerald-deep">
+                  串連 {post.data.related_news.length} 篇新聞
+                </span>
+              )}
+            </div>
+            <h2 class="mt-3 font-serif text-xl font-bold leading-snug text-gray-900 group-hover:text-emerald-deep">
+              {post.data.title}
+            </h2>
+            <p class="mt-2.5 text-sm leading-relaxed text-gray-600">
+              {post.data.summary}
+            </p>
+          </div>
+          {post.data.topics.length > 0 && (
+            <div class="mt-5 flex flex-wrap gap-1.5 border-t border-gray-100 pt-3">
+              {post.data.topics.map((topic) => (
+                <span class="rounded bg-emerald-soft px-2 py-0.5 text-xs font-medium text-emerald-deep">
+                  {topic}
+                </span>
+              ))}
+            </div>
+          )}
+        </a>
+      ))}
+    </div>
+  ) : (
+    <div class="rounded-2xl border border-dashed border-emerald-deep/30 bg-white p-12 text-center shadow-sm">
+      <div class="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full bg-amber-soft font-serif text-xl font-bold text-amber-accent">
+        皓
+      </div>
+      <h2 class="mt-4 font-serif text-2xl font-bold text-emerald-deep">專欄籌備中</h2>
+      <p class="mx-auto mt-2 max-w-md text-sm leading-relaxed text-gray-600">
+        目前尚無公開發布的專欄文章。於 Obsidian 的 <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs">04_皓哥說/</code> 將文章狀態設為 <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs">status: published</code> 並推送後，專欄將自動上線。
+      </p>
+    </div>
+  )}
+</BaseLayout>
