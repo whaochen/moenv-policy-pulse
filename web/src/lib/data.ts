@@ -274,7 +274,7 @@ export function lookupNewsByIds(ids: (string | number)[]): NewsRecord[] {
 }
 
 /**
- * Strict publish gate for《皓哥說》:
+ * Strict publish gate for《晧哥說》:
  * - Excludes any file starting with `_` or `00_` (templates / internal candidate radar)
  * - Includes ONLY entries with `status === 'published'`
  */

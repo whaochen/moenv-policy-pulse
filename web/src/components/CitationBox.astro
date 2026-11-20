@@ -30,7 +30,7 @@ const uid = `cite-${Math.random().toString(36).slice(2, 9)}`;
   </div>
 
   <div class="mt-3 rounded-xl border border-gray-200 bg-ivory p-3.5 font-mono text-xs leading-relaxed text-gray-800 break-all cite-preview">
-    環策皓脈（{year}）。〈{title}〉。環策皓脈。
+    環策晧脈（{year}）。〈{title}〉。環策晧脈。
   </div>
 
   <div class="mt-3 flex flex-wrap items-center justify-between gap-2">
@@ -61,9 +61,9 @@ const uid = `cite-${Math.random().toString(36).slice(2, 9)}`;
     function formatCitation(): string {
       const url = window.location.href;
       if (mode === 'apa') {
-        return `環策皓脈 (${year}). ${title}. 環策皓脈 Taiwan Environment Observatory. ${url}`;
+        return `環策晧脈 (${year}). ${title}. 環策晧脈 Taiwan Environment Observatory. ${url}`;
       }
-      return `環策皓脈（${year}）。〈${title}〉。環策皓脈。${url}`;
+      return `環策晧脈（${year}）。〈${title}〉。環策晧脈。${url}`;
     }
 
     function update() {

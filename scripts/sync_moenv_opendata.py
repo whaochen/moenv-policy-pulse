@@ -401,8 +401,8 @@ def resolve_official_article_urls(
 
 
 def write_candidate_radar(vault: Path, items: list[indexer.NewsItem], generated_at: str) -> Path:
-    """Generate 04_皓哥說/00_待把脈候選雷達.md from high-signal news in the last 14 days."""
-    radar_path = vault / "04_皓哥說" / "00_待把脈候選雷達.md"
+    """Generate 04_晧哥說/00_待把脈候選雷達.md from high-signal news in the last 14 days."""
+    radar_path = vault / "04_晧哥說" / "00_待把脈候選雷達.md"
     radar_path.parent.mkdir(parents=True, exist_ok=True)
 
     dates = sorted(item.date for item in items if item.date)
@@ -441,7 +441,7 @@ def write_candidate_radar(vault: Path, items: list[indexer.NewsItem], generated_
         'title: "待把脈候選雷達（近 14 天高政策訊號新聞）"',
         f"date: {window_end}",
         "status: draft",
-        'summary: "系統自動從近 14 天環境部新聞篩選具高政策訊號之候選題目，供《皓哥說》把脈挑題使用。"',
+        'summary: "系統自動從近 14 天環境部新聞篩選具高政策訊號之候選題目，供《晧哥說》把脈挑題使用。"',
         "---",
         "",
         "# 待把脈候選雷達（近 14 天高政策訊號）",

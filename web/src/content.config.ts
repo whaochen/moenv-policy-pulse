@@ -4,7 +4,7 @@ import { glob } from 'astro/loaders';
 const haoTalks = defineCollection({
   loader: glob({
     pattern: '**/*.md',
-    base: '../04_皓哥說',
+    base: '../04_晧哥說',
   }),
   schema: z.object({
     title: z.string(),

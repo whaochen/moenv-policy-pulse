@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title,
-  description = '環策皓脈（Taiwan Environment Observatory）— 從環境部 25 年、11,496+ 篇新聞中為台灣環境政策找脈絡、把脈、把關的智庫研究入口。',
+  description = '環策晧脈（Taiwan Environment Observatory）— 從環境部 25 年、11,496+ 篇新聞中為台灣環境政策找脈絡、把脈、把關的智庫研究入口。',
 } = Astro.props;
 const currentPath = Astro.url.pathname;
 const manifest = loadManifest();
@@ -18,7 +18,7 @@ const logoSrc = findPublicImage('logo');
 
 const navItems = [
   { href: '/', label: '首頁' },
-  { href: '/hao-talks', label: '皓哥說' },
+  { href: '/hao-talks', label: '晧哥說' },
   { href: '/policy-map', label: '政策神經網' },
   { href: '/trends', label: '趨勢脈絡' },
   { href: '/news', label: '全量新聞' },
@@ -39,7 +39,7 @@ function isActive(href: string): boolean {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <title>{title} | 環策皓脈 Taiwan Environment Observatory</title>
+    <title>{title} | 環策晧脈 Taiwan Environment Observatory</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -54,20 +54,22 @@ function isActive(href: string): boolean {
           {logoSrc ? (
             <img
               src={logoSrc}
-              alt="環策皓脈 Logo"
-              class="h-9 w-9 rounded-lg object-contain bg-white/95 p-0.5 shadow-sm"
+              alt="環策晧脈 HAO Policy Intelligence"
+              class="h-10 w-auto max-w-[210px] rounded-lg bg-white/95 px-2.5 py-1 object-contain shadow-sm transition group-hover:bg-white"
             />
           ) : (
-            <div class="flex h-9 w-9 items-center justify-center rounded-lg border border-amber-300/40 bg-amber-accent font-serif text-lg font-bold text-white shadow-sm transition group-hover:brightness-110">
-              脈
-            </div>
+            <>
+              <div class="flex h-9 w-9 items-center justify-center rounded-lg border border-amber-300/40 bg-amber-accent font-serif text-lg font-bold text-white shadow-sm transition group-hover:brightness-110">
+                脈
+              </div>
+              <div>
+                <div class="font-serif text-lg font-bold tracking-wide leading-tight">環策晧脈</div>
+                <div class="text-[10px] tracking-[0.14em] text-emerald-100/80 uppercase">
+                  Taiwan Environment Observatory
+                </div>
+              </div>
+            </>
           )}
-          <div>
-            <div class="font-serif text-lg font-bold tracking-wide leading-tight">環策皓脈</div>
-            <div class="text-[10px] tracking-[0.14em] text-emerald-100/80 uppercase">
-              Taiwan Environment Observatory
-            </div>
-          </div>
         </a>
 
         <nav class="hidden lg:flex items-center gap-0.5" aria-label="主導覽列">
@@ -125,7 +127,7 @@ function isActive(href: string): boolean {
         <div class="flex flex-col gap-3 text-xs leading-relaxed text-gray-600 lg:flex-row lg:items-center lg:justify-between">
           <div class="max-w-4xl">
             資料來源：中華民國環境部（環境部新聞專區及環境資料開放平臺
-            <code class="rounded bg-gray-100 px-1 py-0.5 text-[11px]">MNEWS_P_01</code>），依政府資料開放授權條款引用｜本站為獨立政策觀察與研究平台，非環境部官方網站｜《皓哥說》與脈絡分析 © 環策皓脈。
+            <code class="rounded bg-gray-100 px-1 py-0.5 text-[11px]">MNEWS_P_01</code>），依政府資料開放授權條款引用｜本站為獨立政策觀察與研究平台，非環境部官方網站｜《晧哥說》與脈絡分析 © 環策晧脈。
             <a href="/about" class="ml-1.5 font-semibold text-emerald-deep underline underline-offset-2 hover:text-emerald-dark">
               完整資料宣告與免責聲明 →
             </a>

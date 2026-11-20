@@ -133,7 +133,7 @@ def test_sync_mode_a_gemini_mock_success(tmp_path: Path, monkeypatch: pytest.Mon
     assert new_row["source_url"] == ""
     assert new_row["source_url_status"] == "pending_official_link"
     assert new_row["attach_url"] == "https://data.moenv.gov.tw/files/carbon-fee.pdf"
-    assert (tmp_path / "04_皓哥說" / "00_待把脈候選雷達.md").is_file()
+    assert (tmp_path / "04_晧哥說" / "00_待把脈候選雷達.md").is_file()
     assert "碳費子法" in new_row["ai_tags"]
     assert len(new_row["ai_tags"]) == 3
     assert "碳費徵收" in new_row["ai_policy_keywords"]

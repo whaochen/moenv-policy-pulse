@@ -1,19 +1,29 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getPublishedHaoTalks, formatIsoDate } from '../../lib/data';
+import { getPublishedHaoTalks, findPublicImage, formatIsoDate } from '../../lib/data';
 
 const posts = await getPublishedHaoTalks();
+const badgeSrc = findPublicImage('hao-talks-badge');
 ---
 
-<BaseLayout title="《皓哥說》專欄" description="《皓哥說》環境政策專欄：聚焦碳費、淨零轉型、資源循環與環境治理的現場觀點。">
-  <div class="mb-8">
-    <span class="inline-flex rounded-full bg-amber-soft px-3 py-1 text-xs font-semibold text-amber-accent">
-      原創專欄 · 政策評析
-    </span>
-    <h1 class="mt-2 font-serif text-3xl font-bold text-emerald-deep">《皓哥說》專欄</h1>
-    <p class="mt-1.5 text-sm text-gray-600">
-      以環境政策實務視角解讀法規脈絡、制度轉折與關鍵新聞背後的治理訊號。
-    </p>
+<BaseLayout title="《晧哥說》專欄" description="《晧哥說》環境政策專欄：聚焦碳費、淨零轉型、資源循環與環境治理的現場觀點。">
+  <div class="mb-8 flex flex-col gap-4 rounded-3xl border border-emerald-900/10 bg-white p-6 shadow-xs sm:flex-row sm:items-center sm:justify-between sm:p-7">
+    <div>
+      <span class="inline-flex rounded-full bg-amber-soft px-3 py-1 text-xs font-semibold text-amber-accent">
+        原創專欄 · 政策評析（共 {posts.length} 篇）
+      </span>
+      <h1 class="mt-2 font-serif text-3xl font-bold text-emerald-deep">《晧哥說》專欄</h1>
+      <p class="mt-1.5 text-sm text-gray-600">
+        以環境政策實務視角解讀法規脈絡、制度轉折與關鍵新聞背後的治理訊號。
+      </p>
+    </div>
+    {badgeSrc && (
+      <img
+        src={badgeSrc}
+        alt="晧哥說專欄視覺"
+        class="h-24 w-auto shrink-0 self-start object-contain sm:self-center"
+      />
+    )}
   </div>
 
   {posts.length > 0 ? (
@@ -54,11 +64,11 @@ const posts = await getPublishedHaoTalks();
   ) : (
     <div class="rounded-2xl border border-dashed border-emerald-deep/30 bg-white p-12 text-center shadow-sm">
       <div class="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full bg-amber-soft font-serif text-xl font-bold text-amber-accent">
-        皓
+        晧
       </div>
       <h2 class="mt-4 font-serif text-2xl font-bold text-emerald-deep">專欄籌備中</h2>
       <p class="mx-auto mt-2 max-w-md text-sm leading-relaxed text-gray-600">
-        目前尚無公開發布的專欄文章。於 Obsidian 的 <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs">04_皓哥說/</code> 將文章狀態設為 <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs">status: published</code> 並推送後，專欄將自動上線。
+        目前尚無公開發布的專欄文章。於 Obsidian 的 <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs">04_晧哥說/</code> 將文章狀態設為 <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs">status: published</code> 並推送後，專欄將自動上線。
       </p>
     </div>
   )}

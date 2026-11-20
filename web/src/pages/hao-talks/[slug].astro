@@ -23,16 +23,16 @@ const portraitSrc = findPublicImage('hao-portrait');
 const pubYear = formatIsoDate(post.data.date).slice(0, 4);
 ---
 
-<BaseLayout title={`${post.data.title} — 皓哥說`} description={post.data.summary}>
+<BaseLayout title={`${post.data.title} — 晧哥說`} description={post.data.summary}>
   <article class="mx-auto max-w-3xl">
     <a href="/hao-talks" class="text-xs font-semibold text-emerald-deep hover:underline">
-      ← 返回《皓哥說》專欄列表
+      ← 返回《晧哥說》專欄列表
     </a>
 
     <header class="mt-4 border-b border-gray-200 pb-6">
       <div class="flex flex-wrap items-center gap-2 text-xs text-gray-500">
         <span class="rounded-full bg-amber-soft px-2.5 py-0.5 font-semibold text-amber-accent">
-          皓哥說
+          晧哥說
         </span>
         <span class="font-mono">{formatIsoDate(post.data.date)}</span>
       </div>
@@ -62,14 +62,14 @@ const pubYear = formatIsoDate(post.data.date).slice(0, 4);
     <!-- 作者卡 -->
     <div class="mt-6 flex items-center gap-4 rounded-2xl border border-emerald-deep/15 bg-white p-4 shadow-xs">
       {portraitSrc ? (
-        <img src={portraitSrc} alt="環策皓脈主筆" class="h-14 w-14 shrink-0 rounded-xl object-cover" />
+        <img src={portraitSrc} alt="環策晧脈主筆" class="h-16 w-16 shrink-0 rounded-xl object-cover object-top" />
       ) : (
         <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-emerald-deep font-serif text-xl font-bold text-amber-200">
-          皓
+          晧
         </div>
       )}
       <div class="text-xs leading-relaxed text-gray-600">
-        <div class="font-serif text-sm font-bold text-emerald-deep">環策皓脈 ·《皓哥說》專欄</div>
+        <div class="font-serif text-sm font-bold text-emerald-deep">環策晧脈 ·《晧哥說》專欄</div>
         <p class="mt-0.5">從 25 年環境部新聞脈絡為政策把脈、把關。觀點屬獨立政策評析，法規細節請以環境部正式公告為準。</p>
       </div>
     </div>

@@ -712,8 +712,8 @@ def export_web_data(vault: Path, output_dir: Path | None = None) -> dict[str, An
     )
 
     methodology_meta = {
-        "project": "環策皓脈（Taiwan Environment Observatory）",
-        "license": "資料來源：中華民國環境部（環境部新聞專區及環境資料開放平臺 MNEWS_P_01），依政府資料開放授權條款（OGDL 1.0）引用；原創分類口徑、分析與視覺化歸屬環策皓脈。",
+        "project": "環策晧脈（Taiwan Environment Observatory）",
+        "license": "資料來源：中華民國環境部（環境部新聞專區及環境資料開放平臺 MNEWS_P_01），依政府資料開放授權條款（OGDL 1.0）引用；原創分類口徑、分析與視覺化歸屬環策晧脈。",
         "updated_at": updated_at,
         "coverage": {"date_start": date_start, "date_end": date_end, "total_news": len(items)},
         "dataset_version": dataset_sha256[:16],

@@ -1,4 +1,4 @@
-# 環策皓脈（moenv-policy-pulse）5 分鐘上線設定清單
+# 環策晧脈（moenv-policy-pulse）5 分鐘上線設定清單
 
 本指南協助您將本機已驗證完成的 `moenv-policy-pulse` 專案推送至 GitHub，並完成 **GitHub Actions 每日全自動排程**、**Cloudflare Pages 永久免費託管** 與 **Obsidian Git 零摩擦寫作串接**。
 
@@ -61,7 +61,7 @@
 
 ---
 
-## 步驟五：Obsidian Git 外掛串接《皓哥說》寫作流程（1 分鐘）
+## 步驟五：Obsidian Git 外掛串接《晧哥說》寫作流程（1 分鐘）
 
 1. 開啟 **Obsidian** → **Open folder as vault** → 選擇本機純 Git 目錄 `D:\Projects\moenv-policy-pulse`（切勿使用舊的 Google Drive 雙向同步目錄）。
 2. 前往 Obsidian **Settings → Community plugins**，安裝並啟用 **Obsidian Git**。
@@ -69,8 +69,8 @@
    - **Pull on startup**：開啟（每次開啟 Obsidian 自動拉取 GitHub Actions 每日同步的最新環境部新聞）。
    - **Auto pull interval**：可設為 `60` 分鐘。
    - **Auto commit-and-sync**：關閉（由您自行控制發布時機）。
-4. 撰寫與發布《皓哥說》專欄：
-   - 複製 `04_皓哥說/_template_draft.md` 並重新命名（檔名**不可**以底線 `_` 開頭，例如 `2026-11-20-carbon-fee-insight.md`）。
+4. 撰寫與發布《晧哥說》專欄：
+   - 複製 `04_晧哥說/_template_draft.md` 並重新命名（檔名**不可**以底線 `_` 開頭，例如 `2026-11-20-carbon-fee-insight.md`）。
    - 撰寫期間維持 `status: draft`（網站完全不會顯示或生成頁面）。
    - 定稿後改為 `status: published`，在 `related_news` 填入新聞編號（如 `"14518"`）。
    - 於 Obsidian 按下 **Ctrl+P** → 執行 **Obsidian Git: Commit all changes** 與 **Push**，約 1～2 分鐘後 Cloudflare Pages 即自動上線新文章！
@@ -82,7 +82,7 @@
 本站已內建自動偵測與無破圖降級機制，您無須修改任何程式碼：
 
 1. 將您的品牌 Logo 放入 `web/public/images/logo.png`（支援 `.svg` / `.png` / `.webp`，建議正方形透明背景）。
-2. 將您的個人形象照放入 `web/public/images/hao-portrait.png`（支援 `.jpg` / `.png` / `.webp`，將自動顯示於首頁開場、《皓哥說》作者卡與 `/about` 頁面）。
+2. 將您的個人形象照放入 `web/public/images/hao-portrait.png`（支援 `.jpg` / `.png` / `.webp`，將自動顯示於首頁開場、《晧哥說》作者卡與 `/about` 頁面）。
 3. 提交並推送至 GitHub `main` 分支（或於 Obsidian 執行 `Git: Commit all changes` + `Git: Push`），約 1 分鐘後即自動呈現於線上網站。
 
 ---
