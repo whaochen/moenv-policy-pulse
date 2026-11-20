@@ -882,7 +882,7 @@
       "低碳"
     ],
     "total_count": 940,
-    "last_30_days_count": 21,
+    "last_30_days_count": 19,
     "prev_30_days_count": 12,
     "yearly_counts": {
       "2001": 0,
@@ -1099,8 +1099,8 @@
       "國土綠蔭"
     ],
     "total_count": 740,
-    "last_30_days_count": 23,
-    "prev_30_days_count": 13,
+    "last_30_days_count": 22,
+    "prev_30_days_count": 14,
     "yearly_counts": {
       "2001": 2,
       "2002": 1,
@@ -1316,8 +1316,8 @@
       "廢棄物再利用"
     ],
     "total_count": 1585,
-    "last_30_days_count": 19,
-    "prev_30_days_count": 17,
+    "last_30_days_count": 18,
+    "prev_30_days_count": 18,
     "yearly_counts": {
       "2001": 13,
       "2002": 20,
@@ -1730,7 +1730,7 @@
     ],
     "total_count": 2411,
     "last_30_days_count": 7,
-    "prev_30_days_count": 8,
+    "prev_30_days_count": 7,
     "yearly_counts": {
       "2001": 34,
       "2002": 32,
@@ -2135,9 +2135,9 @@
       "地下水",
       "污水"
     ],
-    "total_count": 2403,
-    "last_30_days_count": 1,
-    "prev_30_days_count": 8,
+    "total_count": 2404,
+    "last_30_days_count": 2,
+    "prev_30_days_count": 7,
     "yearly_counts": {
       "2001": 30,
       "2002": 53,
@@ -2164,9 +2164,24 @@
       "2023": 41,
       "2024": 53,
       "2025": 70,
-      "2026": 56
+      "2026": 57
     },
     "latest_news": [
+      {
+        "news_id": "20261120095929",
+        "date": "2026-11-20",
+        "roc_date": "115-11-20",
+        "title": "環境部修正「事業及污水下水道系統水污染防治費收費辦法」第11條、第27條",
+        "unit": "環境部水質保護司",
+        "summary": "為落實「污染者付費」原則，並回歸「真實排放水質」作為費額計算基礎，環境部於115年11月17日修正發布「事業及污水下水道系統水污染防治費收費辦法」第11條、第27條。本次修法旨在落實「污染者付費」原則，回歸「真實排放水質」，讓費額計算更能覈實反映實際污染排放量。",
+        "policy_keywords": [
+          "水質保護",
+          "環境執法與稽查"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/News/List?key=11&Lang=zh-tw",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/5zzkgcxn.ft5.png"
+      },
       {
         "news_id": "14504",
         "date": "2026-11-16",
@@ -2303,21 +2318,6 @@
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14155",
         "attach_url": ""
-      },
-      {
-        "news_id": "14123",
-        "date": "2026-09-16",
-        "roc_date": "115-09-16",
-        "title": "臺美共創水資源新價值 論壇引領循環轉型新契機",
-        "unit": "環境部水質保護司",
-        "summary": "在臺美環保技術合作協定下，環境部於115年9月16日辦理「淨水永續-臺美資源循環技術交流論壇」，邀請美國環保署專家及國內產學研團隊，交流淨水技術及政策，深入探討未來製程廢水之資源循環應用路徑。",
-        "policy_keywords": [
-          "資源循環",
-          "水質保護"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14123",
-        "attach_url": ""
       }
     ]
   },
@@ -2336,7 +2336,7 @@
     ],
     "total_count": 489,
     "last_30_days_count": 0,
-    "prev_30_days_count": 2,
+    "prev_30_days_count": 1,
     "yearly_counts": {
       "2001": 2,
       "2002": 17,
@@ -2727,7 +2727,7 @@
     ],
     "total_count": 623,
     "last_30_days_count": 7,
-    "prev_30_days_count": 1,
+    "prev_30_days_count": 0,
     "yearly_counts": {
       "2001": 8,
       "2002": 6,
@@ -2919,7 +2919,7 @@
       "證照"
     ],
     "total_count": 1052,
-    "last_30_days_count": 14,
+    "last_30_days_count": 13,
     "prev_30_days_count": 10,
     "yearly_counts": {
       "2001": 2,
@@ -3123,7 +3123,7 @@
     ],
     "total_count": 373,
     "last_30_days_count": 4,
-    "prev_30_days_count": 8,
+    "prev_30_days_count": 7,
     "yearly_counts": {
       "2001": 5,
       "2002": 3,
@@ -3541,9 +3541,9 @@
       "檢警環",
       "移送法辦"
     ],
-    "total_count": 1857,
-    "last_30_days_count": 3,
-    "prev_30_days_count": 3,
+    "total_count": 1858,
+    "last_30_days_count": 4,
+    "prev_30_days_count": 2,
     "yearly_counts": {
       "2001": 28,
       "2002": 37,
@@ -3570,9 +3570,24 @@
       "2023": 56,
       "2024": 44,
       "2025": 56,
-      "2026": 47
+      "2026": 48
     },
     "latest_news": [
+      {
+        "news_id": "20261120095929",
+        "date": "2026-11-20",
+        "roc_date": "115-11-20",
+        "title": "環境部修正「事業及污水下水道系統水污染防治費收費辦法」第11條、第27條",
+        "unit": "環境部水質保護司",
+        "summary": "為落實「污染者付費」原則，並回歸「真實排放水質」作為費額計算基礎，環境部於115年11月17日修正發布「事業及污水下水道系統水污染防治費收費辦法」第11條、第27條。本次修法旨在落實「污染者付費」原則，回歸「真實排放水質」，讓費額計算更能覈實反映實際污染排放量。",
+        "policy_keywords": [
+          "水質保護",
+          "環境執法與稽查"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/News/List?key=11&Lang=zh-tw",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/5zzkgcxn.ft5.png"
+      },
       {
         "news_id": "14435",
         "date": "2026-11-05",
@@ -3712,22 +3727,6 @@
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/13996",
         "attach_url": ""
-      },
-      {
-        "news_id": "13971",
-        "date": "2026-08-24",
-        "roc_date": "115-08-24",
-        "title": "「美縫筆」冒用官方名義詐欺！環境部鐵腕要求下架 呼籲民眾認明「環保標章」",
-        "unit": "環境部綜合規劃司",
-        "summary": "假認證、真詐欺！針對近期 Facebook（臉書）與 YouTube 等網路平台，出現不肖業者大肆推銷「磁磚防黴防水美縫筆」，並誆稱產品「取得環境部認證」，環境部今（24）日出面嚴正駁斥：環境部從未針對此類產品核發任何認證或許可，該廣告內容純屬虛偽不實，已明顯涉嫌網路詐欺，請民眾切勿受騙上當！ \n為強力打擊不實廣告，環境部已依「詐欺犯罪危害防制條例」第32條規定，函文台灣臉書與美商科高（Google）台灣分公司，要求於文到 24 小時內移除違規廣告、限制瀏覽或停止播送；同時，也函請數位發展部啟動跨境行政協調機制，聯繫 Meta 及 Google 美國總部強制下架涉詐內容，以維護網路環境安全。環境部提醒國人，選購環保產品時，務必認明官方正版的「環保標章」。\n「環保標章」是我國最具公信力的綠色消費識別標誌，推動迄今已核發兩萬六千餘張證書，立基「可回收、低污染、省資源」環保理念，鼓勵企業降低產品在生命週期中對環境的衝擊。民眾在選購清潔用品、建材或日常用品時，認明環保標章，可省荷包又兼顧保護環境與健康。\n環境部再次呼籲，民眾於網路購買標榜環保認證產品時，認明環保標章，並可至「淨零綠色生活資訊網...",
-        "policy_keywords": [
-          "淨零轉型",
-          "綠色消費與標章",
-          "環境執法與稽查"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/13971",
-        "attach_url": ""
       }
     ]
   },
@@ -3746,7 +3745,7 @@
     ],
     "total_count": 47,
     "last_30_days_count": 2,
-    "prev_30_days_count": 3,
+    "prev_30_days_count": 2,
     "yearly_counts": {
       "2001": 0,
       "2002": 0,
@@ -3955,8 +3954,8 @@
       "能源化"
     ],
     "total_count": 404,
-    "last_30_days_count": 5,
-    "prev_30_days_count": 4,
+    "last_30_days_count": 4,
+    "prev_30_days_count": 5,
     "yearly_counts": {
       "2001": 3,
       "2002": 2,

@@ -1,8 +1,8 @@
 {
-  "total_news": 11495,
+  "total_news": 11496,
   "date_start": "2001-01-01",
-  "date_end": "2026-11-19",
-  "updated_at": "2026-11-20T10:57:57+08:00",
+  "date_end": "2026-11-20",
+  "updated_at": "2026-11-20T12:21:28+08:00",
   "topic_count": 20,
   "years": [
     "2001",
@@ -32,11 +32,26 @@
     "2025",
     "2026"
   ],
-  "last_30_days_count": 63,
-  "prev_30_days_count": 54,
-  "last_30_days_delta": 9,
-  "last_30_days_pct": 16.7,
+  "last_30_days_count": 62,
+  "prev_30_days_count": 52,
+  "last_30_days_delta": 10,
+  "last_30_days_pct": 19.2,
   "latest_news": [
+    {
+      "news_id": "20261120095929",
+      "date": "2026-11-20",
+      "roc_date": "115-11-20",
+      "title": "環境部修正「事業及污水下水道系統水污染防治費收費辦法」第11條、第27條",
+      "unit": "環境部水質保護司",
+      "summary": "為落實「污染者付費」原則，並回歸「真實排放水質」作為費額計算基礎，環境部於115年11月17日修正發布「事業及污水下水道系統水污染防治費收費辦法」第11條、第27條。本次修法旨在落實「污染者付費」原則，回歸「真實排放水質」，讓費額計算更能覈實反映實際污染排放量。",
+      "policy_keywords": [
+        "水質保護",
+        "環境執法與稽查"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/News/List?key=11&Lang=zh-tw",
+      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/5zzkgcxn.ft5.png"
+    },
     {
       "news_id": "20261119192059",
       "date": "2026-11-19",
@@ -186,22 +201,6 @@
       ],
       "ai_tags": [],
       "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14503",
-      "attach_url": ""
-    },
-    {
-      "news_id": "14501",
-      "date": "2026-11-14",
-      "roc_date": "115-11-14",
-      "title": "「旗山糖廠環教中心」成為首座通過碳足跡查證環教場所 科技大廠低碳培訓首選 助企業防漂綠",
-      "unit": "環境部國家環境研究院",
-      "summary": "「旗山糖廠社區環境教育中心」（下稱旗山糖廠環教中心）今(14)日在國家環境研究院（下稱國環院）院長張順欽的見證下，正式獲頒第三方機構所核發的「碳足跡查證聲明書」，成為全臺首座取得第三方碳足跡查證的環境教育設施場所，為臺灣環境教育樹立全新里程碑。此項查證不僅提升「旗山糖廠環教中心」在低碳旅遊的競爭力，更有助於吸引重視ESG評比及綠色供應鏈的出口導向科技大廠辦理企業培訓、家庭日與志工服務。",
-      "policy_keywords": [
-        "淨零轉型",
-        "環境教育與綠領人才",
-        "ESG與永續金融"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14501",
       "attach_url": ""
     }
   ]
