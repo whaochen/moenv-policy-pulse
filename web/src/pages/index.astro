@@ -137,19 +137,24 @@ const featuredTimeline =
         </p>
       </div>
 
-      <!-- 右側 5 欄：大方展示晧哥半身形象主視覺（無裁切、柔和光暈、呼吸浮動） -->
+      <!-- 右側 5 欄：大方展示晧哥半身形象主視覺（透明無黑底、雙層柔和光暈自然融入淺象牙白頁面、呼吸浮動） -->
       <div class="lg:col-span-5 flex items-center justify-center">
         <div class="relative flex w-full items-center justify-center py-4">
           <div
-            class="pointer-events-none absolute inset-0 -z-10 rounded-full blur-2xl"
-            style="background: radial-gradient(circle at 50% 50%, rgba(15,76,58,0.16) 0%, rgba(180,83,9,0.08) 45%, rgba(248,249,247,0) 75%);"
+            class="pointer-events-none absolute -inset-4 -z-10 rounded-full blur-3xl"
+            style="background: radial-gradient(circle at 50% 48%, rgba(16,185,129,0.22) 0%, rgba(15,76,58,0.14) 38%, rgba(245,158,11,0.08) 65%, rgba(248,249,247,0) 82%);"
+          ></div>
+          <div
+            class="pointer-events-none absolute inset-6 -z-10 rounded-full blur-2xl"
+            style="background: radial-gradient(circle at 50% 44%, rgba(45,212,191,0.24) 0%, rgba(16,185,129,0.12) 48%, rgba(248,249,247,0) 76%);"
           ></div>
 
           {portraitSrc ? (
             <img
               src={portraitSrc}
               alt="環策晧脈主筆晧哥形象主視覺"
-              class="animate-float-slow max-h-[460px] lg:max-h-[540px] w-auto max-w-full rounded-3xl object-contain drop-shadow-[0_22px_40px_rgba(15,76,58,0.16)]"
+              class="animate-float-slow max-h-[460px] lg:max-h-[540px] w-auto max-w-full object-contain drop-shadow-[0_20px_36px_rgba(15,76,58,0.18)]"
+              style="-webkit-mask-image: linear-gradient(to bottom, black 91%, transparent 100%); mask-image: linear-gradient(to bottom, black 91%, transparent 100%);"
             />
           ) : (
             <div class="flex h-[420px] w-full max-w-sm items-center justify-center rounded-3xl bg-gradient-to-br from-emerald-deep to-emerald-dark font-serif text-7xl font-bold text-amber-200 shadow-lg">
