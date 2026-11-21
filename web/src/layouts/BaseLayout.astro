@@ -13,6 +13,7 @@ const {
   description = '環策晧脈（HAO POLICY INTELLIGENCE）— 從環境部 25 年、一萬多篇官方新聞中，為台灣環境政策找脈絡、把脈、把關。',
 } = Astro.props;
 const currentPath = Astro.url.pathname;
+const pageTitle = currentPath === '/' ? '環策晧脈 ｜ 晧脈元素庫' : `${title} ｜ 環策晧脈`;
 const manifest = loadManifest();
 const logoSrc = findPublicImage('logo');
 
@@ -49,7 +50,7 @@ function isActive(href: string): boolean {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <title>{title} | 環策晧脈 HAO Policy Intelligence</title>
+    <title>{pageTitle}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
