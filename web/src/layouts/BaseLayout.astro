@@ -47,47 +47,33 @@ function isActive(href: string): boolean {
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://hao-element-matrix.pages.dev/badge.js" defer></script>
   </head>
   <body class="bg-ivory text-gray-800 antialiased">
     <!-- 通透象牙白毛玻璃頂部導覽列（桌機 80px / 手機 68px） -->
     <header class="sticky top-0 z-40 border-b border-emerald-950/10 bg-[#FAFBF9]/92 backdrop-blur-md">
       <div class="mx-auto flex h-[68px] max-w-7xl items-center justify-between gap-2 px-4 sm:px-6 lg:h-[80px] lg:px-6 xl:px-10">
-        <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
-          <a
-            href="https://hao-element-matrix.pages.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="晧脈元素庫 · 元素 #08 O（氧）"
-            aria-label="前往主站：晧脈元素庫 · 元素 #08 O（氧）"
-            class="group relative flex h-[42px] w-[42px] sm:h-[46px] sm:w-[46px] shrink-0 flex-col items-center justify-between rounded-xl border border-emerald-300/35 bg-gradient-to-br from-[#0F4C3A] to-[#082E23] px-1.5 py-1 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300/75 hover:shadow-md"
-          >
-            <span class="self-start font-mono text-[8.5px] sm:text-[9px] font-semibold leading-none text-emerald-300/95">08</span>
-            <span class="-mt-0.5 font-sans text-[18px] sm:text-[20px] font-bold leading-none tracking-tight text-white">O</span>
-            <span class="font-mono text-[7.5px] sm:text-[8px] font-medium leading-none tracking-wide text-emerald-200/90">Oxygen</span>
-          </a>
-          <span aria-hidden="true" class="h-7 w-px bg-emerald-950/15 shrink-0"></span>
-          <a href="/" class="flex items-center gap-3 group shrink-0">
-            {logoSrc ? (
-              <img
-                src={logoSrc}
-                alt="環策晧脈 HAO POLICY INTELLIGENCE"
-                class="h-[58px] sm:h-[64px] lg:h-[72px] w-auto object-contain transition-opacity group-hover:opacity-90"
-              />
-            ) : (
-              <>
-                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-deep font-serif text-xl font-bold text-white shadow-sm">
-                  脈
+        <a href="/" class="flex items-center gap-3 group shrink-0">
+          {logoSrc ? (
+            <img
+              src={logoSrc}
+              alt="環策晧脈 HAO POLICY INTELLIGENCE"
+              class="h-[58px] sm:h-[64px] lg:h-[72px] w-auto object-contain transition-opacity group-hover:opacity-90"
+            />
+          ) : (
+            <>
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-deep font-serif text-xl font-bold text-white shadow-sm">
+                脈
+              </div>
+              <div>
+                <div class="font-serif text-xl font-bold tracking-wide text-emerald-deep leading-tight">環策晧脈</div>
+                <div class="text-[10px] tracking-[0.14em] text-emerald-deep/70 uppercase">
+                  HAO Policy Intelligence
                 </div>
-                <div>
-                  <div class="font-serif text-xl font-bold tracking-wide text-emerald-deep leading-tight">環策晧脈</div>
-                  <div class="text-[10px] tracking-[0.14em] text-emerald-deep/70 uppercase">
-                    HAO Policy Intelligence
-                  </div>
-                </div>
-              </>
-            )}
-          </a>
-        </div>
+              </div>
+            </>
+          )}
+        </a>
 
         <nav class="hidden lg:flex items-center gap-0.5" aria-label="主導覽列">
           {navItems.map((item) => (
@@ -103,17 +89,9 @@ function isActive(href: string): boolean {
               {item.label}
             </a>
           ))}
-          <a
-            href="https://hao-element-matrix.pages.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="ml-1.5 xl:ml-2 inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-[#0F4C3A]/25 bg-transparent px-2.5 xl:px-3 py-1.5 text-xs font-medium text-[#0F4C3A] transition hover:border-[#0F4C3A]/55 hover:bg-emerald-900/5"
-            title="前往主站：晧脈元素庫"
-          >
-            <span aria-hidden="true" class="text-[11px] text-emerald-600">✦</span>
-            <span>返回晧脈元素庫</span>
-            <span aria-hidden="true" class="text-[11px] opacity-75">↗</span>
-          </a>
+          <div class="ml-1.5 xl:ml-2 flex shrink-0 items-center">
+            <hao-element-badge symbol="O" theme="dark"></hao-element-badge>
+          </div>
         </nav>
 
         <button
@@ -144,17 +122,8 @@ function isActive(href: string): boolean {
               {item.label}
             </a>
           ))}
-          <div class="mt-2 border-t border-emerald-950/10 pt-2.5">
-            <a
-              href="https://hao-element-matrix.pages.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 rounded-full border border-[#0F4C3A]/25 bg-transparent px-3.5 py-1.5 text-xs font-medium text-[#0F4C3A] transition hover:border-[#0F4C3A]/55 hover:bg-emerald-900/5"
-            >
-              <span aria-hidden="true" class="text-[11px] text-emerald-600">✦</span>
-              <span>返回晧脈元素庫</span>
-              <span aria-hidden="true" class="text-[11px] opacity-75">↗</span>
-            </a>
+          <div class="mt-2 border-t border-emerald-950/10 pt-2.5 flex items-center">
+            <hao-element-badge symbol="O" theme="dark"></hao-element-badge>
           </div>
         </div>
       </div>
