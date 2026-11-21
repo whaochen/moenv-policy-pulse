@@ -236,7 +236,7 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
     <div class="md:hidden space-y-2.5">
       {[
         { idx: 0, code: '01', en: 'MOENV OPEN DATA', zh: '官方源頭 · MNEWS_P_01' },
-        { idx: 1, code: '02', en: 'GITHUB ACTIONS', zh: '雲端排程 · 每日 08:00 自動同步' },
+        { idx: 1, code: '02', en: 'GITHUB ACTIONS', zh: '雲端排程 · 每日 06:00 自動同步' },
         { idx: 2, code: '03', en: 'GEMINI × TF-IDF', zh: '語意與關聯引擎 · 56,000+ 條脈絡' },
         { idx: 3, code: '04', en: 'OBSIDIAN VAULT', zh: '晧哥把脈工作台 ·《晧哥說》撰寫' },
         { idx: 4, code: '05', en: 'ASTRO × CLOUDFLARE', zh: '全球極速發布 · 永久 $0 託管' },
@@ -330,7 +330,7 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
         id="logs-replay-btn"
         class="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-500/15 px-3.5 py-1.5 font-mono text-xs font-semibold text-emerald-200 transition hover:bg-emerald-500/25"
       >
-        ▶ 模擬重播每日 08:00 同步流程
+        ▶ 模擬重播每日 06:00 同步流程
       </button>
     </div>
 
@@ -418,9 +418,9 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
       {
         code: '02 · GITHUB ACTIONS',
         short: 'CLOUD SYNC',
-        title: '雲端自動化大腦：每日 08:00 增量同步與零幻覺統計',
+        title: '雲端自動化大腦：每日 06:00 增量同步與零幻覺統計',
         tools: '核心工具：GitHub Actions (ubuntu-latest) · Python 3.12 · 自動完整性校驗',
-        scaleFn: () => '每日 08:00 自動執行 · 約 60 秒完成',
+        scaleFn: () => '每日 06:00 自動執行 · 約 60 秒完成',
         points: [
           '無須開啟本機電腦，每天早上自動喚醒抓取最新環境部政策新聞。',
           '純程式碼重算 25 年趨勢、近 30 天升溫指標與候選雷達，杜絕統計幻覺。',
@@ -585,7 +585,7 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
     // 3. Build View 2: ARCS (7 Left Tools × 4 Right Governance Modules)
     const leftNodes = [
       { id: 'L0', label: 'MOENV MNEWS_P_01', desc: '環境部開放資料平臺每日提供最新新聞原料，並搭配單篇原網址自動配對。' },
-      { id: 'L1', label: 'GitHub Actions', desc: '每日台灣時間 08:00 自動在雲端執行抓取、關聯運算、資料校驗與提交。' },
+      { id: 'L1', label: 'GitHub Actions', desc: '每日台灣時間 06:00 自動在雲端執行抓取、關聯運算、資料校驗與提交。' },
       { id: 'L2', label: 'Gemini 2.5 Flash-Lite', desc: 'Google AI Studio 免費層模型，強化每日新增新聞的重點摘要與政策標籤，遇限流自動降級。' },
       { id: 'L3', label: 'gemini-embedding-001', desc: '類神經語意嵌入向量，捕捉法規與政策間的深層語意連結，支援增量快取。' },
       { id: 'L4', label: 'TF-IDF + Jieba', desc: '掛載 20 大議題同義詞與環保法規詞典，10 秒內完成全站 11,496 篇餘弦相似度計算。' },
