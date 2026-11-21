@@ -1,12 +1,12 @@
 {
-  "total_news": 11496,
-  "total_relation_edges": 56175,
+  "total_news": 11499,
+  "total_relation_edges": 56190,
   "relation_mode": "tfidf_only",
   "date_start": "2001-01-01",
   "date_end": "2026-11-20",
-  "updated_at": "2026-11-20T14:47:25+08:00",
-  "dataset_version": "aa670c259e1b9bcb",
-  "dataset_sha256": "aa670c259e1b9bcb840860999bb25218cd97e667ce55178ae5717733d5b32c92",
+  "updated_at": "2026-11-21T08:26:47+08:00",
+  "dataset_version": "e77be952b8748186",
+  "dataset_sha256": "e77be952b8748186fdb6d216fe78395ac800b27e02d880fbc1dca5302eb2e6e8",
   "topic_count": 20,
   "years": [
     "2001",
@@ -36,11 +36,73 @@
     "2025",
     "2026"
   ],
-  "last_30_days_count": 62,
+  "last_30_days_count": 65,
   "prev_30_days_count": 52,
-  "last_30_days_delta": 10,
-  "last_30_days_pct": 19.2,
+  "last_30_days_delta": 13,
+  "last_30_days_pct": 25.0,
   "latest_news": [
+    {
+      "news_id": "20261120201727",
+      "date": "2026-11-20",
+      "roc_date": "115-11-20",
+      "title": "呼應《安塔利亞 AI承諾》臺灣願以全球 AI 供應鏈核心之力，打造 AI 與氣候共生的未來",
+      "unit": "環境部氣候變遷署",
+      "summary": "聯合國氣候變化綱要公約第31屆締約方大會（COP31）即將落幕，在土耳其安塔利亞舉行期間，主席國土耳其與國際電信聯盟（ITU）共同發起《安塔利亞人工智慧承諾》（Antalya Artificial Intelligence Pledge）。環境部長彭啓明今（20）日表示，臺灣歡迎並呼應這項承諾，也認同承諾中「讓 AI 成為氣候解決方案的一部分」的共同抱負，臺灣將以全球 AI 供應鏈核心的角色，協助世界各國創造 AI 與氣候共生的價值。",
+      "policy_keywords": [
+        "碳費徵收",
+        "自主減量計畫",
+        "碳定價與ETS",
+        "溫室氣體盤查登錄",
+        "淨零轉型",
+        "氣候變遷與調適",
+        "資源循環",
+        "廢棄物與環保犯罪",
+        "空氣品質",
+        "國際環境合作",
+        "生質能與再生能源"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14537",
+      "source_url_status": "",
+      "attach_url": ""
+    },
+    {
+      "news_id": "20261120192802",
+      "date": "2026-11-20",
+      "roc_date": "115-11-20",
+      "title": "掌握《巴黎協定》第六條國際新局！環境部舉辦 COP31 國際論壇，完善國外碳權認可機制促進實質氣候合作",
+      "unit": "環境部氣候變遷署",
+      "summary": "聯合國氣候公約第 31 次締約方大會（COP31）於土耳其安塔利亞進入最後協商階段。環境部今（20）日舉辦「從氣候科學到全球碳市場發展：巴黎協定 Article 6」論壇，聚焦國際碳市場談判動態與法規進展，並說明我國國外碳權認可準則，引導產業落實實質減碳與接軌國際規範。",
+      "policy_keywords": [
+        "碳定價與ETS",
+        "淨零轉型",
+        "氣候變遷與調適",
+        "國際環境合作",
+        "生質能與再生能源"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14536",
+      "source_url_status": "",
+      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/lpgfftbv.joq.jpg"
+    },
+    {
+      "news_id": "20261120165940",
+      "date": "2026-11-20",
+      "roc_date": "115-11-20",
+      "title": "從種樹到育樹　以都市綠蔭降溫　走向人樹永續共生",
+      "unit": "環境部環境管理署",
+      "summary": "面對全球氣候變遷及都市熱島效應加劇，環境部積極推動「國土綠蔭氣候調適計畫」，透過都市林建構、科學植栽及長期養護管理，緩解都市熱島效應，提升城市氣候調適能力。為深化都市林治理及跨領域專業交流，環境部昨(19)日舉辦名人講座，邀請日本東京大學都市工學環境設計博士，並具日本樹木醫專業資格的詹鳳春博士，以「都市綠化趨勢與共生」為題，從國際經驗及臺灣實務案例，探討都市綠化與環境永續發展之策略。",
+      "policy_keywords": [
+        "氣候變遷與調適",
+        "空氣品質",
+        "環境教育與綠領人才",
+        "國際環境合作"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14534",
+      "source_url_status": "",
+      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/eiihx0uz.jop.jpg"
+    },
     {
       "news_id": "20261120095929",
       "date": "2026-11-20",
@@ -167,55 +229,6 @@
       "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14519",
       "source_url_status": "",
       "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/h3dcmyqv.pz0.png"
-    },
-    {
-      "news_id": "14518",
-      "date": "2026-11-16",
-      "roc_date": "115-11-16",
-      "title": "環境部COP31「綠色算力與氣候數位科技」論壇 彭啓明部長：臺灣的減碳，就是全球AI的減碳",
-      "unit": "環境部氣候變遷署",
-      "summary": "COP31 邁入第二週，為呼應大會「科學、產業和科技」主題，環境部今(16)日舉辦「COP31 氣候脈動．臺灣同行」系列活動，以「AI for Climate, Climate for AI：綠色算力與氣候數位科技」為題展開國際線上論壇。論壇由部長彭啓明親自主持，邀集台灣氣候聯盟理事長彭双浪、Climate Change AI 共同創辦人 David Rolnick、台智雲總經理吳漢章、台電副總經理鄭慶鴻及氣候科技與創新專家Eleonora Gatti 等專家學者，探討臺灣如何憑藉半導體與資通訊實力，引領全球邁向高算力、低碳排的永續新時代。",
-      "policy_keywords": [
-        "淨零轉型",
-        "氣候變遷與調適",
-        "國際環境合作"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14518",
-      "source_url_status": "",
-      "attach_url": ""
-    },
-    {
-      "news_id": "14504",
-      "date": "2026-11-16",
-      "roc_date": "115-11-16",
-      "title": "環境部表揚北中區優良水環境巡守隊 同心護溪共守家鄉水環境",
-      "unit": "環境部水質保護司",
-      "summary": "為肯定基層志工對水環境守護的貢獻，環境部今(16)日於桃園市藍家友善農場舉辦「114年度北中區優良水環境巡守隊頒獎典禮暨觀摩活動」。本次活動公開表揚北中區榮獲全國優良水環境巡守隊殊榮的14支隊伍，以及4位於水環境領域長期深耕的傑出楷模。活動不僅頒發獎項，更透過實地走訪中庄調整池、體驗食農教育與生態解說，讓各縣市巡守夥伴在交流中凝聚共識，展現中央、地方與民間同心護溪的堅定力量。",
-      "policy_keywords": [
-        "水質保護"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14504",
-      "source_url_status": "",
-      "attach_url": ""
-    },
-    {
-      "news_id": "14503",
-      "date": "2026-11-14",
-      "roc_date": "115-11-14",
-      "title": "碳費、淨零全入題！全國環境知識競賽盼培養綠色種子　冠軍出爐！",
-      "unit": "環境部環境保護司",
-      "summary": "知識就是力量，為厚植永續新力量，環境部與教育部每年共同主辦全國性環境知識競賽，今(14)日於國立高雄科技大學第一校區舉行115年度競賽，來自全國歷經地方初賽優勝的菁英齊聚南臺灣，爭取國小組、國中組、高中（職）組及社會組等四個組別的最高榮譽。經過一整天緊張刺激的競賽，各組冠軍分別由社會組南投縣、高中職組臺中市、國中組桃園市及國小組連江縣奪得，每位選手表現都很精采，展現環境知識的普及與扎根，匯聚成強大推動永續的力量。",
-      "policy_keywords": [
-        "碳費徵收",
-        "淨零轉型",
-        "環境教育與綠領人才"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14503",
-      "source_url_status": "",
-      "attach_url": ""
     }
   ]
 }

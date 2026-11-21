@@ -37,45 +37,45 @@
       "name": "氣候與碳定價",
       "kind": "group",
       "category": "氣候與碳定價",
-      "value": 2353,
-      "last30": 54,
-      "delta30": 26
+      "value": 2363,
+      "last30": 64,
+      "delta30": 36
     },
     {
       "id": "group:circular",
       "name": "資源循環與廢棄物",
       "kind": "group",
       "category": "資源循環與廢棄物",
-      "value": 4689,
-      "last30": 36,
-      "delta30": 1
+      "value": 4693,
+      "last30": 40,
+      "delta30": 5
     },
     {
       "id": "group:pollution",
       "name": "污染防制",
       "kind": "group",
       "category": "污染防制",
-      "value": 5087,
-      "last30": 14,
-      "delta30": 5
+      "value": 5089,
+      "last30": 16,
+      "delta30": 7
     },
     {
       "id": "group:governance",
       "name": "治理與制度",
       "kind": "group",
       "category": "治理與制度",
-      "value": 2810,
-      "last30": 20,
-      "delta30": 13
+      "value": 2813,
+      "last30": 23,
+      "delta30": 16
     },
     {
       "id": "group:society",
       "name": "社會溝通與人才",
       "kind": "group",
       "category": "社會溝通與人才",
-      "value": 1425,
-      "last30": 17,
-      "delta30": 0
+      "value": 1426,
+      "last30": 18,
+      "delta30": 1
     },
     {
       "id": "topic:carbon_fee",
@@ -84,9 +84,9 @@
       "kind": "topic",
       "category": "氣候與碳定價",
       "description": "碳費申報、費率、徵收、收費制度與企業因應。",
-      "value": 92,
-      "last30": 4,
-      "delta30": 4,
+      "value": 93,
+      "last30": 5,
+      "delta30": 5,
       "pct30": 100.0,
       "url": "/topics/carbon_fee"
     },
@@ -97,9 +97,9 @@
       "kind": "topic",
       "category": "氣候與碳定價",
       "description": "自主減量、指定削減率、減量計畫與優惠費率。",
-      "value": 43,
-      "last30": 1,
-      "delta30": 1,
+      "value": 44,
+      "last30": 2,
+      "delta30": 2,
       "pct30": 100.0,
       "url": "/topics/voluntary_reduction"
     },
@@ -110,9 +110,9 @@
       "kind": "topic",
       "category": "氣候與碳定價",
       "description": "碳定價、排放交易、碳市場、碳權與國際接軌。",
-      "value": 102,
-      "last30": 4,
-      "delta30": 4,
+      "value": 104,
+      "last30": 6,
+      "delta30": 6,
       "pct30": 100.0,
       "url": "/topics/carbon_pricing_ets"
     },
@@ -123,10 +123,10 @@
       "kind": "topic",
       "category": "氣候與碳定價",
       "description": "溫室氣體盤查、登錄、排放清冊與範疇三係數。",
-      "value": 436,
-      "last30": 4,
-      "delta30": 2,
-      "pct30": 100.0,
+      "value": 437,
+      "last30": 5,
+      "delta30": 3,
+      "pct30": 150.0,
       "url": "/topics/ghg_inventory"
     },
     {
@@ -136,10 +136,10 @@
       "kind": "topic",
       "category": "氣候與碳定價",
       "description": "2050 淨零、減碳路徑、綠色轉型與企業競爭力。",
-      "value": 940,
-      "last30": 19,
-      "delta30": 7,
-      "pct30": 58.3,
+      "value": 942,
+      "last30": 21,
+      "delta30": 9,
+      "pct30": 75.0,
       "url": "/topics/net_zero_transition"
     },
     {
@@ -149,10 +149,10 @@
       "kind": "topic",
       "category": "氣候與碳定價",
       "description": "氣候變遷、高溫、熱浪、韌性城市與調適政策。",
-      "value": 740,
-      "last30": 22,
-      "delta30": 8,
-      "pct30": 57.1,
+      "value": 743,
+      "last30": 25,
+      "delta30": 11,
+      "pct30": 78.6,
       "url": "/topics/climate_adaptation"
     },
     {
@@ -162,10 +162,10 @@
       "kind": "topic",
       "category": "資源循環與廢棄物",
       "description": "資源循環、資源回收、再利用與循環經濟政策。",
-      "value": 1585,
-      "last30": 18,
-      "delta30": 0,
-      "pct30": 0.0,
+      "value": 1586,
+      "last30": 19,
+      "delta30": 1,
+      "pct30": 5.6,
       "url": "/topics/resource_circulation"
     },
     {
@@ -188,10 +188,10 @@
       "kind": "topic",
       "category": "資源循環與廢棄物",
       "description": "廢棄物清理、非法棄置、掩埋、清運與環保犯罪查緝。",
-      "value": 2411,
-      "last30": 7,
-      "delta30": 0,
-      "pct30": 0.0,
+      "value": 2412,
+      "last30": 8,
+      "delta30": 1,
+      "pct30": 14.3,
       "url": "/topics/waste_crime"
     },
     {
@@ -201,10 +201,10 @@
       "kind": "topic",
       "category": "污染防制",
       "description": "空污、PM2.5、臭氧、空污費、移動污染源與空氣品質管理。",
-      "value": 1571,
-      "last30": 5,
-      "delta30": 4,
-      "pct30": 400.0,
+      "value": 1573,
+      "last30": 7,
+      "delta30": 6,
+      "pct30": 600.0,
       "url": "/topics/air_quality"
     },
     {
@@ -266,10 +266,10 @@
       "kind": "topic",
       "category": "社會溝通與人才",
       "description": "環境教育、環教場所、綠領人才、證照與人才培育。",
-      "value": 1052,
-      "last30": 13,
-      "delta30": 3,
-      "pct30": 30.0,
+      "value": 1053,
+      "last30": 14,
+      "delta30": 4,
+      "pct30": 40.0,
       "url": "/topics/environmental_education"
     },
     {
@@ -292,10 +292,10 @@
       "kind": "topic",
       "category": "治理與制度",
       "description": "國際合作、COP、UNFCCC、巴黎協定、歐盟與跨國交流。",
-      "value": 494,
-      "last30": 14,
-      "delta30": 11,
-      "pct30": 366.7,
+      "value": 497,
+      "last30": 17,
+      "delta30": 14,
+      "pct30": 466.7,
       "url": "/topics/international_cooperation"
     },
     {
@@ -331,10 +331,10 @@
       "kind": "topic",
       "category": "資源循環與廢棄物",
       "description": "沼氣、生質能、綠能、廚餘能源化與廢棄物發電。",
-      "value": 404,
-      "last30": 4,
-      "delta30": -1,
-      "pct30": -20.0,
+      "value": 406,
+      "last30": 6,
+      "delta30": 1,
+      "pct30": 20.0,
       "url": "/topics/bioenergy"
     },
     {
@@ -382,9 +382,9 @@
       "name": "COP 氣候大會",
       "kind": "cluster",
       "category": "治理與制度",
-      "value": 46,
-      "last30": 11,
-      "delta30": 11,
+      "value": 48,
+      "last30": 13,
+      "delta30": 13,
       "url": "/news?q=COP28"
     },
     {
@@ -590,14 +590,14 @@
     {
       "source": "topic:resource_circulation",
       "target": "topic:waste_crime",
-      "weight": 2077.2,
-      "cooccurrence": 880,
+      "weight": 2078.0,
+      "cooccurrence": 881,
       "kind": "semantic"
     },
     {
       "source": "topic:enforcement",
       "target": "topic:waste_crime",
-      "weight": 1585.9,
+      "weight": 1586.1,
       "cooccurrence": 711,
       "kind": "semantic"
     },
@@ -618,8 +618,8 @@
     {
       "source": "topic:climate_adaptation",
       "target": "topic:net_zero_transition",
-      "weight": 649.1,
-      "cooccurrence": 310,
+      "weight": 653.0,
+      "cooccurrence": 312,
       "kind": "semantic"
     },
     {
@@ -639,21 +639,21 @@
     {
       "source": "topic:enforcement",
       "target": "topic:resource_circulation",
-      "weight": 472.3,
+      "weight": 472.2,
       "cooccurrence": 205,
       "kind": "semantic"
     },
     {
       "source": "topic:climate_adaptation",
       "target": "topic:ghg_inventory",
-      "weight": 450.8,
-      "cooccurrence": 194,
+      "weight": 452.5,
+      "cooccurrence": 195,
       "kind": "semantic"
     },
     {
       "source": "topic:environmental_education",
       "target": "topic:net_zero_transition",
-      "weight": 438.3,
+      "weight": 438.4,
       "cooccurrence": 203,
       "kind": "semantic"
     },
@@ -667,36 +667,36 @@
     {
       "source": "topic:climate_adaptation",
       "target": "topic:international_cooperation",
-      "weight": 324.5,
-      "cooccurrence": 146,
+      "weight": 330.2,
+      "cooccurrence": 149,
       "kind": "semantic"
     },
     {
       "source": "topic:bioenergy",
       "target": "topic:resource_circulation",
-      "weight": 321.0,
-      "cooccurrence": 146,
+      "weight": 322.0,
+      "cooccurrence": 147,
       "kind": "semantic"
     },
     {
       "source": "topic:net_zero_transition",
       "target": "topic:resource_circulation",
-      "weight": 319.5,
-      "cooccurrence": 152,
+      "weight": 320.8,
+      "cooccurrence": 153,
       "kind": "semantic"
     },
     {
       "source": "topic:ghg_inventory",
       "target": "topic:net_zero_transition",
-      "weight": 315.4,
-      "cooccurrence": 148,
+      "weight": 316.9,
+      "cooccurrence": 149,
       "kind": "semantic"
     },
     {
       "source": "topic:bioenergy",
       "target": "topic:waste_crime",
-      "weight": 306.6,
-      "cooccurrence": 132,
+      "weight": 307.8,
+      "cooccurrence": 133,
       "kind": "semantic"
     },
     {
@@ -709,22 +709,22 @@
     {
       "source": "topic:green_consumption",
       "target": "topic:net_zero_transition",
-      "weight": 292.3,
+      "weight": 292.4,
       "cooccurrence": 147,
       "kind": "semantic"
     },
     {
       "source": "topic:bioenergy",
       "target": "topic:enforcement",
-      "weight": 281.5,
+      "weight": 281.4,
       "cooccurrence": 120,
       "kind": "semantic"
     },
     {
       "source": "topic:air_quality",
       "target": "topic:waste_crime",
-      "weight": 268.9,
-      "cooccurrence": 112,
+      "weight": 269.7,
+      "cooccurrence": 113,
       "kind": "semantic"
     },
     {
@@ -737,15 +737,15 @@
     {
       "source": "topic:resource_circulation",
       "target": "topic:water_quality",
-      "weight": 214.1,
+      "weight": 213.8,
       "cooccurrence": 92,
       "kind": "semantic"
     },
     {
       "source": "topic:international_cooperation",
       "target": "topic:net_zero_transition",
-      "weight": 204.9,
-      "cooccurrence": 99,
+      "weight": 208.0,
+      "cooccurrence": 101,
       "kind": "semantic"
     },
     {
@@ -758,29 +758,29 @@
     {
       "source": "topic:carbon_fee",
       "target": "topic:climate_adaptation",
-      "weight": 186.8,
-      "cooccurrence": 82,
+      "weight": 188.3,
+      "cooccurrence": 83,
       "kind": "semantic"
     },
     {
       "source": "topic:net_zero_transition",
       "target": "topic:waste_crime",
-      "weight": 171.6,
-      "cooccurrence": 75,
+      "weight": 172.9,
+      "cooccurrence": 76,
       "kind": "semantic"
     },
     {
       "source": "topic:ghg_inventory",
       "target": "topic:international_cooperation",
-      "weight": 167.6,
-      "cooccurrence": 74,
+      "weight": 169.1,
+      "cooccurrence": 75,
       "kind": "semantic"
     },
     {
       "source": "topic:climate_adaptation",
       "target": "topic:resource_circulation",
-      "weight": 165.7,
-      "cooccurrence": 74,
+      "weight": 167.2,
+      "cooccurrence": 75,
       "kind": "semantic"
     },
     {
@@ -793,22 +793,22 @@
     {
       "source": "topic:carbon_pricing_ets",
       "target": "topic:climate_adaptation",
-      "weight": 156.0,
-      "cooccurrence": 69,
+      "weight": 159.0,
+      "cooccurrence": 71,
       "kind": "semantic"
     },
     {
       "source": "topic:international_cooperation",
       "target": "topic:waste_crime",
-      "weight": 154.5,
-      "cooccurrence": 73,
+      "weight": 155.8,
+      "cooccurrence": 74,
       "kind": "semantic"
     },
     {
       "source": "topic:international_cooperation",
       "target": "topic:resource_circulation",
-      "weight": 152.8,
-      "cooccurrence": 70,
+      "weight": 154.3,
+      "cooccurrence": 71,
       "kind": "semantic"
     },
     {
@@ -821,8 +821,15 @@
     {
       "source": "topic:air_quality",
       "target": "topic:international_cooperation",
-      "weight": 128.7,
-      "cooccurrence": 53,
+      "weight": 131.7,
+      "cooccurrence": 55,
+      "kind": "semantic"
+    },
+    {
+      "source": "topic:carbon_pricing_ets",
+      "target": "topic:net_zero_transition",
+      "weight": 121.5,
+      "cooccurrence": 61,
       "kind": "semantic"
     },
     {
@@ -833,37 +840,30 @@
       "kind": "semantic"
     },
     {
-      "source": "topic:carbon_pricing_ets",
-      "target": "topic:net_zero_transition",
-      "weight": 118.8,
-      "cooccurrence": 59,
-      "kind": "semantic"
-    },
-    {
       "source": "topic:climate_adaptation",
       "target": "topic:environmental_education",
-      "weight": 114.9,
-      "cooccurrence": 55,
-      "kind": "semantic"
-    },
-    {
-      "source": "topic:air_quality",
-      "target": "topic:net_zero_transition",
-      "weight": 114.3,
-      "cooccurrence": 54,
+      "weight": 116.9,
+      "cooccurrence": 56,
       "kind": "semantic"
     },
     {
       "source": "topic:bioenergy",
       "target": "topic:net_zero_transition",
-      "weight": 113.3,
-      "cooccurrence": 59,
+      "weight": 115.9,
+      "cooccurrence": 61,
+      "kind": "semantic"
+    },
+    {
+      "source": "topic:air_quality",
+      "target": "topic:net_zero_transition",
+      "weight": 115.6,
+      "cooccurrence": 55,
       "kind": "semantic"
     },
     {
       "source": "topic:environmental_education",
       "target": "topic:resource_circulation",
-      "weight": 110.3,
+      "weight": 110.5,
       "cooccurrence": 48,
       "kind": "semantic"
     },
@@ -877,8 +877,8 @@
     {
       "source": "topic:air_quality",
       "target": "topic:resource_circulation",
-      "weight": 107.5,
-      "cooccurrence": 48,
+      "weight": 108.6,
+      "cooccurrence": 49,
       "kind": "semantic"
     }
   ]

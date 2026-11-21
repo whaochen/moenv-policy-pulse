@@ -401,7 +401,7 @@
     "title": "國際氣候會議 COP 參與",
     "topic_slug": "international_cooperation",
     "description": "追蹤台灣參與 UNFCCC 氣候變遷大會（COP28～COP31）、NDC 目標提出、巴黎協定第六條碳權合作與國際論壇脈絡。",
-    "total_matched": 37,
+    "total_matched": 38,
     "year_start": "2016",
     "year_end": "2026",
     "stage_counts": {
@@ -566,17 +566,6 @@
         "source_url_status": ""
       },
       {
-        "news_id": "20261117190624",
-        "date": "2026-11-17",
-        "year": "2026",
-        "title": "串聯歐亞碳移除經驗 環境部COP31系列論壇探討臺灣生物炭循環新價值",
-        "unit": "環境部氣候變遷署",
-        "stage": "研商溝通",
-        "summary": "響應聯合國氣候變化綱要公約第31次締約方大會(COP31)「海洋、自然與土地利用」主題日，環境部 今(17)日舉辦「歐洲與亞洲碳移除(CDR)發展策略與生物炭」國際線上論壇。會議邀集芬蘭國際認證平台 Puro.earth、歐洲碳移除政策智庫 Carbonfuture 及國內產學專家，探討借鏡歐盟「碳移除認證架構(CRCF)」等國際標準，將本土農林剩餘資材轉化",
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14521",
-        "source_url_status": ""
-      },
-      {
         "news_id": "20261118203907",
         "date": "2026-11-18",
         "year": "2026",
@@ -596,6 +585,17 @@
         "stage": "研商溝通",
         "summary": "環境部今 (19) 日舉辦「COP31 氣候脈動．臺灣同行」線上論壇，以「氣候世代的接力賽：臺灣青世代的氣候韌性與圓夢行動」為題，串聯從小學、高中到大專海外實踐的完整拼圖，展現臺灣由校園扎根、生活自覺到走向世界的跨世代氣候行動力。",
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14529",
+        "source_url_status": ""
+      },
+      {
+        "news_id": "20261120192802",
+        "date": "2026-11-20",
+        "year": "2026",
+        "title": "掌握《巴黎協定》第六條國際新局！環境部舉辦 COP31 國際論壇，完善國外碳權認可機制促進實質氣候合作",
+        "unit": "環境部氣候變遷署",
+        "stage": "研商溝通",
+        "summary": "聯合國氣候公約第 31 次締約方大會（COP31）於土耳其安塔利亞進入最後協商階段。環境部今（20）日舉辦「從氣候科學到全球碳市場發展：巴黎協定 Article 6」論壇，聚焦國際碳市場談判動態與法規進展，並說明我國國外碳權認可準則，引導產業落實實質減碳與接軌國際規範。",
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14536",
         "source_url_status": ""
       }
     ]
