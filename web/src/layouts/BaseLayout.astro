@@ -16,6 +16,15 @@ const currentPath = Astro.url.pathname;
 const manifest = loadManifest();
 const logoSrc = findPublicImage('logo');
 
+const startYear = manifest.date_start ? Number(manifest.date_start.slice(0, 4)) : 2001;
+const endYear = manifest.date_end ? Number(manifest.date_end.slice(0, 4)) : 2026;
+const spanYears = Math.max(1, endYear - startYear + 1);
+const syncTimeLabel = formatTaipeiTimestamp(manifest.updated_at);
+const compactSyncFull = syncTimeLabel.replace(/:\d{2}\s*\(UTC\+8\)$/, '');
+const compactSyncParts = compactSyncFull.match(/^(\d{4})-(\d{2}-\d{2}\s+\d{2}:\d{2})$/);
+const syncYear = compactSyncParts ? compactSyncParts[1] : '';
+const syncShort = compactSyncParts ? compactSyncParts[2] : compactSyncFull;
+
 const navItems = [
   { href: '/', label: '首頁' },
   { href: '/hao-talks', label: '晧哥說' },
@@ -50,76 +59,182 @@ function isActive(href: string): boolean {
     <script src="https://hao-element-matrix.pages.dev/badge.js" defer></script>
   </head>
   <body class="bg-ivory text-gray-800 antialiased">
-    <!-- 通透象牙白毛玻璃頂部導覽列（桌機 80px / 手機 68px） -->
-    <header class="sticky top-0 z-40 border-b border-emerald-950/10 bg-[#FAFBF9]/92 backdrop-blur-md">
-      <div class="mx-auto flex h-[68px] max-w-7xl items-center justify-between gap-2 px-4 sm:px-6 lg:h-[80px] lg:px-6 xl:px-10">
-        <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
-          <a
-            href="https://hao-element-matrix.pages.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="晧脈元素庫 · 元素 #08 O（氧）"
-            aria-label="前往主站：晧脈元素庫 · 元素 #08 O（氧）"
-            class="group relative flex h-[42px] w-[42px] sm:h-[46px] sm:w-[46px] shrink-0 flex-col items-center justify-between rounded-xl border border-emerald-300/35 bg-gradient-to-br from-[#0F4C3A] to-[#082E23] px-1.5 py-1 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300/75 hover:shadow-md"
-          >
-            <span class="self-start font-mono text-[8.5px] sm:text-[9px] font-semibold leading-none text-emerald-300/95">08</span>
-            <span class="-mt-0.5 font-sans text-[18px] sm:text-[20px] font-bold leading-none tracking-tight text-white">O</span>
-            <span class="font-mono text-[7.5px] sm:text-[8px] font-medium leading-none tracking-wide text-emerald-200/90">Oxygen</span>
-          </a>
-          <span aria-hidden="true" class="h-7 w-px bg-emerald-950/15 shrink-0"></span>
-          <a href="/" class="flex items-center gap-3 group shrink-0">
-            {logoSrc ? (
-              <img
-                src={logoSrc}
-                alt="環策晧脈 HAO POLICY INTELLIGENCE"
-                class="h-[58px] sm:h-[64px] lg:h-[72px] w-auto object-contain transition-opacity group-hover:opacity-90"
-              />
-            ) : (
-              <>
-                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-deep font-serif text-xl font-bold text-white shadow-sm">
-                  脈
-                </div>
-                <div>
-                  <div class="font-serif text-xl font-bold tracking-wide text-emerald-deep leading-tight">環策晧脈</div>
-                  <div class="text-[10px] tracking-[0.14em] text-emerald-deep/70 uppercase">
-                    HAO Policy Intelligence
+    <!-- 通透象牙白毛玻璃雙層旗艦 Banner -->
+    <header class="sticky top-0 z-40 border-b border-emerald-950/10 bg-[#F8F9F7]/95 backdrop-blur-md">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-6 xl:px-10">
+        <div class="lg:grid lg:grid-cols-[minmax(0,1fr)_228px] xl:grid-cols-[minmax(0,1fr)_258px] lg:gap-4 xl:gap-5 lg:items-stretch">
+          <!-- 左側雙層區 -->
+          <div class="min-w-0 flex flex-col">
+            <!-- 第 1 層：O 元素方塊、分隔線、環策晧脈主 Logo、主要導覽連結 -->
+            <div class="flex items-center justify-between gap-2 py-2 lg:py-2.5">
+              <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
+                <a
+                  href="https://hao-element-matrix.pages.dev/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="晧脈元素庫 · 元素 #08 O（氧）"
+                  aria-label="前往主站：晧脈元素庫 · 元素 #08 O（氧）"
+                  class="group relative flex h-[40px] w-[40px] sm:h-[44px] sm:w-[44px] shrink-0 flex-col items-center justify-between rounded-xl border border-emerald-300/35 bg-gradient-to-br from-[#0F4C3A] to-[#082E23] px-1.5 py-1 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300/75 hover:shadow-md"
+                >
+                  <span class="self-start font-mono text-[8px] sm:text-[8.5px] font-semibold leading-none text-emerald-300/95">08</span>
+                  <span class="-mt-0.5 font-sans text-[17px] sm:text-[19px] font-bold leading-none tracking-tight text-white">O</span>
+                  <span class="font-mono text-[7px] sm:text-[7.5px] font-medium leading-none tracking-wide text-emerald-200/90">Oxygen</span>
+                </a>
+                <span aria-hidden="true" class="h-7 w-px bg-emerald-950/15 shrink-0"></span>
+                <a href="/" class="flex items-center gap-3 group shrink-0">
+                  {logoSrc ? (
+                    <img
+                      src={logoSrc}
+                      alt="環策晧脈 HAO POLICY INTELLIGENCE"
+                      class="h-[52px] sm:h-[58px] lg:h-[64px] w-auto object-contain transition-opacity group-hover:opacity-90"
+                    />
+                  ) : (
+                    <>
+                      <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-deep font-serif text-xl font-bold text-white shadow-sm">
+                        脈
+                      </div>
+                      <div>
+                        <div class="font-serif text-xl font-bold tracking-wide text-emerald-deep leading-tight">環策晧脈</div>
+                        <div class="text-[10px] tracking-[0.14em] text-emerald-deep/70 uppercase">
+                          HAO Policy Intelligence
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </a>
+              </div>
+
+              <nav class="hidden lg:flex items-center gap-0.5 xl:gap-1" aria-label="主導覽列">
+                {navItems.map((item) => (
+                  <a
+                    href={item.href}
+                    class:list={[
+                      'whitespace-nowrap rounded-full px-1.5 xl:px-2.5 py-1.5 text-[12.5px] xl:text-[13.5px] transition',
+                      isActive(item.href)
+                        ? 'bg-emerald-900/10 text-emerald-950 font-semibold'
+                        : 'text-[#0F4C3A] font-medium hover:bg-emerald-900/5 hover:text-emerald-950',
+                    ]}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+
+              <button
+                id="mobile-menu-btn"
+                type="button"
+                class="lg:hidden inline-flex items-center justify-center rounded-lg p-2 text-emerald-deep hover:bg-emerald-900/5"
+                aria-label="開啟選單"
+                aria-expanded="false"
+              >
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- 第 2 層：4 項即時統計精簡淺色 KPI 卡片列 + 右側淺色元素徽章 -->
+            <div class="border-t border-emerald-950/[0.07] py-1.5 lg:py-2">
+              <div class="flex flex-wrap lg:flex-nowrap items-center justify-between gap-1.5 xl:gap-2">
+                <div class="grid w-full grid-cols-2 gap-1.5 sm:flex sm:w-auto sm:flex-wrap lg:flex-nowrap sm:items-center sm:gap-1.5 xl:gap-2">
+                  <div class="min-w-0 flex items-center justify-between gap-1.5 xl:gap-2 rounded-lg border border-[#0F4C3A]/10 bg-white/85 px-2 xl:px-2.5 py-1 shadow-[0_1px_2px_rgba(15,76,58,0.03)]">
+                    <span class="text-[10px] font-medium text-gray-500 whitespace-nowrap">累計新聞</span>
+                    <span class="font-mono text-[11px] xl:text-xs font-bold text-[#0F4C3A] whitespace-nowrap">
+                      {manifest.total_news.toLocaleString()} <span class="font-sans text-[10px] font-normal text-gray-500">篇</span>
+                    </span>
+                  </div>
+                  <div class="min-w-0 flex items-center justify-between gap-1.5 xl:gap-2 rounded-lg border border-[#0F4C3A]/10 bg-white/85 px-2 xl:px-2.5 py-1 shadow-[0_1px_2px_rgba(15,76,58,0.03)]">
+                    <span class="text-[10px] font-medium text-gray-500 whitespace-nowrap">政策觀測</span>
+                    <span class="font-mono text-[11px] xl:text-xs font-bold text-[#0F4C3A] whitespace-nowrap">
+                      {spanYears} <span class="font-sans text-[10px] font-normal text-gray-500">年</span>
+                    </span>
+                  </div>
+                  <div class="min-w-0 flex items-center justify-between gap-1.5 xl:gap-2 rounded-lg border border-[#0F4C3A]/10 bg-white/85 px-2 xl:px-2.5 py-1 shadow-[0_1px_2px_rgba(15,76,58,0.03)]">
+                    <span class="text-[10px] font-medium text-gray-500 whitespace-nowrap">政策脈絡</span>
+                    <span class="font-mono text-[11px] xl:text-xs font-bold text-[#B45309] whitespace-nowrap">
+                      {(manifest.total_relation_edges ?? 0).toLocaleString()} <span class="font-sans text-[10px] font-normal text-gray-500">條</span>
+                    </span>
+                  </div>
+                  <div
+                    title={`最近更新：${syncTimeLabel}`}
+                    class="min-w-0 flex items-center justify-between gap-1.5 xl:gap-2 rounded-lg border border-[#0F4C3A]/10 bg-white/85 px-2 xl:px-2.5 py-1 shadow-[0_1px_2px_rgba(15,76,58,0.03)]"
+                  >
+                    <span class="text-[10px] font-medium text-gray-500 whitespace-nowrap">資料同步</span>
+                    <span class="truncate font-mono text-[11px] font-semibold text-gray-700 whitespace-nowrap">
+                      {syncYear && <span class="hidden sm:inline">{syncYear}-</span>}{syncShort}
+                    </span>
                   </div>
                 </div>
-              </>
-            )}
-          </a>
-        </div>
 
-        <nav class="hidden lg:flex items-center gap-0.5" aria-label="主導覽列">
-          {navItems.map((item) => (
-            <a
-              href={item.href}
-              class:list={[
-                'whitespace-nowrap rounded-full px-2 xl:px-3 py-2 text-[13px] xl:text-sm transition',
-                isActive(item.href)
-                  ? 'bg-emerald-900/10 text-emerald-950 font-semibold'
-                  : 'text-[#0F4C3A] font-medium hover:bg-emerald-900/5 hover:text-emerald-950',
-              ]}
-            >
-              {item.label}
-            </a>
-          ))}
-          <div class="ml-1.5 xl:ml-2 flex shrink-0 items-center">
-            <hao-element-badge symbol="O" theme="dark"></hao-element-badge>
+                <div class="hidden lg:flex shrink-0 items-center">
+                  <hao-element-badge symbol="O" theme="light"></hao-element-badge>
+                </div>
+              </div>
+            </div>
           </div>
-        </nav>
 
-        <button
-          id="mobile-menu-btn"
-          type="button"
-          class="lg:hidden inline-flex items-center justify-center rounded-lg p-2 text-emerald-deep hover:bg-emerald-900/5"
-          aria-label="開啟選單"
-          aria-expanded="false"
-        >
-          <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
+          <!-- 右側橫跨兩層：MOENV · POLICY PULSE LIVE 輕量 SVG 動畫卡片（手機版自動隱藏） -->
+          <div class="hidden lg:flex py-2">
+            <a
+              href="/policy-map"
+              title="查看政策神經網與即時脈動"
+              class="group flex w-full flex-col justify-between rounded-2xl border border-[#0F4C3A]/15 bg-gradient-to-br from-[#F3F8F5] via-[#F8F9F7] to-[#FBF6EC] px-3.5 py-2.5 shadow-[0_2px_12px_rgba(15,76,58,0.06)] transition hover:border-[#0F4C3A]/30 hover:shadow-[0_4px_16px_rgba(15,76,58,0.1)]"
+            >
+              <div class="flex items-center justify-between gap-2">
+                <div class="flex items-center gap-1.5">
+                  <span class="relative flex h-2 w-2 shrink-0">
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#B45309]/70 opacity-75"></span>
+                    <span class="relative inline-flex h-2 w-2 rounded-full bg-[#0F4C3A]"></span>
+                  </span>
+                  <span class="font-mono text-[9.5px] font-bold tracking-[0.12em] text-[#0F4C3A] uppercase">
+                    MOENV · POLICY PULSE
+                  </span>
+                </div>
+                <span class="rounded-full border border-[#B45309]/25 bg-[#FEF3C7]/60 px-1.5 py-0.5 font-mono text-[8.5px] font-bold tracking-wider text-[#B45309]">
+                  LIVE
+                </span>
+              </div>
+
+              <div class="my-1 flex items-center justify-center">
+                <svg class="h-[46px] w-full overflow-visible" viewBox="0 0 220 48" fill="none" aria-hidden="true">
+                  <!-- 背景參考微線 -->
+                  <line x1="0" y1="24" x2="220" y2="24" stroke="#0F4C3A" stroke-opacity="0.08" stroke-dasharray="3 3" />
+                  <!-- 節點呼吸連線 -->
+                  <line x1="34" y1="26" x2="88" y2="12" stroke="#0F4C3A" stroke-opacity="0.22" stroke-width="1" />
+                  <line x1="88" y1="12" x2="142" y2="34" stroke="#B45309" stroke-opacity="0.26" stroke-width="1" />
+                  <line x1="142" y1="34" x2="190" y2="16" stroke="#0F4C3A" stroke-opacity="0.22" stroke-width="1" />
+                  <!-- 深綠主脈動波形 -->
+                  <path
+                    d="M2 26 C 18 26, 24 26, 34 26 C 48 26, 62 12, 88 12 C 110 12, 120 35, 142 34 C 164 33, 174 16, 190 16 C 202 16, 210 22, 218 22"
+                    stroke="#0F4C3A"
+                    stroke-width="1.9"
+                    stroke-linecap="round"
+                    class="banner-wave-emerald"
+                  />
+                  <!-- 暖金副脈動波形 -->
+                  <path
+                    d="M2 31 C 22 31, 36 16, 60 19 C 84 22, 98 37, 122 31 C 146 25, 160 11, 184 15 C 198 17, 208 25, 218 25"
+                    stroke="#B45309"
+                    stroke-width="1.4"
+                    stroke-opacity="0.82"
+                    stroke-linecap="round"
+                    class="banner-wave-amber"
+                  />
+                  <!-- 呼吸節點 -->
+                  <circle cx="34" cy="26" r="2.8" fill="#0F4C3A" class="banner-node-breathe" />
+                  <circle cx="88" cy="12" r="3.2" fill="#0F4C3A" class="banner-node-breathe" style="animation-delay: 0.7s;" />
+                  <circle cx="142" cy="34" r="3" fill="#B45309" class="banner-node-breathe" style="animation-delay: 1.4s;" />
+                  <circle cx="190" cy="16" r="2.8" fill="#0F4C3A" class="banner-node-breathe" style="animation-delay: 2.1s;" />
+                </svg>
+              </div>
+
+              <div class="flex items-center justify-between text-[10px] text-[#0F4C3A]/75">
+                <span>生態政策脈動與節點連線</span>
+                <span class="font-semibold text-[#B45309] transition-transform group-hover:translate-x-0.5">→</span>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
 
       <div id="mobile-menu" class="hidden lg:hidden border-t border-emerald-950/10 bg-[#FAFBF9] px-4 py-3 shadow-sm">
@@ -138,7 +253,7 @@ function isActive(href: string): boolean {
             </a>
           ))}
           <div class="mt-2 border-t border-emerald-950/10 pt-2.5 flex items-center">
-            <hao-element-badge symbol="O" theme="dark"></hao-element-badge>
+            <hao-element-badge symbol="O" theme="light"></hao-element-badge>
           </div>
         </div>
       </div>

@@ -86,6 +86,43 @@
   animation: pulse-flow 3.2s linear infinite;
 }
 
+/* Banner MOENV · POLICY PULSE LIVE 輕量 SVG 波形與節點呼吸動畫 */
+@keyframes banner-wave-drift {
+  0% {
+    stroke-dashoffset: 320;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes banner-node-pulse {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+}
+
+.banner-wave-emerald {
+  stroke-dasharray: 140 20;
+  animation: banner-wave-drift 5.5s linear infinite;
+}
+
+.banner-wave-amber {
+  stroke-dasharray: 90 28;
+  animation: banner-wave-drift 7.5s linear infinite reverse;
+}
+
+.banner-node-breathe {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: banner-node-pulse 3.4s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal-section {
     opacity: 1;
@@ -93,7 +130,10 @@
     transition: none;
   }
   .animate-float-slow,
-  .pulse-flow-path {
+  .pulse-flow-path,
+  .banner-wave-emerald,
+  .banner-wave-amber,
+  .banner-node-breathe {
     animation: none;
   }
   .editorial-card:hover {
