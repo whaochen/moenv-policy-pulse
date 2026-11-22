@@ -1,12 +1,12 @@
 {
-  "total_news": 11502,
-  "total_relation_edges": 56205,
+  "total_news": 11503,
+  "total_relation_edges": 56210,
   "relation_mode": "tfidf_only",
   "date_start": "2001-01-01",
   "date_end": "2026-11-22",
-  "updated_at": "2026-11-22T19:28:38+08:00",
-  "dataset_version": "7d6a3b37c580c616",
-  "dataset_sha256": "7d6a3b37c580c61673bd0e4085c54fb810d188fe31cfa437e864de8cf003e4f7",
+  "updated_at": "2026-11-23T04:24:25+08:00",
+  "dataset_version": "be9bdb8129d9547a",
+  "dataset_sha256": "be9bdb8129d9547adf35947dc528a060915cb7dcf9d8e23feb84a716f6990101",
   "topic_count": 20,
   "years": [
     "2001",
@@ -36,11 +36,37 @@
     "2025",
     "2026"
   ],
-  "last_30_days_count": 64,
+  "last_30_days_count": 65,
   "prev_30_days_count": 51,
-  "last_30_days_delta": 13,
-  "last_30_days_pct": 25.5,
+  "last_30_days_delta": 14,
+  "last_30_days_pct": 27.5,
   "latest_news": [
+    {
+      "news_id": "20261122220745",
+      "date": "2026-11-22",
+      "roc_date": "115-11-22",
+      "title": "COP31 未達共識 臺灣不等待、加速落實　攜手國際推動碳市場、循環經濟與 AI 減碳韌性",
+      "unit": "環境部氣候變遷署",
+      "summary": "聯合國氣候變化綱要公約第 31 屆締約方大會(COP31)在土耳其安塔利亞舉行，原訂11月20日閉幕，延長兩日仍因各國對化石燃料轉型等議題立場分歧，主決議「安塔利亞協議（Antalya Pact）」未能達成共識，未通過主要決議。雖然談判受挫，仍通過多項實質議程項目，全球氣候治理「從談判承諾走向具體落實」的趨勢不會改變。",
+      "policy_keywords": [
+        "碳費徵收",
+        "自主減量計畫",
+        "碳定價與ETS",
+        "溫室氣體盤查登錄",
+        "淨零轉型",
+        "氣候變遷與調適",
+        "資源循環",
+        "空氣品質",
+        "水質保護",
+        "國際環境合作",
+        "ESG與永續金融",
+        "生質能與再生能源"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14541",
+      "source_url_status": "",
+      "attach_url": ""
+    },
     {
       "news_id": "20261120171557",
       "date": "2026-11-22",
@@ -210,24 +236,6 @@
       "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14528",
       "source_url_status": "",
       "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/kmzt00fp.uql.jpg"
-    },
-    {
-      "news_id": "20261119100502",
-      "date": "2026-11-19",
-      "roc_date": "115-11-19",
-      "title": "環境部預告「鋼鐵業集塵灰高溫冶煉設施戴奧辛管制及排放標準」修正草案",
-      "unit": "環境部大氣環境司",
-      "summary": "為強化鋼鐵業集塵灰高溫冶煉設施之空氣污染管制，環境部今日預告修正「鋼鐵業集塵灰高溫冶煉設施戴奧辛管制及排放標準」草案，本次修法重點在於加嚴鋼鐵業集塵灰高溫冶煉設施之戴奧辛排放標準，並於本行業別中，新增粒狀污染物、硫氧化物、氮氧化物及一氧化碳排放標準，且將法規名稱修正為「鋼鐵業集塵灰高溫冶煉設施空氣污染物管制及排放標準」，以擴大此冶煉設施空氣污染物管制對象及範圍，以期降低空氣污染物排放，提升空氣品質。",
-      "policy_keywords": [
-        "氣候變遷與調適",
-        "資源循環",
-        "空氣品質",
-        "國際環境合作"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14527",
-      "source_url_status": "",
-      "attach_url": "https://enews.moenv.gov.tw/File/Get/moenv-news/zh-tw/jBfZozwN6qzuUtI"
     }
   ]
 }

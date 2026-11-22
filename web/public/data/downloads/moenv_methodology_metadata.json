@@ -1,14 +1,14 @@
 {
   "project": "環策晧脈（Taiwan Environment Observatory）",
   "license": "資料來源：中華民國環境部（環境部新聞專區及環境資料開放平臺 MNEWS_P_01），依政府資料開放授權條款（OGDL 1.0）引用；原創分類口徑、分析與視覺化歸屬環策晧脈。",
-  "updated_at": "2026-11-22T19:28:38+08:00",
+  "updated_at": "2026-11-23T04:24:25+08:00",
   "coverage": {
     "date_start": "2001-01-01",
     "date_end": "2026-11-22",
-    "total_news": 11502
+    "total_news": 11503
   },
-  "dataset_version": "7d6a3b37c580c616",
-  "dataset_sha256": "7d6a3b37c580c61673bd0e4085c54fb810d188fe31cfa437e864de8cf003e4f7",
+  "dataset_version": "be9bdb8129d9547a",
+  "dataset_sha256": "be9bdb8129d9547adf35947dc528a060915cb7dcf9d8e23feb84a716f6990101",
   "deduplication": "以 news_id 為主鍵，並搭配正規化日期＋去標點去空白標題指紋（NFKC compact identity key）雙重去重，避免跨來源（官網與開放資料）重複收錄。",
   "multi_label_rule": "採「一文多標籤」口徑：單篇新聞若同時命中多項議題之同義詞表，將於對應議題各自計數 1 次，因此各議題加總高於全站新聞總篇數屬正常現象。",
   "relation_engine": {
@@ -17,7 +17,7 @@
     "layer_2": "選配 Gemini Embedding API（gemini-embedding-001）增量快取語意向量計算 S_embed；若未設 API Key 或遭遇限流，自動降級為 100% TF-IDF 權重。",
     "blend_formula": "w_ij = alpha * S_tfidf(i, j) + (1 - alpha) * S_embed(i, j) + topic_bonus (0.05)",
     "active_meta": {
-      "generated_at": "2026-11-23T00:16:24+08:00",
+      "generated_at": "2026-11-23T04:24:42+08:00",
       "algorithm": "Route 3 Hybrid (TF-IDF + jieba domain dict + optional Gemini Neural Embeddings)",
       "mode": "tfidf_only",
       "alpha": 1.0,
@@ -25,10 +25,10 @@
       "min_score": 0.16,
       "topic_bonus": 0.05,
       "domain_dict_terms": 174,
-      "vocab_size": 26581,
-      "total_items": 11502,
-      "total_edges": 56205,
-      "elapsed_seconds": 11.99,
+      "vocab_size": 26587,
+      "total_items": 11503,
+      "total_edges": 56210,
+      "elapsed_seconds": 12.19,
       "embedding_meta": {
         "mode": "tfidf_only",
         "model": "gemini-embedding-001",
@@ -50,7 +50,7 @@
         "碳費徵收",
         "碳費申報"
       ],
-      "total_count": 93
+      "total_count": 94
     },
     {
       "slug": "voluntary_reduction",
@@ -64,7 +64,7 @@
         "指定削減率",
         "優惠費率"
       ],
-      "total_count": 44
+      "total_count": 45
     },
     {
       "slug": "carbon_pricing_ets",
@@ -79,7 +79,7 @@
         "碳市場",
         "碳權"
       ],
-      "total_count": 105
+      "total_count": 106
     },
     {
       "slug": "ghg_inventory",
@@ -94,7 +94,7 @@
         "範疇三",
         "GHG"
       ],
-      "total_count": 437
+      "total_count": 438
     },
     {
       "slug": "net_zero_transition",
@@ -109,7 +109,7 @@
         "減碳",
         "低碳"
       ],
-      "total_count": 944
+      "total_count": 945
     },
     {
       "slug": "climate_adaptation",
@@ -125,7 +125,7 @@
         "韌性",
         "國土綠蔭"
       ],
-      "total_count": 743
+      "total_count": 744
     },
     {
       "slug": "resource_circulation",
@@ -140,7 +140,7 @@
         "循環標誌",
         "廢棄物再利用"
       ],
-      "total_count": 1587
+      "total_count": 1588
     },
     {
       "slug": "plastic_reduction",
@@ -189,7 +189,7 @@
         "空污費",
         "移動污染源"
       ],
-      "total_count": 1573
+      "total_count": 1574
     },
     {
       "slug": "water_quality",
@@ -205,7 +205,7 @@
         "地下水",
         "污水"
       ],
-      "total_count": 2404
+      "total_count": 2405
     },
     {
       "slug": "soil_groundwater",
@@ -298,7 +298,7 @@
         "日本",
         "國際研討會"
       ],
-      "total_count": 499
+      "total_count": 500
     },
     {
       "slug": "enforcement",
@@ -329,7 +329,7 @@
         "金融資源",
         "永續長"
       ],
-      "total_count": 48
+      "total_count": 49
     },
     {
       "slug": "bioenergy",
@@ -345,7 +345,7 @@
         "廚餘",
         "能源化"
       ],
-      "total_count": 407
+      "total_count": 408
     }
   ]
 }
