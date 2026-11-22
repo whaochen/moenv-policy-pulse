@@ -723,7 +723,7 @@
     {
       "source": "topic:air_quality",
       "target": "topic:waste_crime",
-      "weight": 269.9,
+      "weight": 270.1,
       "cooccurrence": 113,
       "kind": "semantic"
     },
