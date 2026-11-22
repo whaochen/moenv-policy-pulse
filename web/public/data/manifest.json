@@ -1,12 +1,12 @@
 {
-  "total_news": 11501,
-  "total_relation_edges": 56199,
+  "total_news": 11502,
+  "total_relation_edges": 56205,
   "relation_mode": "tfidf_only",
   "date_start": "2001-01-01",
-  "date_end": "2026-11-21",
-  "updated_at": "2026-11-22T09:04:33+08:00",
-  "dataset_version": "60a7cf045f993b0b",
-  "dataset_sha256": "60a7cf045f993b0b4653c2f1d4a835c47430ef6d5598360fff9fefcb8bb95170",
+  "date_end": "2026-11-22",
+  "updated_at": "2026-11-22T19:28:38+08:00",
+  "dataset_version": "7d6a3b37c580c616",
+  "dataset_sha256": "7d6a3b37c580c61673bd0e4085c54fb810d188fe31cfa437e864de8cf003e4f7",
   "topic_count": 20,
   "years": [
     "2001",
@@ -36,11 +36,27 @@
     "2025",
     "2026"
   ],
-  "last_30_days_count": 63,
-  "prev_30_days_count": 56,
-  "last_30_days_delta": 7,
-  "last_30_days_pct": 12.5,
+  "last_30_days_count": 64,
+  "prev_30_days_count": 51,
+  "last_30_days_delta": 13,
+  "last_30_days_pct": 25.5,
   "latest_news": [
+    {
+      "news_id": "20261120171557",
+      "date": "2026-11-22",
+      "roc_date": "115-11-22",
+      "title": "臺灣環境教育再度揚名國際！ 永安社區環教中心獲CIFA大獎",
+      "unit": "環境部國家環境研究院",
+      "summary": "臺灣環境教育再傳捷報！獲環境部認證的環教場所「臺東永安社區」，20日在馬來西亞古晉舉行的「亞洲區家庭研究聯盟(CIFA)2026年3A計畫」競賽中傳回捷報。社區憑藉「臺東永安『好料』市集」方案，從香港、新加坡、中國、馬來西亞及臺灣等5地共82件提案中強勢突圍，成為最終8支獲獎隊伍之一。此獎項高度肯定具創新與實踐力的家庭服務計畫，也再次見證臺灣在地社區推動環境教育的軟實力。",
+      "policy_keywords": [
+        "環境教育與綠領人才",
+        "國際環境合作"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14535",
+      "source_url_status": "",
+      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/yd1z3p3l.wkk.jpeg"
+    },
     {
       "news_id": "20261121180111",
       "date": "2026-11-21",
@@ -212,26 +228,6 @@
       "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14527",
       "source_url_status": "",
       "attach_url": "https://enews.moenv.gov.tw/File/Get/moenv-news/zh-tw/jBfZozwN6qzuUtI"
-    },
-    {
-      "news_id": "20261118203907",
-      "date": "2026-11-18",
-      "roc_date": "115-11-18",
-      "title": "呼應COP31「以人為本」行動 環境部辦公正轉型論壇　 串聯智庫、原鄉與青年實踐開放治理",
-      "unit": "環境部氣候變遷署",
-      "summary": "呼應聯合國氣候變化公約第31次締約方大會(UNFCCC COP31)本(18)日主題「人類、社會發展與性別(Human and Social Development, Gender)」，環境部今(18)日舉辦COP31系列活動「公正轉型、社會溝通與公眾參與」線上論壇。",
-      "policy_keywords": [
-        "碳費徵收",
-        "碳定價與ETS",
-        "淨零轉型",
-        "氣候變遷與調適",
-        "國際環境合作",
-        "生質能與再生能源"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14526",
-      "source_url_status": "",
-      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/zfnzzzdx.4ks.jpg"
     }
   ]
 }

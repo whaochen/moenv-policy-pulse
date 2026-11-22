@@ -1,14 +1,14 @@
 {
   "project": "環策晧脈（Taiwan Environment Observatory）",
   "license": "資料來源：中華民國環境部（環境部新聞專區及環境資料開放平臺 MNEWS_P_01），依政府資料開放授權條款（OGDL 1.0）引用；原創分類口徑、分析與視覺化歸屬環策晧脈。",
-  "updated_at": "2026-11-22T09:04:33+08:00",
+  "updated_at": "2026-11-22T19:28:38+08:00",
   "coverage": {
     "date_start": "2001-01-01",
-    "date_end": "2026-11-21",
-    "total_news": 11501
+    "date_end": "2026-11-22",
+    "total_news": 11502
   },
-  "dataset_version": "60a7cf045f993b0b",
-  "dataset_sha256": "60a7cf045f993b0b4653c2f1d4a835c47430ef6d5598360fff9fefcb8bb95170",
+  "dataset_version": "7d6a3b37c580c616",
+  "dataset_sha256": "7d6a3b37c580c61673bd0e4085c54fb810d188fe31cfa437e864de8cf003e4f7",
   "deduplication": "以 news_id 為主鍵，並搭配正規化日期＋去標點去空白標題指紋（NFKC compact identity key）雙重去重，避免跨來源（官網與開放資料）重複收錄。",
   "multi_label_rule": "採「一文多標籤」口徑：單篇新聞若同時命中多項議題之同義詞表，將於對應議題各自計數 1 次，因此各議題加總高於全站新聞總篇數屬正常現象。",
   "relation_engine": {
@@ -17,7 +17,7 @@
     "layer_2": "選配 Gemini Embedding API（gemini-embedding-001）增量快取語意向量計算 S_embed；若未設 API Key 或遭遇限流，自動降級為 100% TF-IDF 權重。",
     "blend_formula": "w_ij = alpha * S_tfidf(i, j) + (1 - alpha) * S_embed(i, j) + topic_bonus (0.05)",
     "active_meta": {
-      "generated_at": "2026-11-22T09:53:26+08:00",
+      "generated_at": "2026-11-22T19:28:55+08:00",
       "algorithm": "Route 3 Hybrid (TF-IDF + jieba domain dict + optional Gemini Neural Embeddings)",
       "mode": "tfidf_only",
       "alpha": 1.0,
@@ -25,10 +25,10 @@
       "min_score": 0.16,
       "topic_bonus": 0.05,
       "domain_dict_terms": 174,
-      "vocab_size": 26580,
-      "total_items": 11501,
-      "total_edges": 56199,
-      "elapsed_seconds": 16.33,
+      "vocab_size": 26581,
+      "total_items": 11502,
+      "total_edges": 56205,
+      "elapsed_seconds": 11.85,
       "embedding_meta": {
         "mode": "tfidf_only",
         "model": "gemini-embedding-001",
@@ -266,7 +266,7 @@
         "環境教育人員",
         "證照"
       ],
-      "total_count": 1055
+      "total_count": 1056
     },
     {
       "slug": "green_consumption",
@@ -298,7 +298,7 @@
         "日本",
         "國際研討會"
       ],
-      "total_count": 498
+      "total_count": 499
     },
     {
       "slug": "enforcement",

@@ -39,7 +39,7 @@
       "category": "氣候與碳定價",
       "value": 2366,
       "last30": 66,
-      "delta30": 37
+      "delta30": 44
     },
     {
       "id": "group:circular",
@@ -48,7 +48,7 @@
       "category": "資源循環與廢棄物",
       "value": 4696,
       "last30": 41,
-      "delta30": 4
+      "delta30": 6
     },
     {
       "id": "group:pollution",
@@ -57,25 +57,25 @@
       "category": "污染防制",
       "value": 5089,
       "last30": 14,
-      "delta30": 3
+      "delta30": 4
     },
     {
       "id": "group:governance",
       "name": "治理與制度",
       "kind": "group",
       "category": "治理與制度",
-      "value": 2815,
-      "last30": 25,
-      "delta30": 18
+      "value": 2816,
+      "last30": 26,
+      "delta30": 21
     },
     {
       "id": "group:society",
       "name": "社會溝通與人才",
       "kind": "group",
       "category": "社會溝通與人才",
-      "value": 1429,
-      "last30": 20,
-      "delta30": 2
+      "value": 1430,
+      "last30": 21,
+      "delta30": 4
     },
     {
       "id": "topic:carbon_fee",
@@ -125,8 +125,8 @@
       "description": "溫室氣體盤查、登錄、排放清冊與範疇三係數。",
       "value": 437,
       "last30": 5,
-      "delta30": 3,
-      "pct30": 150.0,
+      "delta30": 5,
+      "pct30": 100.0,
       "url": "/topics/ghg_inventory"
     },
     {
@@ -138,8 +138,8 @@
       "description": "2050 淨零、減碳路徑、綠色轉型與企業競爭力。",
       "value": 944,
       "last30": 22,
-      "delta30": 9,
-      "pct30": 69.2,
+      "delta30": 12,
+      "pct30": 120.0,
       "url": "/topics/net_zero_transition"
     },
     {
@@ -151,8 +151,8 @@
       "description": "氣候變遷、高溫、熱浪、韌性城市與調適政策。",
       "value": 743,
       "last30": 25,
-      "delta30": 11,
-      "pct30": 78.6,
+      "delta30": 13,
+      "pct30": 108.3,
       "url": "/topics/climate_adaptation"
     },
     {
@@ -164,8 +164,8 @@
       "description": "資源循環、資源回收、再利用與循環經濟政策。",
       "value": 1587,
       "last30": 19,
-      "delta30": 0,
-      "pct30": 0.0,
+      "delta30": 1,
+      "pct30": 5.6,
       "url": "/topics/resource_circulation"
     },
     {
@@ -190,8 +190,8 @@
       "description": "廢棄物清理、非法棄置、掩埋、清運與環保犯罪查緝。",
       "value": 2413,
       "last30": 9,
-      "delta30": 2,
-      "pct30": 28.6,
+      "delta30": 3,
+      "pct30": 50.0,
       "url": "/topics/waste_crime"
     },
     {
@@ -203,8 +203,8 @@
       "description": "空污、PM2.5、臭氧、空污費、移動污染源與空氣品質管理。",
       "value": 1573,
       "last30": 6,
-      "delta30": 4,
-      "pct30": 200.0,
+      "delta30": 5,
+      "pct30": 500.0,
       "url": "/topics/air_quality"
     },
     {
@@ -266,10 +266,10 @@
       "kind": "topic",
       "category": "社會溝通與人才",
       "description": "環境教育、環教場所、綠領人才、證照與人才培育。",
-      "value": 1055,
-      "last30": 15,
-      "delta30": 4,
-      "pct30": 36.4,
+      "value": 1056,
+      "last30": 16,
+      "delta30": 5,
+      "pct30": 45.5,
       "url": "/topics/environmental_education"
     },
     {
@@ -281,8 +281,8 @@
       "description": "環保標章、綠色採購、綠色消費、環保旅宿與永續生活。",
       "value": 374,
       "last30": 5,
-      "delta30": -2,
-      "pct30": -28.6,
+      "delta30": -1,
+      "pct30": -16.7,
       "url": "/topics/green_consumption"
     },
     {
@@ -292,10 +292,10 @@
       "kind": "topic",
       "category": "治理與制度",
       "description": "國際合作、COP、UNFCCC、巴黎協定、歐盟與跨國交流。",
-      "value": 498,
-      "last30": 18,
-      "delta30": 15,
-      "pct30": 500.0,
+      "value": 499,
+      "last30": 19,
+      "delta30": 17,
+      "pct30": 850.0,
       "url": "/topics/international_cooperation"
     },
     {
@@ -320,8 +320,8 @@
       "description": "ESG、永續金融、企業永續、綠色金融與投資資源。",
       "value": 48,
       "last30": 3,
-      "delta30": 1,
-      "pct30": 50.0,
+      "delta30": 2,
+      "pct30": 200.0,
       "url": "/topics/esg_finance"
     },
     {
@@ -653,7 +653,7 @@
     {
       "source": "topic:environmental_education",
       "target": "topic:net_zero_transition",
-      "weight": 442.9,
+      "weight": 443.0,
       "cooccurrence": 205,
       "kind": "semantic"
     },
@@ -674,7 +674,7 @@
     {
       "source": "topic:net_zero_transition",
       "target": "topic:resource_circulation",
-      "weight": 323.8,
+      "weight": 323.9,
       "cooccurrence": 154,
       "kind": "semantic"
     },
@@ -709,21 +709,21 @@
     {
       "source": "topic:green_consumption",
       "target": "topic:net_zero_transition",
-      "weight": 295.0,
+      "weight": 294.8,
       "cooccurrence": 148,
       "kind": "semantic"
     },
     {
       "source": "topic:bioenergy",
       "target": "topic:enforcement",
-      "weight": 281.4,
+      "weight": 281.3,
       "cooccurrence": 120,
       "kind": "semantic"
     },
     {
       "source": "topic:air_quality",
       "target": "topic:waste_crime",
-      "weight": 270.1,
+      "weight": 269.9,
       "cooccurrence": 113,
       "kind": "semantic"
     },
@@ -744,14 +744,14 @@
     {
       "source": "topic:international_cooperation",
       "target": "topic:net_zero_transition",
-      "weight": 210.8,
+      "weight": 211.2,
       "cooccurrence": 102,
       "kind": "semantic"
     },
     {
       "source": "topic:plastic_reduction",
       "target": "topic:waste_crime",
-      "weight": 198.8,
+      "weight": 198.9,
       "cooccurrence": 84,
       "kind": "semantic"
     },
@@ -800,14 +800,14 @@
     {
       "source": "topic:international_cooperation",
       "target": "topic:waste_crime",
-      "weight": 158.6,
+      "weight": 158.7,
       "cooccurrence": 75,
       "kind": "semantic"
     },
     {
       "source": "topic:international_cooperation",
       "target": "topic:resource_circulation",
-      "weight": 157.0,
+      "weight": 157.3,
       "cooccurrence": 72,
       "kind": "semantic"
     },
@@ -863,7 +863,7 @@
     {
       "source": "topic:environmental_education",
       "target": "topic:resource_circulation",
-      "weight": 112.7,
+      "weight": 112.9,
       "cooccurrence": 49,
       "kind": "semantic"
     },

@@ -721,7 +721,7 @@
     ],
     "total_count": 437,
     "last_30_days_count": 5,
-    "prev_30_days_count": 2,
+    "prev_30_days_count": 0,
     "yearly_counts": {
       "2001": 1,
       "2002": 4,
@@ -954,7 +954,7 @@
     ],
     "total_count": 944,
     "last_30_days_count": 22,
-    "prev_30_days_count": 13,
+    "prev_30_days_count": 10,
     "yearly_counts": {
       "2001": 0,
       "2002": 0,
@@ -1195,7 +1195,7 @@
     ],
     "total_count": 743,
     "last_30_days_count": 25,
-    "prev_30_days_count": 14,
+    "prev_30_days_count": 12,
     "yearly_counts": {
       "2001": 2,
       "2002": 1,
@@ -1432,7 +1432,7 @@
     ],
     "total_count": 1587,
     "last_30_days_count": 19,
-    "prev_30_days_count": 19,
+    "prev_30_days_count": 18,
     "yearly_counts": {
       "2001": 13,
       "2002": 20,
@@ -1879,7 +1879,7 @@
     ],
     "total_count": 2413,
     "last_30_days_count": 9,
-    "prev_30_days_count": 7,
+    "prev_30_days_count": 6,
     "yearly_counts": {
       "2001": 34,
       "2002": 32,
@@ -2110,7 +2110,7 @@
     ],
     "total_count": 1573,
     "last_30_days_count": 6,
-    "prev_30_days_count": 2,
+    "prev_30_days_count": 1,
     "yearly_counts": {
       "2001": 36,
       "2002": 20,
@@ -3149,8 +3149,8 @@
       "環境教育人員",
       "證照"
     ],
-    "total_count": 1055,
-    "last_30_days_count": 15,
+    "total_count": 1056,
+    "last_30_days_count": 16,
     "prev_30_days_count": 11,
     "yearly_counts": {
       "2001": 2,
@@ -3178,9 +3178,25 @@
       "2023": 41,
       "2024": 51,
       "2025": 75,
-      "2026": 98
+      "2026": 99
     },
     "latest_news": [
+      {
+        "news_id": "20261120171557",
+        "date": "2026-11-22",
+        "roc_date": "115-11-22",
+        "title": "臺灣環境教育再度揚名國際！ 永安社區環教中心獲CIFA大獎",
+        "unit": "環境部國家環境研究院",
+        "summary": "臺灣環境教育再傳捷報！獲環境部認證的環教場所「臺東永安社區」，20日在馬來西亞古晉舉行的「亞洲區家庭研究聯盟(CIFA)2026年3A計畫」競賽中傳回捷報。社區憑藉「臺東永安『好料』市集」方案，從香港、新加坡、中國、馬來西亞及臺灣等5地共82件提案中強勢突圍，成為最終8支獲獎隊伍之一。此獎項高度肯定具創新與實踐力的家庭服務計畫，也再次見證臺灣在地社區推動環境教育的軟實力。",
+        "policy_keywords": [
+          "環境教育與綠領人才",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14535",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/yd1z3p3l.wkk.jpeg"
+      },
       {
         "news_id": "20261121180111",
         "date": "2026-11-21",
@@ -3339,21 +3355,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14448",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "14445",
-        "date": "2026-11-07",
-        "roc_date": "115-11-07",
-        "title": "國環院響應世界無紙日！ 環保證照電子證書破6成、測驗電腦化",
-        "unit": "環境部國家環境研究院",
-        "summary": "適逢「世界無紙日」(World Paper Free Day)，環境部國家環境研究院（國環院)公布環保專業證照訓練無紙化推動成效。自民國114年推動電子證書以來，已有逾六成申請案採數位化辦理；另推行37年的紙本測驗亦於上月「公私場所噪音狀況檢查或鑑定人員訓練」中，首度轉型為電腦測驗。國環院院長張順欽表示，該院透過證書與測驗無紙化，具體減少森林資源消耗，落實綠色環保政策。",
-        "policy_keywords": [
-          "環境教育與綠領人才"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14445",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -3372,7 +3373,7 @@
     ],
     "total_count": 374,
     "last_30_days_count": 5,
-    "prev_30_days_count": 7,
+    "prev_30_days_count": 6,
     "yearly_counts": {
       "2001": 5,
       "2002": 3,
@@ -3585,9 +3586,9 @@
       "日本",
       "國際研討會"
     ],
-    "total_count": 498,
-    "last_30_days_count": 18,
-    "prev_30_days_count": 3,
+    "total_count": 499,
+    "last_30_days_count": 19,
+    "prev_30_days_count": 2,
     "yearly_counts": {
       "2001": 7,
       "2002": 8,
@@ -3614,9 +3615,25 @@
       "2023": 15,
       "2024": 25,
       "2025": 37,
-      "2026": 48
+      "2026": 49
     },
     "latest_news": [
+      {
+        "news_id": "20261120171557",
+        "date": "2026-11-22",
+        "roc_date": "115-11-22",
+        "title": "臺灣環境教育再度揚名國際！ 永安社區環教中心獲CIFA大獎",
+        "unit": "環境部國家環境研究院",
+        "summary": "臺灣環境教育再傳捷報！獲環境部認證的環教場所「臺東永安社區」，20日在馬來西亞古晉舉行的「亞洲區家庭研究聯盟(CIFA)2026年3A計畫」競賽中傳回捷報。社區憑藉「臺東永安『好料』市集」方案，從香港、新加坡、中國、馬來西亞及臺灣等5地共82件提案中強勢突圍，成為最終8支獲獎隊伍之一。此獎項高度肯定具創新與實踐力的家庭服務計畫，也再次見證臺灣在地社區推動環境教育的軟實力。",
+        "policy_keywords": [
+          "環境教育與綠領人才",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14535",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/yd1z3p3l.wkk.jpeg"
+      },
       {
         "news_id": "20261121090641",
         "date": "2026-11-21",
@@ -3791,23 +3808,6 @@
         ],
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14518",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14502",
-        "date": "2026-11-13",
-        "roc_date": "115-11-13",
-        "title": "呼應 COP31「金融與貿易」主題日 環境部論壇聚焦氣候資金　引導金融支持企業減碳",
-        "unit": "環境部氣候變遷署",
-        "summary": "聯合國氣候峰會(COP31)於今(13)日邁入第五天，大會主題日為「金融與貿易」(Finance and Trade)。聯合國秘書長古特瑞斯(António Guterres)於11日領袖峰會倡議「氣候正義協定」(Climate Justice Compact)，並將氣候資金列為四大核心之一，強調資金必須充足、可負擔且容易取得，呼籲已開發國家帶頭於2035年前每年提供至少3,000億美元，並讓1.3兆美元目標成為真正流向開發中國家的資金。",
-        "policy_keywords": [
-          "淨零轉型",
-          "氣候變遷與調適",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14502",
         "source_url_status": "",
         "attach_url": ""
       }
@@ -4041,7 +4041,7 @@
     ],
     "total_count": 48,
     "last_30_days_count": 3,
-    "prev_30_days_count": 2,
+    "prev_30_days_count": 1,
     "yearly_counts": {
       "2001": 0,
       "2002": 0,
