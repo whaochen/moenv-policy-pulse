@@ -1,12 +1,12 @@
 {
-  "total_news": 11499,
-  "total_relation_edges": 56190,
+  "total_news": 11501,
+  "total_relation_edges": 56199,
   "relation_mode": "tfidf_only",
   "date_start": "2001-01-01",
-  "date_end": "2026-11-20",
-  "updated_at": "2026-11-21T08:26:47+08:00",
-  "dataset_version": "e77be952b8748186",
-  "dataset_sha256": "e77be952b8748186fdb6d216fe78395ac800b27e02d880fbc1dca5302eb2e6e8",
+  "date_end": "2026-11-21",
+  "updated_at": "2026-11-22T09:04:33+08:00",
+  "dataset_version": "60a7cf045f993b0b",
+  "dataset_sha256": "60a7cf045f993b0b4653c2f1d4a835c47430ef6d5598360fff9fefcb8bb95170",
   "topic_count": 20,
   "years": [
     "2001",
@@ -36,11 +36,50 @@
     "2025",
     "2026"
   ],
-  "last_30_days_count": 65,
-  "prev_30_days_count": 52,
-  "last_30_days_delta": 13,
-  "last_30_days_pct": 25.0,
+  "last_30_days_count": 63,
+  "prev_30_days_count": 56,
+  "last_30_days_delta": 7,
+  "last_30_days_pct": 12.5,
   "latest_news": [
+    {
+      "news_id": "20261121180111",
+      "date": "2026-11-21",
+      "roc_date": "115-11-21",
+      "title": "環境部舉辦「企業ESG人才培育」階段實習成果分享會 攜手青年企業共創永續新亮點",
+      "unit": "環境部環境保護司",
+      "summary": "為回應全球淨零轉型與ESG發展趨勢，環境部積極推動「企業ESG人才培育計畫」，並於今（21）日舉辦「青年企業實習：階段實習成果分享會」。本次活動以「企業 × 青年 × 永續行動」為核心理念，邀請參與企業代表與青年齊聚一堂，展示青年提早進入企業實習的豐碩成果。",
+      "policy_keywords": [
+        "淨零轉型",
+        "環境教育與綠領人才",
+        "ESG與永續金融",
+        "生質能與再生能源"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14540",
+      "source_url_status": "",
+      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/li452ghb.zcv.jpg"
+    },
+    {
+      "news_id": "20261121090641",
+      "date": "2026-11-21",
+      "roc_date": "115-11-21",
+      "title": "呼應 COP31 零廢棄主題 臺灣強化與各國循環經濟合作",
+      "unit": "環境部資源循環署",
+      "summary": "第31屆聯合國氣候變化綱要公約締約方大會（COP31）落幕，主辦國土耳其將「零廢棄」（Zero Waste）與循環經濟列為全球氣候行動的重要主題。環境部長彭啓明今（21）日表示，臺灣高度重視COP31所倡議的零廢棄與循環經濟方向，並將資源循環視為推動淨零轉型、強化資源安全及產業競爭力的重要策略。臺灣不僅將持續深化國內循環經濟政策，也願意分享多年累積的資源回收、技術創新及產業發展經驗，積極與國際夥伴合作，共同推動循環材料應用及跨境循環供應鏈，讓循環經濟成為全球氣候行動與綠色成長的新動力。",
+      "policy_keywords": [
+        "碳定價與ETS",
+        "淨零轉型",
+        "資源循環",
+        "廢棄物與環保犯罪",
+        "環境教育與綠領人才",
+        "綠色消費與標章",
+        "國際環境合作"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14539",
+      "source_url_status": "",
+      "attach_url": ""
+    },
     {
       "news_id": "20261120201727",
       "date": "2026-11-20",
@@ -193,42 +232,6 @@
       "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14526",
       "source_url_status": "",
       "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/zfnzzzdx.4ks.jpg"
-    },
-    {
-      "news_id": "20261117190624",
-      "date": "2026-11-17",
-      "roc_date": "115-11-17",
-      "title": "串聯歐亞碳移除經驗 環境部COP31系列論壇探討臺灣生物炭循環新價值",
-      "unit": "環境部氣候變遷署",
-      "summary": "響應聯合國氣候變化綱要公約第31次締約方大會(COP31)「海洋、自然與土地利用」主題日，環境部 今(17)日舉辦「歐洲與亞洲碳移除(CDR)發展策略與生物炭」國際線上論壇。會議邀集芬蘭國際認證平台 Puro.earth、歐洲碳移除政策智庫 Carbonfuture 及國內產學專家，探討借鏡歐盟「碳移除認證架構(CRCF)」等國際標準，將本土農林剩餘資材轉化為具國際公信力的高品質碳資產，為我國 2050 淨零轉型奠定基石。",
-      "policy_keywords": [
-        "碳定價與ETS",
-        "淨零轉型",
-        "氣候變遷與調適",
-        "資源循環",
-        "國際環境合作"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14521",
-      "source_url_status": "",
-      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/hhezowhu.4v1.jpg"
-    },
-    {
-      "news_id": "20261117135816",
-      "date": "2026-11-17",
-      "roc_date": "115-11-17",
-      "title": "用鏡頭記錄你的綠色選擇！ 「第二屆綠影創作獎」開放報名 總獎金50萬元",
-      "unit": "環境部環境保護司",
-      "summary": "綠色生活，食、衣、住、行、育樂、購，來自每日生活的選擇。一個自備的杯子、一件修好再穿的舊衣、一趟改搭大眾運輸的通勤，都是值得被看見的綠色選擇。環境部與財團法人彩晶文教基金會共同主辦的「第二屆綠影創作獎」今(17)日公布簡章並開放報名，以「100種綠色生活的可能」為年度主題，誠摯邀請大家拿起攝影機，透過鏡頭記錄生活中每一項「綠色選擇」的故事，總獎金50萬元，報名至2027年3月31日止。",
-      "policy_keywords": [
-        "淨零轉型",
-        "環境教育與綠領人才",
-        "綠色消費與標章"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14519",
-      "source_url_status": "",
-      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/h3dcmyqv.pz0.png"
     }
   ]
 }

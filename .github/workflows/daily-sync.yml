@@ -2,8 +2,11 @@ name: Daily MOENV News Sync
 
 on:
   schedule:
-    # Daily at 22:00 UTC (06:00 Asia/Taipei)
-    - cron: '0 22 * * *'
+    # 避開整點排程高峰：台灣時間每日 06:17、11:17、16:17、21:17 (Asia/Taipei = UTC+8)
+    - cron: '17 22 * * *'
+    - cron: '17 3 * * *'
+    - cron: '17 8 * * *'
+    - cron: '17 13 * * *'
   workflow_dispatch:
 
 permissions:

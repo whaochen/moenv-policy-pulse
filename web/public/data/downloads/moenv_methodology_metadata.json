@@ -1,14 +1,14 @@
 {
   "project": "環策晧脈（Taiwan Environment Observatory）",
   "license": "資料來源：中華民國環境部（環境部新聞專區及環境資料開放平臺 MNEWS_P_01），依政府資料開放授權條款（OGDL 1.0）引用；原創分類口徑、分析與視覺化歸屬環策晧脈。",
-  "updated_at": "2026-11-21T08:26:47+08:00",
+  "updated_at": "2026-11-22T09:04:33+08:00",
   "coverage": {
     "date_start": "2001-01-01",
-    "date_end": "2026-11-20",
-    "total_news": 11499
+    "date_end": "2026-11-21",
+    "total_news": 11501
   },
-  "dataset_version": "e77be952b8748186",
-  "dataset_sha256": "e77be952b8748186fdb6d216fe78395ac800b27e02d880fbc1dca5302eb2e6e8",
+  "dataset_version": "60a7cf045f993b0b",
+  "dataset_sha256": "60a7cf045f993b0b4653c2f1d4a835c47430ef6d5598360fff9fefcb8bb95170",
   "deduplication": "以 news_id 為主鍵，並搭配正規化日期＋去標點去空白標題指紋（NFKC compact identity key）雙重去重，避免跨來源（官網與開放資料）重複收錄。",
   "multi_label_rule": "採「一文多標籤」口徑：單篇新聞若同時命中多項議題之同義詞表，將於對應議題各自計數 1 次，因此各議題加總高於全站新聞總篇數屬正常現象。",
   "relation_engine": {
@@ -17,7 +17,7 @@
     "layer_2": "選配 Gemini Embedding API（gemini-embedding-001）增量快取語意向量計算 S_embed；若未設 API Key 或遭遇限流，自動降級為 100% TF-IDF 權重。",
     "blend_formula": "w_ij = alpha * S_tfidf(i, j) + (1 - alpha) * S_embed(i, j) + topic_bonus (0.05)",
     "active_meta": {
-      "generated_at": "2026-11-21T08:42:48+08:00",
+      "generated_at": "2026-11-22T09:05:19+08:00",
       "algorithm": "Route 3 Hybrid (TF-IDF + jieba domain dict + optional Gemini Neural Embeddings)",
       "mode": "tfidf_only",
       "alpha": 1.0,
@@ -25,10 +25,10 @@
       "min_score": 0.16,
       "topic_bonus": 0.05,
       "domain_dict_terms": 174,
-      "vocab_size": 26579,
-      "total_items": 11499,
-      "total_edges": 56190,
-      "elapsed_seconds": 18.43,
+      "vocab_size": 26580,
+      "total_items": 11501,
+      "total_edges": 56199,
+      "elapsed_seconds": 18.37,
       "embedding_meta": {
         "mode": "tfidf_only",
         "model": "gemini-embedding-001",
@@ -79,7 +79,7 @@
         "碳市場",
         "碳權"
       ],
-      "total_count": 104
+      "total_count": 105
     },
     {
       "slug": "ghg_inventory",
@@ -109,7 +109,7 @@
         "減碳",
         "低碳"
       ],
-      "total_count": 942
+      "total_count": 944
     },
     {
       "slug": "climate_adaptation",
@@ -140,7 +140,7 @@
         "循環標誌",
         "廢棄物再利用"
       ],
-      "total_count": 1586
+      "total_count": 1587
     },
     {
       "slug": "plastic_reduction",
@@ -172,7 +172,7 @@
         "事業廢棄物",
         "有害廢棄物"
       ],
-      "total_count": 2412
+      "total_count": 2413
     },
     {
       "slug": "air_quality",
@@ -266,7 +266,7 @@
         "環境教育人員",
         "證照"
       ],
-      "total_count": 1053
+      "total_count": 1055
     },
     {
       "slug": "green_consumption",
@@ -281,7 +281,7 @@
         "淨零綠生活",
         "友善食力"
       ],
-      "total_count": 373
+      "total_count": 374
     },
     {
       "slug": "international_cooperation",
@@ -298,7 +298,7 @@
         "日本",
         "國際研討會"
       ],
-      "total_count": 497
+      "total_count": 498
     },
     {
       "slug": "enforcement",
@@ -329,7 +329,7 @@
         "金融資源",
         "永續長"
       ],
-      "total_count": 47
+      "total_count": 48
     },
     {
       "slug": "bioenergy",
@@ -345,7 +345,7 @@
         "廚餘",
         "能源化"
       ],
-      "total_count": 406
+      "total_count": 407
     }
   ]
 }

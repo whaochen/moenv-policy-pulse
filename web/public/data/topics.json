@@ -477,8 +477,8 @@
       "碳市場",
       "碳權"
     ],
-    "total_count": 104,
-    "last_30_days_count": 6,
+    "total_count": 105,
+    "last_30_days_count": 7,
     "prev_30_days_count": 0,
     "yearly_counts": {
       "2001": 0,
@@ -506,9 +506,30 @@
       "2023": 8,
       "2024": 16,
       "2025": 15,
-      "2026": 17
+      "2026": 18
     },
     "latest_news": [
+      {
+        "news_id": "20261121090641",
+        "date": "2026-11-21",
+        "roc_date": "115-11-21",
+        "title": "呼應 COP31 零廢棄主題 臺灣強化與各國循環經濟合作",
+        "unit": "環境部資源循環署",
+        "summary": "第31屆聯合國氣候變化綱要公約締約方大會（COP31）落幕，主辦國土耳其將「零廢棄」（Zero Waste）與循環經濟列為全球氣候行動的重要主題。環境部長彭啓明今（21）日表示，臺灣高度重視COP31所倡議的零廢棄與循環經濟方向，並將資源循環視為推動淨零轉型、強化資源安全及產業競爭力的重要策略。臺灣不僅將持續深化國內循環經濟政策，也願意分享多年累積的資源回收、技術創新及產業發展經驗，積極與國際夥伴合作，共同推動循環材料應用及跨境循環供應鏈，讓循環經濟成為全球氣候行動與綠色成長的新動力。",
+        "policy_keywords": [
+          "碳定價與ETS",
+          "淨零轉型",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "環境教育與綠領人才",
+          "綠色消費與標章",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14539",
+        "source_url_status": "",
+        "attach_url": ""
+      },
       {
         "news_id": "20261120201727",
         "date": "2026-11-20",
@@ -680,25 +701,6 @@
         ],
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14089",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14034",
-        "date": "2026-09-01",
-        "roc_date": "115-09-01",
-        "title": "環境部修正發布「碳費收費辦法」第3條之1、第9條，以及「自主減量計畫管理辦法」第11條之1、第17條",
-        "unit": "環境部氣候變遷署",
-        "summary": "我國碳費制度於114年正式上路，461廠收費對象（合計240家企業）已於今年5月全數完成繳費，為我國碳定價制度迎來歷史性關鍵里程碑。為使碳費制度推動更臻周延，並兼顧首次納管事業辦理溫室氣體盤查登錄、查驗及申請自主減量計畫所需作業時間，環境部廣徵各界意見後，公告修正「碳費收費辦法」第3條之1、第9條，以及「自主減量計畫管理辦法」第11條之1、第17條，確保制度兼顧程序公平、產業轉型與實質減量。",
-        "policy_keywords": [
-          "碳費徵收",
-          "自主減量計畫",
-          "碳定價與ETS",
-          "溫室氣體盤查登錄",
-          "氣候變遷與調適"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14034",
         "source_url_status": "",
         "attach_url": ""
       }
@@ -950,9 +952,9 @@
       "減碳",
       "低碳"
     ],
-    "total_count": 942,
-    "last_30_days_count": 21,
-    "prev_30_days_count": 12,
+    "total_count": 944,
+    "last_30_days_count": 22,
+    "prev_30_days_count": 13,
     "yearly_counts": {
       "2001": 0,
       "2002": 0,
@@ -979,9 +981,48 @@
       "2023": 71,
       "2024": 92,
       "2025": 133,
-      "2026": 164
+      "2026": 166
     },
     "latest_news": [
+      {
+        "news_id": "20261121180111",
+        "date": "2026-11-21",
+        "roc_date": "115-11-21",
+        "title": "環境部舉辦「企業ESG人才培育」階段實習成果分享會 攜手青年企業共創永續新亮點",
+        "unit": "環境部環境保護司",
+        "summary": "為回應全球淨零轉型與ESG發展趨勢，環境部積極推動「企業ESG人才培育計畫」，並於今（21）日舉辦「青年企業實習：階段實習成果分享會」。本次活動以「企業 × 青年 × 永續行動」為核心理念，邀請參與企業代表與青年齊聚一堂，展示青年提早進入企業實習的豐碩成果。",
+        "policy_keywords": [
+          "淨零轉型",
+          "環境教育與綠領人才",
+          "ESG與永續金融",
+          "生質能與再生能源"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14540",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/li452ghb.zcv.jpg"
+      },
+      {
+        "news_id": "20261121090641",
+        "date": "2026-11-21",
+        "roc_date": "115-11-21",
+        "title": "呼應 COP31 零廢棄主題 臺灣強化與各國循環經濟合作",
+        "unit": "環境部資源循環署",
+        "summary": "第31屆聯合國氣候變化綱要公約締約方大會（COP31）落幕，主辦國土耳其將「零廢棄」（Zero Waste）與循環經濟列為全球氣候行動的重要主題。環境部長彭啓明今（21）日表示，臺灣高度重視COP31所倡議的零廢棄與循環經濟方向，並將資源循環視為推動淨零轉型、強化資源安全及產業競爭力的重要策略。臺灣不僅將持續深化國內循環經濟政策，也願意分享多年累積的資源回收、技術創新及產業發展經驗，積極與國際夥伴合作，共同推動循環材料應用及跨境循環供應鏈，讓循環經濟成為全球氣候行動與綠色成長的新動力。",
+        "policy_keywords": [
+          "碳定價與ETS",
+          "淨零轉型",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "環境教育與綠領人才",
+          "綠色消費與標章",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14539",
+        "source_url_status": "",
+        "attach_url": ""
+      },
       {
         "news_id": "20261120201727",
         "date": "2026-11-20",
@@ -1133,40 +1174,6 @@
         ],
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14503",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14501",
-        "date": "2026-11-14",
-        "roc_date": "115-11-14",
-        "title": "「旗山糖廠環教中心」成為首座通過碳足跡查證環教場所 科技大廠低碳培訓首選 助企業防漂綠",
-        "unit": "環境部國家環境研究院",
-        "summary": "「旗山糖廠社區環境教育中心」（下稱旗山糖廠環教中心）今(14)日在國家環境研究院（下稱國環院）院長張順欽的見證下，正式獲頒第三方機構所核發的「碳足跡查證聲明書」，成為全臺首座取得第三方碳足跡查證的環境教育設施場所，為臺灣環境教育樹立全新里程碑。此項查證不僅提升「旗山糖廠環教中心」在低碳旅遊的競爭力，更有助於吸引重視ESG評比及綠色供應鏈的出口導向科技大廠辦理企業培訓、家庭日與志工服務。",
-        "policy_keywords": [
-          "淨零轉型",
-          "環境教育與綠領人才",
-          "ESG與永續金融"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14501",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14502",
-        "date": "2026-11-13",
-        "roc_date": "115-11-13",
-        "title": "呼應 COP31「金融與貿易」主題日 環境部論壇聚焦氣候資金　引導金融支持企業減碳",
-        "unit": "環境部氣候變遷署",
-        "summary": "聯合國氣候峰會(COP31)於今(13)日邁入第五天，大會主題日為「金融與貿易」(Finance and Trade)。聯合國秘書長古特瑞斯(António Guterres)於11日領袖峰會倡議「氣候正義協定」(Climate Justice Compact)，並將氣候資金列為四大核心之一，強調資金必須充足、可負擔且容易取得，呼籲已開發國家帶頭於2035年前每年提供至少3,000億美元，並讓1.3兆美元目標成為真正流向開發中國家的資金。",
-        "policy_keywords": [
-          "淨零轉型",
-          "氣候變遷與調適",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14502",
         "source_url_status": "",
         "attach_url": ""
       }
@@ -1423,9 +1430,9 @@
       "循環標誌",
       "廢棄物再利用"
     ],
-    "total_count": 1586,
+    "total_count": 1587,
     "last_30_days_count": 19,
-    "prev_30_days_count": 18,
+    "prev_30_days_count": 19,
     "yearly_counts": {
       "2001": 13,
       "2002": 20,
@@ -1452,9 +1459,30 @@
       "2023": 92,
       "2024": 110,
       "2025": 128,
-      "2026": 181
+      "2026": 182
     },
     "latest_news": [
+      {
+        "news_id": "20261121090641",
+        "date": "2026-11-21",
+        "roc_date": "115-11-21",
+        "title": "呼應 COP31 零廢棄主題 臺灣強化與各國循環經濟合作",
+        "unit": "環境部資源循環署",
+        "summary": "第31屆聯合國氣候變化綱要公約締約方大會（COP31）落幕，主辦國土耳其將「零廢棄」（Zero Waste）與循環經濟列為全球氣候行動的重要主題。環境部長彭啓明今（21）日表示，臺灣高度重視COP31所倡議的零廢棄與循環經濟方向，並將資源循環視為推動淨零轉型、強化資源安全及產業競爭力的重要策略。臺灣不僅將持續深化國內循環經濟政策，也願意分享多年累積的資源回收、技術創新及產業發展經驗，積極與國際夥伴合作，共同推動循環材料應用及跨境循環供應鏈，讓循環經濟成為全球氣候行動與綠色成長的新動力。",
+        "policy_keywords": [
+          "碳定價與ETS",
+          "淨零轉型",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "環境教育與綠領人才",
+          "綠色消費與標章",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14539",
+        "source_url_status": "",
+        "attach_url": ""
+      },
       {
         "news_id": "20261120201727",
         "date": "2026-11-20",
@@ -1618,23 +1646,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14449",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "14446",
-        "date": "2026-11-08",
-        "roc_date": "115-11-08",
-        "title": "國環院邀集產官學對話水資源永續 聚焦PFAS、廢水稀有及有價資源回收、綠能轉型",
-        "unit": "環境部國家環境研究院",
-        "summary": "環境部國家環境研究院（國環院)3日邀集產官學研近百人，聚焦節能創能、資源循環、新興污染物PFAS管理及再生水供需等議題，透過專題交流與綜合座談，探討有價資源回收及綠色創能技術，促進產業轉型與跨域合作，共同推動水資源永續利用。",
-        "policy_keywords": [
-          "資源循環",
-          "化學物質與毒化物",
-          "生質能與再生能源"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14446",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -1653,8 +1664,8 @@
       "包裝減量"
     ],
     "total_count": 289,
-    "last_30_days_count": 7,
-    "prev_30_days_count": 5,
+    "last_30_days_count": 6,
+    "prev_30_days_count": 6,
     "yearly_counts": {
       "2001": 3,
       "2002": 33,
@@ -1866,8 +1877,8 @@
       "事業廢棄物",
       "有害廢棄物"
     ],
-    "total_count": 2412,
-    "last_30_days_count": 8,
+    "total_count": 2413,
+    "last_30_days_count": 9,
     "prev_30_days_count": 7,
     "yearly_counts": {
       "2001": 34,
@@ -1895,9 +1906,30 @@
       "2023": 59,
       "2024": 82,
       "2025": 107,
-      "2026": 93
+      "2026": 94
     },
     "latest_news": [
+      {
+        "news_id": "20261121090641",
+        "date": "2026-11-21",
+        "roc_date": "115-11-21",
+        "title": "呼應 COP31 零廢棄主題 臺灣強化與各國循環經濟合作",
+        "unit": "環境部資源循環署",
+        "summary": "第31屆聯合國氣候變化綱要公約締約方大會（COP31）落幕，主辦國土耳其將「零廢棄」（Zero Waste）與循環經濟列為全球氣候行動的重要主題。環境部長彭啓明今（21）日表示，臺灣高度重視COP31所倡議的零廢棄與循環經濟方向，並將資源循環視為推動淨零轉型、強化資源安全及產業競爭力的重要策略。臺灣不僅將持續深化國內循環經濟政策，也願意分享多年累積的資源回收、技術創新及產業發展經驗，積極與國際夥伴合作，共同推動循環材料應用及跨境循環供應鏈，讓循環經濟成為全球氣候行動與綠色成長的新動力。",
+        "policy_keywords": [
+          "碳定價與ETS",
+          "淨零轉型",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "環境教育與綠領人才",
+          "綠色消費與標章",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14539",
+        "source_url_status": "",
+        "attach_url": ""
+      },
       {
         "news_id": "20261120201727",
         "date": "2026-11-20",
@@ -2058,22 +2090,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14331",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "14322",
-        "date": "2026-10-19",
-        "roc_date": "115-10-19",
-        "title": "網購「小型焚化爐」當心觸法！非法處理廢棄物最重可處7年有期徒刑",
-        "unit": "環境部環境管理署",
-        "summary": "",
-        "policy_keywords": [
-          "廢棄物與環保犯罪",
-          "環境執法與稽查"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14322",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -2093,8 +2109,8 @@
       "移動污染源"
     ],
     "total_count": 1573,
-    "last_30_days_count": 7,
-    "prev_30_days_count": 1,
+    "last_30_days_count": 6,
+    "prev_30_days_count": 2,
     "yearly_counts": {
       "2001": 36,
       "2002": 20,
@@ -2931,8 +2947,8 @@
       "PFAS"
     ],
     "total_count": 623,
-    "last_30_days_count": 7,
-    "prev_30_days_count": 0,
+    "last_30_days_count": 6,
+    "prev_30_days_count": 1,
     "yearly_counts": {
       "2001": 8,
       "2002": 6,
@@ -3133,9 +3149,9 @@
       "環境教育人員",
       "證照"
     ],
-    "total_count": 1053,
-    "last_30_days_count": 14,
-    "prev_30_days_count": 10,
+    "total_count": 1055,
+    "last_30_days_count": 15,
+    "prev_30_days_count": 11,
     "yearly_counts": {
       "2001": 2,
       "2002": 1,
@@ -3162,9 +3178,48 @@
       "2023": 41,
       "2024": 51,
       "2025": 75,
-      "2026": 96
+      "2026": 98
     },
     "latest_news": [
+      {
+        "news_id": "20261121180111",
+        "date": "2026-11-21",
+        "roc_date": "115-11-21",
+        "title": "環境部舉辦「企業ESG人才培育」階段實習成果分享會 攜手青年企業共創永續新亮點",
+        "unit": "環境部環境保護司",
+        "summary": "為回應全球淨零轉型與ESG發展趨勢，環境部積極推動「企業ESG人才培育計畫」，並於今（21）日舉辦「青年企業實習：階段實習成果分享會」。本次活動以「企業 × 青年 × 永續行動」為核心理念，邀請參與企業代表與青年齊聚一堂，展示青年提早進入企業實習的豐碩成果。",
+        "policy_keywords": [
+          "淨零轉型",
+          "環境教育與綠領人才",
+          "ESG與永續金融",
+          "生質能與再生能源"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14540",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/li452ghb.zcv.jpg"
+      },
+      {
+        "news_id": "20261121090641",
+        "date": "2026-11-21",
+        "roc_date": "115-11-21",
+        "title": "呼應 COP31 零廢棄主題 臺灣強化與各國循環經濟合作",
+        "unit": "環境部資源循環署",
+        "summary": "第31屆聯合國氣候變化綱要公約締約方大會（COP31）落幕，主辦國土耳其將「零廢棄」（Zero Waste）與循環經濟列為全球氣候行動的重要主題。環境部長彭啓明今（21）日表示，臺灣高度重視COP31所倡議的零廢棄與循環經濟方向，並將資源循環視為推動淨零轉型、強化資源安全及產業競爭力的重要策略。臺灣不僅將持續深化國內循環經濟政策，也願意分享多年累積的資源回收、技術創新及產業發展經驗，積極與國際夥伴合作，共同推動循環材料應用及跨境循環供應鏈，讓循環經濟成為全球氣候行動與綠色成長的新動力。",
+        "policy_keywords": [
+          "碳定價與ETS",
+          "淨零轉型",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "環境教育與綠領人才",
+          "綠色消費與標章",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14539",
+        "source_url_status": "",
+        "attach_url": ""
+      },
       {
         "news_id": "20261120165940",
         "date": "2026-11-20",
@@ -3299,39 +3354,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14445",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "14427",
-        "date": "2026-11-05",
-        "roc_date": "115-11-05",
-        "title": "看得懂淨零生活　做得到綠色行動 環境部攜手社福夥伴分享易讀手冊成果",
-        "unit": "環境部環境保護司",
-        "summary": "為推動淨零綠生活並落實資訊平權，環境部於11月5日在國立臺灣科學教育館辦理「看得懂未來・一起實踐淨零生活」活動，結合《我要淨零救地球－淨零綠生活易讀手冊》試教分享與「回到未來：想像力驅動綠色轉型」特展參觀，展示教材編製、校園及社福場域推廣成果，並邀請易讀資訊與社會福利領域專家及合作夥伴，交流教材設計與實務應用經驗。透過成果展示、案例分享及導覽，讓教育工作者與社福夥伴認識易讀教材的運用方式，協助心智障礙者及不同閱讀需求族群理解淨零生活，擴大環境行動的參與。",
-        "policy_keywords": [
-          "淨零轉型",
-          "環境教育與綠領人才",
-          "綠色消費與標章"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14427",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14402",
-        "date": "2026-10-31",
-        "roc_date": "115-10-31",
-        "title": "全國環保志（義）工群英會苗栗登場 2,000 名志工交流競賽首辦「政策交流會」深化中央地方合作",
-        "unit": "環境部環境保護司",
-        "summary": "年度環保盛事「115 年全國環保志（義）工群英會」於今（31）日在苗栗縣熱烈登場！來自全國 22 縣（市）、超過 2,000 位環保志（義）工與環保局夥伴歡喜相聚。環境部部長彭啓明出席頒獎典禮，肯定全國志工長期無私奉獻，並期許借重志工深入社區的力量，攜手推動環境教育 2.0 與國土綠蔭。本次參賽志工皆是經過地方初賽脫穎而出的環保尖兵，在會場展現豐富的環保知識、團隊默契與爭取榮譽的決心。",
-        "policy_keywords": [
-          "氣候變遷與調適",
-          "環境教育與綠領人才"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14402",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -3348,8 +3370,8 @@
       "淨零綠生活",
       "友善食力"
     ],
-    "total_count": 373,
-    "last_30_days_count": 4,
+    "total_count": 374,
+    "last_30_days_count": 5,
     "prev_30_days_count": 7,
     "yearly_counts": {
       "2001": 5,
@@ -3377,9 +3399,30 @@
       "2023": 20,
       "2024": 20,
       "2025": 36,
-      "2026": 45
+      "2026": 46
     },
     "latest_news": [
+      {
+        "news_id": "20261121090641",
+        "date": "2026-11-21",
+        "roc_date": "115-11-21",
+        "title": "呼應 COP31 零廢棄主題 臺灣強化與各國循環經濟合作",
+        "unit": "環境部資源循環署",
+        "summary": "第31屆聯合國氣候變化綱要公約締約方大會（COP31）落幕，主辦國土耳其將「零廢棄」（Zero Waste）與循環經濟列為全球氣候行動的重要主題。環境部長彭啓明今（21）日表示，臺灣高度重視COP31所倡議的零廢棄與循環經濟方向，並將資源循環視為推動淨零轉型、強化資源安全及產業競爭力的重要策略。臺灣不僅將持續深化國內循環經濟政策，也願意分享多年累積的資源回收、技術創新及產業發展經驗，積極與國際夥伴合作，共同推動循環材料應用及跨境循環供應鏈，讓循環經濟成為全球氣候行動與綠色成長的新動力。",
+        "policy_keywords": [
+          "碳定價與ETS",
+          "淨零轉型",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "環境教育與綠領人才",
+          "綠色消費與標章",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14539",
+        "source_url_status": "",
+        "attach_url": ""
+      },
       {
         "news_id": "20261117135816",
         "date": "2026-11-17",
@@ -3524,22 +3567,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14245",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "14193",
-        "date": "2026-09-26",
-        "roc_date": "115-09-26",
-        "title": "漫遊大稻埕體驗綠生活，體驗綠生活可愛力量",
-        "unit": "環境部環境保護司",
-        "summary": "",
-        "policy_keywords": [
-          "淨零轉型",
-          "綠色消費與標章"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14193",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -3558,8 +3585,8 @@
       "日本",
       "國際研討會"
     ],
-    "total_count": 497,
-    "last_30_days_count": 17,
+    "total_count": 498,
+    "last_30_days_count": 18,
     "prev_30_days_count": 3,
     "yearly_counts": {
       "2001": 7,
@@ -3587,9 +3614,30 @@
       "2023": 15,
       "2024": 25,
       "2025": 37,
-      "2026": 47
+      "2026": 48
     },
     "latest_news": [
+      {
+        "news_id": "20261121090641",
+        "date": "2026-11-21",
+        "roc_date": "115-11-21",
+        "title": "呼應 COP31 零廢棄主題 臺灣強化與各國循環經濟合作",
+        "unit": "環境部資源循環署",
+        "summary": "第31屆聯合國氣候變化綱要公約締約方大會（COP31）落幕，主辦國土耳其將「零廢棄」（Zero Waste）與循環經濟列為全球氣候行動的重要主題。環境部長彭啓明今（21）日表示，臺灣高度重視COP31所倡議的零廢棄與循環經濟方向，並將資源循環視為推動淨零轉型、強化資源安全及產業競爭力的重要策略。臺灣不僅將持續深化國內循環經濟政策，也願意分享多年累積的資源回收、技術創新及產業發展經驗，積極與國際夥伴合作，共同推動循環材料應用及跨境循環供應鏈，讓循環經濟成為全球氣候行動與綠色成長的新動力。",
+        "policy_keywords": [
+          "碳定價與ETS",
+          "淨零轉型",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "環境教育與綠領人才",
+          "綠色消費與標章",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14539",
+        "source_url_status": "",
+        "attach_url": ""
+      },
       {
         "news_id": "20261120201727",
         "date": "2026-11-20",
@@ -3760,24 +3808,6 @@
         ],
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14502",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14489",
-        "date": "2026-11-12",
-        "roc_date": "115-11-12",
-        "title": "接軌《巴黎協定》，環境部預告訂定「國外減量額度認可準則」草案",
-        "unit": "環境部氣候變遷署",
-        "summary": "臺灣已進入「碳排有價」時代！依據氣候變遷因應法第27條規定，企業以國外溫室氣體減量額度來扣抵國內碳費或總量管制義務，必須符合環境部所訂定之認可準則，爰環境部於今(12)日預告訂定「國外減量額度認可準則」草案。",
-        "policy_keywords": [
-          "碳費徵收",
-          "溫室氣體盤查登錄",
-          "氣候變遷與調適",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14489",
         "source_url_status": "",
         "attach_url": ""
       }
@@ -4009,8 +4039,8 @@
       "金融資源",
       "永續長"
     ],
-    "total_count": 47,
-    "last_30_days_count": 2,
+    "total_count": 48,
+    "last_30_days_count": 3,
     "prev_30_days_count": 2,
     "yearly_counts": {
       "2001": 0,
@@ -4038,9 +4068,27 @@
       "2023": 3,
       "2024": 6,
       "2025": 5,
-      "2026": 20
+      "2026": 21
     },
     "latest_news": [
+      {
+        "news_id": "20261121180111",
+        "date": "2026-11-21",
+        "roc_date": "115-11-21",
+        "title": "環境部舉辦「企業ESG人才培育」階段實習成果分享會 攜手青年企業共創永續新亮點",
+        "unit": "環境部環境保護司",
+        "summary": "為回應全球淨零轉型與ESG發展趨勢，環境部積極推動「企業ESG人才培育計畫」，並於今（21）日舉辦「青年企業實習：階段實習成果分享會」。本次活動以「企業 × 青年 × 永續行動」為核心理念，邀請參與企業代表與青年齊聚一堂，展示青年提早進入企業實習的豐碩成果。",
+        "policy_keywords": [
+          "淨零轉型",
+          "環境教育與綠領人才",
+          "ESG與永續金融",
+          "生質能與再生能源"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14540",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/li452ghb.zcv.jpg"
+      },
       {
         "news_id": "14501",
         "date": "2026-11-14",
@@ -4196,22 +4244,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/13577",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "13573",
-        "date": "2026-06-26",
-        "roc_date": "115-06-26",
-        "title": "環境部邀中央與地方政府永續長 深入成龍濕地研習氣候調適策略 強化韌性行動力",
-        "unit": "環境部氣候變遷署",
-        "summary": "臺灣上週才剛經歷極端高溫，這兩天又逢豪雨成災，接連的嚴峻氣候衝擊，凸顯強化氣候變遷調適之政府治理與行動力已成迫切課題。環境部於今（26）日與觀樹教育基金會及義美環境保護基金會合作，於雲林縣成龍濕地舉辦「前線直擊：永續長的跨域調適與韌性創新」活動，邀集中央與地方政府永續長實地走訪，親身體驗氣候變遷下的社區韌性。",
-        "policy_keywords": [
-          "氣候變遷與調適",
-          "ESG與永續金融"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/13573",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -4229,8 +4261,8 @@
       "廚餘",
       "能源化"
     ],
-    "total_count": 406,
-    "last_30_days_count": 6,
+    "total_count": 407,
+    "last_30_days_count": 7,
     "prev_30_days_count": 5,
     "yearly_counts": {
       "2001": 3,
@@ -4258,9 +4290,27 @@
       "2023": 13,
       "2024": 21,
       "2025": 43,
-      "2026": 31
+      "2026": 32
     },
     "latest_news": [
+      {
+        "news_id": "20261121180111",
+        "date": "2026-11-21",
+        "roc_date": "115-11-21",
+        "title": "環境部舉辦「企業ESG人才培育」階段實習成果分享會 攜手青年企業共創永續新亮點",
+        "unit": "環境部環境保護司",
+        "summary": "為回應全球淨零轉型與ESG發展趨勢，環境部積極推動「企業ESG人才培育計畫」，並於今（21）日舉辦「青年企業實習：階段實習成果分享會」。本次活動以「企業 × 青年 × 永續行動」為核心理念，邀請參與企業代表與青年齊聚一堂，展示青年提早進入企業實習的豐碩成果。",
+        "policy_keywords": [
+          "淨零轉型",
+          "環境教育與綠領人才",
+          "ESG與永續金融",
+          "生質能與再生能源"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14540",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/li452ghb.zcv.jpg"
+      },
       {
         "news_id": "20261120201727",
         "date": "2026-11-20",
@@ -4427,25 +4477,6 @@
         ],
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14286",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14260",
-        "date": "2026-10-07",
-        "roc_date": "115-10-07",
-        "title": "翻轉校園綠能！環境部攜手教育部與經濟部 打造大專校院淨零轉型新引擎",
-        "unit": "環境部綜合規劃司",
-        "summary": "為加速邁向國家「2050淨零排放」願景，環境部、教育部與經濟部於10月7日聯手舉辦「115年大學永續長研討會」。本次吸引全國133所大專校院響應。會中針對「大學永續治理」、「校園太陽光電」及「氣候調適」三大核心議題展開深度研討，跨部會攜手全臺大專校院，共同開創「淨零韌性校園」的全新里程碑。",
-        "policy_keywords": [
-          "淨零轉型",
-          "氣候變遷與調適",
-          "環境教育與綠領人才",
-          "ESG與永續金融",
-          "生質能與再生能源"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14260",
         "source_url_status": "",
         "attach_url": ""
       }

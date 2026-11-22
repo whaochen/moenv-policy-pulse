@@ -24,7 +24,7 @@ waste_crime,廢棄物與環保犯罪,資源循環與廢棄物,2022,36
 waste_crime,廢棄物與環保犯罪,資源循環與廢棄物,2023,59
 waste_crime,廢棄物與環保犯罪,資源循環與廢棄物,2024,82
 waste_crime,廢棄物與環保犯罪,資源循環與廢棄物,2025,107
-waste_crime,廢棄物與環保犯罪,資源循環與廢棄物,2026,93
+waste_crime,廢棄物與環保犯罪,資源循環與廢棄物,2026,94
 water_quality,水質保護,污染防制,2001,30
 water_quality,水質保護,污染防制,2002,53
 water_quality,水質保護,污染防制,2003,32
@@ -102,7 +102,7 @@ resource_circulation,資源循環,資源循環與廢棄物,2022,63
 resource_circulation,資源循環,資源循環與廢棄物,2023,92
 resource_circulation,資源循環,資源循環與廢棄物,2024,110
 resource_circulation,資源循環,資源循環與廢棄物,2025,128
-resource_circulation,資源循環,資源循環與廢棄物,2026,181
+resource_circulation,資源循環,資源循環與廢棄物,2026,182
 air_quality,空氣品質,污染防制,2001,36
 air_quality,空氣品質,污染防制,2002,20
 air_quality,空氣品質,污染防制,2003,16
@@ -154,7 +154,7 @@ environmental_education,環境教育與綠領人才,社會溝通與人才,2022,3
 environmental_education,環境教育與綠領人才,社會溝通與人才,2023,41
 environmental_education,環境教育與綠領人才,社會溝通與人才,2024,51
 environmental_education,環境教育與綠領人才,社會溝通與人才,2025,75
-environmental_education,環境教育與綠領人才,社會溝通與人才,2026,96
+environmental_education,環境教育與綠領人才,社會溝通與人才,2026,98
 net_zero_transition,淨零轉型,氣候與碳定價,2007,1
 net_zero_transition,淨零轉型,氣候與碳定價,2008,35
 net_zero_transition,淨零轉型,氣候與碳定價,2009,48
@@ -174,7 +174,7 @@ net_zero_transition,淨零轉型,氣候與碳定價,2022,54
 net_zero_transition,淨零轉型,氣候與碳定價,2023,71
 net_zero_transition,淨零轉型,氣候與碳定價,2024,92
 net_zero_transition,淨零轉型,氣候與碳定價,2025,133
-net_zero_transition,淨零轉型,氣候與碳定價,2026,164
+net_zero_transition,淨零轉型,氣候與碳定價,2026,166
 climate_adaptation,氣候變遷與調適,氣候與碳定價,2001,2
 climate_adaptation,氣候變遷與調適,氣候與碳定價,2002,1
 climate_adaptation,氣候變遷與調適,氣候與碳定價,2003,2
@@ -252,7 +252,7 @@ international_cooperation,國際環境合作,治理與制度,2022,9
 international_cooperation,國際環境合作,治理與制度,2023,15
 international_cooperation,國際環境合作,治理與制度,2024,25
 international_cooperation,國際環境合作,治理與制度,2025,37
-international_cooperation,國際環境合作,治理與制度,2026,47
+international_cooperation,國際環境合作,治理與制度,2026,48
 soil_groundwater,土壤及地下水,污染防制,2001,2
 soil_groundwater,土壤及地下水,污染防制,2002,17
 soil_groundwater,土壤及地下水,污染防制,2003,4
@@ -356,7 +356,7 @@ bioenergy,生質能與再生能源,資源循環與廢棄物,2022,10
 bioenergy,生質能與再生能源,資源循環與廢棄物,2023,13
 bioenergy,生質能與再生能源,資源循環與廢棄物,2024,21
 bioenergy,生質能與再生能源,資源循環與廢棄物,2025,43
-bioenergy,生質能與再生能源,資源循環與廢棄物,2026,31
+bioenergy,生質能與再生能源,資源循環與廢棄物,2026,32
 green_consumption,綠色消費與標章,社會溝通與人才,2001,5
 green_consumption,綠色消費與標章,社會溝通與人才,2002,3
 green_consumption,綠色消費與標章,社會溝通與人才,2003,7
@@ -382,7 +382,7 @@ green_consumption,綠色消費與標章,社會溝通與人才,2022,37
 green_consumption,綠色消費與標章,社會溝通與人才,2023,20
 green_consumption,綠色消費與標章,社會溝通與人才,2024,20
 green_consumption,綠色消費與標章,社會溝通與人才,2025,36
-green_consumption,綠色消費與標章,社會溝通與人才,2026,45
+green_consumption,綠色消費與標章,社會溝通與人才,2026,46
 plastic_reduction,減塑與一次用產品,資源循環與廢棄物,2001,3
 plastic_reduction,減塑與一次用產品,資源循環與廢棄物,2002,33
 plastic_reduction,減塑與一次用產品,資源循環與廢棄物,2003,19
@@ -428,7 +428,7 @@ carbon_pricing_ets,碳定價與ETS,氣候與碳定價,2022,1
 carbon_pricing_ets,碳定價與ETS,氣候與碳定價,2023,8
 carbon_pricing_ets,碳定價與ETS,氣候與碳定價,2024,16
 carbon_pricing_ets,碳定價與ETS,氣候與碳定價,2025,15
-carbon_pricing_ets,碳定價與ETS,氣候與碳定價,2026,17
+carbon_pricing_ets,碳定價與ETS,氣候與碳定價,2026,18
 carbon_fee,碳費徵收,氣候與碳定價,2011,1
 carbon_fee,碳費徵收,氣候與碳定價,2021,4
 carbon_fee,碳費徵收,氣候與碳定價,2022,1
@@ -446,7 +446,7 @@ esg_finance,ESG與永續金融,治理與制度,2022,6
 esg_finance,ESG與永續金融,治理與制度,2023,3
 esg_finance,ESG與永續金融,治理與制度,2024,6
 esg_finance,ESG與永續金融,治理與制度,2025,5
-esg_finance,ESG與永續金融,治理與制度,2026,20
+esg_finance,ESG與永續金融,治理與制度,2026,21
 voluntary_reduction,自主減量計畫,氣候與碳定價,2004,1
 voluntary_reduction,自主減量計畫,氣候與碳定價,2005,1
 voluntary_reduction,自主減量計畫,氣候與碳定價,2007,2
