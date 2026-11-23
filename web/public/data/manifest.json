@@ -1,12 +1,12 @@
 {
-  "total_news": 11506,
-  "total_relation_edges": 56227,
+  "total_news": 11507,
+  "total_relation_edges": 56233,
   "relation_mode": "tfidf_only",
   "date_start": "2001-01-01",
   "date_end": "2026-11-23",
-  "updated_at": "2026-11-23T20:48:40+08:00",
-  "dataset_version": "21902e44f827d128",
-  "dataset_sha256": "21902e44f827d128f8155aaec63ee159e58f6e18130e8460138103017b24655f",
+  "updated_at": "2026-11-24T04:11:19+08:00",
+  "dataset_version": "1195391bb5754333",
+  "dataset_sha256": "1195391bb575433316522d44e928f4c7e2c0efb53a57111fec38ec778a3bb02a",
   "topic_count": 20,
   "years": [
     "2001",
@@ -36,11 +36,31 @@
     "2025",
     "2026"
   ],
-  "last_30_days_count": 68,
+  "last_30_days_count": 69,
   "prev_30_days_count": 50,
-  "last_30_days_delta": 18,
-  "last_30_days_pct": 36.0,
+  "last_30_days_delta": 19,
+  "last_30_days_pct": 38.0,
   "latest_news": [
+    {
+      "news_id": "20261123193317",
+      "date": "2026-11-23",
+      "roc_date": "115-11-23",
+      "title": "環境部表揚空品淨化區優良認養單位，凝聚公私協力，共同推動國土綠蔭！",
+      "unit": "環境部氣候變遷署",
+      "summary": "環境部今（23）日舉辦「國土綠蔭氣候調適計畫暨推動木質資源循環」說明會及「115年度空氣品質淨化區優良認養單位頒獎典禮」，由部長彭啓明主持，邀集地方環保局、評審委員及認養單位等線上線下共226人與會，聚焦都市林政策、樹木養護及木質資源循環等議題。環境部期盼以既有空品淨化區為基礎，串聯地方政府、企業與社區資源，將單點綠地擴展為兼具降溫、生態與休憩功能的綠色網絡，強化城市氣候韌性。",
+      "policy_keywords": [
+        "淨零轉型",
+        "氣候變遷與調適",
+        "資源循環",
+        "空氣品質",
+        "環境教育與綠領人才",
+        "ESG與永續金融"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14564",
+      "source_url_status": "",
+      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/kaozbqmp.si4.jpg"
+    },
     {
       "news_id": "20261123173045",
       "date": "2026-11-23",
@@ -220,24 +240,6 @@
       "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14536",
       "source_url_status": "",
       "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/lpgfftbv.joq.jpg"
-    },
-    {
-      "news_id": "20261120165940",
-      "date": "2026-11-20",
-      "roc_date": "115-11-20",
-      "title": "從種樹到育樹　以都市綠蔭降溫　走向人樹永續共生",
-      "unit": "環境部環境管理署",
-      "summary": "面對全球氣候變遷及都市熱島效應加劇，環境部積極推動「國土綠蔭氣候調適計畫」，透過都市林建構、科學植栽及長期養護管理，緩解都市熱島效應，提升城市氣候調適能力。為深化都市林治理及跨領域專業交流，環境部昨(19)日舉辦名人講座，邀請日本東京大學都市工學環境設計博士，並具日本樹木醫專業資格的詹鳳春博士，以「都市綠化趨勢與共生」為題，從國際經驗及臺灣實務案例，探討都市綠化與環境永續發展之策略。",
-      "policy_keywords": [
-        "氣候變遷與調適",
-        "空氣品質",
-        "環境教育與綠領人才",
-        "國際環境合作"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14534",
-      "source_url_status": "",
-      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/eiihx0uz.jop.jpg"
     }
   ]
 }
