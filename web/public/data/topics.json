@@ -985,8 +985,8 @@
       "減碳",
       "低碳"
     ],
-    "total_count": 945,
-    "last_30_days_count": 23,
+    "total_count": 946,
+    "last_30_days_count": 24,
     "prev_30_days_count": 10,
     "yearly_counts": {
       "2001": 0,
@@ -1014,9 +1014,30 @@
       "2023": 71,
       "2024": 92,
       "2025": 133,
-      "2026": 167
+      "2026": 168
     },
     "latest_news": [
+      {
+        "news_id": "20261123173045",
+        "date": "2026-11-23",
+        "roc_date": "115-11-23",
+        "title": "減少一次性包裝 多增一分環境友善 環境部綠色包裝論壇助產業接軌歐盟新制",
+        "unit": "環境部環境保護司",
+        "summary": "因應2026年歐盟《包裝及包裝廢棄物法規》（PPWR）已於今(115)年8月12日開始適用，為使產業界接軌國際，讓商品自源頭即符合相關規範供民眾選購，環境部於今(23)日舉辦「歐盟PPWR新制與臺灣綠色包裝」實務論壇，邀集產官學界交流，聚焦國內資源循環政策與國際法規趨勢，並由業者分享PPWR規範下的包裝設計與實務經驗，協助企業接軌國際綠色標準，同時展示裸包裝、循環包裝及無包裝銷售模式等「淨零綠生活」落地應用。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "減塑與一次用產品",
+          "廢棄物與環保犯罪",
+          "綠色消費與標章",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14563",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/5uqugewy.unq.jpg"
+      },
       {
         "news_id": "20261122220745",
         "date": "2026-11-22",
@@ -1201,23 +1222,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14519",
         "source_url_status": "",
         "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/h3dcmyqv.pz0.png"
-      },
-      {
-        "news_id": "14518",
-        "date": "2026-11-16",
-        "roc_date": "115-11-16",
-        "title": "環境部COP31「綠色算力與氣候數位科技」論壇 彭啓明部長：臺灣的減碳，就是全球AI的減碳",
-        "unit": "環境部氣候變遷署",
-        "summary": "COP31 邁入第二週，為呼應大會「科學、產業和科技」主題，環境部今(16)日舉辦「COP31 氣候脈動．臺灣同行」系列活動，以「AI for Climate, Climate for AI：綠色算力與氣候數位科技」為題展開國際線上論壇。論壇由部長彭啓明親自主持，邀集台灣氣候聯盟理事長彭双浪、Climate Change AI 共同創辦人 David Rolnick、台智雲總經理吳漢章、台電副總經理鄭慶鴻及氣候科技與創新專家Eleonora Gatti 等專家學者，探討臺灣如何憑藉半導體與資通訊實力，引領全球邁向高算力、低碳排的永續新時代。",
-        "policy_keywords": [
-          "淨零轉型",
-          "氣候變遷與調適",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14518",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -1235,8 +1239,8 @@
       "韌性",
       "國土綠蔭"
     ],
-    "total_count": 744,
-    "last_30_days_count": 26,
+    "total_count": 745,
+    "last_30_days_count": 27,
     "prev_30_days_count": 12,
     "yearly_counts": {
       "2001": 2,
@@ -1264,9 +1268,30 @@
       "2023": 62,
       "2024": 90,
       "2025": 124,
-      "2026": 166
+      "2026": 167
     },
     "latest_news": [
+      {
+        "news_id": "20261123173045",
+        "date": "2026-11-23",
+        "roc_date": "115-11-23",
+        "title": "減少一次性包裝 多增一分環境友善 環境部綠色包裝論壇助產業接軌歐盟新制",
+        "unit": "環境部環境保護司",
+        "summary": "因應2026年歐盟《包裝及包裝廢棄物法規》（PPWR）已於今(115)年8月12日開始適用，為使產業界接軌國際，讓商品自源頭即符合相關規範供民眾選購，環境部於今(23)日舉辦「歐盟PPWR新制與臺灣綠色包裝」實務論壇，邀集產官學界交流，聚焦國內資源循環政策與國際法規趨勢，並由業者分享PPWR規範下的包裝設計與實務經驗，協助企業接軌國際綠色標準，同時展示裸包裝、循環包裝及無包裝銷售模式等「淨零綠生活」落地應用。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "減塑與一次用產品",
+          "廢棄物與環保犯罪",
+          "綠色消費與標章",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14563",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/5uqugewy.unq.jpg"
+      },
       {
         "news_id": "20261122220745",
         "date": "2026-11-22",
@@ -1448,23 +1473,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14518",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "14502",
-        "date": "2026-11-13",
-        "roc_date": "115-11-13",
-        "title": "呼應 COP31「金融與貿易」主題日 環境部論壇聚焦氣候資金　引導金融支持企業減碳",
-        "unit": "環境部氣候變遷署",
-        "summary": "聯合國氣候峰會(COP31)於今(13)日邁入第五天，大會主題日為「金融與貿易」(Finance and Trade)。聯合國秘書長古特瑞斯(António Guterres)於11日領袖峰會倡議「氣候正義協定」(Climate Justice Compact)，並將氣候資金列為四大核心之一，強調資金必須充足、可負擔且容易取得，呼籲已開發國家帶頭於2035年前每年提供至少3,000億美元，並讓1.3兆美元目標成為真正流向開發中國家的資金。",
-        "policy_keywords": [
-          "淨零轉型",
-          "氣候變遷與調適",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14502",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -1481,9 +1489,9 @@
       "循環標誌",
       "廢棄物再利用"
     ],
-    "total_count": 1588,
-    "last_30_days_count": 20,
-    "prev_30_days_count": 18,
+    "total_count": 1589,
+    "last_30_days_count": 21,
+    "prev_30_days_count": 17,
     "yearly_counts": {
       "2001": 13,
       "2002": 20,
@@ -1510,9 +1518,30 @@
       "2023": 92,
       "2024": 110,
       "2025": 128,
-      "2026": 183
+      "2026": 184
     },
     "latest_news": [
+      {
+        "news_id": "20261123173045",
+        "date": "2026-11-23",
+        "roc_date": "115-11-23",
+        "title": "減少一次性包裝 多增一分環境友善 環境部綠色包裝論壇助產業接軌歐盟新制",
+        "unit": "環境部環境保護司",
+        "summary": "因應2026年歐盟《包裝及包裝廢棄物法規》（PPWR）已於今(115)年8月12日開始適用，為使產業界接軌國際，讓商品自源頭即符合相關規範供民眾選購，環境部於今(23)日舉辦「歐盟PPWR新制與臺灣綠色包裝」實務論壇，邀集產官學界交流，聚焦國內資源循環政策與國際法規趨勢，並由業者分享PPWR規範下的包裝設計與實務經驗，協助企業接軌國際綠色標準，同時展示裸包裝、循環包裝及無包裝銷售模式等「淨零綠生活」落地應用。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "減塑與一次用產品",
+          "廢棄物與環保犯罪",
+          "綠色消費與標章",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14563",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/5uqugewy.unq.jpg"
+      },
       {
         "news_id": "20261122220745",
         "date": "2026-11-22",
@@ -1690,23 +1719,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14486",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "14450",
-        "date": "2026-11-09",
-        "roc_date": "115-11-09",
-        "title": "環境部公告修正「一般廢棄物清除處理方式」公告事項附表一廚餘再利用管理方式",
-        "unit": "環境部環境管理署",
-        "summary": "為配合農業部將集中供膳之學校、國防部所屬軍事及軍事教育機關、法務部所屬矯正機關產生之廚餘，納為動物性循環原料，環境部公告修正「一般廢棄物清除處理方式」公告事項附表一，增訂廚餘再利用於動物飼料原料用途者，應依飼料管理法相關規定辦理；再利用於動物性循環原料者，其清除機構及再利用機構應每日作成營運紀錄，再利用機構之營運紀錄及相關證明文件應妥善保存5年，不適用一般廢棄物回收清除處理辦法第34條第3項規定，以周延實務管理需求，掌握廚餘來源及流向。\n本次修正公告已依行政程序法完成草案預告、研商等行政程序，相關資料詳細內容請參閱本新聞附加檔案，或至行政院公報資訊網([https://gazette.nat.gov.tw/egFront/](https://gazette.nat.gov.tw/egFront/))下載，歡迎各界瀏覽參閱。",
-        "policy_keywords": [
-          "資源循環",
-          "廢棄物與環保犯罪",
-          "生質能與再生能源"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14450",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -1724,9 +1736,9 @@
       "袋袋箱傳",
       "包裝減量"
     ],
-    "total_count": 289,
-    "last_30_days_count": 6,
-    "prev_30_days_count": 6,
+    "total_count": 290,
+    "last_30_days_count": 7,
+    "prev_30_days_count": 5,
     "yearly_counts": {
       "2001": 3,
       "2002": 33,
@@ -1753,9 +1765,30 @@
       "2023": 21,
       "2024": 20,
       "2025": 14,
-      "2026": 60
+      "2026": 61
     },
     "latest_news": [
+      {
+        "news_id": "20261123173045",
+        "date": "2026-11-23",
+        "roc_date": "115-11-23",
+        "title": "減少一次性包裝 多增一分環境友善 環境部綠色包裝論壇助產業接軌歐盟新制",
+        "unit": "環境部環境保護司",
+        "summary": "因應2026年歐盟《包裝及包裝廢棄物法規》（PPWR）已於今(115)年8月12日開始適用，為使產業界接軌國際，讓商品自源頭即符合相關規範供民眾選購，環境部於今(23)日舉辦「歐盟PPWR新制與臺灣綠色包裝」實務論壇，邀集產官學界交流，聚焦國內資源循環政策與國際法規趨勢，並由業者分享PPWR規範下的包裝設計與實務經驗，協助企業接軌國際綠色標準，同時展示裸包裝、循環包裝及無包裝銷售模式等「淨零綠生活」落地應用。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "減塑與一次用產品",
+          "廢棄物與環保犯罪",
+          "綠色消費與標章",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14563",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/5uqugewy.unq.jpg"
+      },
       {
         "news_id": "20261119192059",
         "date": "2026-11-19",
@@ -1905,22 +1938,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14304",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "14275",
-        "date": "2026-10-08",
-        "roc_date": "115-10-08",
-        "title": "自備袋優先、二手袋補位　量販超市攜手讓好袋再利用",
-        "unit": "環境部資源循環署",
-        "summary": "到量販店、超市採買，若自備購物袋不夠裝或臨時忘了帶袋，除了購買新的購物袋，現在也有更多減塑選擇。環境部資源循環署表示，「袋袋箱傳」持續將二手袋帶進日常消費場域，目前萬家福、大全聯、樂家康、全聯及地方超市等均設有循環據點，民眾可就近取用二手袋；部分量販店也提供乾淨紙箱，讓購物有更多不使用新塑膠袋的選擇。除了提供取用空間，賣場也逐步投入二手袋募集與循環推廣，讓門市從「取用點」進一步成為二手袋循環的一環。",
-        "policy_keywords": [
-          "資源循環",
-          "減塑與一次用產品"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14275",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -1938,8 +1955,8 @@
       "事業廢棄物",
       "有害廢棄物"
     ],
-    "total_count": 2413,
-    "last_30_days_count": 9,
+    "total_count": 2414,
+    "last_30_days_count": 10,
     "prev_30_days_count": 6,
     "yearly_counts": {
       "2001": 34,
@@ -1967,9 +1984,30 @@
       "2023": 59,
       "2024": 82,
       "2025": 107,
-      "2026": 94
+      "2026": 95
     },
     "latest_news": [
+      {
+        "news_id": "20261123173045",
+        "date": "2026-11-23",
+        "roc_date": "115-11-23",
+        "title": "減少一次性包裝 多增一分環境友善 環境部綠色包裝論壇助產業接軌歐盟新制",
+        "unit": "環境部環境保護司",
+        "summary": "因應2026年歐盟《包裝及包裝廢棄物法規》（PPWR）已於今(115)年8月12日開始適用，為使產業界接軌國際，讓商品自源頭即符合相關規範供民眾選購，環境部於今(23)日舉辦「歐盟PPWR新制與臺灣綠色包裝」實務論壇，邀集產官學界交流，聚焦國內資源循環政策與國際法規趨勢，並由業者分享PPWR規範下的包裝設計與實務經驗，協助企業接軌國際綠色標準，同時展示裸包裝、循環包裝及無包裝銷售模式等「淨零綠生活」落地應用。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "減塑與一次用產品",
+          "廢棄物與環保犯罪",
+          "綠色消費與標章",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14563",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/5uqugewy.unq.jpg"
+      },
       {
         "news_id": "20261121090641",
         "date": "2026-11-21",
@@ -2133,24 +2171,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14379",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "14331",
-        "date": "2026-10-20",
-        "roc_date": "115-10-20",
-        "title": "環檢警查獲藉再利用卻非法處理廢塑膠混合物 向法院聲請沒收犯罪所得7,162萬餘元",
-        "unit": "環境部環境管理署",
-        "summary": "環境部環境管理署中區環境管理中心與苗栗縣環保局，偕同臺灣苗栗地方檢察署吳珈維檢察官指揮內政部警政署保安警察第七總隊第三大隊及法務部調查局彰化縣調查站等機關組成專案小組，聯手查獲「潔○環保工程有限公司」「佳○定股份有限公司」及「眾○股份有限公司」等3家公司，以合法掩護非法，假借再利用大肆非法收受廢塑膠混合物，並隨意處理及堆置，圖謀大賺黑心錢之環保犯罪不法勾當。日前經苗栗地方檢察署偵查終結依犯廢棄物清理法第46條規定起訴涉案6名人員及3家法人，並同步向法院聲請沒收犯罪工具及犯罪所得新臺幣7,162萬餘元。\n**藉再利用卻非法處理，大賺黑心暴利！** \n中區環境管理中心執行查核可燃事業廢棄物轉化再生能源專案時，發現佳○定公司製成固體再生燃料(SRF)之原料不符合規定，進而溯源並透過系統勾稽比對數萬筆資料，發現潔○公司只有取得廢棄物清除許可及廢塑膠個案再利用資格，卻對外誆稱可以處理廢塑膠，四處向各縣市製造塑膠包裝材料工廠大肆收受廢塑膠混合物。該公司的手法可說是「左手收錢、右手亂丟」藉此大發環保不義之財，收取高額處理費用後，卻非法將廢塑膠混合物轉運給佳○定公司與眾○公司等廢塑膠再利用機構，任意堆...",
-        "policy_keywords": [
-          "資源循環",
-          "廢棄物與環保犯罪",
-          "環境執法與稽查",
-          "生質能與再生能源"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14331",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -2169,8 +2189,8 @@
       "空污費",
       "移動污染源"
     ],
-    "total_count": 1574,
-    "last_30_days_count": 7,
+    "total_count": 1575,
+    "last_30_days_count": 8,
     "prev_30_days_count": 1,
     "yearly_counts": {
       "2001": 36,
@@ -2198,9 +2218,26 @@
       "2023": 69,
       "2024": 84,
       "2025": 59,
-      "2026": 42
+      "2026": 43
     },
     "latest_news": [
+      {
+        "news_id": "20261123165556",
+        "date": "2026-11-23",
+        "roc_date": "115-11-23",
+        "title": "全國環保夥伴齊聚一堂，強化技師專業把關",
+        "unit": "環境部環境管理署",
+        "summary": "環境部環境管理署今(23)日於國立中興大學舉辦「115年度專業技師簽證環保許可文件共識營」，邀集中央及地方環保機關、環境工程技師、應用地質技師、技師公會及相關單位等超過300位環保夥伴共同參與，透過空污、水污及土污許可文件常見疑義案例分享、技師懲戒制度解析及綜合座談，促進技師與審查機關雙向交流，凝聚簽證與審查共識，攜手守護環境品質。",
+        "policy_keywords": [
+          "空氣品質",
+          "水質保護",
+          "土壤及地下水"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14562",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/idu5ezic.qit.jpg"
+      },
       {
         "news_id": "20261122220745",
         "date": "2026-11-22",
@@ -2362,23 +2399,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14175",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "14030",
-        "date": "2026-09-01",
-        "roc_date": "115-09-01",
-        "title": "環境管理署科技執法 查獲烤漆廠排放甲苯超標16倍 並沒收犯罪所得5,900餘萬元",
-        "unit": "環境部環境管理署",
-        "summary": "環境部環境管理署中區環境管理中心運用智能分析及監控，發現臺中市某大型建材烤漆業者，有不當排放揮發性有機物廢氣並逃漏繳空氣污染防制費情事，經報請臺灣臺中地方檢察署偵辦，近期偵結，以犯空氣污染防制法申報不實及刑法詐欺得利等罪，將包含法人在內共3人提起公訴，並向法院聲請沒收犯罪所得新臺幣5,900餘萬元。",
-        "policy_keywords": [
-          "廢棄物與環保犯罪",
-          "空氣品質",
-          "環境執法與稽查"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14030",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -2396,8 +2416,8 @@
       "地下水",
       "污水"
     ],
-    "total_count": 2405,
-    "last_30_days_count": 3,
+    "total_count": 2407,
+    "last_30_days_count": 5,
     "prev_30_days_count": 7,
     "yearly_counts": {
       "2001": 30,
@@ -2425,9 +2445,43 @@
       "2023": 41,
       "2024": 53,
       "2025": 70,
-      "2026": 58
+      "2026": 60
     },
     "latest_news": [
+      {
+        "news_id": "20261123165556",
+        "date": "2026-11-23",
+        "roc_date": "115-11-23",
+        "title": "全國環保夥伴齊聚一堂，強化技師專業把關",
+        "unit": "環境部環境管理署",
+        "summary": "環境部環境管理署今(23)日於國立中興大學舉辦「115年度專業技師簽證環保許可文件共識營」，邀集中央及地方環保機關、環境工程技師、應用地質技師、技師公會及相關單位等超過300位環保夥伴共同參與，透過空污、水污及土污許可文件常見疑義案例分享、技師懲戒制度解析及綜合座談，促進技師與審查機關雙向交流，凝聚簽證與審查共識，攜手守護環境品質。",
+        "policy_keywords": [
+          "空氣品質",
+          "水質保護",
+          "土壤及地下水"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14562",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/idu5ezic.qit.jpg"
+      },
+      {
+        "news_id": "20261123150624",
+        "date": "2026-11-23",
+        "roc_date": "115-11-23",
+        "title": "臺灣環保技術輸出新里程碑！ 臺菲簽署土水合作備忘錄 打造綠色技術「國際通行證」",
+        "unit": "環境部環境管理署",
+        "summary": "臺灣環保技術國際合作再傳捷報！為協助國內優質環境科技拓展東南亞市場，環境部特別邀請菲律賓科技部工業技術發展研究院(ITDI)代表團來臺，於11月2日至6日展開為期一週的「2026臺菲土壤及地下水環境技術合作與交流活動」，並於11月5日在環境部完成「臺菲土壤及地下水保護技術暨科學合作瞭解備忘錄（MOU）」簽署儀式，讓臺灣環保技術輸出邁入新的里程碑。",
+        "policy_keywords": [
+          "水質保護",
+          "土壤及地下水",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14561",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/cpb3tkdc.5uh.jpg"
+      },
       {
         "news_id": "20261122220745",
         "date": "2026-11-22",
@@ -2566,37 +2620,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14237",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "14202",
-        "date": "2026-09-30",
-        "roc_date": "115-09-30",
-        "title": "守護飲用水安全！ 國環院與台水簽署MOU聯手導入AI預警與新興污染物監測",
-        "unit": "環境部國家環境研究院",
-        "summary": "",
-        "policy_keywords": [
-          "水質保護"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14202",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14199",
-        "date": "2026-09-29",
-        "roc_date": "115-09-29",
-        "title": "東協青年齊聚臺南 探索綠色永續土水整治",
-        "unit": "環境部環境管理署",
-        "summary": "",
-        "policy_keywords": [
-          "水質保護",
-          "土壤及地下水"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14199",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -2613,8 +2636,8 @@
       "農地污染",
       "污染場址"
     ],
-    "total_count": 489,
-    "last_30_days_count": 0,
+    "total_count": 491,
+    "last_30_days_count": 2,
     "prev_30_days_count": 1,
     "yearly_counts": {
       "2001": 2,
@@ -2642,9 +2665,43 @@
       "2023": 20,
       "2024": 16,
       "2025": 18,
-      "2026": 20
+      "2026": 22
     },
     "latest_news": [
+      {
+        "news_id": "20261123165556",
+        "date": "2026-11-23",
+        "roc_date": "115-11-23",
+        "title": "全國環保夥伴齊聚一堂，強化技師專業把關",
+        "unit": "環境部環境管理署",
+        "summary": "環境部環境管理署今(23)日於國立中興大學舉辦「115年度專業技師簽證環保許可文件共識營」，邀集中央及地方環保機關、環境工程技師、應用地質技師、技師公會及相關單位等超過300位環保夥伴共同參與，透過空污、水污及土污許可文件常見疑義案例分享、技師懲戒制度解析及綜合座談，促進技師與審查機關雙向交流，凝聚簽證與審查共識，攜手守護環境品質。",
+        "policy_keywords": [
+          "空氣品質",
+          "水質保護",
+          "土壤及地下水"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14562",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/idu5ezic.qit.jpg"
+      },
+      {
+        "news_id": "20261123150624",
+        "date": "2026-11-23",
+        "roc_date": "115-11-23",
+        "title": "臺灣環保技術輸出新里程碑！ 臺菲簽署土水合作備忘錄 打造綠色技術「國際通行證」",
+        "unit": "環境部環境管理署",
+        "summary": "臺灣環保技術國際合作再傳捷報！為協助國內優質環境科技拓展東南亞市場，環境部特別邀請菲律賓科技部工業技術發展研究院(ITDI)代表團來臺，於11月2日至6日展開為期一週的「2026臺菲土壤及地下水環境技術合作與交流活動」，並於11月5日在環境部完成「臺菲土壤及地下水保護技術暨科學合作瞭解備忘錄（MOU）」簽署儀式，讓臺灣環保技術輸出邁入新的里程碑。",
+        "policy_keywords": [
+          "水質保護",
+          "土壤及地下水",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14561",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/cpb3tkdc.5uh.jpg"
+      },
       {
         "news_id": "14199",
         "date": "2026-09-29",
@@ -2772,40 +2829,6 @@
         ],
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/13763",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "13751",
-        "date": "2026-07-23",
-        "roc_date": "115-07-23",
-        "title": "明天開探！松菸限時3天最酷任務「地底有秘密」！",
-        "unit": "環境部環境管理署",
-        "summary": "暑假最強檔、最神祕的探險任務明天正式登場！由環境部主辦的「地底有秘密：土壤及地下水特展與技術論壇」，將於明天（7月24日）在臺北松山文創園區2號及3號倉庫盛大展開。該展覽展期僅限3天，特別針對暑期親子家庭、學生及科技迷規劃，要帶領全民一起化身地下探險家，穿越極具震撼力的土層與地下水光影幻境，在層層線索中展開趣味解謎，找出守護土地的關鍵密碼。",
-        "policy_keywords": [
-          "水質保護",
-          "土壤及地下水"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/13751",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "13744",
-        "date": "2026-07-22",
-        "roc_date": "115-07-22",
-        "title": "守護環工技師金招牌 環境部攜手產官學界凝聚查核共識",
-        "unit": "環境部環境管理署",
-        "summary": "環保許可簽證文件，不僅代表技師的專業判斷與把關責任，更攸關著環境品質、公共安全及民眾健康。環境部環境管理署今(22)日舉辦「『凝聚專業力．守護金招牌』115年度提升技師簽證品質策略共創營」，邀集環境部、行政院公共工程委員會、環工技師公會及查核委員齊聚一堂，針對空污、水污及土污等三大領域之查核議題進行交流，凝聚查核共識，共同守護環工技師金字招牌。",
-        "policy_keywords": [
-          "廢棄物與環保犯罪",
-          "空氣品質",
-          "土壤及地下水",
-          "環境執法與稽查"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/13744",
         "source_url_status": "",
         "attach_url": ""
       }
@@ -3449,8 +3472,8 @@
       "淨零綠生活",
       "友善食力"
     ],
-    "total_count": 374,
-    "last_30_days_count": 5,
+    "total_count": 375,
+    "last_30_days_count": 6,
     "prev_30_days_count": 6,
     "yearly_counts": {
       "2001": 5,
@@ -3478,9 +3501,30 @@
       "2023": 20,
       "2024": 20,
       "2025": 36,
-      "2026": 46
+      "2026": 47
     },
     "latest_news": [
+      {
+        "news_id": "20261123173045",
+        "date": "2026-11-23",
+        "roc_date": "115-11-23",
+        "title": "減少一次性包裝 多增一分環境友善 環境部綠色包裝論壇助產業接軌歐盟新制",
+        "unit": "環境部環境保護司",
+        "summary": "因應2026年歐盟《包裝及包裝廢棄物法規》（PPWR）已於今(115)年8月12日開始適用，為使產業界接軌國際，讓商品自源頭即符合相關規範供民眾選購，環境部於今(23)日舉辦「歐盟PPWR新制與臺灣綠色包裝」實務論壇，邀集產官學界交流，聚焦國內資源循環政策與國際法規趨勢，並由業者分享PPWR規範下的包裝設計與實務經驗，協助企業接軌國際綠色標準，同時展示裸包裝、循環包裝及無包裝銷售模式等「淨零綠生活」落地應用。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "減塑與一次用產品",
+          "廢棄物與環保犯罪",
+          "綠色消費與標章",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14563",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/5uqugewy.unq.jpg"
+      },
       {
         "news_id": "20261121090641",
         "date": "2026-11-21",
@@ -3629,23 +3673,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14264",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "14245",
-        "date": "2026-10-05",
-        "roc_date": "115-10-05",
-        "title": "臺灣參與2026亞太循環經濟熱點論壇 分享循環雙法經驗　深化臺澳循環產業合作",
-        "unit": "環境部資源循環署",
-        "summary": "環境部資源循環署署長賴瑩瑩率團赴澳洲雪梨，參加由澳洲主辦之「2026亞太循環經濟熱點論壇」（Asia Pacific Circular Economy Hotspot 2026），並於論壇期間與澳洲新南威爾斯州環境保護局（EPA）、氣候變遷、能源、環境與水務部（DCCEEW）等單位進行交流，聚焦擴大生產者責任、綠色採購、太陽能板與電池回收、關鍵材料循環及循環產業聚落等合作方向，期盼促進臺澳政策對話、產業鏈合作及亞太循環市場發展。",
-        "policy_keywords": [
-          "氣候變遷與調適",
-          "資源循環",
-          "綠色消費與標章"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14245",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -3664,8 +3691,8 @@
       "日本",
       "國際研討會"
     ],
-    "total_count": 500,
-    "last_30_days_count": 20,
+    "total_count": 502,
+    "last_30_days_count": 22,
     "prev_30_days_count": 2,
     "yearly_counts": {
       "2001": 7,
@@ -3693,9 +3720,47 @@
       "2023": 15,
       "2024": 25,
       "2025": 37,
-      "2026": 50
+      "2026": 52
     },
     "latest_news": [
+      {
+        "news_id": "20261123173045",
+        "date": "2026-11-23",
+        "roc_date": "115-11-23",
+        "title": "減少一次性包裝 多增一分環境友善 環境部綠色包裝論壇助產業接軌歐盟新制",
+        "unit": "環境部環境保護司",
+        "summary": "因應2026年歐盟《包裝及包裝廢棄物法規》（PPWR）已於今(115)年8月12日開始適用，為使產業界接軌國際，讓商品自源頭即符合相關規範供民眾選購，環境部於今(23)日舉辦「歐盟PPWR新制與臺灣綠色包裝」實務論壇，邀集產官學界交流，聚焦國內資源循環政策與國際法規趨勢，並由業者分享PPWR規範下的包裝設計與實務經驗，協助企業接軌國際綠色標準，同時展示裸包裝、循環包裝及無包裝銷售模式等「淨零綠生活」落地應用。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "減塑與一次用產品",
+          "廢棄物與環保犯罪",
+          "綠色消費與標章",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14563",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/5uqugewy.unq.jpg"
+      },
+      {
+        "news_id": "20261123150624",
+        "date": "2026-11-23",
+        "roc_date": "115-11-23",
+        "title": "臺灣環保技術輸出新里程碑！ 臺菲簽署土水合作備忘錄 打造綠色技術「國際通行證」",
+        "unit": "環境部環境管理署",
+        "summary": "臺灣環保技術國際合作再傳捷報！為協助國內優質環境科技拓展東南亞市場，環境部特別邀請菲律賓科技部工業技術發展研究院(ITDI)代表團來臺，於11月2日至6日展開為期一週的「2026臺菲土壤及地下水環境技術合作與交流活動」，並於11月5日在環境部完成「臺菲土壤及地下水保護技術暨科學合作瞭解備忘錄（MOU）」簽署儀式，讓臺灣環保技術輸出邁入新的里程碑。",
+        "policy_keywords": [
+          "水質保護",
+          "土壤及地下水",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14561",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/cpb3tkdc.5uh.jpg"
+      },
       {
         "news_id": "20261122220745",
         "date": "2026-11-22",
@@ -3858,45 +3923,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14527",
         "source_url_status": "",
         "attach_url": "https://enews.moenv.gov.tw/File/Get/moenv-news/zh-tw/jBfZozwN6qzuUtI"
-      },
-      {
-        "news_id": "20261118203907",
-        "date": "2026-11-18",
-        "roc_date": "115-11-18",
-        "title": "呼應COP31「以人為本」行動 環境部辦公正轉型論壇　 串聯智庫、原鄉與青年實踐開放治理",
-        "unit": "環境部氣候變遷署",
-        "summary": "呼應聯合國氣候變化公約第31次締約方大會(UNFCCC COP31)本(18)日主題「人類、社會發展與性別(Human and Social Development, Gender)」，環境部今(18)日舉辦COP31系列活動「公正轉型、社會溝通與公眾參與」線上論壇。",
-        "policy_keywords": [
-          "碳費徵收",
-          "碳定價與ETS",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "國際環境合作",
-          "生質能與再生能源"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14526",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/zfnzzzdx.4ks.jpg"
-      },
-      {
-        "news_id": "20261117190624",
-        "date": "2026-11-17",
-        "roc_date": "115-11-17",
-        "title": "串聯歐亞碳移除經驗 環境部COP31系列論壇探討臺灣生物炭循環新價值",
-        "unit": "環境部氣候變遷署",
-        "summary": "響應聯合國氣候變化綱要公約第31次締約方大會(COP31)「海洋、自然與土地利用」主題日，環境部 今(17)日舉辦「歐洲與亞洲碳移除(CDR)發展策略與生物炭」國際線上論壇。會議邀集芬蘭國際認證平台 Puro.earth、歐洲碳移除政策智庫 Carbonfuture 及國內產學專家，探討借鏡歐盟「碳移除認證架構(CRCF)」等國際標準，將本土農林剩餘資材轉化為具國際公信力的高品質碳資產，為我國 2050 淨零轉型奠定基石。",
-        "policy_keywords": [
-          "碳定價與ETS",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "資源循環",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14521",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/hhezowhu.4v1.jpg"
       }
     ]
   },

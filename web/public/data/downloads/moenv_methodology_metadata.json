@@ -1,14 +1,14 @@
 {
   "project": "環策晧脈（Taiwan Environment Observatory）",
   "license": "資料來源：中華民國環境部（環境部新聞專區及環境資料開放平臺 MNEWS_P_01），依政府資料開放授權條款（OGDL 1.0）引用；原創分類口徑、分析與視覺化歸屬環策晧脈。",
-  "updated_at": "2026-11-23T04:24:25+08:00",
+  "updated_at": "2026-11-23T20:48:40+08:00",
   "coverage": {
     "date_start": "2001-01-01",
-    "date_end": "2026-11-22",
-    "total_news": 11503
+    "date_end": "2026-11-23",
+    "total_news": 11506
   },
-  "dataset_version": "be9bdb8129d9547a",
-  "dataset_sha256": "be9bdb8129d9547adf35947dc528a060915cb7dcf9d8e23feb84a716f6990101",
+  "dataset_version": "21902e44f827d128",
+  "dataset_sha256": "21902e44f827d128f8155aaec63ee159e58f6e18130e8460138103017b24655f",
   "deduplication": "以 news_id 為主鍵，並搭配正規化日期＋去標點去空白標題指紋（NFKC compact identity key）雙重去重，避免跨來源（官網與開放資料）重複收錄。",
   "multi_label_rule": "採「一文多標籤」口徑：單篇新聞若同時命中多項議題之同義詞表，將於對應議題各自計數 1 次，因此各議題加總高於全站新聞總篇數屬正常現象。",
   "relation_engine": {
@@ -17,7 +17,7 @@
     "layer_2": "選配 Gemini Embedding API（gemini-embedding-001）增量快取語意向量計算 S_embed；若未設 API Key 或遭遇限流，自動降級為 100% TF-IDF 權重。",
     "blend_formula": "w_ij = alpha * S_tfidf(i, j) + (1 - alpha) * S_embed(i, j) + topic_bonus (0.05)",
     "active_meta": {
-      "generated_at": "2026-11-23T10:44:13+08:00",
+      "generated_at": "2026-11-23T20:48:55+08:00",
       "algorithm": "Route 3 Hybrid (TF-IDF + jieba domain dict + optional Gemini Neural Embeddings)",
       "mode": "tfidf_only",
       "alpha": 1.0,
@@ -25,10 +25,10 @@
       "min_score": 0.16,
       "topic_bonus": 0.05,
       "domain_dict_terms": 174,
-      "vocab_size": 26587,
-      "total_items": 11503,
-      "total_edges": 56210,
-      "elapsed_seconds": 18.47,
+      "vocab_size": 26592,
+      "total_items": 11506,
+      "total_edges": 56227,
+      "elapsed_seconds": 10.2,
       "embedding_meta": {
         "mode": "tfidf_only",
         "model": "gemini-embedding-001",
@@ -109,7 +109,7 @@
         "減碳",
         "低碳"
       ],
-      "total_count": 945
+      "total_count": 946
     },
     {
       "slug": "climate_adaptation",
@@ -125,7 +125,7 @@
         "韌性",
         "國土綠蔭"
       ],
-      "total_count": 744
+      "total_count": 745
     },
     {
       "slug": "resource_circulation",
@@ -140,7 +140,7 @@
         "循環標誌",
         "廢棄物再利用"
       ],
-      "total_count": 1588
+      "total_count": 1589
     },
     {
       "slug": "plastic_reduction",
@@ -156,7 +156,7 @@
         "袋袋箱傳",
         "包裝減量"
       ],
-      "total_count": 289
+      "total_count": 290
     },
     {
       "slug": "waste_crime",
@@ -172,7 +172,7 @@
         "事業廢棄物",
         "有害廢棄物"
       ],
-      "total_count": 2413
+      "total_count": 2414
     },
     {
       "slug": "air_quality",
@@ -189,7 +189,7 @@
         "空污費",
         "移動污染源"
       ],
-      "total_count": 1574
+      "total_count": 1575
     },
     {
       "slug": "water_quality",
@@ -205,7 +205,7 @@
         "地下水",
         "污水"
       ],
-      "total_count": 2405
+      "total_count": 2407
     },
     {
       "slug": "soil_groundwater",
@@ -220,7 +220,7 @@
         "農地污染",
         "污染場址"
       ],
-      "total_count": 489
+      "total_count": 491
     },
     {
       "slug": "eia",
@@ -281,7 +281,7 @@
         "淨零綠生活",
         "友善食力"
       ],
-      "total_count": 374
+      "total_count": 375
     },
     {
       "slug": "international_cooperation",
@@ -298,7 +298,7 @@
         "日本",
         "國際研討會"
       ],
-      "total_count": 500
+      "total_count": 502
     },
     {
       "slug": "enforcement",
