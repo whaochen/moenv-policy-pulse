@@ -1,12 +1,12 @@
 {
-  "total_news": 11509,
-  "total_relation_edges": 56242,
+  "total_news": 11511,
+  "total_relation_edges": 56250,
   "relation_mode": "tfidf_only",
   "date_start": "2001-01-01",
   "date_end": "2026-11-24",
-  "updated_at": "2026-11-24T21:46:14+08:00",
-  "dataset_version": "4a09402e2977f8cb",
-  "dataset_sha256": "4a09402e2977f8cbc77f4ff58c00d06b03f81c6dcfe156048ef9c75be33a7a3e",
+  "updated_at": "2026-11-25T03:29:56+08:00",
+  "dataset_version": "c5967de13112c929",
+  "dataset_sha256": "c5967de13112c92987bc5f8968b82e521db7e2cdf6825e400ba87249d7bd453e",
   "topic_count": 20,
   "years": [
     "2001",
@@ -36,11 +36,48 @@
     "2025",
     "2026"
   ],
-  "last_30_days_count": 71,
+  "last_30_days_count": 73,
   "prev_30_days_count": 50,
-  "last_30_days_delta": 21,
-  "last_30_days_pct": 42.0,
+  "last_30_days_delta": 23,
+  "last_30_days_pct": 46.0,
   "latest_news": [
+    {
+      "news_id": "20261124211318",
+      "date": "2026-11-24",
+      "roc_date": "115-11-24",
+      "title": "國際碳移除平台Puro.earth來臺交流 環境部攜手產官學研共探生物炭產業發展",
+      "unit": "環境部資源循環署",
+      "summary": "環境部今（24）日由部長彭啓明主持「國際碳市場趨勢與臺灣產業合作契機」交流會議，邀請國際碳移除平台 Puro.earth 共同創辦人 Antti Vihavainen 來臺，分享生物炭碳移除國際市場實務，並與芬蘭在台辦事處、國內產官學專家，共同探討生質料源永續管理、產製技術、品質要求、多元應用及國際認證等重要議題，從國際經驗與國內實務對話中，尋找臺灣生物炭產業發展及跨國合作契機。",
+      "policy_keywords": [
+        "碳定價與ETS",
+        "淨零轉型",
+        "氣候變遷與調適",
+        "資源循環",
+        "國際環境合作",
+        "生質能與再生能源"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14574",
+      "source_url_status": "",
+      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/jy5gbl0b.rzi.JPG"
+    },
+    {
+      "news_id": "20261124184219",
+      "date": "2026-11-24",
+      "roc_date": "115-11-24",
+      "title": "SBTi亞洲區主管訪台交流　攜手台灣打造AI供應鏈減碳標準、接軌NDC目標",
+      "unit": "環境部氣候變遷署",
+      "summary": "環境部長彭啟明今日下午接見科學基礎減量目標倡議（SBTi）亞洲區主管⁠Nate Aden，安永聯合會計師事務所執業會計師曾于哲及其亞太地區夥伴亦陪同與會。雙方針對協助台灣產業達成國家自定貢獻（NDC）目標、防範「漂綠」行為深入交換意見，並聚焦台灣在全球 AI 供應鏈的核心地位，研議以台灣為基地建立 AI 產業減碳標準。",
+      "policy_keywords": [
+        "碳費徵收",
+        "淨零轉型",
+        "氣候變遷與調適"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14573",
+      "source_url_status": "",
+      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/deusdzd2.aqq.jpg"
+    },
     {
       "news_id": "20261124175051",
       "date": "2026-11-24",
@@ -190,45 +227,6 @@
       "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14535",
       "source_url_status": "",
       "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/yd1z3p3l.wkk.jpeg"
-    },
-    {
-      "news_id": "20261121180111",
-      "date": "2026-11-21",
-      "roc_date": "115-11-21",
-      "title": "環境部舉辦「企業ESG人才培育」階段實習成果分享會 攜手青年企業共創永續新亮點",
-      "unit": "環境部環境保護司",
-      "summary": "為回應全球淨零轉型與ESG發展趨勢，環境部積極推動「企業ESG人才培育計畫」，並於今（21）日舉辦「青年企業實習：階段實習成果分享會」。本次活動以「企業 × 青年 × 永續行動」為核心理念，邀請參與企業代表與青年齊聚一堂，展示青年提早進入企業實習的豐碩成果。",
-      "policy_keywords": [
-        "淨零轉型",
-        "環境教育與綠領人才",
-        "ESG與永續金融",
-        "生質能與再生能源"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14540",
-      "source_url_status": "",
-      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/li452ghb.zcv.jpg"
-    },
-    {
-      "news_id": "20261121090641",
-      "date": "2026-11-21",
-      "roc_date": "115-11-21",
-      "title": "呼應 COP31 零廢棄主題 臺灣強化與各國循環經濟合作",
-      "unit": "環境部資源循環署",
-      "summary": "第31屆聯合國氣候變化綱要公約締約方大會（COP31）落幕，主辦國土耳其將「零廢棄」（Zero Waste）與循環經濟列為全球氣候行動的重要主題。環境部長彭啓明今（21）日表示，臺灣高度重視COP31所倡議的零廢棄與循環經濟方向，並將資源循環視為推動淨零轉型、強化資源安全及產業競爭力的重要策略。臺灣不僅將持續深化國內循環經濟政策，也願意分享多年累積的資源回收、技術創新及產業發展經驗，積極與國際夥伴合作，共同推動循環材料應用及跨境循環供應鏈，讓循環經濟成為全球氣候行動與綠色成長的新動力。",
-      "policy_keywords": [
-        "碳定價與ETS",
-        "淨零轉型",
-        "資源循環",
-        "廢棄物與環保犯罪",
-        "環境教育與綠領人才",
-        "綠色消費與標章",
-        "國際環境合作"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14539",
-      "source_url_status": "",
-      "attach_url": ""
     }
   ]
 }

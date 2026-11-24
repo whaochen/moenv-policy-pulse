@@ -10,8 +10,8 @@
       "碳費徵收",
       "碳費申報"
     ],
-    "total_count": 94,
-    "last_30_days_count": 6,
+    "total_count": 95,
+    "last_30_days_count": 7,
     "prev_30_days_count": 0,
     "yearly_counts": {
       "2001": 0,
@@ -39,9 +39,26 @@
       "2023": 10,
       "2024": 37,
       "2025": 17,
-      "2026": 24
+      "2026": 25
     },
     "latest_news": [
+      {
+        "news_id": "20261124184219",
+        "date": "2026-11-24",
+        "roc_date": "115-11-24",
+        "title": "SBTi亞洲區主管訪台交流　攜手台灣打造AI供應鏈減碳標準、接軌NDC目標",
+        "unit": "環境部氣候變遷署",
+        "summary": "環境部長彭啟明今日下午接見科學基礎減量目標倡議（SBTi）亞洲區主管⁠Nate Aden，安永聯合會計師事務所執業會計師曾于哲及其亞太地區夥伴亦陪同與會。雙方針對協助台灣產業達成國家自定貢獻（NDC）目標、防範「漂綠」行為深入交換意見，並聚焦台灣在全球 AI 供應鏈的核心地位，研議以台灣為基地建立 AI 產業減碳標準。",
+        "policy_keywords": [
+          "碳費徵收",
+          "淨零轉型",
+          "氣候變遷與調適"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14573",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/deusdzd2.aqq.jpg"
+      },
       {
         "news_id": "20261122220745",
         "date": "2026-11-22",
@@ -217,24 +234,6 @@
         ],
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14034",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14025",
-        "date": "2026-08-31",
-        "roc_date": "115-08-31",
-        "title": "英國CBAM認可臺灣碳費制度 我國碳定價接軌國際再邁重要一步",
-        "unit": "環境部氣候變遷署",
-        "summary": "英國政府近日公布碳邊境調整機制(CBAM)「合格碳定價機制」(Qualifying Carbon Pricing Scheme, QCPS)名單，「臺灣碳費(Taiwan Carbon Fee)」正式列入其中，與歐盟、日本、韓國、新加坡等主要碳定價制度並列。環境部表示，這項進展顯示我國碳定價制度已具備與國際制度接軌的基礎，將有助於我國出口產業因應全球碳邊境調整措施，維持國際競爭力。",
-        "policy_keywords": [
-          "碳費徵收",
-          "碳定價與ETS",
-          "氣候變遷與調適",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14025",
         "source_url_status": "",
         "attach_url": ""
       }
@@ -493,8 +492,8 @@
       "碳市場",
       "碳權"
     ],
-    "total_count": 106,
-    "last_30_days_count": 8,
+    "total_count": 107,
+    "last_30_days_count": 9,
     "prev_30_days_count": 0,
     "yearly_counts": {
       "2001": 0,
@@ -522,9 +521,29 @@
       "2023": 8,
       "2024": 16,
       "2025": 15,
-      "2026": 19
+      "2026": 20
     },
     "latest_news": [
+      {
+        "news_id": "20261124211318",
+        "date": "2026-11-24",
+        "roc_date": "115-11-24",
+        "title": "國際碳移除平台Puro.earth來臺交流 環境部攜手產官學研共探生物炭產業發展",
+        "unit": "環境部資源循環署",
+        "summary": "環境部今（24）日由部長彭啓明主持「國際碳市場趨勢與臺灣產業合作契機」交流會議，邀請國際碳移除平台 Puro.earth 共同創辦人 Antti Vihavainen 來臺，分享生物炭碳移除國際市場實務，並與芬蘭在台辦事處、國內產官學專家，共同探討生質料源永續管理、產製技術、品質要求、多元應用及國際認證等重要議題，從國際經驗與國內實務對話中，尋找臺灣生物炭產業發展及跨國合作契機。",
+        "policy_keywords": [
+          "碳定價與ETS",
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "國際環境合作",
+          "生質能與再生能源"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14574",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/jy5gbl0b.rzi.JPG"
+      },
       {
         "news_id": "20261122220745",
         "date": "2026-11-22",
@@ -707,24 +726,6 @@
         ],
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14112",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14107",
-        "date": "2026-09-14",
-        "roc_date": "115-09-14",
-        "title": "環境部舉辦2026臺德氣候合作研討會 攜手國際夥伴研議碳費至排放交易制度轉型路徑",
-        "unit": "環境部氣候變遷署",
-        "summary": "為深化臺德氣候政策合作，借鏡國際經驗，穩健推動我國碳費邁向總量管制與排放交易制度(ETS)，環境部今(14)日與德國在台協會共同舉辦「2026臺德氣候合作研討會：從碳費到排放交易制度(ETS)的轉型與挑戰」，邀集德國排放交易局(DEHSt)專家，以及國內產官學各界代表齊聚一堂，聚焦歐盟ETS改革、臺灣碳定價路徑、韓國電力部門納管經驗及利害關係人參與等議題，作為我國規劃ETS試行及完善碳定價政策的重要參考。",
-        "policy_keywords": [
-          "碳費徵收",
-          "碳定價與ETS",
-          "氣候變遷與調適",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14107",
         "source_url_status": "",
         "attach_url": ""
       }
@@ -985,8 +986,8 @@
       "減碳",
       "低碳"
     ],
-    "total_count": 948,
-    "last_30_days_count": 26,
+    "total_count": 950,
+    "last_30_days_count": 28,
     "prev_30_days_count": 10,
     "yearly_counts": {
       "2001": 0,
@@ -1014,9 +1015,46 @@
       "2023": 71,
       "2024": 92,
       "2025": 133,
-      "2026": 170
+      "2026": 172
     },
     "latest_news": [
+      {
+        "news_id": "20261124211318",
+        "date": "2026-11-24",
+        "roc_date": "115-11-24",
+        "title": "國際碳移除平台Puro.earth來臺交流 環境部攜手產官學研共探生物炭產業發展",
+        "unit": "環境部資源循環署",
+        "summary": "環境部今（24）日由部長彭啓明主持「國際碳市場趨勢與臺灣產業合作契機」交流會議，邀請國際碳移除平台 Puro.earth 共同創辦人 Antti Vihavainen 來臺，分享生物炭碳移除國際市場實務，並與芬蘭在台辦事處、國內產官學專家，共同探討生質料源永續管理、產製技術、品質要求、多元應用及國際認證等重要議題，從國際經驗與國內實務對話中，尋找臺灣生物炭產業發展及跨國合作契機。",
+        "policy_keywords": [
+          "碳定價與ETS",
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "國際環境合作",
+          "生質能與再生能源"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14574",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/jy5gbl0b.rzi.JPG"
+      },
+      {
+        "news_id": "20261124184219",
+        "date": "2026-11-24",
+        "roc_date": "115-11-24",
+        "title": "SBTi亞洲區主管訪台交流　攜手台灣打造AI供應鏈減碳標準、接軌NDC目標",
+        "unit": "環境部氣候變遷署",
+        "summary": "環境部長彭啟明今日下午接見科學基礎減量目標倡議（SBTi）亞洲區主管⁠Nate Aden，安永聯合會計師事務所執業會計師曾于哲及其亞太地區夥伴亦陪同與會。雙方針對協助台灣產業達成國家自定貢獻（NDC）目標、防範「漂綠」行為深入交換意見，並聚焦台灣在全球 AI 供應鏈的核心地位，研議以台灣為基地建立 AI 產業減碳標準。",
+        "policy_keywords": [
+          "碳費徵收",
+          "淨零轉型",
+          "氣候變遷與調適"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14573",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/deusdzd2.aqq.jpg"
+      },
       {
         "news_id": "20261124175051",
         "date": "2026-11-24",
@@ -1183,46 +1221,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14536",
         "source_url_status": "",
         "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/lpgfftbv.joq.jpg"
-      },
-      {
-        "news_id": "20261119192059",
-        "date": "2026-11-19",
-        "roc_date": "115-11-19",
-        "title": "環境部舉辦 COP31 青年論壇 串聯國小雨水花園、高中淨零對話到大專海外圓夢 許下 2050 世代約定",
-        "unit": "環境部氣候變遷署",
-        "summary": "環境部今 (19) 日舉辦「COP31 氣候脈動．臺灣同行」線上論壇，以「氣候世代的接力賽：臺灣青世代的氣候韌性與圓夢行動」為題，串聯從小學、高中到大專海外實踐的完整拼圖，展現臺灣由校園扎根、生活自覺到走向世界的跨世代氣候行動力。",
-        "policy_keywords": [
-          "碳定價與ETS",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "減塑與一次用產品",
-          "環境教育與綠領人才",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14529",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/etwzlyvf.1p3.jpg"
-      },
-      {
-        "news_id": "20261118203907",
-        "date": "2026-11-18",
-        "roc_date": "115-11-18",
-        "title": "呼應COP31「以人為本」行動 環境部辦公正轉型論壇　 串聯智庫、原鄉與青年實踐開放治理",
-        "unit": "環境部氣候變遷署",
-        "summary": "呼應聯合國氣候變化公約第31次締約方大會(UNFCCC COP31)本(18)日主題「人類、社會發展與性別(Human and Social Development, Gender)」，環境部今(18)日舉辦COP31系列活動「公正轉型、社會溝通與公眾參與」線上論壇。",
-        "policy_keywords": [
-          "碳費徵收",
-          "碳定價與ETS",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "國際環境合作",
-          "生質能與再生能源"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14526",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/zfnzzzdx.4ks.jpg"
       }
     ]
   },
@@ -1240,8 +1238,8 @@
       "韌性",
       "國土綠蔭"
     ],
-    "total_count": 748,
-    "last_30_days_count": 30,
+    "total_count": 750,
+    "last_30_days_count": 32,
     "prev_30_days_count": 12,
     "yearly_counts": {
       "2001": 2,
@@ -1269,9 +1267,46 @@
       "2023": 62,
       "2024": 90,
       "2025": 124,
-      "2026": 170
+      "2026": 172
     },
     "latest_news": [
+      {
+        "news_id": "20261124211318",
+        "date": "2026-11-24",
+        "roc_date": "115-11-24",
+        "title": "國際碳移除平台Puro.earth來臺交流 環境部攜手產官學研共探生物炭產業發展",
+        "unit": "環境部資源循環署",
+        "summary": "環境部今（24）日由部長彭啓明主持「國際碳市場趨勢與臺灣產業合作契機」交流會議，邀請國際碳移除平台 Puro.earth 共同創辦人 Antti Vihavainen 來臺，分享生物炭碳移除國際市場實務，並與芬蘭在台辦事處、國內產官學專家，共同探討生質料源永續管理、產製技術、品質要求、多元應用及國際認證等重要議題，從國際經驗與國內實務對話中，尋找臺灣生物炭產業發展及跨國合作契機。",
+        "policy_keywords": [
+          "碳定價與ETS",
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "國際環境合作",
+          "生質能與再生能源"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14574",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/jy5gbl0b.rzi.JPG"
+      },
+      {
+        "news_id": "20261124184219",
+        "date": "2026-11-24",
+        "roc_date": "115-11-24",
+        "title": "SBTi亞洲區主管訪台交流　攜手台灣打造AI供應鏈減碳標準、接軌NDC目標",
+        "unit": "環境部氣候變遷署",
+        "summary": "環境部長彭啟明今日下午接見科學基礎減量目標倡議（SBTi）亞洲區主管⁠Nate Aden，安永聯合會計師事務所執業會計師曾于哲及其亞太地區夥伴亦陪同與會。雙方針對協助台灣產業達成國家自定貢獻（NDC）目標、防範「漂綠」行為深入交換意見，並聚焦台灣在全球 AI 供應鏈的核心地位，研議以台灣為基地建立 AI 產業減碳標準。",
+        "policy_keywords": [
+          "碳費徵收",
+          "淨零轉型",
+          "氣候變遷與調適"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14573",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/deusdzd2.aqq.jpg"
+      },
       {
         "news_id": "20261124175051",
         "date": "2026-11-24",
@@ -1433,44 +1468,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14534",
         "source_url_status": "",
         "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/eiihx0uz.jop.jpg"
-      },
-      {
-        "news_id": "20261119192059",
-        "date": "2026-11-19",
-        "roc_date": "115-11-19",
-        "title": "環境部舉辦 COP31 青年論壇 串聯國小雨水花園、高中淨零對話到大專海外圓夢 許下 2050 世代約定",
-        "unit": "環境部氣候變遷署",
-        "summary": "環境部今 (19) 日舉辦「COP31 氣候脈動．臺灣同行」線上論壇，以「氣候世代的接力賽：臺灣青世代的氣候韌性與圓夢行動」為題，串聯從小學、高中到大專海外實踐的完整拼圖，展現臺灣由校園扎根、生活自覺到走向世界的跨世代氣候行動力。",
-        "policy_keywords": [
-          "碳定價與ETS",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "減塑與一次用產品",
-          "環境教育與綠領人才",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14529",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/etwzlyvf.1p3.jpg"
-      },
-      {
-        "news_id": "20261119100502",
-        "date": "2026-11-19",
-        "roc_date": "115-11-19",
-        "title": "環境部預告「鋼鐵業集塵灰高溫冶煉設施戴奧辛管制及排放標準」修正草案",
-        "unit": "環境部大氣環境司",
-        "summary": "為強化鋼鐵業集塵灰高溫冶煉設施之空氣污染管制，環境部今日預告修正「鋼鐵業集塵灰高溫冶煉設施戴奧辛管制及排放標準」草案，本次修法重點在於加嚴鋼鐵業集塵灰高溫冶煉設施之戴奧辛排放標準，並於本行業別中，新增粒狀污染物、硫氧化物、氮氧化物及一氧化碳排放標準，且將法規名稱修正為「鋼鐵業集塵灰高溫冶煉設施空氣污染物管制及排放標準」，以擴大此冶煉設施空氣污染物管制對象及範圍，以期降低空氣污染物排放，提升空氣品質。",
-        "policy_keywords": [
-          "氣候變遷與調適",
-          "資源循環",
-          "空氣品質",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14527",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/File/Get/moenv-news/zh-tw/jBfZozwN6qzuUtI"
       }
     ]
   },
@@ -1487,8 +1484,8 @@
       "循環標誌",
       "廢棄物再利用"
     ],
-    "total_count": 1591,
-    "last_30_days_count": 23,
+    "total_count": 1592,
+    "last_30_days_count": 24,
     "prev_30_days_count": 17,
     "yearly_counts": {
       "2001": 13,
@@ -1516,9 +1513,29 @@
       "2023": 92,
       "2024": 110,
       "2025": 128,
-      "2026": 186
+      "2026": 187
     },
     "latest_news": [
+      {
+        "news_id": "20261124211318",
+        "date": "2026-11-24",
+        "roc_date": "115-11-24",
+        "title": "國際碳移除平台Puro.earth來臺交流 環境部攜手產官學研共探生物炭產業發展",
+        "unit": "環境部資源循環署",
+        "summary": "環境部今（24）日由部長彭啓明主持「國際碳市場趨勢與臺灣產業合作契機」交流會議，邀請國際碳移除平台 Puro.earth 共同創辦人 Antti Vihavainen 來臺，分享生物炭碳移除國際市場實務，並與芬蘭在台辦事處、國內產官學專家，共同探討生質料源永續管理、產製技術、品質要求、多元應用及國際認證等重要議題，從國際經驗與國內實務對話中，尋找臺灣生物炭產業發展及跨國合作契機。",
+        "policy_keywords": [
+          "碳定價與ETS",
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "國際環境合作",
+          "生質能與再生能源"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14574",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/jy5gbl0b.rzi.JPG"
+      },
       {
         "news_id": "20261124171453",
         "date": "2026-11-24",
@@ -1701,23 +1718,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14521",
         "source_url_status": "",
         "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/hhezowhu.4v1.jpg"
-      },
-      {
-        "news_id": "14494",
-        "date": "2026-11-13",
-        "roc_date": "115-11-13",
-        "title": "環境部攜手國際扶輪社推動國土綠蔭，串聯公益服務與企業力量，共築氣候韌性城市！",
-        "unit": "環境部氣候變遷署",
-        "summary": "環境部昨（12）日舉辦「國土綠蔭氣候調適計畫暨推動木質資源循環說明會」，由環境部長彭啓明主持，國際扶輪社五位地區總監及社友182人共同參與。此次說明會聚焦都市林推動、社區綠化、企業永續及民間參與等議題，期盼結合國際扶輪長期深耕地方、投入公益服務及串聯跨領域資源的優勢，擴大社會參與國土綠蔭的力量，讓綠蔭從公共空間延伸至社區、校園與企業場域，共同打造更涼適、健康且具氣候韌性的生活環境。",
-        "policy_keywords": [
-          "氣候變遷與調適",
-          "資源循環",
-          "ESG與永續金融"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14494",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -3699,8 +3699,8 @@
       "日本",
       "國際研討會"
     ],
-    "total_count": 502,
-    "last_30_days_count": 22,
+    "total_count": 503,
+    "last_30_days_count": 23,
     "prev_30_days_count": 2,
     "yearly_counts": {
       "2001": 7,
@@ -3728,9 +3728,29 @@
       "2023": 15,
       "2024": 25,
       "2025": 37,
-      "2026": 52
+      "2026": 53
     },
     "latest_news": [
+      {
+        "news_id": "20261124211318",
+        "date": "2026-11-24",
+        "roc_date": "115-11-24",
+        "title": "國際碳移除平台Puro.earth來臺交流 環境部攜手產官學研共探生物炭產業發展",
+        "unit": "環境部資源循環署",
+        "summary": "環境部今（24）日由部長彭啓明主持「國際碳市場趨勢與臺灣產業合作契機」交流會議，邀請國際碳移除平台 Puro.earth 共同創辦人 Antti Vihavainen 來臺，分享生物炭碳移除國際市場實務，並與芬蘭在台辦事處、國內產官學專家，共同探討生質料源永續管理、產製技術、品質要求、多元應用及國際認證等重要議題，從國際經驗與國內實務對話中，尋找臺灣生物炭產業發展及跨國合作契機。",
+        "policy_keywords": [
+          "碳定價與ETS",
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "國際環境合作",
+          "生質能與再生能源"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14574",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/jy5gbl0b.rzi.JPG"
+      },
       {
         "news_id": "20261123173045",
         "date": "2026-11-23",
@@ -3913,24 +3933,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14529",
         "source_url_status": "",
         "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/etwzlyvf.1p3.jpg"
-      },
-      {
-        "news_id": "20261119100502",
-        "date": "2026-11-19",
-        "roc_date": "115-11-19",
-        "title": "環境部預告「鋼鐵業集塵灰高溫冶煉設施戴奧辛管制及排放標準」修正草案",
-        "unit": "環境部大氣環境司",
-        "summary": "為強化鋼鐵業集塵灰高溫冶煉設施之空氣污染管制，環境部今日預告修正「鋼鐵業集塵灰高溫冶煉設施戴奧辛管制及排放標準」草案，本次修法重點在於加嚴鋼鐵業集塵灰高溫冶煉設施之戴奧辛排放標準，並於本行業別中，新增粒狀污染物、硫氧化物、氮氧化物及一氧化碳排放標準，且將法規名稱修正為「鋼鐵業集塵灰高溫冶煉設施空氣污染物管制及排放標準」，以擴大此冶煉設施空氣污染物管制對象及範圍，以期降低空氣污染物排放，提升空氣品質。",
-        "policy_keywords": [
-          "氣候變遷與調適",
-          "資源循環",
-          "空氣品質",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14527",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/File/Get/moenv-news/zh-tw/jBfZozwN6qzuUtI"
       }
     ]
   },
@@ -4395,8 +4397,8 @@
       "廚餘",
       "能源化"
     ],
-    "total_count": 408,
-    "last_30_days_count": 8,
+    "total_count": 409,
+    "last_30_days_count": 9,
     "prev_30_days_count": 5,
     "yearly_counts": {
       "2001": 3,
@@ -4424,9 +4426,29 @@
       "2023": 13,
       "2024": 21,
       "2025": 43,
-      "2026": 33
+      "2026": 34
     },
     "latest_news": [
+      {
+        "news_id": "20261124211318",
+        "date": "2026-11-24",
+        "roc_date": "115-11-24",
+        "title": "國際碳移除平台Puro.earth來臺交流 環境部攜手產官學研共探生物炭產業發展",
+        "unit": "環境部資源循環署",
+        "summary": "環境部今（24）日由部長彭啓明主持「國際碳市場趨勢與臺灣產業合作契機」交流會議，邀請國際碳移除平台 Puro.earth 共同創辦人 Antti Vihavainen 來臺，分享生物炭碳移除國際市場實務，並與芬蘭在台辦事處、國內產官學專家，共同探討生質料源永續管理、產製技術、品質要求、多元應用及國際認證等重要議題，從國際經驗與國內實務對話中，尋找臺灣生物炭產業發展及跨國合作契機。",
+        "policy_keywords": [
+          "碳定價與ETS",
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "國際環境合作",
+          "生質能與再生能源"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14574",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/jy5gbl0b.rzi.JPG"
+      },
       {
         "news_id": "20261122220745",
         "date": "2026-11-22",
@@ -4602,24 +4624,6 @@
         ],
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14338",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14331",
-        "date": "2026-10-20",
-        "roc_date": "115-10-20",
-        "title": "環檢警查獲藉再利用卻非法處理廢塑膠混合物 向法院聲請沒收犯罪所得7,162萬餘元",
-        "unit": "環境部環境管理署",
-        "summary": "環境部環境管理署中區環境管理中心與苗栗縣環保局，偕同臺灣苗栗地方檢察署吳珈維檢察官指揮內政部警政署保安警察第七總隊第三大隊及法務部調查局彰化縣調查站等機關組成專案小組，聯手查獲「潔○環保工程有限公司」「佳○定股份有限公司」及「眾○股份有限公司」等3家公司，以合法掩護非法，假借再利用大肆非法收受廢塑膠混合物，並隨意處理及堆置，圖謀大賺黑心錢之環保犯罪不法勾當。日前經苗栗地方檢察署偵查終結依犯廢棄物清理法第46條規定起訴涉案6名人員及3家法人，並同步向法院聲請沒收犯罪工具及犯罪所得新臺幣7,162萬餘元。\n**藉再利用卻非法處理，大賺黑心暴利！** \n中區環境管理中心執行查核可燃事業廢棄物轉化再生能源專案時，發現佳○定公司製成固體再生燃料(SRF)之原料不符合規定，進而溯源並透過系統勾稽比對數萬筆資料，發現潔○公司只有取得廢棄物清除許可及廢塑膠個案再利用資格，卻對外誆稱可以處理廢塑膠，四處向各縣市製造塑膠包裝材料工廠大肆收受廢塑膠混合物。該公司的手法可說是「左手收錢、右手亂丟」藉此大發環保不義之財，收取高額處理費用後，卻非法將廢塑膠混合物轉運給佳○定公司與眾○公司等廢塑膠再利用機構，任意堆...",
-        "policy_keywords": [
-          "資源循環",
-          "廢棄物與環保犯罪",
-          "環境執法與稽查",
-          "生質能與再生能源"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14331",
         "source_url_status": "",
         "attach_url": ""
       }
