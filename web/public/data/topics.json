@@ -985,8 +985,8 @@
       "減碳",
       "低碳"
     ],
-    "total_count": 947,
-    "last_30_days_count": 25,
+    "total_count": 948,
+    "last_30_days_count": 26,
     "prev_30_days_count": 10,
     "yearly_counts": {
       "2001": 0,
@@ -1014,9 +1014,26 @@
       "2023": 71,
       "2024": 92,
       "2025": 133,
-      "2026": 169
+      "2026": 170
     },
     "latest_news": [
+      {
+        "news_id": "20261124175051",
+        "date": "2026-11-24",
+        "roc_date": "115-11-24",
+        "title": "環境部與BSI深化交流　推動臺灣產業接軌國際減碳標準",
+        "unit": "環境部氣候變遷署",
+        "summary": "環境部長彭啓明於二十四日會見英國標準協會(BSI)全球驗證部門總裁Harold Pradal，BSI為全球首家國家級標準機構，也是國際標準組織(ISO)的創始成員之一。本次會晤，雙方就去碳電力認定、碳捕捉與封存(CCS)、永續金融及人工智慧(AI)環境影響等新興永續議題深入交流。彭部長表示，未來將與BSI保持密切聯繫，借重其國際標準制定及推動經驗，協助臺灣產業接軌國際，兼顧產業競爭力與淨零永續發展。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "ESG與永續金融"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14572",
+        "source_url_status": "",
+        "attach_url": ""
+      },
       {
         "news_id": "20261123193317",
         "date": "2026-11-23",
@@ -1206,25 +1223,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14526",
         "source_url_status": "",
         "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/zfnzzzdx.4ks.jpg"
-      },
-      {
-        "news_id": "20261117190624",
-        "date": "2026-11-17",
-        "roc_date": "115-11-17",
-        "title": "串聯歐亞碳移除經驗 環境部COP31系列論壇探討臺灣生物炭循環新價值",
-        "unit": "環境部氣候變遷署",
-        "summary": "響應聯合國氣候變化綱要公約第31次締約方大會(COP31)「海洋、自然與土地利用」主題日，環境部 今(17)日舉辦「歐洲與亞洲碳移除(CDR)發展策略與生物炭」國際線上論壇。會議邀集芬蘭國際認證平台 Puro.earth、歐洲碳移除政策智庫 Carbonfuture 及國內產學專家，探討借鏡歐盟「碳移除認證架構(CRCF)」等國際標準，將本土農林剩餘資材轉化為具國際公信力的高品質碳資產，為我國 2050 淨零轉型奠定基石。",
-        "policy_keywords": [
-          "碳定價與ETS",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "資源循環",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14521",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/hhezowhu.4v1.jpg"
       }
     ]
   },
@@ -1242,8 +1240,8 @@
       "韌性",
       "國土綠蔭"
     ],
-    "total_count": 746,
-    "last_30_days_count": 28,
+    "total_count": 748,
+    "last_30_days_count": 30,
     "prev_30_days_count": 12,
     "yearly_counts": {
       "2001": 2,
@@ -1271,9 +1269,42 @@
       "2023": 62,
       "2024": 90,
       "2025": 124,
-      "2026": 168
+      "2026": 170
     },
     "latest_news": [
+      {
+        "news_id": "20261124175051",
+        "date": "2026-11-24",
+        "roc_date": "115-11-24",
+        "title": "環境部與BSI深化交流　推動臺灣產業接軌國際減碳標準",
+        "unit": "環境部氣候變遷署",
+        "summary": "環境部長彭啓明於二十四日會見英國標準協會(BSI)全球驗證部門總裁Harold Pradal，BSI為全球首家國家級標準機構，也是國際標準組織(ISO)的創始成員之一。本次會晤，雙方就去碳電力認定、碳捕捉與封存(CCS)、永續金融及人工智慧(AI)環境影響等新興永續議題深入交流。彭部長表示，未來將與BSI保持密切聯繫，借重其國際標準制定及推動經驗，協助臺灣產業接軌國際，兼顧產業競爭力與淨零永續發展。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "ESG與永續金融"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14572",
+        "source_url_status": "",
+        "attach_url": ""
+      },
+      {
+        "news_id": "20261124171453",
+        "date": "2026-11-24",
+        "roc_date": "115-11-24",
+        "title": "「設計，讓未來持續再生」精選新銳作品：探索材料再生與永續生活",
+        "unit": "環境部資源循環署",
+        "summary": "環境部資源循環署今（24）日在循環再設計中心推出「設計，讓未來持續再生」新展，從今年5月新一代設計展中精選27件青年設計作品，以循環永續為主題重新策展，展至明（116）年1月24日。新銳設計者從生活中找題目，並在設計階段思考廢棄材料如何再利用、食物浪費如何減少。多件作品已獲國內外設計獎項肯定。",
+        "policy_keywords": [
+          "氣候變遷與調適",
+          "資源循環"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14571",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/uoylvy4t.nhm.jpg"
+      },
       {
         "news_id": "20261123193317",
         "date": "2026-11-23",
@@ -1440,45 +1471,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14527",
         "source_url_status": "",
         "attach_url": "https://enews.moenv.gov.tw/File/Get/moenv-news/zh-tw/jBfZozwN6qzuUtI"
-      },
-      {
-        "news_id": "20261118203907",
-        "date": "2026-11-18",
-        "roc_date": "115-11-18",
-        "title": "呼應COP31「以人為本」行動 環境部辦公正轉型論壇　 串聯智庫、原鄉與青年實踐開放治理",
-        "unit": "環境部氣候變遷署",
-        "summary": "呼應聯合國氣候變化公約第31次締約方大會(UNFCCC COP31)本(18)日主題「人類、社會發展與性別(Human and Social Development, Gender)」，環境部今(18)日舉辦COP31系列活動「公正轉型、社會溝通與公眾參與」線上論壇。",
-        "policy_keywords": [
-          "碳費徵收",
-          "碳定價與ETS",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "國際環境合作",
-          "生質能與再生能源"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14526",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/zfnzzzdx.4ks.jpg"
-      },
-      {
-        "news_id": "20261117190624",
-        "date": "2026-11-17",
-        "roc_date": "115-11-17",
-        "title": "串聯歐亞碳移除經驗 環境部COP31系列論壇探討臺灣生物炭循環新價值",
-        "unit": "環境部氣候變遷署",
-        "summary": "響應聯合國氣候變化綱要公約第31次締約方大會(COP31)「海洋、自然與土地利用」主題日，環境部 今(17)日舉辦「歐洲與亞洲碳移除(CDR)發展策略與生物炭」國際線上論壇。會議邀集芬蘭國際認證平台 Puro.earth、歐洲碳移除政策智庫 Carbonfuture 及國內產學專家，探討借鏡歐盟「碳移除認證架構(CRCF)」等國際標準，將本土農林剩餘資材轉化為具國際公信力的高品質碳資產，為我國 2050 淨零轉型奠定基石。",
-        "policy_keywords": [
-          "碳定價與ETS",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "資源循環",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14521",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/hhezowhu.4v1.jpg"
       }
     ]
   },
@@ -1495,8 +1487,8 @@
       "循環標誌",
       "廢棄物再利用"
     ],
-    "total_count": 1590,
-    "last_30_days_count": 22,
+    "total_count": 1591,
+    "last_30_days_count": 23,
     "prev_30_days_count": 17,
     "yearly_counts": {
       "2001": 13,
@@ -1524,9 +1516,25 @@
       "2023": 92,
       "2024": 110,
       "2025": 128,
-      "2026": 185
+      "2026": 186
     },
     "latest_news": [
+      {
+        "news_id": "20261124171453",
+        "date": "2026-11-24",
+        "roc_date": "115-11-24",
+        "title": "「設計，讓未來持續再生」精選新銳作品：探索材料再生與永續生活",
+        "unit": "環境部資源循環署",
+        "summary": "環境部資源循環署今（24）日在循環再設計中心推出「設計，讓未來持續再生」新展，從今年5月新一代設計展中精選27件青年設計作品，以循環永續為主題重新策展，展至明（116）年1月24日。新銳設計者從生活中找題目，並在設計階段思考廢棄材料如何再利用、食物浪費如何減少。多件作品已獲國內外設計獎項肯定。",
+        "policy_keywords": [
+          "氣候變遷與調適",
+          "資源循環"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14571",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/uoylvy4t.nhm.jpg"
+      },
       {
         "news_id": "20261123193317",
         "date": "2026-11-23",
@@ -1708,22 +1716,6 @@
         ],
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14494",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14488",
-        "date": "2026-11-12",
-        "roc_date": "115-11-12",
-        "title": "「袋袋箱傳」走進社區　里民捐好袋、鄰里店家接力用",
-        "unit": "環境部資源循環署",
-        "summary": "桃園市寶安里結合里民捐袋與學校制服回收，讓好袋與制服一起再利用，展現社區減塑的生活巧思。這是日前115年全國環保志（義）工群英會政策意見交流中，志工分享的在地經驗之一。環境部資源循環署表示，從地方經驗可見，已有社區設置「袋袋箱傳」二手袋取用點，就近連結袋源與用袋需求，歡迎更多社區、里辦公處及市集加入，讓閒置好袋在生活圈中接力使用。",
-        "policy_keywords": [
-          "資源循環",
-          "減塑與一次用產品"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14488",
         "source_url_status": "",
         "attach_url": ""
       }
@@ -4168,8 +4160,8 @@
       "金融資源",
       "永續長"
     ],
-    "total_count": 50,
-    "last_30_days_count": 5,
+    "total_count": 51,
+    "last_30_days_count": 6,
     "prev_30_days_count": 1,
     "yearly_counts": {
       "2001": 0,
@@ -4197,9 +4189,26 @@
       "2023": 3,
       "2024": 6,
       "2025": 5,
-      "2026": 23
+      "2026": 24
     },
     "latest_news": [
+      {
+        "news_id": "20261124175051",
+        "date": "2026-11-24",
+        "roc_date": "115-11-24",
+        "title": "環境部與BSI深化交流　推動臺灣產業接軌國際減碳標準",
+        "unit": "環境部氣候變遷署",
+        "summary": "環境部長彭啓明於二十四日會見英國標準協會(BSI)全球驗證部門總裁Harold Pradal，BSI為全球首家國家級標準機構，也是國際標準組織(ISO)的創始成員之一。本次會晤，雙方就去碳電力認定、碳捕捉與封存(CCS)、永續金融及人工智慧(AI)環境影響等新興永續議題深入交流。彭部長表示，未來將與BSI保持密切聯繫，借重其國際標準制定及推動經驗，協助臺灣產業接軌國際，兼顧產業競爭力與淨零永續發展。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "ESG與永續金融"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14572",
+        "source_url_status": "",
+        "attach_url": ""
+      },
       {
         "news_id": "20261123193317",
         "date": "2026-11-23",
@@ -4367,23 +4376,6 @@
         ],
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/13918",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "13676",
-        "date": "2026-07-14",
-        "roc_date": "115-07-14",
-        "title": "台灣高溫有解！環境部前進中部公布「都市林6大治理重點」：導入樹保制度、將推國土綠蔭氣候調適網平台",
-        "unit": "環境部氣候變遷署",
-        "summary": "炎炎夏日，城市如何精準降溫？環境部今（14）日於國立中興大學舉辦第三場「國土綠蔭氣候調適計畫暨推動木質資源循環說明會」，由環境部長彭啓明主持，立法委員何欣純、臺中市政府永續長兼秘書長黃崇典、中興大學校長詹富智、國家都市林推動委員會委員王升陽院長、柳婉郁特聘教授，以及農業部、內政部、臺中市政府等中央、地方及學界代表共同出席，現場及線上近200人參與。環境部這次首度公布由前兩場民眾與專家意見彙整出的「都市林六大追蹤重點」，宣告國家政策將從「傾聽民意」正式邁向「制度治理」，把綠蔭打造成市民生活最強的「天然冷氣」。",
-        "policy_keywords": [
-          "氣候變遷與調適",
-          "資源循環",
-          "ESG與永續金融"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/13676",
         "source_url_status": "",
         "attach_url": ""
       }

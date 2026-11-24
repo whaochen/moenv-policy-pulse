@@ -1,12 +1,12 @@
 {
-  "total_news": 11507,
-  "total_relation_edges": 56233,
+  "total_news": 11509,
+  "total_relation_edges": 56242,
   "relation_mode": "tfidf_only",
   "date_start": "2001-01-01",
-  "date_end": "2026-11-23",
-  "updated_at": "2026-11-24T04:11:19+08:00",
-  "dataset_version": "1195391bb5754333",
-  "dataset_sha256": "1195391bb575433316522d44e928f4c7e2c0efb53a57111fec38ec778a3bb02a",
+  "date_end": "2026-11-24",
+  "updated_at": "2026-11-24T21:46:14+08:00",
+  "dataset_version": "4a09402e2977f8cb",
+  "dataset_sha256": "4a09402e2977f8cbc77f4ff58c00d06b03f81c6dcfe156048ef9c75be33a7a3e",
   "topic_count": 20,
   "years": [
     "2001",
@@ -36,11 +36,44 @@
     "2025",
     "2026"
   ],
-  "last_30_days_count": 69,
+  "last_30_days_count": 71,
   "prev_30_days_count": 50,
-  "last_30_days_delta": 19,
-  "last_30_days_pct": 38.0,
+  "last_30_days_delta": 21,
+  "last_30_days_pct": 42.0,
   "latest_news": [
+    {
+      "news_id": "20261124175051",
+      "date": "2026-11-24",
+      "roc_date": "115-11-24",
+      "title": "環境部與BSI深化交流　推動臺灣產業接軌國際減碳標準",
+      "unit": "環境部氣候變遷署",
+      "summary": "環境部長彭啓明於二十四日會見英國標準協會(BSI)全球驗證部門總裁Harold Pradal，BSI為全球首家國家級標準機構，也是國際標準組織(ISO)的創始成員之一。本次會晤，雙方就去碳電力認定、碳捕捉與封存(CCS)、永續金融及人工智慧(AI)環境影響等新興永續議題深入交流。彭部長表示，未來將與BSI保持密切聯繫，借重其國際標準制定及推動經驗，協助臺灣產業接軌國際，兼顧產業競爭力與淨零永續發展。",
+      "policy_keywords": [
+        "淨零轉型",
+        "氣候變遷與調適",
+        "ESG與永續金融"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14572",
+      "source_url_status": "",
+      "attach_url": ""
+    },
+    {
+      "news_id": "20261124171453",
+      "date": "2026-11-24",
+      "roc_date": "115-11-24",
+      "title": "「設計，讓未來持續再生」精選新銳作品：探索材料再生與永續生活",
+      "unit": "環境部資源循環署",
+      "summary": "環境部資源循環署今（24）日在循環再設計中心推出「設計，讓未來持續再生」新展，從今年5月新一代設計展中精選27件青年設計作品，以循環永續為主題重新策展，展至明（116）年1月24日。新銳設計者從生活中找題目，並在設計階段思考廢棄材料如何再利用、食物浪費如何減少。多件作品已獲國內外設計獎項肯定。",
+      "policy_keywords": [
+        "氣候變遷與調適",
+        "資源循環"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14571",
+      "source_url_status": "",
+      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/uoylvy4t.nhm.jpg"
+    },
     {
       "news_id": "20261123193317",
       "date": "2026-11-23",
@@ -196,50 +229,6 @@
       "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14539",
       "source_url_status": "",
       "attach_url": ""
-    },
-    {
-      "news_id": "20261120201727",
-      "date": "2026-11-20",
-      "roc_date": "115-11-20",
-      "title": "呼應《安塔利亞 AI承諾》臺灣願以全球 AI 供應鏈核心之力，打造 AI 與氣候共生的未來",
-      "unit": "環境部氣候變遷署",
-      "summary": "聯合國氣候變化綱要公約第31屆締約方大會（COP31）即將落幕，在土耳其安塔利亞舉行期間，主席國土耳其與國際電信聯盟（ITU）共同發起《安塔利亞人工智慧承諾》（Antalya Artificial Intelligence Pledge）。環境部長彭啓明今（20）日表示，臺灣歡迎並呼應這項承諾，也認同承諾中「讓 AI 成為氣候解決方案的一部分」的共同抱負，臺灣將以全球 AI 供應鏈核心的角色，協助世界各國創造 AI 與氣候共生的價值。",
-      "policy_keywords": [
-        "碳費徵收",
-        "自主減量計畫",
-        "碳定價與ETS",
-        "溫室氣體盤查登錄",
-        "淨零轉型",
-        "氣候變遷與調適",
-        "資源循環",
-        "廢棄物與環保犯罪",
-        "空氣品質",
-        "國際環境合作",
-        "生質能與再生能源"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14537",
-      "source_url_status": "",
-      "attach_url": ""
-    },
-    {
-      "news_id": "20261120192802",
-      "date": "2026-11-20",
-      "roc_date": "115-11-20",
-      "title": "掌握《巴黎協定》第六條國際新局！環境部舉辦 COP31 國際論壇，完善國外碳權認可機制促進實質氣候合作",
-      "unit": "環境部氣候變遷署",
-      "summary": "聯合國氣候公約第 31 次締約方大會（COP31）於土耳其安塔利亞進入最後協商階段。環境部今（20）日舉辦「從氣候科學到全球碳市場發展：巴黎協定 Article 6」論壇，聚焦國際碳市場談判動態與法規進展，並說明我國國外碳權認可準則，引導產業落實實質減碳與接軌國際規範。",
-      "policy_keywords": [
-        "碳定價與ETS",
-        "淨零轉型",
-        "氣候變遷與調適",
-        "國際環境合作",
-        "生質能與再生能源"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14536",
-      "source_url_status": "",
-      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/lpgfftbv.joq.jpg"
     }
   ]
 }
