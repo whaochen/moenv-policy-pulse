@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T07:05:23+08:00",
+  "generated_at": "2026-11-25T13:45:52+08:00",
   "algorithm": "Route 3 Hybrid (TF-IDF + jieba domain dict + optional Gemini Neural Embeddings)",
   "mode": "tfidf_only",
   "alpha": 1.0,
@@ -10,7 +10,7 @@
   "vocab_size": 26603,
   "total_items": 11511,
   "total_edges": 56250,
-  "elapsed_seconds": 17.98,
+  "elapsed_seconds": 17.92,
   "embedding_meta": {
     "mode": "tfidf_only",
     "model": "gemini-embedding-001",
