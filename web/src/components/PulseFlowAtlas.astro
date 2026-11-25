@@ -1,13 +1,30 @@
 ---
-import { loadManifest, formatTaipeiTimestamp } from '../lib/data';
+import { loadManifest, loadTrends, getPublishedHaoTalks, formatTaipeiTimestamp } from '../lib/data';
 
 const manifest = loadManifest();
+const trends = loadTrends();
+const publishedTalks = await getPublishedHaoTalks();
+
 const startYear = manifest.date_start ? Number(manifest.date_start.slice(0, 4)) : 2001;
 const endYear = manifest.date_end ? Number(manifest.date_end.slice(0, 4)) : 2026;
 const spanYears = Math.max(1, endYear - startYear + 1);
 const initialNews = manifest.total_news;
 const initialRelations = manifest.total_relation_edges ?? 0;
 const initialSync = formatTaipeiTimestamp(manifest.updated_at);
+const initialTalksCount = publishedTalks.length;
+const initial30dCount = manifest.last_30_days_count ?? 0;
+
+function sumEra(minY: number, maxY: number): number {
+  return (trends.yearly_totals || []).reduce((acc, row) => {
+    const y = Number(row.year);
+    return y >= minY && y <= maxY ? acc + (row.count || 0) : acc;
+  }, 0);
+}
+
+const era1 = sumEra(2001, 2010);
+const era2 = sumEra(2011, 2015);
+const era3 = sumEra(2016, 2020);
+const era4 = sumEra(2021, 2026);
 ---
 
 <div
@@ -81,188 +98,439 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
     </div>
   </div>
 
-  <!-- 2. 視圖一：FLOWS（橫向弧線流光圖 Arc Diagram） -->
-  <div id="atlas-panel-flows" class="atlas-panel p-4 sm:p-6">
-    <!-- 懸浮玻璃態解說卡 -->
-    <div class="mb-5 rounded-xl border border-emerald-400/25 bg-[#08241C]/80 p-4 backdrop-blur-md shadow-[0_8px_28px_rgba(0,0,0,0.35)] sm:p-5">
-      <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-        <div>
+  <!-- 2. 視圖一：FLOWS（V2.5 三段式海量匯流煉金圖） -->
+  <div id="atlas-panel-flows" class="atlas-panel p-4 sm:p-5">
+    <!-- 上方精簡聚焦動態故事解說條（控制高度 ~120-135px，讓超過 65% 空間留給匯流畫布） -->
+    <div class="mb-4 rounded-xl border border-emerald-400/25 bg-[#08241C]/85 px-4 py-3 backdrop-blur-md shadow-[0_8px_28px_rgba(0,0,0,0.35)]">
+      <div class="flex flex-col gap-2.5 lg:flex-row lg:items-center lg:justify-between">
+        <div class="min-w-0 flex-1">
           <div class="flex flex-wrap items-center gap-2">
-            <span id="flow-card-step" class="rounded-full bg-amber-500/20 border border-amber-400/40 px-2.5 py-0.5 font-mono text-[11px] font-bold text-amber-300">
-              01 · MOENV OPEN DATA
+            <span id="flow-card-step" class="rounded-full border border-amber-400/40 bg-amber-500/20 px-2.5 py-0.5 font-mono text-[11px] font-bold text-amber-300">
+              STAGE 01 · 海量匯入
             </span>
-            <span id="flow-card-scale" class="rounded-full bg-emerald-500/15 border border-emerald-400/30 px-2.5 py-0.5 font-mono text-[11px] text-emerald-300">
+            <span id="flow-card-scale" class="rounded-full border border-emerald-400/30 bg-emerald-500/15 px-2.5 py-0.5 font-mono text-[11px] text-emerald-300">
               {initialNews.toLocaleString()} 篇官方新聞
             </span>
+            <span id="flow-cruise-indicator" class="font-mono text-[11px] font-semibold text-emerald-200/75">
+              01 / 04 · INGESTION
+            </span>
           </div>
-          <h3 id="flow-card-title" class="mt-2 font-serif text-lg font-bold text-white sm:text-xl">
-            官方源頭：MNEWS_P_01 ＋ 單篇原網址自動配對
+          <h3 id="flow-card-title" class="mt-1.5 font-serif text-base font-bold text-white sm:text-lg">
+            百川匯海：無痛收錄 2001–2026 共 {initialNews.toLocaleString()} 篇官方新聞
           </h3>
-          <p id="flow-card-tools" class="mt-1 font-mono text-[11px] text-emerald-300/85">
-            核心工具：環境部環境資料開放平臺 MNEWS_P_01 · 精準單篇 URL Resolver
+          <p id="flow-card-desc" class="mt-0.5 text-xs leading-relaxed text-emerald-100/85">
+            結合環境部歷史歸檔與 MNEWS_P_01 開放資料即時增量，每日 4 次自動入庫，完整保留 26 年環境治理全貌。
           </p>
         </div>
-        <div id="flow-cruise-indicator" class="shrink-0 font-mono text-xs font-bold tracking-wider text-amber-300/90">
-          01 / 05 · OPEN DATA
+
+        <!-- 四階段快切膠囊 -->
+        <div class="flex flex-wrap items-center gap-1.5 shrink-0">
+          {[
+            { idx: 0, label: '01 海量匯入' },
+            { idx: 1, label: '02 系統工程' },
+            { idx: 2, label: '03 AI 雙模型' },
+            { idx: 3, label: '04 智庫產出' },
+          ].map((s) => (
+            <button
+              type="button"
+              data-stage-btn={s.idx}
+              class:list={[
+                'stage-pill-btn rounded-lg border px-2.5 py-1 font-mono text-[11px] font-semibold transition',
+                s.idx === 0
+                  ? 'border-amber-400/70 bg-amber-500/20 text-amber-200 shadow-[0_0_12px_rgba(245,158,11,0.22)]'
+                  : 'border-emerald-500/25 bg-black/25 text-emerald-200/70 hover:border-emerald-400/50 hover:text-emerald-100',
+              ]}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- 桌機版（>= 768px）：三段式海量匯流煉金畫布 -->
+    <div id="stream-canvas-wrap" class="hidden md:block relative rounded-xl border border-emerald-500/15 bg-[#04120E]/70 px-4 py-5 overflow-hidden">
+      <!-- 底層：動態計算座標的貝茲流道 SVG -->
+      <svg
+        id="stream-beams-svg"
+        class="pointer-events-none absolute inset-0 h-full w-full"
+        aria-hidden="true"
+      >
+        <defs>
+          <filter id="stream-beam-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <linearGradient id="stream-grad-in" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#6EE7B7" stop-opacity="0.35" />
+            <stop offset="60%" stop-color="#34D399" stop-opacity="0.75" />
+            <stop offset="100%" stop-color="#10B981" stop-opacity="0.95" />
+          </linearGradient>
+          <linearGradient id="stream-grad-out" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.9" />
+            <stop offset="55%" stop-color="#FBBF24" stop-opacity="0.75" />
+            <stop offset="100%" stop-color="#34D399" stop-opacity="0.9" />
+          </linearGradient>
+        </defs>
+        <g id="stream-beams-layer" fill="none"></g>
+      </svg>
+
+      <!-- 中層：高密度 60FPS HTML5 Canvas 粒子流 -->
+      <canvas
+        id="stream-particles-canvas"
+        class="pointer-events-none absolute inset-0 h-full w-full"
+        aria-hidden="true"
+      ></canvas>
+
+      <!-- 上層：三段式互動節點架構（左 5 源頭 / 中 2 核心+把脈台 / 右 4 成果） -->
+      <div class="relative z-10 grid grid-cols-12 items-center gap-6 lg:gap-8">
+        <!-- 左段（4 欄）：5 條並行時代匯流通道 -->
+        <div class="col-span-4 space-y-2.5">
+          <div class="mb-1 flex items-center justify-between px-1 font-mono text-[10px] font-bold tracking-widest text-emerald-300/80">
+            <span>SOURCES · 2001–2026</span>
+            <span id="stream-left-total">{initialNews.toLocaleString()} 篇</span>
+          </div>
+
+          <!-- 源頭 1: 2001-2010 -->
+          <div
+            data-stream-node="src-0"
+            data-stage="0"
+            data-anchor-side="right"
+            class="stream-node cursor-pointer rounded-xl border border-emerald-400/25 bg-[#071D16]/90 px-3 py-2 backdrop-blur-sm transition duration-200 hover:border-emerald-300/70"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-mono text-[11px] font-bold text-emerald-300">2001–2010</span>
+              <span id="era-count-1" class="rounded bg-emerald-500/15 px-1.5 py-0.5 font-mono text-[11px] font-bold text-white">
+                {era1.toLocaleString()} 篇
+              </span>
+            </div>
+            <div class="mt-0.5 text-[11px] text-emerald-100/75 truncate">早期環保署歷史新聞</div>
+          </div>
+
+          <!-- 源頭 2: 2011-2015 -->
+          <div
+            data-stream-node="src-1"
+            data-stage="0"
+            data-anchor-side="right"
+            class="stream-node cursor-pointer rounded-xl border border-emerald-400/25 bg-[#071D16]/90 px-3 py-2 backdrop-blur-sm transition duration-200 hover:border-emerald-300/70"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-mono text-[11px] font-bold text-emerald-300">2011–2015</span>
+              <span id="era-count-2" class="rounded bg-emerald-500/15 px-1.5 py-0.5 font-mono text-[11px] font-bold text-white">
+                {era2.toLocaleString()} 篇
+              </span>
+            </div>
+            <div class="mt-0.5 text-[11px] text-emerald-100/75 truncate">空水廢與環評治理新聞</div>
+          </div>
+
+          <!-- 源頭 3: 2016-2020 -->
+          <div
+            data-stream-node="src-2"
+            data-stage="0"
+            data-anchor-side="right"
+            class="stream-node cursor-pointer rounded-xl border border-emerald-400/25 bg-[#071D16]/90 px-3 py-2 backdrop-blur-sm transition duration-200 hover:border-emerald-300/70"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-mono text-[11px] font-bold text-emerald-300">2016–2020</span>
+              <span id="era-count-3" class="rounded bg-emerald-500/15 px-1.5 py-0.5 font-mono text-[11px] font-bold text-white">
+                {era3.toLocaleString()} 篇
+              </span>
+            </div>
+            <div class="mt-0.5 text-[11px] text-emerald-100/75 truncate">永續轉型與空污防制新聞</div>
+          </div>
+
+          <!-- 源頭 4: 2021-2026 -->
+          <div
+            data-stream-node="src-3"
+            data-stage="0"
+            data-anchor-side="right"
+            class="stream-node cursor-pointer rounded-xl border border-emerald-400/25 bg-[#071D16]/90 px-3 py-2 backdrop-blur-sm transition duration-200 hover:border-emerald-300/70"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-mono text-[11px] font-bold text-emerald-300">2021–2026</span>
+              <span id="era-count-4" class="rounded bg-emerald-500/15 px-1.5 py-0.5 font-mono text-[11px] font-bold text-white">
+                {era4.toLocaleString()} 篇
+              </span>
+            </div>
+            <div class="mt-0.5 text-[11px] text-emerald-100/75 truncate">升格環境部・淨零與碳費新局</div>
+          </div>
+
+          <!-- 源頭 5: LIVE MNEWS_P_01 -->
+          <div
+            data-stream-node="src-4"
+            data-stage="0"
+            data-anchor-side="right"
+            class="stream-node cursor-pointer rounded-xl border border-emerald-300/45 bg-gradient-to-r from-[#0A2920]/95 to-[#071D16]/90 px-3 py-2 backdrop-blur-sm transition duration-200 hover:border-emerald-200"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="inline-flex items-center gap-1.5 font-mono text-[11px] font-bold text-emerald-200">
+                <span class="relative flex h-2 w-2">
+                  <span class="atlas-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
+                </span>
+                LIVE · MNEWS_P_01
+              </span>
+              <span id="era-count-live" class="rounded bg-emerald-400/20 px-1.5 py-0.5 font-mono text-[10px] font-bold text-emerald-200">
+                近30天 {initial30dCount} 篇
+              </span>
+            </div>
+            <div class="mt-0.5 text-[11px] text-emerald-100/80 truncate">環境部開放資料每日 4 次即時增量新訊</div>
+          </div>
+        </div>
+
+        <!-- 中段（4 欄）：系統方法 × AI 雙核煉金中樞 ＋ 底部 Obsidian 晧哥把脈台 -->
+        <div class="col-span-4 flex flex-col items-stretch justify-center gap-4">
+          <!-- 核心 A：系統工程核 -->
+          <div
+            data-stream-node="core-a"
+            data-stage="1"
+            class="stream-node relative cursor-pointer rounded-2xl border border-emerald-400/45 bg-gradient-to-b from-[#0A2B21]/95 to-[#061A14]/95 p-3.5 shadow-[0_0_26px_rgba(16,185,129,0.16)] backdrop-blur-md transition duration-200 hover:border-emerald-300"
+          >
+            <div class="flex items-center gap-3">
+              <!-- 翠綠旋轉刻度環圖示 -->
+              <div class="relative flex h-11 w-11 shrink-0 items-center justify-center">
+                <svg class="atlas-spin-slow h-11 w-11 text-emerald-400" viewBox="0 0 44 44" fill="none">
+                  <circle cx="22" cy="22" r="19" stroke="currentColor" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="3 3" />
+                  <circle cx="22" cy="22" r="14" stroke="#34D399" stroke-width="1.8" stroke-dasharray="22 10" />
+                </svg>
+                <span class="absolute font-mono text-[10px] font-bold text-emerald-200">SYS</span>
+              </div>
+              <div class="min-w-0">
+                <div class="font-mono text-[10px] font-bold tracking-wider text-emerald-300">SYSTEM ENGINE</div>
+                <div class="font-serif text-sm font-bold text-white">系統化清洗與索引</div>
+              </div>
+            </div>
+            <div class="mt-2.5 flex flex-wrap gap-1 text-[10px] font-medium text-emerald-100/85">
+              <span class="rounded bg-black/30 px-1.5 py-0.5 border border-emerald-500/20">GitHub Actions 每日 4 次</span>
+              <span class="rounded bg-black/30 px-1.5 py-0.5 border border-emerald-500/20">雙重指紋去重</span>
+              <span class="rounded bg-black/30 px-1.5 py-0.5 border border-emerald-500/20">單篇原網址配對</span>
+              <span class="rounded bg-black/30 px-1.5 py-0.5 border border-emerald-500/20">20 大議題詞典</span>
+            </div>
+          </div>
+
+          <!-- 核心 B：AI 語意雙模型核 -->
+          <div
+            data-stream-node="core-b"
+            data-stage="2"
+            class="stream-node relative cursor-pointer rounded-2xl border border-amber-400/50 bg-gradient-to-b from-[#1A2416]/95 via-[#0B231B]/95 to-[#071813]/95 p-3.5 shadow-[0_0_30px_rgba(245,158,11,0.16)] backdrop-blur-md transition duration-200 hover:border-amber-300"
+          >
+            <div class="flex items-center gap-3">
+              <!-- 暖金 × 翠綠雙色脈衝光環 -->
+              <div class="relative flex h-11 w-11 shrink-0 items-center justify-center">
+                <svg class="atlas-spin-reverse h-11 w-11" viewBox="0 0 44 44" fill="none">
+                  <circle cx="22" cy="22" r="19" stroke="#F59E0B" stroke-opacity="0.45" stroke-width="1.5" stroke-dasharray="6 4" />
+                  <circle cx="22" cy="22" r="14" stroke="#34D399" stroke-width="1.8" stroke-dasharray="16 8" />
+                </svg>
+                <span class="absolute font-mono text-[10px] font-bold text-amber-300">AI</span>
+              </div>
+              <div class="min-w-0">
+                <div class="font-mono text-[10px] font-bold tracking-wider text-amber-300">AI SEMANTIC CORE</div>
+                <div class="font-serif text-sm font-bold text-white">Gemini 雙模型 × TF-IDF</div>
+              </div>
+            </div>
+            <div class="mt-2.5 flex flex-wrap gap-1 text-[10px] font-medium text-amber-100/90">
+              <span class="rounded bg-black/35 px-1.5 py-0.5 border border-amber-400/25">Gemini 2.5 Flash-Lite 摘要</span>
+              <span class="rounded bg-black/35 px-1.5 py-0.5 border border-emerald-400/25">gemini-embedding-001 向量</span>
+              <span id="core-b-edges" class="rounded bg-amber-500/15 px-1.5 py-0.5 border border-amber-400/35 text-amber-200 font-semibold">
+                編織 {initialRelations.toLocaleString()} 關聯邊
+              </span>
+            </div>
+          </div>
+
+          <!-- 核心下方掛載：人機協作節點（Obsidian 晧哥把脈台） -->
+          <div
+            data-stream-node="core-human"
+            data-stage="3"
+            class="stream-node cursor-pointer rounded-xl border border-amber-400/50 bg-gradient-to-r from-[#241A09]/90 via-[#151D13]/90 to-[#0B221B]/90 px-3.5 py-2.5 shadow-[0_0_20px_rgba(245,158,11,0.12)] transition duration-200 hover:border-amber-300"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-mono text-[10px] font-bold tracking-wider text-amber-300">
+                OBSIDIAN VAULT · 晧哥把脈
+              </span>
+              <span class="rounded-full bg-amber-500/20 px-2 py-0.5 font-mono text-[9px] font-bold text-amber-200">
+                HUMAN-IN-LOOP
+              </span>
+            </div>
+            <div class="mt-0.5 text-[11px] font-medium text-amber-50/90">
+              AI 處理萬篇脈絡，晧哥寫出《晧哥說》
+            </div>
+          </div>
+        </div>
+
+        <!-- 右段（4 欄）：4 大智庫成果分流卡 -->
+        <div class="col-span-4 space-y-2.5">
+          <div class="mb-1 flex items-center justify-between px-1 font-mono text-[10px] font-bold tracking-widest text-amber-300/85">
+            <span>THINK TANK OUTPUTS</span>
+            <span>$0 / MO</span>
+          </div>
+
+          <!-- 成果 1：政策脈絡神經網絡 -->
+          <a
+            href="/policy-map"
+            data-stream-node="out-0"
+            data-stage="3"
+            data-anchor-side="left"
+            class="stream-node block rounded-xl border border-amber-400/30 bg-[#081F17]/90 px-3.5 py-2.5 backdrop-blur-sm transition duration-200 hover:border-amber-300"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-serif text-xs font-bold text-white">1. 政策脈絡神經網絡</span>
+              <svg class="h-4 w-8 text-amber-300 shrink-0" viewBox="0 0 36 16" fill="none" aria-hidden="true">
+                <line x1="5" y1="11" x2="18" y2="4" stroke="currentColor" stroke-opacity="0.5" stroke-width="1.2" />
+                <line x1="18" y1="4" x2="31" y2="11" stroke="#34D399" stroke-opacity="0.7" stroke-width="1.2" />
+                <circle cx="5" cy="11" r="2.2" fill="#34D399" />
+                <circle cx="18" cy="4" r="2.5" fill="currentColor" />
+                <circle cx="31" cy="11" r="2.2" fill="#34D399" />
+              </svg>
+            </div>
+            <div id="out-relations-text" class="mt-1 font-mono text-[11px] font-semibold text-amber-300">
+              {initialRelations.toLocaleString()} 條跨年關聯
+            </div>
+          </a>
+
+          <!-- 成果 2：26 年趨勢與法規時間軸 -->
+          <a
+            href="/trends"
+            data-stream-node="out-1"
+            data-stage="3"
+            data-anchor-side="left"
+            class="stream-node block rounded-xl border border-emerald-400/30 bg-[#081F17]/90 px-3.5 py-2.5 backdrop-blur-sm transition duration-200 hover:border-emerald-300"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-serif text-xs font-bold text-white">2. {spanYears} 年趨勢與法規時間軸</span>
+              <span class="font-mono text-[10px] text-emerald-300">TIMELINE</span>
+            </div>
+            <div id="out-span-text" class="mt-1 text-[11px] text-emerald-100/80">
+              {startYear}–{endYear} 完整演進與四階段法規脈絡
+            </div>
+          </a>
+
+          <!-- 成果 3：《晧哥說》專欄與候選雷達 -->
+          <a
+            href="/hao-talks"
+            data-stream-node="out-2"
+            data-stage="3"
+            data-anchor-side="left"
+            class="stream-node block rounded-xl border border-amber-400/30 bg-[#081F17]/90 px-3.5 py-2.5 backdrop-blur-sm transition duration-200 hover:border-amber-300"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-serif text-xs font-bold text-white">3. 《晧哥說》專欄與候選雷達</span>
+              <span class="font-mono text-[10px] text-amber-300">INSIGHTS</span>
+            </div>
+            <div class="mt-1 font-mono text-[11px] font-semibold text-amber-200">
+              {initialTalksCount} 篇深度把脈
+            </div>
+          </a>
+
+          <!-- 成果 4：研究級開放資料與極速站點 -->
+          <a
+            href="/research"
+            data-stream-node="out-3"
+            data-stage="3"
+            data-anchor-side="left"
+            class="stream-node block rounded-xl border border-emerald-400/30 bg-[#081F17]/90 px-3.5 py-2.5 backdrop-blur-sm transition duration-200 hover:border-emerald-300"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-serif text-xs font-bold text-white">4. 研究級開放資料與極速站點</span>
+              <span class="font-mono text-[10px] text-emerald-300">EDGE</span>
+            </div>
+            <div class="mt-1 text-[11px] text-emerald-100/80">
+              {spanYears} 個年度 JSON 分片・Cloudflare Pages $0 託管
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 手機版（< 768px）：由上而下的垂直流光版面 -->
+    <div class="md:hidden space-y-3">
+      <!-- 區塊 1：左段海量源頭 -->
+      <div class="rounded-xl border border-emerald-500/25 bg-[#061A14]/90 p-3">
+        <div class="mb-2 flex items-center justify-between font-mono text-[10px] font-bold tracking-wider text-emerald-300">
+          <span>STAGE 01 · 海量源頭湧入</span>
+          <span id="mob-stream-total">{initialNews.toLocaleString()} 篇</span>
+        </div>
+        <div class="grid grid-cols-2 gap-1.5 text-[11px]">
+          <div class="rounded-lg border border-emerald-500/20 bg-black/25 px-2.5 py-1.5">
+            <div class="font-mono text-[10px] text-emerald-300">2001–2010</div>
+            <div id="mob-era-1" class="font-mono font-bold text-white">{era1.toLocaleString()} 篇</div>
+          </div>
+          <div class="rounded-lg border border-emerald-500/20 bg-black/25 px-2.5 py-1.5">
+            <div class="font-mono text-[10px] text-emerald-300">2011–2015</div>
+            <div id="mob-era-2" class="font-mono font-bold text-white">{era2.toLocaleString()} 篇</div>
+          </div>
+          <div class="rounded-lg border border-emerald-500/20 bg-black/25 px-2.5 py-1.5">
+            <div class="font-mono text-[10px] text-emerald-300">2016–2020</div>
+            <div id="mob-era-3" class="font-mono font-bold text-white">{era3.toLocaleString()} 篇</div>
+          </div>
+          <div class="rounded-lg border border-emerald-500/20 bg-black/25 px-2.5 py-1.5">
+            <div class="font-mono text-[10px] text-emerald-300">2021–2026</div>
+            <div id="mob-era-4" class="font-mono font-bold text-white">{era4.toLocaleString()} 篇</div>
+          </div>
+          <div class="col-span-2 flex items-center justify-between rounded-lg border border-emerald-400/35 bg-emerald-950/50 px-2.5 py-1.5">
+            <span class="font-mono text-[10px] font-bold text-emerald-200">LIVE · MNEWS_P_01（4次/日）</span>
+            <span id="mob-era-live" class="font-mono text-[10px] font-bold text-emerald-300">近30天 {initial30dCount} 篇</span>
+          </div>
         </div>
       </div>
 
-      <ul id="flow-card-points" class="mt-3 grid grid-cols-1 gap-2 text-xs leading-relaxed text-emerald-100/85 md:grid-cols-3">
-        <li class="rounded-lg bg-black/25 px-3 py-2 border border-emerald-500/15">直接串接官方開放資料 API，取代脆弱網頁爬蟲，穩定零中斷。</li>
-        <li class="rounded-lg bg-black/25 px-3 py-2 border border-emerald-500/15">自動比對官網列表與連續編號，精準回填單篇原文網址、絕不以首頁充數。</li>
-        <li class="rounded-lg bg-black/25 px-3 py-2 border border-emerald-500/15">雙重指紋去重機制保護既有歷史歸檔，只增量補齊每日新發布新聞。</li>
-      </ul>
-    </div>
+      <!-- 垂直流光箭頭 -->
+      <div class="flex justify-center" aria-hidden="true">
+        <div class="flex h-6 w-6 items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-950/70 font-mono text-xs text-emerald-300">↓</div>
+      </div>
 
-    <!-- 桌機版 SVG 橫向弧線流光圖 -->
-    <div class="hidden md:block relative">
-      <svg
-        id="atlas-flows-svg"
-        viewBox="0 0 1000 320"
-        class="w-full h-auto select-none"
-        role="img"
-        aria-label="環策晧脈五站式弧線流光架構圖"
-      >
-        <defs>
-          <filter id="atlas-glow-green" x="-40%" y="-40%" width="180%" height="180%">
-            <feGaussianBlur stdDeviation="3.5" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          <filter id="atlas-glow-amber" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="4.5" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          <linearGradient id="beam-emerald" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#10B981" stop-opacity="0.35" />
-            <stop offset="50%" stop-color="#34D399" stop-opacity="0.95" />
-            <stop offset="100%" stop-color="#10B981" stop-opacity="0.35" />
-          </linearGradient>
-          <linearGradient id="beam-amber" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#10B981" stop-opacity="0.4" />
-            <stop offset="50%" stop-color="#F59E0B" stop-opacity="0.95" />
-            <stop offset="100%" stop-color="#34D399" stop-opacity="0.4" />
-          </linearGradient>
-        </defs>
-
-        <!-- 水平發光基準軸 -->
-        <line x1="80" y1="215" x2="920" y2="215" stroke="url(#beam-emerald)" stroke-width="2" opacity="0.65" />
-
-        <!-- 主資料流貝茲弧線（相鄰站點 + 跨站回饋弧線） -->
-        <g id="flow-arcs-layer" fill="none">
-          <!-- 1 -> 2 -->
-          <path id="arc-1-2" d="M 100 215 Q 200 105 300 215" stroke="url(#beam-emerald)" stroke-width="2.2" opacity="0.85" />
-          <!-- 2 -> 3 -->
-          <path id="arc-2-3" d="M 300 215 Q 400 105 500 215" stroke="url(#beam-emerald)" stroke-width="2.2" opacity="0.85" />
-          <!-- 3 -> 4 -->
-          <path id="arc-3-4" d="M 500 215 Q 600 105 700 215" stroke="url(#beam-amber)" stroke-width="2.2" opacity="0.85" />
-          <!-- 4 -> 5 -->
-          <path id="arc-4-5" d="M 700 215 Q 800 105 900 215" stroke="url(#beam-emerald)" stroke-width="2.2" opacity="0.85" />
-          <!-- 跨站弧線 2 -> 5（每日自動輸出直達發布） -->
-          <path id="arc-2-5" d="M 300 215 Q 600 25 900 215" stroke="url(#beam-emerald)" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.55" />
-          <!-- 跨站弧線 1 -> 3（全文語意向量建置） -->
-          <path id="arc-1-3" d="M 100 215 Q 300 58 500 215" stroke="url(#beam-amber)" stroke-width="1.4" stroke-dasharray="4 5" opacity="0.5" />
-          <!-- 回饋弧線 4 -> 2（Obsidian Git Push 觸發更新） -->
-          <path id="arc-4-2" d="M 700 215 Q 500 285 300 215" stroke="#F59E0B" stroke-width="1.3" stroke-dasharray="3 6" opacity="0.45" />
-        </g>
-
-        <!-- 持續穿梭的能量粒子 -->
-        <g class="atlas-particles" filter="url(#atlas-glow-green)">
-          <circle r="3.6" fill="#FFFFFF">
-            <animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#arc-1-2" /></animateMotion>
-          </circle>
-          <circle r="3.6" fill="#34D399">
-            <animateMotion dur="2.6s" begin="0.7s" repeatCount="indefinite"><mpath href="#arc-2-3" /></animateMotion>
-          </circle>
-          <circle r="3.8" fill="#F59E0B">
-            <animateMotion dur="2.8s" begin="1.1s" repeatCount="indefinite"><mpath href="#arc-3-4" /></animateMotion>
-          </circle>
-          <circle r="3.6" fill="#FFFFFF">
-            <animateMotion dur="2.5s" begin="1.6s" repeatCount="indefinite"><mpath href="#arc-4-5" /></animateMotion>
-          </circle>
-          <circle r="3.2" fill="#34D399">
-            <animateMotion dur="4.2s" begin="0.3s" repeatCount="indefinite"><mpath href="#arc-2-5" /></animateMotion>
-          </circle>
-          <circle r="3.0" fill="#FCD34D">
-            <animateMotion dur="3.8s" begin="1.9s" repeatCount="indefinite"><mpath href="#arc-1-3" /></animateMotion>
-          </circle>
-          <circle r="2.8" fill="#F59E0B">
-            <animateMotion dur="4.6s" begin="0.9s" repeatCount="indefinite"><mpath href="#arc-4-2" /></animateMotion>
-          </circle>
-        </g>
-
-        <!-- 5 大核心站點節點 -->
-        {[
-          { idx: 0, x: 100, code: '01', en: 'MOENV OPEN DATA', zh: '官方源頭' },
-          { idx: 1, x: 300, code: '02', en: 'GITHUB ACTIONS', zh: '雲端排程' },
-          { idx: 2, x: 500, code: '03', en: 'GEMINI × TF-IDF', zh: '語意關聯引擎' },
-          { idx: 3, x: 700, code: '04', en: 'OBSIDIAN VAULT', zh: '晧哥把脈台' },
-          { idx: 4, x: 900, code: '05', en: 'ASTRO × CF PAGES', zh: '全球極速發布' },
-        ].map((n) => (
-          <g
-            class="flow-node cursor-pointer"
-            data-flow-idx={n.idx}
-            transform={`translate(${n.x}, 215)`}
-          >
-            <!-- 全區域透明點擊熱區 -->
-            <rect x="-76" y="-30" width="152" height="114" rx="12" fill="transparent" />
-            <!-- 外層脈衝光環 -->
-            <circle class="flow-ring" r="24" fill="none" stroke="#F59E0B" stroke-width="1.8" opacity={n.idx === 0 ? '0.9' : '0'} filter="url(#atlas-glow-amber)" />
-            <circle class="flow-core" r="15" fill="#071A14" stroke={n.idx === 0 ? '#F59E0B' : '#34D399'} stroke-width="2.5" filter="url(#atlas-glow-green)" />
-            <text y="4" text-anchor="middle" fill="#FFFFFF" font-family="ui-monospace, monospace" font-size="10" font-weight="700">{n.code}</text>
-
-            <!-- 迷你脈衝刻度條 -->
-            <g transform="translate(-18, 28)" opacity="0.65">
-              <rect x="0" y="2" width="4" height="8" rx="1" fill="#10B981" />
-              <rect x="7" y="0" width="4" height="10" rx="1" fill="#34D399" />
-              <rect x="14" y="4" width="4" height="6" rx="1" fill="#10B981" />
-              <rect x="21" y="1" width="4" height="9" rx="1" fill="#F59E0B" />
-              <rect x="28" y="3" width="4" height="7" rx="1" fill="#34D399" />
-            </g>
-
-            <text y="56" text-anchor="middle" fill="#A7F3D0" font-family="ui-monospace, monospace" font-size="10.5" font-weight="700">{n.en}</text>
-            <text y="74" text-anchor="middle" fill="#D1FAE5" font-size="12" font-weight="600">{n.zh}</text>
-          </g>
-        ))}
-      </svg>
-    </div>
-
-    <!-- 手機版直向緊湊流光列表 -->
-    <div class="md:hidden space-y-2.5">
-      {[
-        { idx: 0, code: '01', en: 'MOENV OPEN DATA', zh: '官方源頭 · MNEWS_P_01' },
-        { idx: 1, code: '02', en: 'GITHUB ACTIONS', zh: '雲端排程 · 每日 06:00 自動同步' },
-        { idx: 2, code: '03', en: 'GEMINI × TF-IDF', zh: '語意與關聯引擎 · 56,000+ 條脈絡' },
-        { idx: 3, code: '04', en: 'OBSIDIAN VAULT', zh: '晧哥把脈工作台 ·《晧哥說》撰寫' },
-        { idx: 4, code: '05', en: 'ASTRO × CLOUDFLARE', zh: '全球極速發布 · 永久 $0 託管' },
-      ].map((m) => (
-        <button
-          type="button"
-          data-flow-idx={m.idx}
-          class:list={[
-            'flow-mobile-btn flex w-full items-center justify-between rounded-xl border px-3.5 py-3 text-left transition',
-            m.idx === 0
-              ? 'border-amber-400/60 bg-emerald-900/50'
-              : 'border-emerald-500/20 bg-black/25',
-          ]}
-        >
-          <div class="flex items-center gap-3">
-            <span class="flex h-7 w-7 items-center justify-center rounded-full border border-emerald-400/50 bg-[#071A14] font-mono text-[11px] font-bold text-emerald-200">
-              {m.code}
-            </span>
-            <div>
-              <div class="font-mono text-[11px] font-bold text-emerald-300">{m.en}</div>
-              <div class="text-xs text-emerald-50/90">{m.zh}</div>
-            </div>
+      <!-- 區塊 2：中段系統工程 × AI 雙核 ＋ 晧哥把脈 -->
+      <div class="space-y-2 rounded-xl border border-amber-400/35 bg-[#081F17]/90 p-3">
+        <div class="font-mono text-[10px] font-bold tracking-wider text-amber-300">
+          STAGE 02 & 03 · 系統工程 × AI 雙核煉金
+        </div>
+        <div class="rounded-lg border border-emerald-400/35 bg-black/30 px-3 py-2">
+          <div class="font-mono text-[10px] font-bold text-emerald-300">SYSTEM ENGINE · 系統化清洗與索引</div>
+          <div class="mt-0.5 text-[11px] text-emerald-100/85">GitHub Actions 4次/日・雙重指紋去重・單篇原網址配對</div>
+        </div>
+        <div class="rounded-lg border border-amber-400/35 bg-black/30 px-3 py-2">
+          <div class="font-mono text-[10px] font-bold text-amber-300">AI SEMANTIC CORE · Gemini 雙模型 × TF-IDF</div>
+          <div id="mob-core-b-edges" class="mt-0.5 text-[11px] text-amber-100/90">
+            Flash-Lite 摘要・embedding-001 向量・編織 {initialRelations.toLocaleString()} 關聯邊
           </div>
-          <span class="font-mono text-[11px] text-amber-300">查看 →</span>
-        </button>
-      ))}
+        </div>
+        <div class="rounded-lg border border-amber-400/45 bg-amber-950/30 px-3 py-2">
+          <div class="font-mono text-[10px] font-bold text-amber-200">OBSIDIAN VAULT · 晧哥把脈</div>
+          <div class="mt-0.5 text-[11px] text-amber-100/85">AI 處理萬篇脈絡，晧哥寫出《晧哥說》</div>
+        </div>
+      </div>
+
+      <!-- 垂直流光箭頭 -->
+      <div class="flex justify-center" aria-hidden="true">
+        <div class="flex h-6 w-6 items-center justify-center rounded-full border border-amber-400/40 bg-amber-950/60 font-mono text-xs text-amber-300">↓</div>
+      </div>
+
+      <!-- 區塊 3：右段四大智庫產出 -->
+      <div class="rounded-xl border border-emerald-500/25 bg-[#061A14]/90 p-3">
+        <div class="mb-2 font-mono text-[10px] font-bold tracking-wider text-amber-300">
+          STAGE 04 · 智庫規模產出
+        </div>
+        <div class="grid grid-cols-1 gap-1.5 text-xs">
+          <a href="/policy-map" class="flex items-center justify-between rounded-lg border border-amber-400/25 bg-black/25 px-3 py-2">
+            <span class="font-semibold text-white">政策脈絡神經網絡</span>
+            <span id="mob-out-relations" class="font-mono text-[11px] text-amber-300">{initialRelations.toLocaleString()} 條</span>
+          </a>
+          <a href="/trends" class="flex items-center justify-between rounded-lg border border-emerald-400/25 bg-black/25 px-3 py-2">
+            <span class="font-semibold text-white">{spanYears} 年趨勢與時間軸</span>
+            <span class="font-mono text-[11px] text-emerald-300">{startYear}–{endYear}</span>
+          </a>
+          <a href="/hao-talks" class="flex items-center justify-between rounded-lg border border-amber-400/25 bg-black/25 px-3 py-2">
+            <span class="font-semibold text-white">《晧哥說》深度把脈</span>
+            <span class="font-mono text-[11px] text-amber-200">{initialTalksCount} 篇</span>
+          </a>
+          <a href="/research" class="flex items-center justify-between rounded-lg border border-emerald-400/25 bg-black/25 px-3 py-2">
+            <span class="font-semibold text-white">研究級開放資料</span>
+            <span class="font-mono text-[11px] text-emerald-300">$0 託管</span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -330,7 +598,7 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
         id="logs-replay-btn"
         class="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-500/15 px-3.5 py-1.5 font-mono text-xs font-semibold text-emerald-200 transition hover:bg-emerald-500/25"
       >
-        ▶ 模擬重播每日 06:00 同步流程
+        ▶ 模擬重播每日 4 次同步流程
       </button>
     </div>
 
@@ -374,15 +642,24 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
     0% { transform: scale(1); opacity: 0.75; }
     75%, 100% { transform: scale(2.1); opacity: 0; }
   }
+  @keyframes atlas-spin-kf {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
   .atlas-ping {
     animation: atlas-ping-kf 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
   }
+  .atlas-spin-slow {
+    animation: atlas-spin-kf 24s linear infinite;
+  }
+  .atlas-spin-reverse {
+    animation: atlas-spin-kf 18s linear infinite reverse;
+  }
   @media (prefers-reduced-motion: reduce) {
-    .atlas-ping {
+    .atlas-ping,
+    .atlas-spin-slow,
+    .atlas-spin-reverse {
       animation: none;
-    }
-    .atlas-particles {
-      display: none;
     }
   }
 </style>
@@ -392,125 +669,408 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
   if (root) {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Live state hydrated from /data/manifest.json
     const liveData = {
-      totalNews: Number((document.getElementById('atlas-stat-news')?.textContent || '11496').replace(/[^\d]/g, '')) || 11496,
-      totalRelations: Number((document.getElementById('atlas-stat-relations')?.textContent || '56175').replace(/[^\d]/g, '')) || 56175,
+      totalNews: Number((document.getElementById('atlas-stat-news')?.textContent || '11511').replace(/[^\d]/g, '')) || 11511,
+      totalRelations: Number((document.getElementById('atlas-stat-relations')?.textContent || '56250').replace(/[^\d]/g, '')) || 56250,
       dateStart: '2001-01-01',
-      dateEnd: '2026-11-20',
+      dateEnd: '2026-11-25',
       updatedAt: document.getElementById('atlas-header-sync')?.textContent || '',
       yearsSpan: 26,
+      last30d: Number((document.getElementById('era-count-live')?.textContent || '0').replace(/[^\d]/g, '')) || 0,
+      eras: [
+        Number((document.getElementById('era-count-1')?.textContent || '0').replace(/[^\d]/g, '')) || 0,
+        Number((document.getElementById('era-count-2')?.textContent || '0').replace(/[^\d]/g, '')) || 0,
+        Number((document.getElementById('era-count-3')?.textContent || '0').replace(/[^\d]/g, '')) || 0,
+        Number((document.getElementById('era-count-4')?.textContent || '0').replace(/[^\d]/g, '')) || 0,
+      ],
     };
 
-    const flowStations = [
+    const stages = [
       {
-        code: '01 · MOENV OPEN DATA',
-        short: 'OPEN DATA',
-        title: '官方源頭：MNEWS_P_01 ＋ 單篇原網址自動配對',
-        tools: '核心工具：環境部環境資料開放平臺 MNEWS_P_01 · 精準單篇 URL Resolver',
+        code: 'STAGE 01 · 海量匯入',
+        short: 'INGESTION',
         scaleFn: () => `${liveData.totalNews.toLocaleString()} 篇官方新聞`,
-        points: [
-          '直接串接官方開放資料 API，取代脆弱網頁爬蟲，穩定零中斷。',
-          '自動比對官網列表與連續編號，精準回填單篇原文網址、絕不以首頁充數。',
-          '雙重指紋去重機制保護既有歷史歸檔，只增量補齊每日新發布新聞。',
-        ],
+        titleFn: () => `百川匯海：無痛收錄 ${liveData.dateStart.slice(0, 4)}–${liveData.dateEnd.slice(0, 4)} 共 ${liveData.totalNews.toLocaleString()} 篇官方新聞`,
+        descFn: () => '結合環境部 26 年歷史歸檔與 MNEWS_P_01 開放資料即時增量，每日 4 次自動入庫，完整保留台灣環境治理全貌。',
       },
       {
-        code: '02 · GITHUB ACTIONS',
-        short: 'CLOUD SYNC',
-        title: '雲端自動化大腦：每日 06:00 增量同步與零幻覺統計',
-        tools: '核心工具：GitHub Actions (ubuntu-latest) · Python 3.12 · 自動完整性校驗',
-        scaleFn: () => '每日 06:00 自動執行 · 約 60 秒完成',
-        points: [
-          '無須開啟本機電腦，每天早上自動喚醒抓取最新環境部政策新聞。',
-          '純程式碼重算 25 年趨勢、近 30 天升溫指標與候選雷達，杜絕統計幻覺。',
-          '通過完整性驗證後才自動 Commit 回主分支，確保線上資料永遠可靠。',
-        ],
+        code: 'STAGE 02 · 系統工程',
+        short: 'SYSTEM ENGINE',
+        scaleFn: () => '每日 4 次自動排程 · 零幻覺',
+        titleFn: () => '系統化清洗與索引：雙重指紋去重 × 單篇原網址精準配對',
+        descFn: () => '由 GitHub Actions 在台灣時間 06:17、11:17、16:17、21:17 自動執行清洗、20 大議題分類與完整性驗證，絕不以首頁充數。',
       },
       {
-        code: '03 · GEMINI × TF-IDF',
-        short: 'AI ENGINE',
-        title: 'AI 語意與關聯引擎：雙模型摘要與 56,000+ 條脈絡計算',
-        tools: '核心模型：Gemini 2.5 Flash-Lite · gemini-embedding-001 · TF-IDF + Jieba',
-        scaleFn: () => `${liveData.totalRelations.toLocaleString()} 條語意脈絡邊`,
-        points: [
-          '單篇摘要與標籤由 Gemini 2.5 Flash-Lite 免費層增強，遇限流無縫降級規則引擎。',
-          '結合中文環保專有名詞詞典與語意嵌入向量，為每篇新聞算出 Top 5 前世今生。',
-          '架構設計由 Gemini 拆解、Google Antigravity 實作驗證，維持高品質零月費。',
-        ],
+        code: 'STAGE 03 · AI 雙模型輔助',
+        short: 'AI SEMANTIC CORE',
+        scaleFn: () => `${liveData.totalRelations.toLocaleString()} 條語意關聯邊`,
+        titleFn: () => `AI 語意雙模型煉金：Gemini 2.5 Flash-Lite × gemini-embedding-001 × TF-IDF`,
+        descFn: () => `結合免費層雙模型與環保專有名詞詞典，將原始新聞提煉為 ${liveData.totalRelations.toLocaleString()} 條前世今生脈絡，遇限流自動無縫降級。`,
       },
       {
-        code: '04 · OBSIDIAN VAULT',
-        short: 'OBSIDIAN',
-        title: '晧哥把脈工作台：四層知識庫與《晧哥說》撰寫',
-        tools: '核心工具：Obsidian 四層知識庫 · Obsidian Git · 待把脈候選雷達',
-        scaleFn: () => '原料 → 脈絡 → 觀點 → 研究',
-        points: [
-          '開啟 Obsidian 自動 Pull 最新環境部新聞與近 14 天高訊號候選雷達。',
-          '晧哥親自挑題寫作《晧哥說》，並以 related_news 自動串連官方原新聞。',
-          '嚴格草稿閘門保護：draft 絕不公開，改為 published 後一鍵 Push 即發布。',
-        ],
-      },
-      {
-        code: '05 · ASTRO × CLOUDFLARE',
-        short: 'EDGE DEPLOY',
-        title: '全球極速發布：年度分片靜態站點，永久 $0 託管',
-        tools: '核心工具：Astro 5 靜態編譯 · 26 年度 JSON 分片 · Cloudflare Pages',
-        scaleFn: () => '建置 < 5 秒 · 永久 $0 / 月',
-        points: [
-          '將 25 年全量新聞切分為 26 個年度輕量分片，避開檔案上限並實現毫秒檢索。',
-          'GitHub 主分支一有更新即觸發 Cloudflare Pages 自動建置部署至全球節點。',
-          '搭配無追蹤 Cookie 的 Cloudflare Web Analytics，兼具速度、隱私與零帳單。',
-        ],
+        code: 'STAGE 04 · 智庫規模產出',
+        short: 'THINK TANK OUTPUTS',
+        scaleFn: () => '4 大公開成果 · 永久 $0 / 月',
+        titleFn: () => '人類把脈與規模化交付：Obsidian 晧哥把脈 → 永久零元智庫網站',
+        descFn: () => 'AI 梳理萬篇脈絡後，由晧哥在 Obsidian 把脈撰寫《晧哥說》，最終以 26 個年度分片發布至全球邊緣節點。',
       },
     ];
 
-    // Update FLOWS card + SVG highlight
-    let activeFlowIdx = 0;
+    let activeStage = 0;
+    let hoveredNodeKey: string | null = null;
     let cruiseOn = !reduceMotion;
     let cruiseTimer: number | null = null;
+    let currentView = 'flows';
+    let inViewport = true;
 
     const flowStepEl = document.getElementById('flow-card-step');
     const flowScaleEl = document.getElementById('flow-card-scale');
     const flowTitleEl = document.getElementById('flow-card-title');
-    const flowToolsEl = document.getElementById('flow-card-tools');
-    const flowPointsEl = document.getElementById('flow-card-points');
+    const flowDescEl = document.getElementById('flow-card-desc');
     const flowIndicatorEl = document.getElementById('flow-cruise-indicator');
     const cruiseBtn = document.getElementById('atlas-cruise-btn');
 
-    function renderFlowFocus(idx: number) {
-      activeFlowIdx = idx;
-      const st = flowStations[idx];
+    function renderStage(idx: number) {
+      activeStage = idx;
+      const st = stages[idx];
       if (!st) return;
 
       if (flowStepEl) flowStepEl.textContent = st.code;
       if (flowScaleEl) flowScaleEl.textContent = st.scaleFn();
-      if (flowTitleEl) flowTitleEl.textContent = st.title;
-      if (flowToolsEl) flowToolsEl.textContent = st.tools;
-      if (flowIndicatorEl) flowIndicatorEl.textContent = `0${idx + 1} / 05 · ${st.short}`;
-      if (flowPointsEl) {
-        flowPointsEl.innerHTML = st.points
-          .map((pt) => `<li class="rounded-lg bg-black/25 px-3 py-2 border border-emerald-500/15">${pt}</li>`)
-          .join('');
-      }
+      if (flowTitleEl) flowTitleEl.textContent = st.titleFn();
+      if (flowDescEl) flowDescEl.textContent = st.descFn();
+      if (flowIndicatorEl) flowIndicatorEl.textContent = `0${idx + 1} / 04 · ${st.short}`;
 
-      root.querySelectorAll<SVGGElement>('.flow-node').forEach((node) => {
-        const isCurrent = Number(node.dataset.flowIdx) === idx;
-        const ring = node.querySelector<SVGCircleElement>('.flow-ring');
-        const core = node.querySelector<SVGCircleElement>('.flow-core');
-        if (ring) ring.setAttribute('opacity', isCurrent ? '0.95' : '0');
-        if (core) core.setAttribute('stroke', isCurrent ? '#F59E0B' : '#34D399');
+      root.querySelectorAll<HTMLButtonElement>('.stage-pill-btn').forEach((b) => {
+        const isCurrent = Number(b.dataset.stageBtn) === idx;
+        b.classList.toggle('border-amber-400/70', isCurrent);
+        b.classList.toggle('bg-amber-500/20', isCurrent);
+        b.classList.toggle('text-amber-200', isCurrent);
+        b.classList.toggle('shadow-[0_0_12px_rgba(245,158,11,0.22)]', isCurrent);
+        b.classList.toggle('border-emerald-500/25', !isCurrent);
+        b.classList.toggle('bg-black/25', !isCurrent);
+        b.classList.toggle('text-emerald-200/70', !isCurrent);
       });
 
-      root.querySelectorAll<HTMLButtonElement>('.flow-mobile-btn').forEach((btn) => {
-        const isCurrent = Number(btn.dataset.flowIdx) === idx;
-        btn.classList.toggle('border-amber-400/60', isCurrent);
-        btn.classList.toggle('bg-emerald-900/50', isCurrent);
-        btn.classList.toggle('border-emerald-500/20', !isCurrent);
-        btn.classList.toggle('bg-black/25', !isCurrent);
+      applyStreamHighlight();
+    }
+
+    // --- 三段式 SVG 流道 + Canvas 粒子引擎 ---
+    const wrap = document.getElementById('stream-canvas-wrap');
+    const beamsLayer = document.getElementById('stream-beams-layer');
+    const canvas = document.getElementById('stream-particles-canvas') as HTMLCanvasElement | null;
+    const ctx = canvas ? canvas.getContext('2d') : null;
+
+    interface CubicPath {
+      id: string;
+      stage: number;
+      fromKey: string;
+      toKey: string;
+      x0: number; y0: number;
+      cx1: number; cy1: number;
+      cx2: number; cy2: number;
+      x1: number; y1: number;
+      width: number;
+      color: string;
+      dashed?: boolean;
+    }
+
+    interface Particle {
+      pathIdx: number;
+      t: number;
+      speed: number;
+      size: number;
+      alpha: number;
+    }
+
+    let streamPaths: CubicPath[] = [];
+    let particles: Particle[] = [];
+
+    function getAnchor(key: string, side: 'left' | 'right' | 'top' | 'bottom'): { x: number; y: number } | null {
+      if (!wrap) return null;
+      const el = wrap.querySelector<HTMLElement>(`[data-stream-node="${key}"]`);
+      if (!el) return null;
+      const wr = wrap.getBoundingClientRect();
+      const er = el.getBoundingClientRect();
+      if (wr.width === 0 || er.width === 0) return null;
+      const cx = er.left - wr.left + er.width / 2;
+      const cy = er.top - wr.top + er.height / 2;
+      if (side === 'left') return { x: er.left - wr.left, y: cy };
+      if (side === 'right') return { x: er.right - wr.left, y: cy };
+      if (side === 'top') return { x: cx, y: er.top - wr.top };
+      return { x: cx, y: er.bottom - wr.top };
+    }
+
+    function cubicPoint(p: CubicPath, t: number): { x: number; y: number } {
+      const u = 1 - t;
+      const tt = t * t;
+      const uu = u * u;
+      const uuu = uu * u;
+      const ttt = tt * t;
+      return {
+        x: uuu * p.x0 + 3 * uu * t * p.cx1 + 3 * u * tt * p.cx2 + ttt * p.x1,
+        y: uuu * p.y0 + 3 * uu * t * p.cy1 + 3 * u * tt * p.cy2 + ttt * p.y1,
+      };
+    }
+
+    function computeStreamGeometry() {
+      if (!wrap || !beamsLayer || !canvas) return;
+      const wr = wrap.getBoundingClientRect();
+      if (wr.width === 0 || wr.height === 0) return;
+
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(wr.width * dpr);
+      canvas.height = Math.round(wr.height * dpr);
+      if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const svg = document.getElementById('stream-beams-svg');
+      svg?.setAttribute('viewBox', `0 0 ${wr.width} ${wr.height}`);
+
+      const coreALeft = getAnchor('core-a', 'left');
+      const coreARight = getAnchor('core-a', 'right');
+      const coreABot = getAnchor('core-a', 'bottom');
+      const coreBLeft = getAnchor('core-b', 'left');
+      const coreBRight = getAnchor('core-b', 'right');
+      const coreBTop = getAnchor('core-b', 'top');
+      const coreBBot = getAnchor('core-b', 'bottom');
+      const humanTop = getAnchor('core-human', 'top');
+      const humanRight = getAnchor('core-human', 'right');
+
+      if (!coreALeft || !coreBLeft || !coreBRight || !coreARight) return;
+
+      const maxEra = Math.max(1, ...liveData.eras);
+      const nextPaths: CubicPath[] = [];
+
+      // 左段 5 條匯流通道（前 3 條導向核心 A，後 2 條導向核心 A/B 交會）
+      for (let i = 0; i < 5; i++) {
+        const start = getAnchor(`src-${i}`, 'right');
+        if (!start) continue;
+        const target = i < 3 ? coreALeft : coreBLeft;
+        const dx = (target.x - start.x) * 0.55;
+        const ratio = i < 4 ? (liveData.eras[i] || 500) / maxEra : 0.65;
+        const width = 1.6 + ratio * 2.4;
+        nextPaths.push({
+          id: `in-${i}`,
+          stage: 0,
+          fromKey: `src-${i}`,
+          toKey: i < 3 ? 'core-a' : 'core-b',
+          x0: start.x, y0: start.y,
+          cx1: start.x + dx, cy1: start.y,
+          cx2: target.x - dx, cy2: target.y + (i - 2) * 4,
+          x1: target.x, y1: target.y + (i - 2) * 4,
+          width,
+          color: i === 4 ? '#6EE7B7' : '#34D399',
+        });
+      }
+
+      // 中段 核心 A -> 核心 B 垂直串聯能量束
+      if (coreABot && coreBTop) {
+        nextPaths.push({
+          id: 'core-a-b',
+          stage: 1,
+          fromKey: 'core-a',
+          toKey: 'core-b',
+          x0: coreABot.x, y0: coreABot.y,
+          cx1: coreABot.x, cy1: (coreABot.y + coreBTop.y) / 2,
+          cx2: coreBTop.x, cy2: (coreABot.y + coreBTop.y) / 2,
+          x1: coreBTop.x, y1: coreBTop.y,
+          width: 2.6,
+          color: '#34D399',
+        });
+      }
+
+      // 中段 核心 B -> 下方 Obsidian 晧哥把脈 暖金虛線光束
+      if (coreBBot && humanTop) {
+        nextPaths.push({
+          id: 'core-b-human',
+          stage: 3,
+          fromKey: 'core-b',
+          toKey: 'core-human',
+          x0: coreBBot.x, y0: coreBBot.y,
+          cx1: coreBBot.x, cy1: (coreBBot.y + humanTop.y) / 2,
+          cx2: humanTop.x, cy2: (coreBBot.y + humanTop.y) / 2,
+          x1: humanTop.x, y1: humanTop.y,
+          width: 2.0,
+          color: '#F59E0B',
+          dashed: true,
+        });
+      }
+
+      // 右段 4 條智庫成果輸出束
+      const outputStarts = [coreBRight, coreARight, humanRight || coreBRight, coreBRight];
+      const outputColors = ['#F59E0B', '#34D399', '#FBBF24', '#34D399'];
+      const outputFrom = ['core-b', 'core-a', 'core-human', 'core-b'];
+
+      for (let j = 0; j < 4; j++) {
+        const start = outputStarts[j];
+        const end = getAnchor(`out-${j}`, 'left');
+        if (!start || !end) continue;
+        const dx = (end.x - start.x) * 0.52;
+        nextPaths.push({
+          id: `out-${j}`,
+          stage: 3,
+          fromKey: outputFrom[j],
+          toKey: `out-${j}`,
+          x0: start.x, y0: start.y,
+          cx1: start.x + dx, cy1: start.y,
+          cx2: end.x - dx, cy2: end.y,
+          x1: end.x, y1: end.y,
+          width: 2.4,
+          color: outputColors[j],
+        });
+      }
+
+      streamPaths = nextPaths;
+
+      // 繪製底層 SVG 貝茲流道
+      beamsLayer.innerHTML = '';
+      for (const p of streamPaths) {
+        const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        pathEl.setAttribute('d', `M ${p.x0} ${p.y0} C ${p.cx1} ${p.cy1}, ${p.cx2} ${p.cy2}, ${p.x1} ${p.y1}`);
+        pathEl.setAttribute('stroke', p.color);
+        pathEl.setAttribute('stroke-width', String(p.width));
+        pathEl.setAttribute('stroke-linecap', 'round');
+        if (p.dashed) pathEl.setAttribute('stroke-dasharray', '5 5');
+        pathEl.dataset.pathId = p.id;
+        pathEl.dataset.stage = String(p.stage);
+        pathEl.dataset.fromKey = p.fromKey;
+        pathEl.dataset.toKey = p.toKey;
+        beamsLayer.appendChild(pathEl);
+      }
+
+      // 初始化 75+ 顆高密度粒子（左段源頭密集湧入，呈現萬篇規模感）
+      if (particles.length === 0 && streamPaths.length > 0) {
+        const nextParticles: Particle[] = [];
+        streamPaths.forEach((p, idx) => {
+          const count = p.id.startsWith('in-') ? 10 : p.id.startsWith('out-') ? 6 : 4;
+          for (let k = 0; k < count; k++) {
+            nextParticles.push({
+              pathIdx: idx,
+              t: (k / count + Math.random() * 0.12) % 1,
+              speed: (p.id.startsWith('in-') ? 0.0042 : 0.0048) + Math.random() * 0.0022,
+              size: p.id.startsWith('in-') ? 1.5 + Math.random() * 1.4 : 1.8 + Math.random() * 1.5,
+              alpha: 0.65 + Math.random() * 0.35,
+            });
+          }
+        });
+        particles = nextParticles;
+      }
+
+      applyStreamHighlight();
+    }
+
+    function isPathHighlighted(p: { stage: number; fromKey: string; toKey: string }): boolean {
+      if (hoveredNodeKey) {
+        return p.fromKey === hoveredNodeKey || p.toKey === hoveredNodeKey;
+      }
+      if (activeStage === 1) return p.toKey === 'core-a' || p.fromKey === 'core-a';
+      if (activeStage === 2) return p.toKey === 'core-b' || p.fromKey === 'core-b';
+      return p.stage === activeStage;
+    }
+
+    function isNodeHighlighted(key: string, nodeStage: number): boolean {
+      if (hoveredNodeKey) {
+        if (key === hoveredNodeKey) return true;
+        return streamPaths.some(
+          (p) => (p.fromKey === hoveredNodeKey && p.toKey === key) || (p.toKey === hoveredNodeKey && p.fromKey === key)
+        );
+      }
+      return nodeStage === activeStage;
+    }
+
+    function applyStreamHighlight() {
+      if (beamsLayer) {
+        beamsLayer.querySelectorAll<SVGPathElement>('path').forEach((el) => {
+          const info = {
+            stage: Number(el.dataset.stage || '0'),
+            fromKey: el.dataset.fromKey || '',
+            toKey: el.dataset.toKey || '',
+          };
+          const hi = isPathHighlighted(info);
+          el.setAttribute('opacity', hi ? '0.92' : '0.22');
+          if (hi) el.setAttribute('filter', 'url(#stream-beam-glow)');
+          else el.removeAttribute('filter');
+        });
+      }
+
+      wrap?.querySelectorAll<HTMLElement>('.stream-node').forEach((node) => {
+        const key = node.dataset.streamNode || '';
+        const st = Number(node.dataset.stage || '0');
+        const hi = isNodeHighlighted(key, st);
+        node.style.opacity = hi ? '1' : '0.45';
+        node.style.transform = hi && key === hoveredNodeKey ? 'translateY(-1px)' : '';
       });
     }
 
+    // 60FPS Particle Loop
+    let rafId: number | null = null;
+    function tickParticles() {
+      if (!ctx || !canvas || !wrap || currentView !== 'flows' || !inViewport || reduceMotion) {
+        rafId = null;
+        return;
+      }
+
+      const wr = wrap.getBoundingClientRect();
+      ctx.clearRect(0, 0, wr.width, wr.height);
+
+      for (const pt of particles) {
+        const p = streamPaths[pt.pathIdx];
+        if (!p) continue;
+        const hi = isPathHighlighted(p);
+        pt.t = (pt.t + pt.speed * (hi ? 1.55 : 0.8)) % 1;
+
+        const pos = cubicPoint(p, pt.t);
+        const tailPos = cubicPoint(p, Math.max(0, pt.t - 0.035));
+        const alpha = pt.alpha * (hi ? 1 : 0.24);
+
+        // 輕微拖尾光束
+        ctx.beginPath();
+        ctx.moveTo(tailPos.x, tailPos.y);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.strokeStyle = p.color;
+        ctx.globalAlpha = alpha * 0.55;
+        ctx.lineWidth = pt.size * 1.1;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+
+        // 粒子核心點
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, pt.size, 0, Math.PI * 2);
+        ctx.fillStyle = hi ? '#FFFFFF' : p.color;
+        ctx.globalAlpha = alpha;
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+
+      rafId = window.requestAnimationFrame(tickParticles);
+    }
+
+    function ensureParticleLoop() {
+      if (!reduceMotion && currentView === 'flows' && inViewport && rafId === null && wrap && wrap.offsetParent !== null) {
+        rafId = window.requestAnimationFrame(tickParticles);
+      }
+    }
+
+    if (wrap) {
+      const ro = new ResizeObserver(() => {
+        computeStreamGeometry();
+        ensureParticleLoop();
+      });
+      ro.observe(wrap);
+    }
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          inViewport = entries.some((e) => e.isIntersecting);
+          if (inViewport) ensureParticleLoop();
+        },
+        { threshold: 0.05 }
+      );
+      io.observe(root);
+    }
+
+    // 巡航與互動控制
     function updateCruiseBtn() {
       if (!cruiseBtn) return;
       cruiseBtn.textContent = cruiseOn ? '⏸ 暫停巡航' : '▶ 自動巡航';
@@ -527,11 +1087,12 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
 
     function startCruise() {
       stopCruise();
+      hoveredNodeKey = null;
       cruiseOn = true;
       updateCruiseBtn();
       cruiseTimer = window.setInterval(() => {
-        renderFlowFocus((activeFlowIdx + 1) % flowStations.length);
-      }, 4000);
+        renderStage((activeStage + 1) % stages.length);
+      }, 4200);
     }
 
     cruiseBtn?.addEventListener('click', () => {
@@ -539,17 +1100,25 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
       else startCruise();
     });
 
-    root.querySelectorAll<Element>('.flow-node, .flow-mobile-btn').forEach((el) => {
-      const idx = Number((el as HTMLElement).dataset.flowIdx || '0');
-      el.addEventListener('click', () => {
+    root.querySelectorAll<HTMLButtonElement>('.stage-pill-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
         stopCruise();
-        renderFlowFocus(idx);
+        hoveredNodeKey = null;
+        renderStage(Number(btn.dataset.stageBtn || '0'));
       });
-      el.addEventListener('mouseenter', () => {
-        if (el.classList.contains('flow-node')) {
-          stopCruise();
-          renderFlowFocus(idx);
-        }
+    });
+
+    root.querySelectorAll<HTMLElement>('.stream-node').forEach((node) => {
+      const key = node.dataset.streamNode || '';
+      const st = Number(node.dataset.stage || '0');
+      node.addEventListener('mouseenter', () => {
+        stopCruise();
+        hoveredNodeKey = key;
+        renderStage(st);
+      });
+      node.addEventListener('mouseleave', () => {
+        hoveredNodeKey = null;
+        applyStreamHighlight();
       });
     });
 
@@ -562,6 +1131,7 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
     };
 
     function switchView(view: string) {
+      currentView = view;
       viewBtns.forEach((b) => {
         const active = b.dataset.atlasView === view;
         b.setAttribute('aria-selected', String(active));
@@ -573,6 +1143,10 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
         b.classList.toggle('font-medium', !active);
       });
       Object.entries(panels).forEach(([k, p]) => p?.classList.toggle('hidden', k !== view));
+      if (view === 'flows') {
+        computeStreamGeometry();
+        ensureParticleLoop();
+      }
       if (view === 'logs' && !logsRenderedOnce) {
         renderLogs(false);
       }
@@ -585,17 +1159,17 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
     // 3. Build View 2: ARCS (7 Left Tools × 4 Right Governance Modules)
     const leftNodes = [
       { id: 'L0', label: 'MOENV MNEWS_P_01', desc: '環境部開放資料平臺每日提供最新新聞原料，並搭配單篇原網址自動配對。' },
-      { id: 'L1', label: 'GitHub Actions', desc: '每日台灣時間 06:00 自動在雲端執行抓取、關聯運算、資料校驗與提交。' },
+      { id: 'L1', label: 'GitHub Actions', desc: '每日台灣時間 06:17、11:17、16:17、21:17 自動在雲端執行抓取、關聯運算、資料校驗與提交。' },
       { id: 'L2', label: 'Gemini 2.5 Flash-Lite', desc: 'Google AI Studio 免費層模型，強化每日新增新聞的重點摘要與政策標籤，遇限流自動降級。' },
       { id: 'L3', label: 'gemini-embedding-001', desc: '類神經語意嵌入向量，捕捉法規與政策間的深層語意連結，支援增量快取。' },
-      { id: 'L4', label: 'TF-IDF + Jieba', desc: '掛載 20 大議題同義詞與環保法規詞典，10 秒內完成全站 11,496 篇餘弦相似度計算。' },
+      { id: 'L4', label: 'TF-IDF + Jieba', desc: '掛載 20 大議題同義詞與環保法規詞典，10 秒內完成全站萬餘篇餘弦相似度計算。' },
       { id: 'L5', label: 'Obsidian Git', desc: '讓晧哥在純本機四層知識庫撰寫《晧哥說》，一鍵 Commit & Push 觸發上線。' },
       { id: 'L6', label: 'Google Antigravity', desc: '與 Gemini 架構設計協作完成工程實作、自動化測試、UI 重塑與部署驗證。' },
     ];
 
     const rightNodes = [
-      { id: 'R0', label: 'DATA', sub: '原文擷取 · 單篇配對 · 雙重去重', desc: 'DATA 模組負責每日增量擷取、精準配對環境部單篇原文網址，並以雙重指紋守護 11,496 筆歸檔。' },
-      { id: 'R1', label: 'MEMORY', sub: '25 年語料 · 56,175+ 關聯 · 四層筆記', desc: 'MEMORY 模組串連 25 年全量語料庫與超過 56,000 條跨年關聯邊，並同步寫入 Obsidian 四層知識結構。' },
+      { id: 'R0', label: 'DATA', sub: '原文擷取 · 單篇配對 · 雙重去重', desc: 'DATA 模組負責每日增量擷取、精準配對環境部單篇原文網址，並以雙重指紋守護萬餘筆歸檔。' },
+      { id: 'R1', label: 'MEMORY', sub: '26 年語料 · 56,250+ 關聯 · 四層筆記', desc: 'MEMORY 模組串連 26 年全量語料庫與超過 56,000 條跨年關聯邊，並同步寫入 Obsidian 四層知識結構。' },
       { id: 'R2', label: 'RULES', sub: '零幻覺統計 · 免費降級 · 草稿閘門', desc: 'RULES 模組以純程式確保統計零幻覺、API 限流自動降級不中斷，並嚴格攔截所有 draft 草稿。' },
       { id: 'R3', label: 'DELIVERY', sub: '年度分片 JSON · 神經網 · 學術下載', desc: 'DELIVERY 模組將全量資料切分為年度輕量分片，驅動互動神經網絡圖、全量檢索與研究級 CSV 下載。' },
     ];
@@ -620,62 +1194,105 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
     if (linksLayer && leftLayer && rightLayer) {
       const leftPos = new Map<string, { x: number; y: number }>();
       const rightPos = new Map<string, { x: number; y: number }>();
+      const nodeDesc = new Map<string, string>();
 
-      leftNodes.forEach((n, i) => {
-        const y = 62 + i * 50;
-        leftPos.set(n.id, { x: 255, y });
+      leftNodes.forEach((n, idx) => {
+        const y = 66 + idx * 49;
+        leftPos.set(n.id, { x: 250, y });
+        nodeDesc.set(n.id, `${n.label}：${n.desc}`);
+
         const g = document.createElementNS(svgNS, 'g');
         g.setAttribute('class', 'arc-node cursor-pointer');
-        g.setAttribute('data-node-id', n.id);
-        g.innerHTML = `
-          <rect x="24" y="${y - 16}" width="231" height="32" rx="10" fill="#09231B" stroke="#10B981" stroke-opacity="0.4" stroke-width="1.2" />
-          <circle cx="255" cy="${y}" r="4" fill="#34D399" />
-          <text x="38" y="${y + 4}" fill="#ECFDF5" font-family="ui-monospace, monospace" font-size="11.5" font-weight="600">${n.label}</text>
-        `;
+        g.dataset.nodeId = n.id;
+
+        const rect = document.createElementNS(svgNS, 'rect');
+        rect.setAttribute('x', '34');
+        rect.setAttribute('y', String(y - 18));
+        rect.setAttribute('width', '216');
+        rect.setAttribute('height', '36');
+        rect.setAttribute('rx', '10');
+        rect.setAttribute('fill', '#09241B');
+        rect.setAttribute('stroke', '#10B981');
+        rect.setAttribute('stroke-opacity', '0.45');
+        rect.setAttribute('stroke-width', '1.4');
+
+        const text = document.createElementNS(svgNS, 'text');
+        text.setAttribute('x', '142');
+        text.setAttribute('y', String(y + 4));
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('fill', '#ECFDF5');
+        text.setAttribute('font-family', 'ui-monospace, monospace');
+        text.setAttribute('font-size', '12');
+        text.setAttribute('font-weight', '600');
+        text.textContent = n.label;
+
+        g.appendChild(rect);
+        g.appendChild(text);
         leftLayer.appendChild(g);
       });
 
-      rightNodes.forEach((n, i) => {
-        const y = 85 + i * 82;
-        rightPos.set(n.id, { x: 645, y });
+      rightNodes.forEach((n, idx) => {
+        const y = 84 + idx * 82;
+        rightPos.set(n.id, { x: 670, y });
+        nodeDesc.set(n.id, `${n.label}：${n.desc}`);
+
         const g = document.createElementNS(svgNS, 'g');
         g.setAttribute('class', 'arc-node cursor-pointer');
-        g.setAttribute('data-node-id', n.id);
-        g.innerHTML = `
-          <rect x="645" y="${y - 26}" width="290" height="52" rx="12" fill="#09231B" stroke="#F59E0B" stroke-opacity="0.45" stroke-width="1.4" />
-          <circle cx="645" cy="${y}" r="4.5" fill="#F59E0B" />
-          <text x="664" y="${y - 4}" fill="#FDE68A" font-family="ui-monospace, monospace" font-size="12.5" font-weight="700">${n.label}</text>
-          <text x="664" y="${y + 14}" fill="#D1FAE5" font-size="10.5">${n.sub}</text>
-        `;
+        g.dataset.nodeId = n.id;
+
+        const rect = document.createElementNS(svgNS, 'rect');
+        rect.setAttribute('x', '670');
+        rect.setAttribute('y', String(y - 26));
+        rect.setAttribute('width', '252');
+        rect.setAttribute('height', '52');
+        rect.setAttribute('rx', '12');
+        rect.setAttribute('fill', '#0B281E');
+        rect.setAttribute('stroke', '#F59E0B');
+        rect.setAttribute('stroke-opacity', '0.5');
+        rect.setAttribute('stroke-width', '1.5');
+
+        const title = document.createElementNS(svgNS, 'text');
+        title.setAttribute('x', '688');
+        title.setAttribute('y', String(y - 3));
+        title.setAttribute('fill', '#FCD34D');
+        title.setAttribute('font-family', 'ui-monospace, monospace');
+        title.setAttribute('font-size', '13');
+        title.setAttribute('font-weight', '700');
+        title.textContent = n.label;
+
+        const sub = document.createElementNS(svgNS, 'text');
+        sub.setAttribute('x', '688');
+        sub.setAttribute('y', String(y + 15));
+        sub.setAttribute('fill', '#D1FAE5');
+        sub.setAttribute('font-size', '11');
+        sub.textContent = n.sub;
+
+        g.appendChild(rect);
+        g.appendChild(title);
+        g.appendChild(sub);
         rightLayer.appendChild(g);
       });
 
-      arcEdges.forEach(([src, dst], idx) => {
-        const p1 = leftPos.get(src);
-        const p2 = rightPos.get(dst);
-        if (!p1 || !p2) return;
-        const d = `M ${p1.x} ${p1.y} C ${p1.x + 170} ${p1.y}, ${p2.x - 170} ${p2.y}, ${p2.x} ${p2.y}`;
-        const path = document.createElementNS(svgNS, 'path');
-        path.setAttribute('d', d);
-        path.setAttribute('class', 'arc-edge transition-all duration-200');
-        path.setAttribute('data-src', src);
-        path.setAttribute('data-dst', dst);
-        path.setAttribute('stroke', idx % 3 === 0 ? '#F59E0B' : '#10B981');
-        path.setAttribute('stroke-width', '1.4');
-        path.setAttribute('opacity', '0.45');
-        linksLayer.appendChild(path);
+      arcEdges.forEach(([src, dst]) => {
+        const s = leftPos.get(src);
+        const d = rightPos.get(dst);
+        if (!s || !d) return;
+        const p = document.createElementNS(svgNS, 'path');
+        p.setAttribute('d', `M ${s.x} ${s.y} C 430 ${s.y}, 490 ${d.y}, ${d.x} ${d.y}`);
+        p.setAttribute('stroke', dst === 'R1' || dst === 'R2' ? '#F59E0B' : '#34D399');
+        p.setAttribute('stroke-width', '1.4');
+        p.setAttribute('opacity', '0.45');
+        p.setAttribute('class', 'arc-edge transition-opacity');
+        p.dataset.src = src;
+        p.dataset.dst = dst;
+        linksLayer.appendChild(p);
       });
-
-      const nodeDesc = new Map<string, string>([
-        ...leftNodes.map((n) => [n.id, `${n.label}：${n.desc}`] as [string, string]),
-        ...rightNodes.map((n) => [n.id, n.desc] as [string, string]),
-      ]);
 
       function highlightArcNode(nodeId: string | null) {
         const connected = new Set<string>();
         if (nodeId) connected.add(nodeId);
 
-        linksLayer!.querySelectorAll<SVGPathElement>('.arc-edge').forEach((edge) => {
+        root.querySelectorAll<SVGPathElement>('.arc-edge').forEach((edge) => {
           const s = edge.dataset.src || '';
           const d = edge.dataset.dst || '';
           if (!nodeId) {
@@ -760,13 +1377,15 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
 
     logsReplayBtn?.addEventListener('click', () => renderLogs(true));
 
-    // 5. Hydrate live real data from /data/manifest.json
-    fetch('/data/manifest.json')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((m) => {
-        if (!m) return;
+    // 5. Hydrate live real data from /data/manifest.json & /data/trends.json
+    Promise.all([
+      fetch('/data/manifest.json').then((r) => (r.ok ? r.json() : null)).catch(() => null),
+      fetch('/data/trends.json').then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    ]).then(([m, tr]) => {
+      if (m) {
         if (typeof m.total_news === 'number') liveData.totalNews = m.total_news;
         if (typeof m.total_relation_edges === 'number') liveData.totalRelations = m.total_relation_edges;
+        if (typeof m.last_30_days_count === 'number') liveData.last30d = m.last_30_days_count;
         if (m.date_start) liveData.dateStart = m.date_start;
         if (m.date_end) liveData.dateEnd = m.date_end;
         if (m.updated_at) liveData.updatedAt = String(m.updated_at).replace('T', ' ').replace(/\+08:00$/, ' (UTC+8)');
@@ -778,17 +1397,57 @@ const initialSync = formatTaipeiTimestamp(manifest.updated_at);
         const elRel = document.getElementById('atlas-stat-relations');
         const elSpan = document.getElementById('atlas-stat-span');
         const elSync = document.getElementById('atlas-header-sync');
+        const elLeftTotal = document.getElementById('stream-left-total');
+        const elMobTotal = document.getElementById('mob-stream-total');
+        const elCoreBEdges = document.getElementById('core-b-edges');
+        const elMobCoreBEdges = document.getElementById('mob-core-b-edges');
+        const elOutRel = document.getElementById('out-relations-text');
+        const elMobOutRel = document.getElementById('mob-out-relations');
+        const elLive30 = document.getElementById('era-count-live');
+        const elMobLive30 = document.getElementById('mob-era-live');
+
         if (elNews) elNews.textContent = `${liveData.totalNews.toLocaleString()} 篇`;
         if (elRel) elRel.textContent = `${liveData.totalRelations.toLocaleString()} 條`;
         if (elSpan) elSpan.textContent = `${sy}–${ey} (${liveData.yearsSpan} YRS)`;
         if (elSync) elSync.textContent = liveData.updatedAt;
+        if (elLeftTotal) elLeftTotal.textContent = `${liveData.totalNews.toLocaleString()} 篇`;
+        if (elMobTotal) elMobTotal.textContent = `${liveData.totalNews.toLocaleString()} 篇`;
+        if (elCoreBEdges) elCoreBEdges.textContent = `編織 ${liveData.totalRelations.toLocaleString()} 關聯邊`;
+        if (elMobCoreBEdges) elMobCoreBEdges.textContent = `Flash-Lite 摘要・embedding-001 向量・編織 ${liveData.totalRelations.toLocaleString()} 關聯邊`;
+        if (elOutRel) elOutRel.textContent = `${liveData.totalRelations.toLocaleString()} 條跨年關聯`;
+        if (elMobOutRel) elMobOutRel.textContent = `${liveData.totalRelations.toLocaleString()} 條`;
+        if (elLive30) elLive30.textContent = `近30天 ${liveData.last30d} 篇`;
+        if (elMobLive30) elMobLive30.textContent = `近30天 ${liveData.last30d} 篇`;
+      }
 
-        renderFlowFocus(activeFlowIdx);
-        if (logsRenderedOnce) renderLogs(false);
-      })
-      .catch(() => {});
+      if (tr && Array.isArray(tr.yearly_totals)) {
+        const sumRange = (minY: number, maxY: number) =>
+          tr.yearly_totals.reduce((acc: number, row: { year: string; count: number }) => {
+            const y = Number(row.year);
+            return y >= minY && y <= maxY ? acc + (row.count || 0) : acc;
+          }, 0);
+        liveData.eras = [
+          sumRange(2001, 2010),
+          sumRange(2011, 2015),
+          sumRange(2016, 2020),
+          sumRange(2021, 2026),
+        ];
+        liveData.eras.forEach((cnt, idx) => {
+          const el = document.getElementById(`era-count-${idx + 1}`);
+          const mobEl = document.getElementById(`mob-era-${idx + 1}`);
+          if (el) el.textContent = `${cnt.toLocaleString()} 篇`;
+          if (mobEl) mobEl.textContent = `${cnt.toLocaleString()} 篇`;
+        });
+      }
 
-    renderFlowFocus(0);
+      computeStreamGeometry();
+      renderStage(activeStage);
+      if (logsRenderedOnce) renderLogs(false);
+    });
+
+    renderStage(0);
+    computeStreamGeometry();
+    ensureParticleLoop();
     updateCruiseBtn();
     if (cruiseOn) startCruise();
   }
