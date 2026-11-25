@@ -39,8 +39,8 @@ HTML_TITLE_RE = re.compile(r"<title\b[^>]*>(.*?)</title>", re.I | re.S)
 OG_TITLE_RE = re.compile(r'<meta\b[^>]*property=["\']og:title["\'][^>]*content=["\'](.*?)["\']', re.I | re.S)
 
 DEFAULT_LIMIT = 1000
-DEFAULT_TIMEOUT = 30
-DEFAULT_RETRIES = 3
+DEFAULT_TIMEOUT = 45
+DEFAULT_RETRIES = 5
 DEFAULT_OVERLAP_DAYS = 14
 DEFAULT_PROBE_RANGE = 40
 
@@ -164,7 +164,7 @@ def fetch_json_with_backoff(
         except (HTTPError, URLError, TimeoutError, json.JSONDecodeError, OSError) as exc:
             last_error = exc
             if attempt + 1 < retries:
-                delay = 2**attempt
+                delay = min(20, 2 ** (attempt + 1))
                 print(
                     f"[WARN] Open Data request failed (attempt {attempt + 1}/{retries}): {exc}. Retrying in {delay}s...",
                     file=sys.stderr,

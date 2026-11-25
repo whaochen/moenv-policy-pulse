@@ -83,4 +83,8 @@ jobs:
           fi
 
           git commit -m "chore(data): auto-sync MOENV news ${SYNC_DATE}"
-          git push origin main
+          if ! git push origin main; then
+            echo "Push rejected; rebasing onto latest origin/main and retrying..."
+            git pull --rebase --autostash origin main
+            git push origin main
+          fi
