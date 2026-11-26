@@ -1,12 +1,12 @@
 {
-  "total_news": 11511,
-  "total_relation_edges": 56250,
+  "total_news": 11513,
+  "total_relation_edges": 56257,
   "relation_mode": "tfidf_only",
   "date_start": "2001-01-01",
-  "date_end": "2026-11-24",
-  "updated_at": "2026-11-25T03:29:56+08:00",
-  "dataset_version": "c5967de13112c929",
-  "dataset_sha256": "c5967de13112c92987bc5f8968b82e521db7e2cdf6825e400ba87249d7bd453e",
+  "date_end": "2026-11-26",
+  "updated_at": "2026-11-26T20:38:40+08:00",
+  "dataset_version": "a1ee4b94ffdc7758",
+  "dataset_sha256": "a1ee4b94ffdc7758877bf9a94e30f047c1a522022a1068abf5a5dab7340a8cff",
   "topic_count": 20,
   "years": [
     "2001",
@@ -36,11 +36,43 @@
     "2025",
     "2026"
   ],
-  "last_30_days_count": 73,
+  "last_30_days_count": 74,
   "prev_30_days_count": 50,
-  "last_30_days_delta": 23,
-  "last_30_days_pct": 46.0,
+  "last_30_days_delta": 24,
+  "last_30_days_pct": 48.0,
   "latest_news": [
+    {
+      "news_id": "20261126160042",
+      "date": "2026-11-26",
+      "roc_date": "115-11-26",
+      "title": "啟動制服循環再生案例 循環署攜手國防部與紡織產業共創循環衣流循環 採購量能達11萬件！",
+      "unit": "環境部資源循環署",
+      "summary": "環境部資源循環署11月25日舉辦「115年紡織循環推動成果說明會暨紡織循環聯盟成員大會」，表揚積極投入循環制服供應的產業夥伴。今年不僅國內循環制服年供應量能已達11萬件，循環署更跨部會攜手國防部、經濟部與產業界，啟動首波約1公噸退役軍服及寢具再生試驗，展現公私協力推動臺灣紡織循環的具體成果。",
+      "policy_keywords": [
+        "資源循環"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14591",
+      "source_url_status": "",
+      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/h54zq4pg.wpb.jpg"
+    },
+    {
+      "news_id": "20261126142846",
+      "date": "2026-11-26",
+      "roc_date": "115-11-26",
+      "title": "歲末整理捐好袋　企業持續響應「袋袋箱傳」支持日常減塑",
+      "unit": "環境部資源循環署",
+      "summary": "環境部資源循環署推動「袋袋箱傳」二手袋循環平台，已串聯逾200個企業募集袋源與市場、商圈及鄰里店家的用袋需求，透過員工募集、分批供袋及平台媒合，讓閒置提袋重新找到使用機會。其中，聯華電子累計登錄供袋11次、募集1.4萬個；兆豐金控亦延續前期踴躍響應的成果，近期再度啟動第二波企業募袋行動，號召同仁於歲末盤點捐出好袋，展現企業持續參與日常減塑的行動力。",
+      "policy_keywords": [
+        "溫室氣體盤查登錄",
+        "資源循環",
+        "減塑與一次用產品"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14590",
+      "source_url_status": "",
+      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/4vfyvqeg.cng.jpg"
+    },
     {
       "news_id": "20261124211318",
       "date": "2026-11-24",
@@ -185,48 +217,6 @@
       "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14561",
       "source_url_status": "",
       "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/cpb3tkdc.5uh.jpg"
-    },
-    {
-      "news_id": "20261122220745",
-      "date": "2026-11-22",
-      "roc_date": "115-11-22",
-      "title": "COP31 未達共識 臺灣不等待、加速落實　攜手國際推動碳市場、循環經濟與 AI 減碳韌性",
-      "unit": "環境部氣候變遷署",
-      "summary": "聯合國氣候變化綱要公約第 31 屆締約方大會(COP31)在土耳其安塔利亞舉行，原訂11月20日閉幕，延長兩日仍因各國對化石燃料轉型等議題立場分歧，主決議「安塔利亞協議（Antalya Pact）」未能達成共識，未通過主要決議。雖然談判受挫，仍通過多項實質議程項目，全球氣候治理「從談判承諾走向具體落實」的趨勢不會改變。",
-      "policy_keywords": [
-        "碳費徵收",
-        "自主減量計畫",
-        "碳定價與ETS",
-        "溫室氣體盤查登錄",
-        "淨零轉型",
-        "氣候變遷與調適",
-        "資源循環",
-        "空氣品質",
-        "水質保護",
-        "國際環境合作",
-        "ESG與永續金融",
-        "生質能與再生能源"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14541",
-      "source_url_status": "",
-      "attach_url": ""
-    },
-    {
-      "news_id": "20261120171557",
-      "date": "2026-11-22",
-      "roc_date": "115-11-22",
-      "title": "臺灣環境教育再度揚名國際！ 永安社區環教中心獲CIFA大獎",
-      "unit": "環境部國家環境研究院",
-      "summary": "臺灣環境教育再傳捷報！獲環境部認證的環教場所「臺東永安社區」，20日在馬來西亞古晉舉行的「亞洲區家庭研究聯盟(CIFA)2026年3A計畫」競賽中傳回捷報。社區憑藉「臺東永安『好料』市集」方案，從香港、新加坡、中國、馬來西亞及臺灣等5地共82件提案中強勢突圍，成為最終8支獲獎隊伍之一。此獎項高度肯定具創新與實踐力的家庭服務計畫，也再次見證臺灣在地社區推動環境教育的軟實力。",
-      "policy_keywords": [
-        "環境教育與綠領人才",
-        "國際環境合作"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14535",
-      "source_url_status": "",
-      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/yd1z3p3l.wkk.jpeg"
     }
   ]
 }

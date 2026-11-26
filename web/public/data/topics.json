@@ -744,8 +744,8 @@
       "範疇三",
       "GHG"
     ],
-    "total_count": 438,
-    "last_30_days_count": 6,
+    "total_count": 439,
+    "last_30_days_count": 7,
     "prev_30_days_count": 0,
     "yearly_counts": {
       "2001": 1,
@@ -773,9 +773,26 @@
       "2023": 32,
       "2024": 36,
       "2025": 28,
-      "2026": 28
+      "2026": 29
     },
     "latest_news": [
+      {
+        "news_id": "20261126142846",
+        "date": "2026-11-26",
+        "roc_date": "115-11-26",
+        "title": "歲末整理捐好袋　企業持續響應「袋袋箱傳」支持日常減塑",
+        "unit": "環境部資源循環署",
+        "summary": "環境部資源循環署推動「袋袋箱傳」二手袋循環平台，已串聯逾200個企業募集袋源與市場、商圈及鄰里店家的用袋需求，透過員工募集、分批供袋及平台媒合，讓閒置提袋重新找到使用機會。其中，聯華電子累計登錄供袋11次、募集1.4萬個；兆豐金控亦延續前期踴躍響應的成果，近期再度啟動第二波企業募袋行動，號召同仁於歲末盤點捐出好袋，展現企業持續參與日常減塑的行動力。",
+        "policy_keywords": [
+          "溫室氣體盤查登錄",
+          "資源循環",
+          "減塑與一次用產品"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14590",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/4vfyvqeg.cng.jpg"
+      },
       {
         "news_id": "20261122220745",
         "date": "2026-11-22",
@@ -951,25 +968,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14140",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "14034",
-        "date": "2026-09-01",
-        "roc_date": "115-09-01",
-        "title": "環境部修正發布「碳費收費辦法」第3條之1、第9條，以及「自主減量計畫管理辦法」第11條之1、第17條",
-        "unit": "環境部氣候變遷署",
-        "summary": "我國碳費制度於114年正式上路，461廠收費對象（合計240家企業）已於今年5月全數完成繳費，為我國碳定價制度迎來歷史性關鍵里程碑。為使碳費制度推動更臻周延，並兼顧首次納管事業辦理溫室氣體盤查登錄、查驗及申請自主減量計畫所需作業時間，環境部廣徵各界意見後，公告修正「碳費收費辦法」第3條之1、第9條，以及「自主減量計畫管理辦法」第11條之1、第17條，確保制度兼顧程序公平、產業轉型與實質減量。",
-        "policy_keywords": [
-          "碳費徵收",
-          "自主減量計畫",
-          "碳定價與ETS",
-          "溫室氣體盤查登錄",
-          "氣候變遷與調適"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14034",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -988,7 +986,7 @@
     ],
     "total_count": 950,
     "last_30_days_count": 28,
-    "prev_30_days_count": 10,
+    "prev_30_days_count": 9,
     "yearly_counts": {
       "2001": 0,
       "2002": 0,
@@ -1484,8 +1482,8 @@
       "循環標誌",
       "廢棄物再利用"
     ],
-    "total_count": 1592,
-    "last_30_days_count": 24,
+    "total_count": 1594,
+    "last_30_days_count": 26,
     "prev_30_days_count": 17,
     "yearly_counts": {
       "2001": 13,
@@ -1513,9 +1511,41 @@
       "2023": 92,
       "2024": 110,
       "2025": 128,
-      "2026": 187
+      "2026": 189
     },
     "latest_news": [
+      {
+        "news_id": "20261126160042",
+        "date": "2026-11-26",
+        "roc_date": "115-11-26",
+        "title": "啟動制服循環再生案例 循環署攜手國防部與紡織產業共創循環衣流循環 採購量能達11萬件！",
+        "unit": "環境部資源循環署",
+        "summary": "環境部資源循環署11月25日舉辦「115年紡織循環推動成果說明會暨紡織循環聯盟成員大會」，表揚積極投入循環制服供應的產業夥伴。今年不僅國內循環制服年供應量能已達11萬件，循環署更跨部會攜手國防部、經濟部與產業界，啟動首波約1公噸退役軍服及寢具再生試驗，展現公私協力推動臺灣紡織循環的具體成果。",
+        "policy_keywords": [
+          "資源循環"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14591",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/h54zq4pg.wpb.jpg"
+      },
+      {
+        "news_id": "20261126142846",
+        "date": "2026-11-26",
+        "roc_date": "115-11-26",
+        "title": "歲末整理捐好袋　企業持續響應「袋袋箱傳」支持日常減塑",
+        "unit": "環境部資源循環署",
+        "summary": "環境部資源循環署推動「袋袋箱傳」二手袋循環平台，已串聯逾200個企業募集袋源與市場、商圈及鄰里店家的用袋需求，透過員工募集、分批供袋及平台媒合，讓閒置提袋重新找到使用機會。其中，聯華電子累計登錄供袋11次、募集1.4萬個；兆豐金控亦延續前期踴躍響應的成果，近期再度啟動第二波企業募袋行動，號召同仁於歲末盤點捐出好袋，展現企業持續參與日常減塑的行動力。",
+        "policy_keywords": [
+          "溫室氣體盤查登錄",
+          "資源循環",
+          "減塑與一次用產品"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14590",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/4vfyvqeg.cng.jpg"
+      },
       {
         "news_id": "20261124211318",
         "date": "2026-11-24",
@@ -1681,43 +1711,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14528",
         "source_url_status": "",
         "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/kmzt00fp.uql.jpg"
-      },
-      {
-        "news_id": "20261119100502",
-        "date": "2026-11-19",
-        "roc_date": "115-11-19",
-        "title": "環境部預告「鋼鐵業集塵灰高溫冶煉設施戴奧辛管制及排放標準」修正草案",
-        "unit": "環境部大氣環境司",
-        "summary": "為強化鋼鐵業集塵灰高溫冶煉設施之空氣污染管制，環境部今日預告修正「鋼鐵業集塵灰高溫冶煉設施戴奧辛管制及排放標準」草案，本次修法重點在於加嚴鋼鐵業集塵灰高溫冶煉設施之戴奧辛排放標準，並於本行業別中，新增粒狀污染物、硫氧化物、氮氧化物及一氧化碳排放標準，且將法規名稱修正為「鋼鐵業集塵灰高溫冶煉設施空氣污染物管制及排放標準」，以擴大此冶煉設施空氣污染物管制對象及範圍，以期降低空氣污染物排放，提升空氣品質。",
-        "policy_keywords": [
-          "氣候變遷與調適",
-          "資源循環",
-          "空氣品質",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14527",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/File/Get/moenv-news/zh-tw/jBfZozwN6qzuUtI"
-      },
-      {
-        "news_id": "20261117190624",
-        "date": "2026-11-17",
-        "roc_date": "115-11-17",
-        "title": "串聯歐亞碳移除經驗 環境部COP31系列論壇探討臺灣生物炭循環新價值",
-        "unit": "環境部氣候變遷署",
-        "summary": "響應聯合國氣候變化綱要公約第31次締約方大會(COP31)「海洋、自然與土地利用」主題日，環境部 今(17)日舉辦「歐洲與亞洲碳移除(CDR)發展策略與生物炭」國際線上論壇。會議邀集芬蘭國際認證平台 Puro.earth、歐洲碳移除政策智庫 Carbonfuture 及國內產學專家，探討借鏡歐盟「碳移除認證架構(CRCF)」等國際標準，將本土農林剩餘資材轉化為具國際公信力的高品質碳資產，為我國 2050 淨零轉型奠定基石。",
-        "policy_keywords": [
-          "碳定價與ETS",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "資源循環",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14521",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/hhezowhu.4v1.jpg"
       }
     ]
   },
@@ -1735,8 +1728,8 @@
       "袋袋箱傳",
       "包裝減量"
     ],
-    "total_count": 290,
-    "last_30_days_count": 7,
+    "total_count": 291,
+    "last_30_days_count": 8,
     "prev_30_days_count": 5,
     "yearly_counts": {
       "2001": 3,
@@ -1764,9 +1757,26 @@
       "2023": 21,
       "2024": 20,
       "2025": 14,
-      "2026": 61
+      "2026": 62
     },
     "latest_news": [
+      {
+        "news_id": "20261126142846",
+        "date": "2026-11-26",
+        "roc_date": "115-11-26",
+        "title": "歲末整理捐好袋　企業持續響應「袋袋箱傳」支持日常減塑",
+        "unit": "環境部資源循環署",
+        "summary": "環境部資源循環署推動「袋袋箱傳」二手袋循環平台，已串聯逾200個企業募集袋源與市場、商圈及鄰里店家的用袋需求，透過員工募集、分批供袋及平台媒合，讓閒置提袋重新找到使用機會。其中，聯華電子累計登錄供袋11次、募集1.4萬個；兆豐金控亦延續前期踴躍響應的成果，近期再度啟動第二波企業募袋行動，號召同仁於歲末盤點捐出好袋，展現企業持續參與日常減塑的行動力。",
+        "policy_keywords": [
+          "溫室氣體盤查登錄",
+          "資源循環",
+          "減塑與一次用產品"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14590",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/4vfyvqeg.cng.jpg"
+      },
       {
         "news_id": "20261123173045",
         "date": "2026-11-23",
@@ -1919,22 +1929,6 @@
         ],
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14330",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14304",
-        "date": "2026-10-15",
-        "roc_date": "115-10-15",
-        "title": "買運動裝備、資訊設備也能用二手好袋 「袋袋箱傳」串聯多元通路",
-        "unit": "環境部資源循環署",
-        "summary": "",
-        "policy_keywords": [
-          "資源循環",
-          "減塑與一次用產品"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14304",
         "source_url_status": "",
         "attach_url": ""
       }
@@ -3255,8 +3249,8 @@
       "證照"
     ],
     "total_count": 1057,
-    "last_30_days_count": 17,
-    "prev_30_days_count": 11,
+    "last_30_days_count": 16,
+    "prev_30_days_count": 12,
     "yearly_counts": {
       "2001": 2,
       "2002": 1,
@@ -3482,7 +3476,7 @@
     ],
     "total_count": 375,
     "last_30_days_count": 6,
-    "prev_30_days_count": 6,
+    "prev_30_days_count": 5,
     "yearly_counts": {
       "2001": 5,
       "2002": 3,

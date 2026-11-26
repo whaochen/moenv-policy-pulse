@@ -1,14 +1,14 @@
 {
   "project": "環策晧脈（Taiwan Environment Observatory）",
   "license": "資料來源：中華民國環境部（環境部新聞專區及環境資料開放平臺 MNEWS_P_01），依政府資料開放授權條款（OGDL 1.0）引用；原創分類口徑、分析與視覺化歸屬環策晧脈。",
-  "updated_at": "2026-11-25T03:29:56+08:00",
+  "updated_at": "2026-11-26T20:38:40+08:00",
   "coverage": {
     "date_start": "2001-01-01",
-    "date_end": "2026-11-24",
-    "total_news": 11511
+    "date_end": "2026-11-26",
+    "total_news": 11513
   },
-  "dataset_version": "c5967de13112c929",
-  "dataset_sha256": "c5967de13112c92987bc5f8968b82e521db7e2cdf6825e400ba87249d7bd453e",
+  "dataset_version": "a1ee4b94ffdc7758",
+  "dataset_sha256": "a1ee4b94ffdc7758877bf9a94e30f047c1a522022a1068abf5a5dab7340a8cff",
   "deduplication": "以 news_id 為主鍵，並搭配正規化日期＋去標點去空白標題指紋（NFKC compact identity key）雙重去重，避免跨來源（官網與開放資料）重複收錄。",
   "multi_label_rule": "採「一文多標籤」口徑：單篇新聞若同時命中多項議題之同義詞表，將於對應議題各自計數 1 次，因此各議題加總高於全站新聞總篇數屬正常現象。",
   "relation_engine": {
@@ -17,7 +17,7 @@
     "layer_2": "選配 Gemini Embedding API（gemini-embedding-001）增量快取語意向量計算 S_embed；若未設 API Key 或遭遇限流，自動降級為 100% TF-IDF 權重。",
     "blend_formula": "w_ij = alpha * S_tfidf(i, j) + (1 - alpha) * S_embed(i, j) + topic_bonus (0.05)",
     "active_meta": {
-      "generated_at": "2026-11-26T12:09:26+08:00",
+      "generated_at": "2026-11-26T20:39:01+08:00",
       "algorithm": "Route 3 Hybrid (TF-IDF + jieba domain dict + optional Gemini Neural Embeddings)",
       "mode": "tfidf_only",
       "alpha": 1.0,
@@ -25,10 +25,10 @@
       "min_score": 0.16,
       "topic_bonus": 0.05,
       "domain_dict_terms": 174,
-      "vocab_size": 26603,
-      "total_items": 11511,
-      "total_edges": 56250,
-      "elapsed_seconds": 11.73,
+      "vocab_size": 26606,
+      "total_items": 11513,
+      "total_edges": 56257,
+      "elapsed_seconds": 14.46,
       "embedding_meta": {
         "mode": "tfidf_only",
         "model": "gemini-embedding-001",
@@ -94,7 +94,7 @@
         "範疇三",
         "GHG"
       ],
-      "total_count": 438
+      "total_count": 439
     },
     {
       "slug": "net_zero_transition",
@@ -140,7 +140,7 @@
         "循環標誌",
         "廢棄物再利用"
       ],
-      "total_count": 1592
+      "total_count": 1594
     },
     {
       "slug": "plastic_reduction",
@@ -156,7 +156,7 @@
         "袋袋箱傳",
         "包裝減量"
       ],
-      "total_count": 290
+      "total_count": 291
     },
     {
       "slug": "waste_crime",

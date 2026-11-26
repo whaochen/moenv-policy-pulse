@@ -102,7 +102,7 @@ resource_circulation,資源循環,資源循環與廢棄物,2022,63
 resource_circulation,資源循環,資源循環與廢棄物,2023,92
 resource_circulation,資源循環,資源循環與廢棄物,2024,110
 resource_circulation,資源循環,資源循環與廢棄物,2025,128
-resource_circulation,資源循環,資源循環與廢棄物,2026,187
+resource_circulation,資源循環,資源循環與廢棄物,2026,189
 air_quality,空氣品質,污染防制,2001,36
 air_quality,空氣品質,污染防制,2002,20
 air_quality,空氣品質,污染防制,2003,16
@@ -304,7 +304,7 @@ ghg_inventory,溫室氣體盤查登錄,氣候與碳定價,2022,14
 ghg_inventory,溫室氣體盤查登錄,氣候與碳定價,2023,32
 ghg_inventory,溫室氣體盤查登錄,氣候與碳定價,2024,36
 ghg_inventory,溫室氣體盤查登錄,氣候與碳定價,2025,28
-ghg_inventory,溫室氣體盤查登錄,氣候與碳定價,2026,28
+ghg_inventory,溫室氣體盤查登錄,氣候與碳定價,2026,29
 eia,環評制度,治理與制度,2001,3
 eia,環評制度,治理與制度,2002,4
 eia,環評制度,治理與制度,2003,8
@@ -407,7 +407,7 @@ plastic_reduction,減塑與一次用產品,資源循環與廢棄物,2022,13
 plastic_reduction,減塑與一次用產品,資源循環與廢棄物,2023,21
 plastic_reduction,減塑與一次用產品,資源循環與廢棄物,2024,20
 plastic_reduction,減塑與一次用產品,資源循環與廢棄物,2025,14
-plastic_reduction,減塑與一次用產品,資源循環與廢棄物,2026,61
+plastic_reduction,減塑與一次用產品,資源循環與廢棄物,2026,62
 carbon_pricing_ets,碳定價與ETS,氣候與碳定價,2005,1
 carbon_pricing_ets,碳定價與ETS,氣候與碳定價,2007,2
 carbon_pricing_ets,碳定價與ETS,氣候與碳定價,2008,3
