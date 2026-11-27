@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-27T20:25:57+08:00",
+  "updated_at": "2026-11-28T02:10:32+08:00",
   "yearly_totals": [
     {
       "year": "2001",
@@ -103,7 +103,7 @@
     },
     {
       "year": "2026",
-      "count": 624
+      "count": 625
     }
   ],
   "topic_yearly_matrix": {
@@ -331,7 +331,7 @@
           62,
           90,
           124,
-          175
+          176
         ]
       },
       {
@@ -803,19 +803,19 @@
     "window_end": "2026-11-27",
     "prev_start": "2026-09-29",
     "prev_end": "2026-10-28",
-    "current_total": 73,
+    "current_total": 74,
     "previous_total": 53,
-    "delta": 20,
-    "pct_change": 37.7,
+    "delta": 21,
+    "pct_change": 39.6,
     "topics": [
       {
         "slug": "climate_adaptation",
         "title": "氣候變遷與調適",
         "group": "氣候與碳定價",
-        "current": 33,
+        "current": 34,
         "previous": 14,
-        "delta": 19,
-        "pct_change": 135.7
+        "delta": 20,
+        "pct_change": 142.9
       },
       {
         "slug": "net_zero_transition",
@@ -1028,7 +1028,7 @@
       {
         "week_start": "2026-11-21",
         "week_end": "2026-11-27",
-        "count": 17
+        "count": 18
       }
     ]
   },
@@ -1040,7 +1040,7 @@
       },
       {
         "unit": "環境部氣候變遷署",
-        "count": 131
+        "count": 132
       },
       {
         "unit": "環境部環境管理署",
@@ -1142,7 +1142,7 @@
       },
       {
         "unit": "環境部氣候變遷署",
-        "count": 319
+        "count": 320
       },
       {
         "unit": "行政院環境保護署土污基管會",

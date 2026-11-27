@@ -37,9 +37,9 @@
       "name": "氣候與碳定價",
       "kind": "group",
       "category": "氣候與碳定價",
-      "value": 2391,
-      "last30": 87,
-      "delta30": 62
+      "value": 2392,
+      "last30": 88,
+      "delta30": 63
     },
     {
       "id": "group:circular",
@@ -149,10 +149,10 @@
       "kind": "topic",
       "category": "氣候與碳定價",
       "description": "氣候變遷、高溫、熱浪、韌性城市與調適政策。",
-      "value": 753,
-      "last30": 33,
-      "delta30": 19,
-      "pct30": 135.7,
+      "value": 754,
+      "last30": 34,
+      "delta30": 20,
+      "pct30": 142.9,
       "url": "/topics/climate_adaptation"
     },
     {
@@ -590,7 +590,7 @@
     {
       "source": "topic:resource_circulation",
       "target": "topic:waste_crime",
-      "weight": 2085.9,
+      "weight": 2085.7,
       "cooccurrence": 885,
       "kind": "semantic"
     },
@@ -618,21 +618,21 @@
     {
       "source": "topic:climate_adaptation",
       "target": "topic:net_zero_transition",
-      "weight": 665.9,
+      "weight": 665.8,
       "cooccurrence": 320,
       "kind": "semantic"
     },
     {
       "source": "topic:waste_crime",
       "target": "topic:water_quality",
-      "weight": 606.0,
+      "weight": 606.1,
       "cooccurrence": 234,
       "kind": "semantic"
     },
     {
       "source": "topic:air_quality",
       "target": "topic:enforcement",
-      "weight": 599.7,
+      "weight": 599.6,
       "cooccurrence": 245,
       "kind": "semantic"
     },
@@ -667,7 +667,7 @@
     {
       "source": "topic:climate_adaptation",
       "target": "topic:international_cooperation",
-      "weight": 338.9,
+      "weight": 338.8,
       "cooccurrence": 154,
       "kind": "semantic"
     },
@@ -688,7 +688,7 @@
     {
       "source": "topic:ghg_inventory",
       "target": "topic:net_zero_transition",
-      "weight": 319.6,
+      "weight": 319.5,
       "cooccurrence": 150,
       "kind": "semantic"
     },
@@ -723,7 +723,7 @@
     {
       "source": "topic:air_quality",
       "target": "topic:waste_crime",
-      "weight": 270.9,
+      "weight": 271.0,
       "cooccurrence": 113,
       "kind": "semantic"
     },
@@ -800,7 +800,7 @@
     {
       "source": "topic:air_quality",
       "target": "topic:water_quality",
-      "weight": 163.3,
+      "weight": 163.2,
       "cooccurrence": 64,
       "kind": "semantic"
     },

@@ -1231,8 +1231,8 @@
       "韌性",
       "國土綠蔭"
     ],
-    "total_count": 753,
-    "last_30_days_count": 33,
+    "total_count": 754,
+    "last_30_days_count": 34,
     "prev_30_days_count": 14,
     "yearly_counts": {
       "2001": 2,
@@ -1260,9 +1260,24 @@
       "2023": 62,
       "2024": 90,
       "2025": 124,
-      "2026": 175
+      "2026": 176
     },
     "latest_news": [
+      {
+        "news_id": "20261127194207",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "40℃高溫即時調適行動四部曲完成　環境部攜中央地方檢討成果",
+        "unit": "環境部氣候變遷署",
+        "summary": "為強化我國因應極端高溫的調適與應變能力，環境部今（27）日辦理「115年40℃高溫即時調適行動檢討會」，由環境部次長謝燕儒主持，新北市副市長劉和然、新北市政府消防局局長陳崇岳、環保局副局長朱益君出席，邀集參與演練的中央部會、新北市政府各局處、事業單位及亞東紀念醫院約100人與會，會中彙整今年研討會、兵棋推演及實兵演練成果，檢視跨機關協作缺口，作為建立高溫應變常態化機制的依據。",
+        "policy_keywords": [
+          "氣候變遷與調適"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14602",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/yneag0kq.5gs.jpg"
+      },
       {
         "news_id": "20261127160741",
         "date": "2026-11-27",
@@ -1430,32 +1445,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14563",
         "source_url_status": "",
         "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/5uqugewy.unq.jpg"
-      },
-      {
-        "news_id": "20261122220745",
-        "date": "2026-11-22",
-        "roc_date": "115-11-22",
-        "title": "COP31 未達共識 臺灣不等待、加速落實　攜手國際推動碳市場、循環經濟與 AI 減碳韌性",
-        "unit": "環境部氣候變遷署",
-        "summary": "聯合國氣候變化綱要公約第 31 屆締約方大會(COP31)在土耳其安塔利亞舉行，原訂11月20日閉幕，延長兩日仍因各國對化石燃料轉型等議題立場分歧，主決議「安塔利亞協議（Antalya Pact）」未能達成共識，未通過主要決議。雖然談判受挫，仍通過多項實質議程項目，全球氣候治理「從談判承諾走向具體落實」的趨勢不會改變。",
-        "policy_keywords": [
-          "碳費徵收",
-          "自主減量計畫",
-          "碳定價與ETS",
-          "溫室氣體盤查登錄",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "資源循環",
-          "空氣品質",
-          "水質保護",
-          "國際環境合作",
-          "ESG與永續金融",
-          "生質能與再生能源"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14541",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },

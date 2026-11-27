@@ -1,12 +1,12 @@
 {
-  "total_news": 11516,
-  "total_relation_edges": 56272,
+  "total_news": 11517,
+  "total_relation_edges": 56276,
   "relation_mode": "tfidf_only",
   "date_start": "2001-01-01",
   "date_end": "2026-11-27",
-  "updated_at": "2026-11-27T20:25:57+08:00",
-  "dataset_version": "258105bb7e4cf46a",
-  "dataset_sha256": "258105bb7e4cf46a6e378b2d7d469b683e4740dc2250c4740c9ea920b993e2af",
+  "updated_at": "2026-11-28T02:10:32+08:00",
+  "dataset_version": "c6bdfdfd5f03ddee",
+  "dataset_sha256": "c6bdfdfd5f03ddee29995b593e57bdfce5b6f9d0344a7f839e8af9c6c2fa4a27",
   "topic_count": 20,
   "years": [
     "2001",
@@ -36,11 +36,26 @@
     "2025",
     "2026"
   ],
-  "last_30_days_count": 73,
+  "last_30_days_count": 74,
   "prev_30_days_count": 53,
-  "last_30_days_delta": 20,
-  "last_30_days_pct": 37.7,
+  "last_30_days_delta": 21,
+  "last_30_days_pct": 39.6,
   "latest_news": [
+    {
+      "news_id": "20261127194207",
+      "date": "2026-11-27",
+      "roc_date": "115-11-27",
+      "title": "40℃高溫即時調適行動四部曲完成　環境部攜中央地方檢討成果",
+      "unit": "環境部氣候變遷署",
+      "summary": "為強化我國因應極端高溫的調適與應變能力，環境部今（27）日辦理「115年40℃高溫即時調適行動檢討會」，由環境部次長謝燕儒主持，新北市副市長劉和然、新北市政府消防局局長陳崇岳、環保局副局長朱益君出席，邀集參與演練的中央部會、新北市政府各局處、事業單位及亞東紀念醫院約100人與會，會中彙整今年研討會、兵棋推演及實兵演練成果，檢視跨機關協作缺口，作為建立高溫應變常態化機制的依據。",
+      "policy_keywords": [
+        "氣候變遷與調適"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14602",
+      "source_url_status": "",
+      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/yneag0kq.5gs.jpg"
+    },
     {
       "news_id": "20261127160741",
       "date": "2026-11-27",
@@ -199,26 +214,6 @@
       "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14571",
       "source_url_status": "",
       "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/uoylvy4t.nhm.jpg"
-    },
-    {
-      "news_id": "20261123193317",
-      "date": "2026-11-23",
-      "roc_date": "115-11-23",
-      "title": "環境部表揚空品淨化區優良認養單位，凝聚公私協力，共同推動國土綠蔭！",
-      "unit": "環境部氣候變遷署",
-      "summary": "環境部今（23）日舉辦「國土綠蔭氣候調適計畫暨推動木質資源循環」說明會及「115年度空氣品質淨化區優良認養單位頒獎典禮」，由部長彭啓明主持，邀集地方環保局、評審委員及認養單位等線上線下共226人與會，聚焦都市林政策、樹木養護及木質資源循環等議題。環境部期盼以既有空品淨化區為基礎，串聯地方政府、企業與社區資源，將單點綠地擴展為兼具降溫、生態與休憩功能的綠色網絡，強化城市氣候韌性。",
-      "policy_keywords": [
-        "淨零轉型",
-        "氣候變遷與調適",
-        "資源循環",
-        "空氣品質",
-        "環境教育與綠領人才",
-        "ESG與永續金融"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14564",
-      "source_url_status": "",
-      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/kaozbqmp.si4.jpg"
     }
   ]
 }
