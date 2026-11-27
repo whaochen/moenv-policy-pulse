@@ -17,7 +17,7 @@
     "layer_2": "選配 Gemini Embedding API（gemini-embedding-001）增量快取語意向量計算 S_embed；若未設 API Key 或遭遇限流，自動降級為 100% TF-IDF 權重。",
     "blend_formula": "w_ij = alpha * S_tfidf(i, j) + (1 - alpha) * S_embed(i, j) + topic_bonus (0.05)",
     "active_meta": {
-      "generated_at": "2026-11-27T06:25:30+08:00",
+      "generated_at": "2026-11-27T12:15:08+08:00",
       "algorithm": "Route 3 Hybrid (TF-IDF + jieba domain dict + optional Gemini Neural Embeddings)",
       "mode": "tfidf_only",
       "alpha": 1.0,
@@ -28,7 +28,7 @@
       "vocab_size": 26606,
       "total_items": 11513,
       "total_edges": 56257,
-      "elapsed_seconds": 15.99,
+      "elapsed_seconds": 18.46,
       "embedding_meta": {
         "mode": "tfidf_only",
         "model": "gemini-embedding-001",
