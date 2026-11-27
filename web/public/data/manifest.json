@@ -1,12 +1,12 @@
 {
-  "total_news": 11513,
-  "total_relation_edges": 56257,
+  "total_news": 11516,
+  "total_relation_edges": 56272,
   "relation_mode": "tfidf_only",
   "date_start": "2001-01-01",
-  "date_end": "2026-11-26",
-  "updated_at": "2026-11-26T20:38:40+08:00",
-  "dataset_version": "a1ee4b94ffdc7758",
-  "dataset_sha256": "a1ee4b94ffdc7758877bf9a94e30f047c1a522022a1068abf5a5dab7340a8cff",
+  "date_end": "2026-11-27",
+  "updated_at": "2026-11-27T20:25:57+08:00",
+  "dataset_version": "258105bb7e4cf46a",
+  "dataset_sha256": "258105bb7e4cf46a6e378b2d7d469b683e4740dc2250c4740c9ea920b993e2af",
   "topic_count": 20,
   "years": [
     "2001",
@@ -36,11 +36,68 @@
     "2025",
     "2026"
   ],
-  "last_30_days_count": 74,
-  "prev_30_days_count": 50,
-  "last_30_days_delta": 24,
-  "last_30_days_pct": 48.0,
+  "last_30_days_count": 73,
+  "prev_30_days_count": 53,
+  "last_30_days_delta": 20,
+  "last_30_days_pct": 37.7,
   "latest_news": [
+    {
+      "news_id": "20261127160741",
+      "date": "2026-11-27",
+      "roc_date": "115-11-27",
+      "title": "小小環境記者大哉問！彭啓明與臺北歐洲學校學童暢談永續飲食",
+      "unit": "環境部環境保護司",
+      "summary": "每天吃的午餐和氣候變遷有什麼關係？學校午餐可以更環保嗎？我們又能為地球做些什麼？環境部長彭啓明今（27）日迎來一群特別的訪客——臺北歐洲學校（Taipei European School, TES）小學部「青年環境記者社團（Young Reporters for the Environment, YRE）」師生一行。小小記者們帶著滿滿的好奇心，與彭部長交流低碳飲食、糧食安全及食物浪費等議題，發表「食物永續：我們的聲音，我們的未來」專題簡報，彭部長也透過生活化的例子，一一回應孩子們的提問，分享環境部正在推動的各項永續行動。",
+      "policy_keywords": [
+        "淨零轉型",
+        "氣候變遷與調適",
+        "資源循環",
+        "綠色消費與標章",
+        "生質能與再生能源"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14599",
+      "source_url_status": "",
+      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/wwk2dnaj.bke.JPG"
+    },
+    {
+      "news_id": "20261127152640",
+      "date": "2026-11-27",
+      "roc_date": "115-11-27",
+      "title": "從知識到行動！環境部攜手亞太夥伴將永續理念轉化為具體區域行動",
+      "unit": "環境部環境保護司",
+      "summary": "為深化亞太地區環境教育跨國合作，環境部（全球環境教育夥伴亞太中心，GEEP APRC）今（27）日舉辦「2026年環境教育線上國際研討會」。本次研討會以「從知識到行動」為主題，深入探討「氣候調適與韌性環境」、「資源循環與永續生活」、「綠色創新與行動」及「亞太青年實習與國際交流沙龍」等四大面向，吸引來自臺灣、不丹、印度、印尼、日本、南韓、泰國及菲律賓等亞太國家環境教育專家、政府代表、民間實務推動者及青年行動者齊聚線上，進行深度跨國對談，共同將永續理念轉化為具體區域行動。",
+      "policy_keywords": [
+        "淨零轉型",
+        "氣候變遷與調適",
+        "資源循環",
+        "廢棄物與環保犯罪",
+        "環境教育與綠領人才",
+        "國際環境合作"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14597",
+      "source_url_status": "",
+      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/v5zsh0vo.qjh.jpg"
+    },
+    {
+      "news_id": "20261127111107",
+      "date": "2026-11-27",
+      "roc_date": "115-11-27",
+      "title": "全國景觀園藝產學界連署力挺國土綠蔭政策 環境部攜手專業打造氣候韌性城市",
+      "unit": "環境部氣候變遷署",
+      "summary": "環境部26日舉辦「國土綠蔭氣候調適計畫暨推動木質資源循環說明會」，由部長彭啓明主持，總統府資政吳晟出席。會中獲全國景觀及園藝相關公協會、學會、聯合會及10所大專院校景觀相關學系共同連署支持國家都市林政策，現場共121名產學代表與會，就都市綠蔭建置、樹木健康管理、專業技術及木質資源循環等議題深度交流，期整合產業實務經驗，全面提升都市林經營品質。",
+      "policy_keywords": [
+        "氣候變遷與調適",
+        "資源循環",
+        "廢棄物與環保犯罪",
+        "國際環境合作"
+      ],
+      "ai_tags": [],
+      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14596",
+      "source_url_status": "",
+      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/1s04egin.esv.jpg"
+    },
     {
       "news_id": "20261126160042",
       "date": "2026-11-26",
@@ -162,61 +219,6 @@
       "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14564",
       "source_url_status": "",
       "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/kaozbqmp.si4.jpg"
-    },
-    {
-      "news_id": "20261123173045",
-      "date": "2026-11-23",
-      "roc_date": "115-11-23",
-      "title": "減少一次性包裝 多增一分環境友善 環境部綠色包裝論壇助產業接軌歐盟新制",
-      "unit": "環境部環境保護司",
-      "summary": "因應2026年歐盟《包裝及包裝廢棄物法規》（PPWR）已於今(115)年8月12日開始適用，為使產業界接軌國際，讓商品自源頭即符合相關規範供民眾選購，環境部於今(23)日舉辦「歐盟PPWR新制與臺灣綠色包裝」實務論壇，邀集產官學界交流，聚焦國內資源循環政策與國際法規趨勢，並由業者分享PPWR規範下的包裝設計與實務經驗，協助企業接軌國際綠色標準，同時展示裸包裝、循環包裝及無包裝銷售模式等「淨零綠生活」落地應用。",
-      "policy_keywords": [
-        "淨零轉型",
-        "氣候變遷與調適",
-        "資源循環",
-        "減塑與一次用產品",
-        "廢棄物與環保犯罪",
-        "綠色消費與標章",
-        "國際環境合作"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14563",
-      "source_url_status": "",
-      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/5uqugewy.unq.jpg"
-    },
-    {
-      "news_id": "20261123165556",
-      "date": "2026-11-23",
-      "roc_date": "115-11-23",
-      "title": "全國環保夥伴齊聚一堂，強化技師專業把關",
-      "unit": "環境部環境管理署",
-      "summary": "環境部環境管理署今(23)日於國立中興大學舉辦「115年度專業技師簽證環保許可文件共識營」，邀集中央及地方環保機關、環境工程技師、應用地質技師、技師公會及相關單位等超過300位環保夥伴共同參與，透過空污、水污及土污許可文件常見疑義案例分享、技師懲戒制度解析及綜合座談，促進技師與審查機關雙向交流，凝聚簽證與審查共識，攜手守護環境品質。",
-      "policy_keywords": [
-        "空氣品質",
-        "水質保護",
-        "土壤及地下水"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14562",
-      "source_url_status": "",
-      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/idu5ezic.qit.jpg"
-    },
-    {
-      "news_id": "20261123150624",
-      "date": "2026-11-23",
-      "roc_date": "115-11-23",
-      "title": "臺灣環保技術輸出新里程碑！ 臺菲簽署土水合作備忘錄 打造綠色技術「國際通行證」",
-      "unit": "環境部環境管理署",
-      "summary": "臺灣環保技術國際合作再傳捷報！為協助國內優質環境科技拓展東南亞市場，環境部特別邀請菲律賓科技部工業技術發展研究院(ITDI)代表團來臺，於11月2日至6日展開為期一週的「2026臺菲土壤及地下水環境技術合作與交流活動」，並於11月5日在環境部完成「臺菲土壤及地下水保護技術暨科學合作瞭解備忘錄（MOU）」簽署儀式，讓臺灣環保技術輸出邁入新的里程碑。",
-      "policy_keywords": [
-        "水質保護",
-        "土壤及地下水",
-        "國際環境合作"
-      ],
-      "ai_tags": [],
-      "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14561",
-      "source_url_status": "",
-      "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/cpb3tkdc.5uh.jpg"
     }
   ]
 }

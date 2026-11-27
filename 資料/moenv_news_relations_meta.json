@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T12:15:08+08:00",
+  "generated_at": "2026-11-27T20:26:18+08:00",
   "algorithm": "Route 3 Hybrid (TF-IDF + jieba domain dict + optional Gemini Neural Embeddings)",
   "mode": "tfidf_only",
   "alpha": 1.0,
@@ -7,10 +7,10 @@
   "min_score": 0.16,
   "topic_bonus": 0.05,
   "domain_dict_terms": 174,
-  "vocab_size": 26606,
-  "total_items": 11513,
-  "total_edges": 56257,
-  "elapsed_seconds": 18.46,
+  "vocab_size": 26612,
+  "total_items": 11516,
+  "total_edges": 56272,
+  "elapsed_seconds": 15.8,
   "embedding_meta": {
     "mode": "tfidf_only",
     "model": "gemini-embedding-001",

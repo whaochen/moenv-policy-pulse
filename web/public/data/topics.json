@@ -984,9 +984,9 @@
       "減碳",
       "低碳"
     ],
-    "total_count": 950,
+    "total_count": 952,
     "last_30_days_count": 28,
-    "prev_30_days_count": 9,
+    "prev_30_days_count": 11,
     "yearly_counts": {
       "2001": 0,
       "2002": 0,
@@ -1013,9 +1013,48 @@
       "2023": 71,
       "2024": 92,
       "2025": 133,
-      "2026": 172
+      "2026": 174
     },
     "latest_news": [
+      {
+        "news_id": "20261127160741",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "小小環境記者大哉問！彭啓明與臺北歐洲學校學童暢談永續飲食",
+        "unit": "環境部環境保護司",
+        "summary": "每天吃的午餐和氣候變遷有什麼關係？學校午餐可以更環保嗎？我們又能為地球做些什麼？環境部長彭啓明今（27）日迎來一群特別的訪客——臺北歐洲學校（Taipei European School, TES）小學部「青年環境記者社團（Young Reporters for the Environment, YRE）」師生一行。小小記者們帶著滿滿的好奇心，與彭部長交流低碳飲食、糧食安全及食物浪費等議題，發表「食物永續：我們的聲音，我們的未來」專題簡報，彭部長也透過生活化的例子，一一回應孩子們的提問，分享環境部正在推動的各項永續行動。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "綠色消費與標章",
+          "生質能與再生能源"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14599",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/wwk2dnaj.bke.JPG"
+      },
+      {
+        "news_id": "20261127152640",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "從知識到行動！環境部攜手亞太夥伴將永續理念轉化為具體區域行動",
+        "unit": "環境部環境保護司",
+        "summary": "為深化亞太地區環境教育跨國合作，環境部（全球環境教育夥伴亞太中心，GEEP APRC）今（27）日舉辦「2026年環境教育線上國際研討會」。本次研討會以「從知識到行動」為主題，深入探討「氣候調適與韌性環境」、「資源循環與永續生活」、「綠色創新與行動」及「亞太青年實習與國際交流沙龍」等四大面向，吸引來自臺灣、不丹、印度、印尼、日本、南韓、泰國及菲律賓等亞太國家環境教育專家、政府代表、民間實務推動者及青年行動者齊聚線上，進行深度跨國對談，共同將永續理念轉化為具體區域行動。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "環境教育與綠領人才",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14597",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/v5zsh0vo.qjh.jpg"
+      },
       {
         "news_id": "20261124211318",
         "date": "2026-11-24",
@@ -1175,50 +1214,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14539",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "20261120201727",
-        "date": "2026-11-20",
-        "roc_date": "115-11-20",
-        "title": "呼應《安塔利亞 AI承諾》臺灣願以全球 AI 供應鏈核心之力，打造 AI 與氣候共生的未來",
-        "unit": "環境部氣候變遷署",
-        "summary": "聯合國氣候變化綱要公約第31屆締約方大會（COP31）即將落幕，在土耳其安塔利亞舉行期間，主席國土耳其與國際電信聯盟（ITU）共同發起《安塔利亞人工智慧承諾》（Antalya Artificial Intelligence Pledge）。環境部長彭啓明今（20）日表示，臺灣歡迎並呼應這項承諾，也認同承諾中「讓 AI 成為氣候解決方案的一部分」的共同抱負，臺灣將以全球 AI 供應鏈核心的角色，協助世界各國創造 AI 與氣候共生的價值。",
-        "policy_keywords": [
-          "碳費徵收",
-          "自主減量計畫",
-          "碳定價與ETS",
-          "溫室氣體盤查登錄",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "資源循環",
-          "廢棄物與環保犯罪",
-          "空氣品質",
-          "國際環境合作",
-          "生質能與再生能源"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14537",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "20261120192802",
-        "date": "2026-11-20",
-        "roc_date": "115-11-20",
-        "title": "掌握《巴黎協定》第六條國際新局！環境部舉辦 COP31 國際論壇，完善國外碳權認可機制促進實質氣候合作",
-        "unit": "環境部氣候變遷署",
-        "summary": "聯合國氣候公約第 31 次締約方大會（COP31）於土耳其安塔利亞進入最後協商階段。環境部今（20）日舉辦「從氣候科學到全球碳市場發展：巴黎協定 Article 6」論壇，聚焦國際碳市場談判動態與法規進展，並說明我國國外碳權認可準則，引導產業落實實質減碳與接軌國際規範。",
-        "policy_keywords": [
-          "碳定價與ETS",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "國際環境合作",
-          "生質能與再生能源"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14536",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/lpgfftbv.joq.jpg"
       }
     ]
   },
@@ -1236,9 +1231,9 @@
       "韌性",
       "國土綠蔭"
     ],
-    "total_count": 750,
-    "last_30_days_count": 32,
-    "prev_30_days_count": 12,
+    "total_count": 753,
+    "last_30_days_count": 33,
+    "prev_30_days_count": 14,
     "yearly_counts": {
       "2001": 2,
       "2002": 1,
@@ -1265,9 +1260,66 @@
       "2023": 62,
       "2024": 90,
       "2025": 124,
-      "2026": 172
+      "2026": 175
     },
     "latest_news": [
+      {
+        "news_id": "20261127160741",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "小小環境記者大哉問！彭啓明與臺北歐洲學校學童暢談永續飲食",
+        "unit": "環境部環境保護司",
+        "summary": "每天吃的午餐和氣候變遷有什麼關係？學校午餐可以更環保嗎？我們又能為地球做些什麼？環境部長彭啓明今（27）日迎來一群特別的訪客——臺北歐洲學校（Taipei European School, TES）小學部「青年環境記者社團（Young Reporters for the Environment, YRE）」師生一行。小小記者們帶著滿滿的好奇心，與彭部長交流低碳飲食、糧食安全及食物浪費等議題，發表「食物永續：我們的聲音，我們的未來」專題簡報，彭部長也透過生活化的例子，一一回應孩子們的提問，分享環境部正在推動的各項永續行動。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "綠色消費與標章",
+          "生質能與再生能源"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14599",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/wwk2dnaj.bke.JPG"
+      },
+      {
+        "news_id": "20261127152640",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "從知識到行動！環境部攜手亞太夥伴將永續理念轉化為具體區域行動",
+        "unit": "環境部環境保護司",
+        "summary": "為深化亞太地區環境教育跨國合作，環境部（全球環境教育夥伴亞太中心，GEEP APRC）今（27）日舉辦「2026年環境教育線上國際研討會」。本次研討會以「從知識到行動」為主題，深入探討「氣候調適與韌性環境」、「資源循環與永續生活」、「綠色創新與行動」及「亞太青年實習與國際交流沙龍」等四大面向，吸引來自臺灣、不丹、印度、印尼、日本、南韓、泰國及菲律賓等亞太國家環境教育專家、政府代表、民間實務推動者及青年行動者齊聚線上，進行深度跨國對談，共同將永續理念轉化為具體區域行動。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "環境教育與綠領人才",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14597",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/v5zsh0vo.qjh.jpg"
+      },
+      {
+        "news_id": "20261127111107",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "全國景觀園藝產學界連署力挺國土綠蔭政策 環境部攜手專業打造氣候韌性城市",
+        "unit": "環境部氣候變遷署",
+        "summary": "環境部26日舉辦「國土綠蔭氣候調適計畫暨推動木質資源循環說明會」，由部長彭啓明主持，總統府資政吳晟出席。會中獲全國景觀及園藝相關公協會、學會、聯合會及10所大專院校景觀相關學系共同連署支持國家都市林政策，現場共121名產學代表與會，就都市綠蔭建置、樹木健康管理、專業技術及木質資源循環等議題深度交流，期整合產業實務經驗，全面提升都市林經營品質。",
+        "policy_keywords": [
+          "氣候變遷與調適",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14596",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/1s04egin.esv.jpg"
+      },
       {
         "news_id": "20261124211318",
         "date": "2026-11-24",
@@ -1404,68 +1456,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14541",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "20261120201727",
-        "date": "2026-11-20",
-        "roc_date": "115-11-20",
-        "title": "呼應《安塔利亞 AI承諾》臺灣願以全球 AI 供應鏈核心之力，打造 AI 與氣候共生的未來",
-        "unit": "環境部氣候變遷署",
-        "summary": "聯合國氣候變化綱要公約第31屆締約方大會（COP31）即將落幕，在土耳其安塔利亞舉行期間，主席國土耳其與國際電信聯盟（ITU）共同發起《安塔利亞人工智慧承諾》（Antalya Artificial Intelligence Pledge）。環境部長彭啓明今（20）日表示，臺灣歡迎並呼應這項承諾，也認同承諾中「讓 AI 成為氣候解決方案的一部分」的共同抱負，臺灣將以全球 AI 供應鏈核心的角色，協助世界各國創造 AI 與氣候共生的價值。",
-        "policy_keywords": [
-          "碳費徵收",
-          "自主減量計畫",
-          "碳定價與ETS",
-          "溫室氣體盤查登錄",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "資源循環",
-          "廢棄物與環保犯罪",
-          "空氣品質",
-          "國際環境合作",
-          "生質能與再生能源"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14537",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "20261120192802",
-        "date": "2026-11-20",
-        "roc_date": "115-11-20",
-        "title": "掌握《巴黎協定》第六條國際新局！環境部舉辦 COP31 國際論壇，完善國外碳權認可機制促進實質氣候合作",
-        "unit": "環境部氣候變遷署",
-        "summary": "聯合國氣候公約第 31 次締約方大會（COP31）於土耳其安塔利亞進入最後協商階段。環境部今（20）日舉辦「從氣候科學到全球碳市場發展：巴黎協定 Article 6」論壇，聚焦國際碳市場談判動態與法規進展，並說明我國國外碳權認可準則，引導產業落實實質減碳與接軌國際規範。",
-        "policy_keywords": [
-          "碳定價與ETS",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "國際環境合作",
-          "生質能與再生能源"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14536",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/lpgfftbv.joq.jpg"
-      },
-      {
-        "news_id": "20261120165940",
-        "date": "2026-11-20",
-        "roc_date": "115-11-20",
-        "title": "從種樹到育樹　以都市綠蔭降溫　走向人樹永續共生",
-        "unit": "環境部環境管理署",
-        "summary": "面對全球氣候變遷及都市熱島效應加劇，環境部積極推動「國土綠蔭氣候調適計畫」，透過都市林建構、科學植栽及長期養護管理，緩解都市熱島效應，提升城市氣候調適能力。為深化都市林治理及跨領域專業交流，環境部昨(19)日舉辦名人講座，邀請日本東京大學都市工學環境設計博士，並具日本樹木醫專業資格的詹鳳春博士，以「都市綠化趨勢與共生」為題，從國際經驗及臺灣實務案例，探討都市綠化與環境永續發展之策略。",
-        "policy_keywords": [
-          "氣候變遷與調適",
-          "空氣品質",
-          "環境教育與綠領人才",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14534",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/eiihx0uz.jop.jpg"
       }
     ]
   },
@@ -1482,9 +1472,9 @@
       "循環標誌",
       "廢棄物再利用"
     ],
-    "total_count": 1594,
-    "last_30_days_count": 26,
-    "prev_30_days_count": 17,
+    "total_count": 1597,
+    "last_30_days_count": 28,
+    "prev_30_days_count": 18,
     "yearly_counts": {
       "2001": 13,
       "2002": 20,
@@ -1511,9 +1501,66 @@
       "2023": 92,
       "2024": 110,
       "2025": 128,
-      "2026": 189
+      "2026": 192
     },
     "latest_news": [
+      {
+        "news_id": "20261127160741",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "小小環境記者大哉問！彭啓明與臺北歐洲學校學童暢談永續飲食",
+        "unit": "環境部環境保護司",
+        "summary": "每天吃的午餐和氣候變遷有什麼關係？學校午餐可以更環保嗎？我們又能為地球做些什麼？環境部長彭啓明今（27）日迎來一群特別的訪客——臺北歐洲學校（Taipei European School, TES）小學部「青年環境記者社團（Young Reporters for the Environment, YRE）」師生一行。小小記者們帶著滿滿的好奇心，與彭部長交流低碳飲食、糧食安全及食物浪費等議題，發表「食物永續：我們的聲音，我們的未來」專題簡報，彭部長也透過生活化的例子，一一回應孩子們的提問，分享環境部正在推動的各項永續行動。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "綠色消費與標章",
+          "生質能與再生能源"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14599",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/wwk2dnaj.bke.JPG"
+      },
+      {
+        "news_id": "20261127152640",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "從知識到行動！環境部攜手亞太夥伴將永續理念轉化為具體區域行動",
+        "unit": "環境部環境保護司",
+        "summary": "為深化亞太地區環境教育跨國合作，環境部（全球環境教育夥伴亞太中心，GEEP APRC）今（27）日舉辦「2026年環境教育線上國際研討會」。本次研討會以「從知識到行動」為主題，深入探討「氣候調適與韌性環境」、「資源循環與永續生活」、「綠色創新與行動」及「亞太青年實習與國際交流沙龍」等四大面向，吸引來自臺灣、不丹、印度、印尼、日本、南韓、泰國及菲律賓等亞太國家環境教育專家、政府代表、民間實務推動者及青年行動者齊聚線上，進行深度跨國對談，共同將永續理念轉化為具體區域行動。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "環境教育與綠領人才",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14597",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/v5zsh0vo.qjh.jpg"
+      },
+      {
+        "news_id": "20261127111107",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "全國景觀園藝產學界連署力挺國土綠蔭政策 環境部攜手專業打造氣候韌性城市",
+        "unit": "環境部氣候變遷署",
+        "summary": "環境部26日舉辦「國土綠蔭氣候調適計畫暨推動木質資源循環說明會」，由部長彭啓明主持，總統府資政吳晟出席。會中獲全國景觀及園藝相關公協會、學會、聯合會及10所大專院校景觀相關學系共同連署支持國家都市林政策，現場共121名產學代表與會，就都市綠蔭建置、樹木健康管理、專業技術及木質資源循環等議題深度交流，期整合產業實務經驗，全面提升都市林經營品質。",
+        "policy_keywords": [
+          "氣候變遷與調適",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14596",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/1s04egin.esv.jpg"
+      },
       {
         "news_id": "20261126160042",
         "date": "2026-11-26",
@@ -1648,69 +1695,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14541",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "20261121090641",
-        "date": "2026-11-21",
-        "roc_date": "115-11-21",
-        "title": "呼應 COP31 零廢棄主題 臺灣強化與各國循環經濟合作",
-        "unit": "環境部資源循環署",
-        "summary": "第31屆聯合國氣候變化綱要公約締約方大會（COP31）落幕，主辦國土耳其將「零廢棄」（Zero Waste）與循環經濟列為全球氣候行動的重要主題。環境部長彭啓明今（21）日表示，臺灣高度重視COP31所倡議的零廢棄與循環經濟方向，並將資源循環視為推動淨零轉型、強化資源安全及產業競爭力的重要策略。臺灣不僅將持續深化國內循環經濟政策，也願意分享多年累積的資源回收、技術創新及產業發展經驗，積極與國際夥伴合作，共同推動循環材料應用及跨境循環供應鏈，讓循環經濟成為全球氣候行動與綠色成長的新動力。",
-        "policy_keywords": [
-          "碳定價與ETS",
-          "淨零轉型",
-          "資源循環",
-          "廢棄物與環保犯罪",
-          "環境教育與綠領人才",
-          "綠色消費與標章",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14539",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "20261120201727",
-        "date": "2026-11-20",
-        "roc_date": "115-11-20",
-        "title": "呼應《安塔利亞 AI承諾》臺灣願以全球 AI 供應鏈核心之力，打造 AI 與氣候共生的未來",
-        "unit": "環境部氣候變遷署",
-        "summary": "聯合國氣候變化綱要公約第31屆締約方大會（COP31）即將落幕，在土耳其安塔利亞舉行期間，主席國土耳其與國際電信聯盟（ITU）共同發起《安塔利亞人工智慧承諾》（Antalya Artificial Intelligence Pledge）。環境部長彭啓明今（20）日表示，臺灣歡迎並呼應這項承諾，也認同承諾中「讓 AI 成為氣候解決方案的一部分」的共同抱負，臺灣將以全球 AI 供應鏈核心的角色，協助世界各國創造 AI 與氣候共生的價值。",
-        "policy_keywords": [
-          "碳費徵收",
-          "自主減量計畫",
-          "碳定價與ETS",
-          "溫室氣體盤查登錄",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "資源循環",
-          "廢棄物與環保犯罪",
-          "空氣品質",
-          "國際環境合作",
-          "生質能與再生能源"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14537",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "20261119153708",
-        "date": "2026-11-19",
-        "roc_date": "115-11-19",
-        "title": "「袋袋箱傳」走進離島　4地49處二手袋取用點接力減塑",
-        "unit": "環境部資源循環署",
-        "summary": "馬祖結合市場減塑與企業募集、金門透過「袋袋箱傳」平台媒合店家需求、澎湖設置二手紙袋循環櫃，小琉球則推動「袋袋琉傳」。截至115年11月止，4個離島地區已累積設置共49處二手袋取用點（包含澎湖縣24處、金門縣10處、連江縣9處、屏東縣小琉球6處），依照居民日常採買及旅客購物需求，發展各具特色的減塑循環模式。環境部資源循環署表示，透過「在地募集、在地使用」與平台媒合，讓閒置好袋在島內找到合適去處，落實「自備袋優先、忘帶再取用」。",
-        "policy_keywords": [
-          "溫室氣體盤查登錄",
-          "資源循環",
-          "減塑與一次用產品"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14528",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/kmzt00fp.uql.jpg"
       }
     ]
   },
@@ -1948,9 +1932,9 @@
       "事業廢棄物",
       "有害廢棄物"
     ],
-    "total_count": 2414,
-    "last_30_days_count": 10,
-    "prev_30_days_count": 6,
+    "total_count": 2416,
+    "last_30_days_count": 11,
+    "prev_30_days_count": 7,
     "yearly_counts": {
       "2001": 34,
       "2002": 32,
@@ -1977,9 +1961,47 @@
       "2023": 59,
       "2024": 82,
       "2025": 107,
-      "2026": 95
+      "2026": 97
     },
     "latest_news": [
+      {
+        "news_id": "20261127152640",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "從知識到行動！環境部攜手亞太夥伴將永續理念轉化為具體區域行動",
+        "unit": "環境部環境保護司",
+        "summary": "為深化亞太地區環境教育跨國合作，環境部（全球環境教育夥伴亞太中心，GEEP APRC）今（27）日舉辦「2026年環境教育線上國際研討會」。本次研討會以「從知識到行動」為主題，深入探討「氣候調適與韌性環境」、「資源循環與永續生活」、「綠色創新與行動」及「亞太青年實習與國際交流沙龍」等四大面向，吸引來自臺灣、不丹、印度、印尼、日本、南韓、泰國及菲律賓等亞太國家環境教育專家、政府代表、民間實務推動者及青年行動者齊聚線上，進行深度跨國對談，共同將永續理念轉化為具體區域行動。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "環境教育與綠領人才",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14597",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/v5zsh0vo.qjh.jpg"
+      },
+      {
+        "news_id": "20261127111107",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "全國景觀園藝產學界連署力挺國土綠蔭政策 環境部攜手專業打造氣候韌性城市",
+        "unit": "環境部氣候變遷署",
+        "summary": "環境部26日舉辦「國土綠蔭氣候調適計畫暨推動木質資源循環說明會」，由部長彭啓明主持，總統府資政吳晟出席。會中獲全國景觀及園藝相關公協會、學會、聯合會及10所大專院校景觀相關學系共同連署支持國家都市林政策，現場共121名產學代表與會，就都市綠蔭建置、樹木健康管理、專業技術及木質資源循環等議題深度交流，期整合產業實務經驗，全面提升都市林經營品質。",
+        "policy_keywords": [
+          "氣候變遷與調適",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14596",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/1s04egin.esv.jpg"
+      },
       {
         "news_id": "20261123173045",
         "date": "2026-11-23",
@@ -2128,40 +2150,6 @@
         ],
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14400",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14391",
-        "date": "2026-10-30",
-        "roc_date": "115-10-30",
-        "title": "冷氣滴水擾鄰傷荷包！北區陳情年破二千件 環境部提醒：限期 7 日未改善 依法處分",
-        "unit": "環境部環境管理署",
-        "summary": "氣候變遷與極端高溫，民眾使用冷氣開機時間大增，環境部呼籲民眾檢查冷氣機排水，不滴水做個好鄰居！環境部環境管理署說，冷氣機運行產生的冷凝水若未經適當管道排除，直接或間接滴落他人土地或屋頂等定著物，屬於已經公告污染環境的行為。若經環保稽查人員勸導後逾期未改善，將依《廢棄物清理法》開罰，呼籲國人儘速自主檢查冷氣排水，共同維護社區居家安寧與環境衛生！",
-        "policy_keywords": [
-          "氣候變遷與調適",
-          "廢棄物與環保犯罪",
-          "環境執法與稽查"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14391",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14379",
-        "date": "2026-10-28",
-        "roc_date": "115-10-28",
-        "title": "循環署串聯醫院與產業　打造醫療資源循環生態系",
-        "unit": "環境部資源循環署",
-        "summary": "環境部資源循環署今（28）日舉辦「醫路淨零，智慧新生—資源循環智慧醫院交流會」，邀集醫療院所及產業界，交流醫療廢棄物智慧管理、源頭減量、循環物流及再生產品等實務成果。循環署署長賴瑩瑩感謝醫療界與產業夥伴積極投入，期盼透過跨領域合作，擴大醫療資源循環的實務應用。",
-        "policy_keywords": [
-          "淨零轉型",
-          "資源循環",
-          "廢棄物與環保犯罪"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14379",
         "source_url_status": "",
         "attach_url": ""
       }
@@ -3046,8 +3034,8 @@
       "PFAS"
     ],
     "total_count": 623,
-    "last_30_days_count": 6,
-    "prev_30_days_count": 1,
+    "last_30_days_count": 5,
+    "prev_30_days_count": 2,
     "yearly_counts": {
       "2001": 8,
       "2002": 6,
@@ -3248,7 +3236,7 @@
       "環境教育人員",
       "證照"
     ],
-    "total_count": 1057,
+    "total_count": 1058,
     "last_30_days_count": 16,
     "prev_30_days_count": 12,
     "yearly_counts": {
@@ -3277,9 +3265,29 @@
       "2023": 41,
       "2024": 51,
       "2025": 75,
-      "2026": 100
+      "2026": 101
     },
     "latest_news": [
+      {
+        "news_id": "20261127152640",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "從知識到行動！環境部攜手亞太夥伴將永續理念轉化為具體區域行動",
+        "unit": "環境部環境保護司",
+        "summary": "為深化亞太地區環境教育跨國合作，環境部（全球環境教育夥伴亞太中心，GEEP APRC）今（27）日舉辦「2026年環境教育線上國際研討會」。本次研討會以「從知識到行動」為主題，深入探討「氣候調適與韌性環境」、「資源循環與永續生活」、「綠色創新與行動」及「亞太青年實習與國際交流沙龍」等四大面向，吸引來自臺灣、不丹、印度、印尼、日本、南韓、泰國及菲律賓等亞太國家環境教育專家、政府代表、民間實務推動者及青年行動者齊聚線上，進行深度跨國對談，共同將永續理念轉化為具體區域行動。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "環境教育與綠領人才",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14597",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/v5zsh0vo.qjh.jpg"
+      },
       {
         "news_id": "20261123193317",
         "date": "2026-11-23",
@@ -3443,21 +3451,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14501",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "14451",
-        "date": "2026-11-09",
-        "roc_date": "115-11-09",
-        "title": "環境部表揚115年度環境教育31處績優單位",
-        "unit": "環境部國家環境研究院",
-        "summary": "環境部於9日表揚七股鹽場、台北101環境教育中心、雪霸國家公園、臺東永安社區環境教育園區、臺北市公訓處等31處環境教育設施場所或機構為評鑑績優單位，擔任頒獎人的環境部次長葉俊宏肯定這些環教第一線夥伴長期深耕在地、扎根永續的堅定貢獻。",
-        "policy_keywords": [
-          "環境教育與綠領人才"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14451",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -3474,8 +3467,8 @@
       "淨零綠生活",
       "友善食力"
     ],
-    "total_count": 375,
-    "last_30_days_count": 6,
+    "total_count": 376,
+    "last_30_days_count": 7,
     "prev_30_days_count": 5,
     "yearly_counts": {
       "2001": 5,
@@ -3503,9 +3496,28 @@
       "2023": 20,
       "2024": 20,
       "2025": 36,
-      "2026": 47
+      "2026": 48
     },
     "latest_news": [
+      {
+        "news_id": "20261127160741",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "小小環境記者大哉問！彭啓明與臺北歐洲學校學童暢談永續飲食",
+        "unit": "環境部環境保護司",
+        "summary": "每天吃的午餐和氣候變遷有什麼關係？學校午餐可以更環保嗎？我們又能為地球做些什麼？環境部長彭啓明今（27）日迎來一群特別的訪客——臺北歐洲學校（Taipei European School, TES）小學部「青年環境記者社團（Young Reporters for the Environment, YRE）」師生一行。小小記者們帶著滿滿的好奇心，與彭部長交流低碳飲食、糧食安全及食物浪費等議題，發表「食物永續：我們的聲音，我們的未來」專題簡報，彭部長也透過生活化的例子，一一回應孩子們的提問，分享環境部正在推動的各項永續行動。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "綠色消費與標章",
+          "生質能與再生能源"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14599",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/wwk2dnaj.bke.JPG"
+      },
       {
         "news_id": "20261123173045",
         "date": "2026-11-23",
@@ -3659,22 +3671,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14318",
         "source_url_status": "",
         "attach_url": ""
-      },
-      {
-        "news_id": "14264",
-        "date": "2026-10-07",
-        "roc_date": "115-10-07",
-        "title": "深化綠生活價值鏈！淨零綠生活大聯盟走讀遠雄BEONE",
-        "unit": "環境部環境保護司",
-        "summary": "為持續深化淨零綠生活大聯盟交流，環境部今（7）日帶領聯盟企業夥伴與永續推動者，實地走讀遠雄集團打造的永續示範場域「BEONE未來共生基地」，透過空間活化、舊建材循環再造及永續教材轉譯的實務體驗，促進聯盟成員跨界共學與價值鏈共創。",
-        "policy_keywords": [
-          "淨零轉型",
-          "綠色消費與標章"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14264",
-        "source_url_status": "",
-        "attach_url": ""
       }
     ]
   },
@@ -3693,8 +3689,8 @@
       "日本",
       "國際研討會"
     ],
-    "total_count": 503,
-    "last_30_days_count": 23,
+    "total_count": 505,
+    "last_30_days_count": 25,
     "prev_30_days_count": 2,
     "yearly_counts": {
       "2001": 7,
@@ -3722,9 +3718,47 @@
       "2023": 15,
       "2024": 25,
       "2025": 37,
-      "2026": 53
+      "2026": 55
     },
     "latest_news": [
+      {
+        "news_id": "20261127152640",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "從知識到行動！環境部攜手亞太夥伴將永續理念轉化為具體區域行動",
+        "unit": "環境部環境保護司",
+        "summary": "為深化亞太地區環境教育跨國合作，環境部（全球環境教育夥伴亞太中心，GEEP APRC）今（27）日舉辦「2026年環境教育線上國際研討會」。本次研討會以「從知識到行動」為主題，深入探討「氣候調適與韌性環境」、「資源循環與永續生活」、「綠色創新與行動」及「亞太青年實習與國際交流沙龍」等四大面向，吸引來自臺灣、不丹、印度、印尼、日本、南韓、泰國及菲律賓等亞太國家環境教育專家、政府代表、民間實務推動者及青年行動者齊聚線上，進行深度跨國對談，共同將永續理念轉化為具體區域行動。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "環境教育與綠領人才",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14597",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/v5zsh0vo.qjh.jpg"
+      },
+      {
+        "news_id": "20261127111107",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "全國景觀園藝產學界連署力挺國土綠蔭政策 環境部攜手專業打造氣候韌性城市",
+        "unit": "環境部氣候變遷署",
+        "summary": "環境部26日舉辦「國土綠蔭氣候調適計畫暨推動木質資源循環說明會」，由部長彭啓明主持，總統府資政吳晟出席。會中獲全國景觀及園藝相關公協會、學會、聯合會及10所大專院校景觀相關學系共同連署支持國家都市林政策，現場共121名產學代表與會，就都市綠蔭建置、樹木健康管理、專業技術及木質資源循環等議題深度交流，期整合產業實務經驗，全面提升都市林經營品質。",
+        "policy_keywords": [
+          "氣候變遷與調適",
+          "資源循環",
+          "廢棄物與環保犯罪",
+          "國際環境合作"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14596",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/1s04egin.esv.jpg"
+      },
       {
         "news_id": "20261124211318",
         "date": "2026-11-24",
@@ -3889,44 +3923,6 @@
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14536",
         "source_url_status": "",
         "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/lpgfftbv.joq.jpg"
-      },
-      {
-        "news_id": "20261120165940",
-        "date": "2026-11-20",
-        "roc_date": "115-11-20",
-        "title": "從種樹到育樹　以都市綠蔭降溫　走向人樹永續共生",
-        "unit": "環境部環境管理署",
-        "summary": "面對全球氣候變遷及都市熱島效應加劇，環境部積極推動「國土綠蔭氣候調適計畫」，透過都市林建構、科學植栽及長期養護管理，緩解都市熱島效應，提升城市氣候調適能力。為深化都市林治理及跨領域專業交流，環境部昨(19)日舉辦名人講座，邀請日本東京大學都市工學環境設計博士，並具日本樹木醫專業資格的詹鳳春博士，以「都市綠化趨勢與共生」為題，從國際經驗及臺灣實務案例，探討都市綠化與環境永續發展之策略。",
-        "policy_keywords": [
-          "氣候變遷與調適",
-          "空氣品質",
-          "環境教育與綠領人才",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14534",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/eiihx0uz.jop.jpg"
-      },
-      {
-        "news_id": "20261119192059",
-        "date": "2026-11-19",
-        "roc_date": "115-11-19",
-        "title": "環境部舉辦 COP31 青年論壇 串聯國小雨水花園、高中淨零對話到大專海外圓夢 許下 2050 世代約定",
-        "unit": "環境部氣候變遷署",
-        "summary": "環境部今 (19) 日舉辦「COP31 氣候脈動．臺灣同行」線上論壇，以「氣候世代的接力賽：臺灣青世代的氣候韌性與圓夢行動」為題，串聯從小學、高中到大專海外實踐的完整拼圖，展現臺灣由校園扎根、生活自覺到走向世界的跨世代氣候行動力。",
-        "policy_keywords": [
-          "碳定價與ETS",
-          "淨零轉型",
-          "氣候變遷與調適",
-          "減塑與一次用產品",
-          "環境教育與綠領人才",
-          "國際環境合作"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14529",
-        "source_url_status": "",
-        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/etwzlyvf.1p3.jpg"
       }
     ]
   },
@@ -4391,9 +4387,9 @@
       "廚餘",
       "能源化"
     ],
-    "total_count": 409,
+    "total_count": 410,
     "last_30_days_count": 9,
-    "prev_30_days_count": 5,
+    "prev_30_days_count": 6,
     "yearly_counts": {
       "2001": 3,
       "2002": 2,
@@ -4420,9 +4416,28 @@
       "2023": 13,
       "2024": 21,
       "2025": 43,
-      "2026": 34
+      "2026": 35
     },
     "latest_news": [
+      {
+        "news_id": "20261127160741",
+        "date": "2026-11-27",
+        "roc_date": "115-11-27",
+        "title": "小小環境記者大哉問！彭啓明與臺北歐洲學校學童暢談永續飲食",
+        "unit": "環境部環境保護司",
+        "summary": "每天吃的午餐和氣候變遷有什麼關係？學校午餐可以更環保嗎？我們又能為地球做些什麼？環境部長彭啓明今（27）日迎來一群特別的訪客——臺北歐洲學校（Taipei European School, TES）小學部「青年環境記者社團（Young Reporters for the Environment, YRE）」師生一行。小小記者們帶著滿滿的好奇心，與彭部長交流低碳飲食、糧食安全及食物浪費等議題，發表「食物永續：我們的聲音，我們的未來」專題簡報，彭部長也透過生活化的例子，一一回應孩子們的提問，分享環境部正在推動的各項永續行動。",
+        "policy_keywords": [
+          "淨零轉型",
+          "氣候變遷與調適",
+          "資源循環",
+          "綠色消費與標章",
+          "生質能與再生能源"
+        ],
+        "ai_tags": [],
+        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14599",
+        "source_url_status": "",
+        "attach_url": "https://enews.moenv.gov.tw/img/moenv-news/wwk2dnaj.bke.JPG"
+      },
       {
         "news_id": "20261124211318",
         "date": "2026-11-24",
@@ -4600,24 +4615,6 @@
         ],
         "ai_tags": [],
         "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14378",
-        "source_url_status": "",
-        "attach_url": ""
-      },
-      {
-        "news_id": "14338",
-        "date": "2026-10-21",
-        "roc_date": "115-10-21",
-        "title": "環境部認證新增「陽明海洋文化藝術館」等5處環教場所",
-        "unit": "環境部國家環境研究院",
-        "summary": "環境部10月20日認證通過「陽明海洋文化藝術館」、「崇蘭生活環境博物館」、「谷關遊客中心」、「石門水資源回收中心」及「南亞廚餘堆肥廠」等5處環境教育設施場所。國家環境研究院院長張順欽指出，此次通過認證環境教育設施場所跨越山海，展現「人文結合減碳」與「綠色科技突破」兩大亮點。",
-        "policy_keywords": [
-          "淨零轉型",
-          "資源循環",
-          "環境教育與綠領人才",
-          "生質能與再生能源"
-        ],
-        "ai_tags": [],
-        "source_url": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/14338",
         "source_url_status": "",
         "attach_url": ""
       }

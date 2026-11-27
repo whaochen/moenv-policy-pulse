@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-26T20:38:40+08:00",
+  "updated_at": "2026-11-27T20:25:57+08:00",
   "yearly_totals": [
     {
       "year": "2001",
@@ -103,7 +103,7 @@
     },
     {
       "year": "2026",
-      "count": 621
+      "count": 624
     }
   ],
   "topic_yearly_matrix": {
@@ -298,7 +298,7 @@
           71,
           92,
           133,
-          172
+          174
         ]
       },
       {
@@ -331,7 +331,7 @@
           62,
           90,
           124,
-          172
+          175
         ]
       },
       {
@@ -364,7 +364,7 @@
           92,
           110,
           128,
-          189
+          192
         ]
       },
       {
@@ -430,7 +430,7 @@
           59,
           82,
           107,
-          95
+          97
         ]
       },
       {
@@ -628,7 +628,7 @@
           41,
           51,
           75,
-          100
+          101
         ]
       },
       {
@@ -661,7 +661,7 @@
           20,
           20,
           36,
-          47
+          48
         ]
       },
       {
@@ -694,7 +694,7 @@
           15,
           25,
           37,
-          53
+          55
         ]
       },
       {
@@ -793,56 +793,56 @@
           13,
           21,
           43,
-          34
+          35
         ]
       }
     ]
   },
   "last_30_days": {
-    "window_start": "2026-10-28",
-    "window_end": "2026-11-26",
-    "prev_start": "2026-09-28",
-    "prev_end": "2026-10-27",
-    "current_total": 74,
-    "previous_total": 50,
-    "delta": 24,
-    "pct_change": 48.0,
+    "window_start": "2026-10-29",
+    "window_end": "2026-11-27",
+    "prev_start": "2026-09-29",
+    "prev_end": "2026-10-28",
+    "current_total": 73,
+    "previous_total": 53,
+    "delta": 20,
+    "pct_change": 37.7,
     "topics": [
       {
         "slug": "climate_adaptation",
         "title": "氣候變遷與調適",
         "group": "氣候與碳定價",
-        "current": 32,
-        "previous": 12,
-        "delta": 20,
-        "pct_change": 166.7
+        "current": 33,
+        "previous": 14,
+        "delta": 19,
+        "pct_change": 135.7
       },
       {
         "slug": "net_zero_transition",
         "title": "淨零轉型",
         "group": "氣候與碳定價",
         "current": 28,
-        "previous": 9,
-        "delta": 19,
-        "pct_change": 211.1
+        "previous": 11,
+        "delta": 17,
+        "pct_change": 154.5
       },
       {
         "slug": "resource_circulation",
         "title": "資源循環",
         "group": "資源循環與廢棄物",
-        "current": 26,
-        "previous": 17,
-        "delta": 9,
-        "pct_change": 52.9
+        "current": 28,
+        "previous": 18,
+        "delta": 10,
+        "pct_change": 55.6
       },
       {
         "slug": "international_cooperation",
         "title": "國際環境合作",
         "group": "治理與制度",
-        "current": 23,
+        "current": 25,
         "previous": 2,
-        "delta": 21,
-        "pct_change": 1050.0
+        "delta": 23,
+        "pct_change": 1150.0
       },
       {
         "slug": "environmental_education",
@@ -857,10 +857,10 @@
         "slug": "waste_crime",
         "title": "廢棄物與環保犯罪",
         "group": "資源循環與廢棄物",
-        "current": 10,
-        "previous": 6,
+        "current": 11,
+        "previous": 7,
         "delta": 4,
-        "pct_change": 66.7
+        "pct_change": 57.1
       },
       {
         "slug": "carbon_pricing_ets",
@@ -885,9 +885,9 @@
         "title": "生質能與再生能源",
         "group": "資源循環與廢棄物",
         "current": 9,
-        "previous": 5,
-        "delta": 4,
-        "pct_change": 80.0
+        "previous": 6,
+        "delta": 3,
+        "pct_change": 50.0
       },
       {
         "slug": "plastic_reduction",
@@ -917,6 +917,15 @@
         "pct_change": 100.0
       },
       {
+        "slug": "green_consumption",
+        "title": "綠色消費與標章",
+        "group": "社會溝通與人才",
+        "current": 7,
+        "previous": 5,
+        "delta": 2,
+        "pct_change": 40.0
+      },
+      {
         "slug": "esg_finance",
         "title": "ESG與永續金融",
         "group": "治理與制度",
@@ -929,19 +938,10 @@
         "slug": "chemical_management",
         "title": "化學物質與毒化物",
         "group": "污染防制",
-        "current": 6,
-        "previous": 1,
-        "delta": 5,
-        "pct_change": 500.0
-      },
-      {
-        "slug": "green_consumption",
-        "title": "綠色消費與標章",
-        "group": "社會溝通與人才",
-        "current": 6,
-        "previous": 5,
-        "delta": 1,
-        "pct_change": 20.0
+        "current": 5,
+        "previous": 2,
+        "delta": 3,
+        "pct_change": 150.0
       },
       {
         "slug": "water_quality",
@@ -991,44 +991,44 @@
     ],
     "weekly_counts": [
       {
-        "week_start": "2026-10-02",
-        "week_end": "2026-10-08",
-        "count": 16
+        "week_start": "2026-10-03",
+        "week_end": "2026-10-09",
+        "count": 15
       },
       {
-        "week_start": "2026-10-09",
-        "week_end": "2026-10-15",
+        "week_start": "2026-10-10",
+        "week_end": "2026-10-16",
         "count": 8
       },
       {
-        "week_start": "2026-10-16",
-        "week_end": "2026-10-22",
-        "count": 17
+        "week_start": "2026-10-17",
+        "week_end": "2026-10-23",
+        "count": 16
       },
       {
-        "week_start": "2026-10-23",
-        "week_end": "2026-10-29",
-        "count": 7
+        "week_start": "2026-10-24",
+        "week_end": "2026-10-30",
+        "count": 11
       },
       {
-        "week_start": "2026-10-30",
-        "week_end": "2026-11-05",
-        "count": 17
-      },
-      {
-        "week_start": "2026-11-06",
-        "week_end": "2026-11-12",
-        "count": 19
-      },
-      {
-        "week_start": "2026-11-13",
-        "week_end": "2026-11-19",
+        "week_start": "2026-10-31",
+        "week_end": "2026-11-06",
         "count": 14
       },
       {
-        "week_start": "2026-11-20",
-        "week_end": "2026-11-26",
-        "count": 18
+        "week_start": "2026-11-07",
+        "week_end": "2026-11-13",
+        "count": 22
+      },
+      {
+        "week_start": "2026-11-14",
+        "week_end": "2026-11-20",
+        "count": 14
+      },
+      {
+        "week_start": "2026-11-21",
+        "week_end": "2026-11-27",
+        "count": 17
       }
     ]
   },
@@ -1056,11 +1056,11 @@
       },
       {
         "unit": "環境部環境保護司",
-        "count": 47
+        "count": 49
       },
       {
         "unit": "環境部水質保護司",
-        "count": 47
+        "count": 46
       },
       {
         "unit": "環境部化學物質管理署",
@@ -1088,10 +1088,6 @@
       },
       {
         "unit": "環境部統計處",
-        "count": 1
-      },
-      {
-        "unit": "環境部法制處",
         "count": 1
       }
     ],
@@ -1146,7 +1142,7 @@
       },
       {
         "unit": "環境部氣候變遷署",
-        "count": 318
+        "count": 319
       },
       {
         "unit": "行政院環境保護署土污基管會",
@@ -1174,7 +1170,7 @@
       },
       {
         "unit": "環境部環境保護司",
-        "count": 131
+        "count": 133
       },
       {
         "unit": "主任秘書室",

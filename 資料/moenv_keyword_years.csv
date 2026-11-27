@@ -24,7 +24,7 @@ waste_crime,廢棄物與環保犯罪,資源循環與廢棄物,2022,36
 waste_crime,廢棄物與環保犯罪,資源循環與廢棄物,2023,59
 waste_crime,廢棄物與環保犯罪,資源循環與廢棄物,2024,82
 waste_crime,廢棄物與環保犯罪,資源循環與廢棄物,2025,107
-waste_crime,廢棄物與環保犯罪,資源循環與廢棄物,2026,95
+waste_crime,廢棄物與環保犯罪,資源循環與廢棄物,2026,97
 water_quality,水質保護,污染防制,2001,30
 water_quality,水質保護,污染防制,2002,53
 water_quality,水質保護,污染防制,2003,32
@@ -102,7 +102,7 @@ resource_circulation,資源循環,資源循環與廢棄物,2022,63
 resource_circulation,資源循環,資源循環與廢棄物,2023,92
 resource_circulation,資源循環,資源循環與廢棄物,2024,110
 resource_circulation,資源循環,資源循環與廢棄物,2025,128
-resource_circulation,資源循環,資源循環與廢棄物,2026,189
+resource_circulation,資源循環,資源循環與廢棄物,2026,192
 air_quality,空氣品質,污染防制,2001,36
 air_quality,空氣品質,污染防制,2002,20
 air_quality,空氣品質,污染防制,2003,16
@@ -154,7 +154,7 @@ environmental_education,環境教育與綠領人才,社會溝通與人才,2022,3
 environmental_education,環境教育與綠領人才,社會溝通與人才,2023,41
 environmental_education,環境教育與綠領人才,社會溝通與人才,2024,51
 environmental_education,環境教育與綠領人才,社會溝通與人才,2025,75
-environmental_education,環境教育與綠領人才,社會溝通與人才,2026,100
+environmental_education,環境教育與綠領人才,社會溝通與人才,2026,101
 net_zero_transition,淨零轉型,氣候與碳定價,2007,1
 net_zero_transition,淨零轉型,氣候與碳定價,2008,35
 net_zero_transition,淨零轉型,氣候與碳定價,2009,48
@@ -174,7 +174,7 @@ net_zero_transition,淨零轉型,氣候與碳定價,2022,54
 net_zero_transition,淨零轉型,氣候與碳定價,2023,71
 net_zero_transition,淨零轉型,氣候與碳定價,2024,92
 net_zero_transition,淨零轉型,氣候與碳定價,2025,133
-net_zero_transition,淨零轉型,氣候與碳定價,2026,172
+net_zero_transition,淨零轉型,氣候與碳定價,2026,174
 climate_adaptation,氣候變遷與調適,氣候與碳定價,2001,2
 climate_adaptation,氣候變遷與調適,氣候與碳定價,2002,1
 climate_adaptation,氣候變遷與調適,氣候與碳定價,2003,2
@@ -200,7 +200,7 @@ climate_adaptation,氣候變遷與調適,氣候與碳定價,2022,32
 climate_adaptation,氣候變遷與調適,氣候與碳定價,2023,62
 climate_adaptation,氣候變遷與調適,氣候與碳定價,2024,90
 climate_adaptation,氣候變遷與調適,氣候與碳定價,2025,124
-climate_adaptation,氣候變遷與調適,氣候與碳定價,2026,172
+climate_adaptation,氣候變遷與調適,氣候與碳定價,2026,175
 chemical_management,化學物質與毒化物,污染防制,2001,8
 chemical_management,化學物質與毒化物,污染防制,2002,6
 chemical_management,化學物質與毒化物,污染防制,2003,3
@@ -252,7 +252,7 @@ international_cooperation,國際環境合作,治理與制度,2022,9
 international_cooperation,國際環境合作,治理與制度,2023,15
 international_cooperation,國際環境合作,治理與制度,2024,25
 international_cooperation,國際環境合作,治理與制度,2025,37
-international_cooperation,國際環境合作,治理與制度,2026,53
+international_cooperation,國際環境合作,治理與制度,2026,55
 soil_groundwater,土壤及地下水,污染防制,2001,2
 soil_groundwater,土壤及地下水,污染防制,2002,17
 soil_groundwater,土壤及地下水,污染防制,2003,4
@@ -356,7 +356,7 @@ bioenergy,生質能與再生能源,資源循環與廢棄物,2022,10
 bioenergy,生質能與再生能源,資源循環與廢棄物,2023,13
 bioenergy,生質能與再生能源,資源循環與廢棄物,2024,21
 bioenergy,生質能與再生能源,資源循環與廢棄物,2025,43
-bioenergy,生質能與再生能源,資源循環與廢棄物,2026,34
+bioenergy,生質能與再生能源,資源循環與廢棄物,2026,35
 green_consumption,綠色消費與標章,社會溝通與人才,2001,5
 green_consumption,綠色消費與標章,社會溝通與人才,2002,3
 green_consumption,綠色消費與標章,社會溝通與人才,2003,7
@@ -382,7 +382,7 @@ green_consumption,綠色消費與標章,社會溝通與人才,2022,37
 green_consumption,綠色消費與標章,社會溝通與人才,2023,20
 green_consumption,綠色消費與標章,社會溝通與人才,2024,20
 green_consumption,綠色消費與標章,社會溝通與人才,2025,36
-green_consumption,綠色消費與標章,社會溝通與人才,2026,47
+green_consumption,綠色消費與標章,社會溝通與人才,2026,48
 plastic_reduction,減塑與一次用產品,資源循環與廢棄物,2001,3
 plastic_reduction,減塑與一次用產品,資源循環與廢棄物,2002,33
 plastic_reduction,減塑與一次用產品,資源循環與廢棄物,2003,19
