@@ -590,7 +590,7 @@
     {
       "source": "topic:resource_circulation",
       "target": "topic:waste_crime",
-      "weight": 2085.5,
+      "weight": 2085.7,
       "cooccurrence": 885,
       "kind": "semantic"
     },
